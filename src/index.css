@@ -4,7 +4,7 @@
 
 @layer components {
   .map {
-    @apply h-[100px] w-[100px];
+    @apply h-screen w-screen;
   }
   .container {
     @apply h-full pt-32;
