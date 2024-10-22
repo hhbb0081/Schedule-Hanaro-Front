@@ -1,15 +1,8 @@
-import { useAtom } from 'jotai';
-
 import { Map } from '@/components';
-import { mogacoAtom } from '@/stores';
 
-import '@/index.css';
-
-export function MapLayout() {
-  const [, setMogacoId] = useAtom(mogacoAtom);
-
+export function MapPage() {
   const onClickMarker = (id: string) => {
-    setMogacoId(id);
+    console.log(id);
   };
   return (
     <div className='map'>

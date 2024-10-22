@@ -1,7 +1,12 @@
-export function MainPage() {
+import Header from '@/components/Header/Header';
+import { PropsWithChildren } from 'react';
+
+export function MainPage({ children }: PropsWithChildren) {
   return (
-    <div className='text-6xl'>
-      <div className='text-center'>Main!</div>
+    <div className='App'>
+      <Header />
+      {children}
+      <nav className='navbar'>네브</nav>
     </div>
   );
 }
