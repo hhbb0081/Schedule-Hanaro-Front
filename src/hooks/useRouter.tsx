@@ -17,12 +17,8 @@ export const useRouter = () =>
     {
       path: '/map',
       element: <MapLayout />,
-      children: [{ index: true, element: <MapPage /> }],
-    },
-    {
-      path: '/map',
-      element: <MapLayout />,
       children: [
+        { index: true, element: <MapPage /> },
         {
           path: '/map/:id',
           element: <MapDetailPage />,
