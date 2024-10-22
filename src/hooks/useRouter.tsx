@@ -100,8 +100,4 @@ export const useRouter = () =>
         },
       ],
     },
-    {
-      path: '/admin',
-      element: <AdminMainPage />,
-    },
   ]);
