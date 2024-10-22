@@ -1,5 +1,5 @@
-import { MapLayout } from '@/pages';
-import { MainPage } from '@/pages/Main';
+import { MapLayout, ReservationPage } from '@/pages';
+import { MainPage } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -11,5 +11,9 @@ export const useRouter = () =>
     {
       path: '/map',
       element: <MapLayout />,
+    },
+    {
+      path: '/reservation',
+      element: <ReservationPage />,
     },
   ]);
