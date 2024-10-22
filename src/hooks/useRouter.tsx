@@ -33,8 +33,4 @@ export const useRouter = () =>
       element: <ReservationLayout />,
       children: [{ index: true, element: <ReservationPage /> }],
     },
-    {
-      path: '/admin',
-      element: <AdminMainPage />,
-    },
   ]);
