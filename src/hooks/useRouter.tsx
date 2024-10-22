@@ -1,12 +1,9 @@
 import { MapLayout, ReservationLayout } from '@/components/Layout';
 import { MainLayout } from '@/components/Layout/MainLayout';
-import {
-  BranchDetailPage,
-  MainPage,
-  MapDetailPage,
-  MapPage,
-  ReservationPage,
-} from '@/pages';
+import { BranchDetailPage, MapDetailPage, MapPage } from '@/pages';
+import { ReservationPage } from '@/pages';
+import { MainPage } from '@/pages';
+import { AdminMainPage } from '@/pages/Admin/Main';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -35,5 +32,9 @@ export const useRouter = () =>
       path: '/reservation',
       element: <ReservationLayout />,
       children: [{ index: true, element: <ReservationPage /> }],
+    },
+    {
+      path: '/admin',
+      element: <AdminMainPage />,
     },
   ]);
