@@ -1,5 +1,6 @@
 import { MapLayout, ReservationPage } from '@/pages';
 import { MainPage } from '@/pages';
+import { AdminMainPage } from '@/pages/Admin/Main';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -15,5 +16,9 @@ export const useRouter = () =>
     {
       path: '/reservation',
       element: <ReservationPage />,
+    },
+    {
+      path: '/admin',
+      element: <AdminMainPage />,
     },
   ]);
