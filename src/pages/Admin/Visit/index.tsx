@@ -6,8 +6,8 @@ function VisitPage() {
   return (
     <div className='mx-6 mt-6'>
       <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
-      <Next />
       <WaitingNumber />
+      <Next />
     </div>
   );
 }
