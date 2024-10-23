@@ -17,6 +17,7 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+<<<<<<< HEAD
         // custom color
         main: '#008485',
         lightGray: '#666666',
@@ -25,6 +26,9 @@ export default {
         lightText: '#464646',
         border: '#D9D9D9',
 
+=======
+        main: '#008485',
+>>>>>>> a17d3fa ([Feat]🥚대기 현황 컴포넌트 ,버튼 컴포넌트 추가)
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
