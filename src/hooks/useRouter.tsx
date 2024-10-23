@@ -1,5 +1,5 @@
 import { MapLayout, ReservationLayout } from '@/components/Layout';
-import { AdminLayout } from '@/components/Layout/AdminLayout';
+import AdminLayout from '@/components/Layout/AdminLayout';
 import {
   BranchDetailPage,
   MainPage,
@@ -7,7 +7,9 @@ import {
   MapPage,
   ReservationPage,
 } from '@/pages';
-import { AdminMainPage } from '@/pages/Admin/Main';
+import CallPage from '@/pages/Admin/Call';
+import InquiryPage from '@/pages/Admin/Inquiry';
+import VisitPage from '@/pages/Admin/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -39,6 +41,10 @@ export const useRouter = () =>
     {
       path: '/admin',
       element: <AdminLayout />,
-      children: [{ index: true, element: <AdminMainPage /> }],
+      children: [
+        { index: true, element: <VisitPage /> },
+        { path: '/admin/inquiry', element: <InquiryPage /> },
+        { path: '/admin/call', element: <CallPage /> },
+      ],
     },
   ]);
