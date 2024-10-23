@@ -1,5 +1,3 @@
-import React from 'react';
-
 function WaitingNumber() {
   const previousNumber = 951;
   const currentNumber = 952;
@@ -19,7 +17,7 @@ function WaitingNumber() {
         <span className='text-4xl font-bold text-gray-600 md:text-6xl'>
           {previousNumber}
         </span>
-        <span className='relative top-6 text-6xl font-extrabold text-black md:text-8xl'>
+        <span className='relative top-10 text-6xl font-extrabold text-black md:text-8xl'>
           {currentNumber}
         </span>
         <span className='text-4xl font-bold text-gray-600 md:text-6xl'>
