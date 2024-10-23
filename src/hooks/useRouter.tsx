@@ -1,4 +1,5 @@
 import { MapLayout, ReservationLayout } from '@/components/Layout';
+import { MainLayout } from '@/components/Layout/MainLayout';
 import {
   BranchDetailPage,
   MainPage,
@@ -12,7 +13,8 @@ export const useRouter = () =>
   createBrowserRouter([
     {
       path: '/',
-      element: <MainPage />,
+      element: <MainLayout />,
+      children: [{ index: true, element: <MainPage /> }],
     },
     {
       path: '/map',
