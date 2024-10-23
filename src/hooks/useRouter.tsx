@@ -4,6 +4,10 @@ import { BranchDetailPage, MapDetailPage, MapPage } from '@/pages';
 import { ReservationPage } from '@/pages';
 import { MainPage } from '@/pages';
 import { AdminMainPage } from '@/pages/Admin/Main';
+import AdminLayout from '@/components/Layout/AdminLayout';
+import CallPage from '@/pages/Admin/Call';
+import InquiryPage from '@/pages/Admin/Inquiry';
+import VisitPage from '@/pages/Admin/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -33,4 +37,16 @@ export const useRouter = () =>
       element: <ReservationLayout />,
       children: [{ index: true, element: <ReservationPage /> }],
     },
+<<<<<<< HEAD
+=======
+    {
+      path: '/admin',
+      element: <AdminLayout />,
+      children: [
+        { index: true, element: <VisitPage /> },
+        { path: '/admin/inquiry', element: <InquiryPage /> },
+        { path: '/admin/call', element: <CallPage /> },
+      ],
+    },
+>>>>>>> 8bdf065 ([Admin]� Sidebar(Nav) 추가)
   ]);

@@ -1,9 +1,5 @@
-import '@/index.css';
-
-export function AdminVisitPage() {
-  return (
-    <div className='text-6xl'>
-      <div className='text-center'>Admin Visit!</div>
-    </div>
-  );
+function VisitPage() {
+  return <div>방문상담 관리 페이지</div>;
 }
+
+export default VisitPage;
