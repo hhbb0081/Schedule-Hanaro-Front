@@ -2,9 +2,147 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff')
+    format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Bold';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+    format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@layer base {
+  html {
+    font-family: font-pretendReg;
+    text-align: center;
+    height: 100dvh;
+  }
+
+  .bold-text {
+    font-family: font-pretendBold;
+  }
+
+  .medium-text {
+    font-family: font-pretendMed;
+  }
+
+  .regular-text {
+    font-family: font-pretendReg;
+  }
+
+  .button {
+    @apply bg-main/80 hover:bg-main/90 text-white;
+  }
+
+  .input {
+    @apply text-[theme('color.lightGray')] placeholder:text-[theme('colors.border')] focus:border-[theme('colors.lightGray')] focus:outline-none;
+  }
+
+  .selectTrigger {
+    @apply focus:bg-['#F4F4F4'];
+  }
+
+  @media (min-height: 100dvh) {
+    #root {
+      --app-height: 100%;
+    }
+  }
+
+  .App {
+    margin: 0 auto;
+    height: var(--app-height);
+    height: 100dvh;
+    /* width: 100%; */
+  }
+  .Element {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .Element::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media only screen and (max-width: 430px) {
+    html {
+      font-size: 12px;
+    }
+    .App {
+      min-width: 320px;
+      width: 100%;
+      background-color: white;
+    }
+    .navbar,
+    .top_header {
+      width: 100%;
+      margin: 0 auto;
+      /* background-color: black; */
+    }
+    .top_header_page {
+      width: 100%;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      top: 0.94rem;
+    }
+  }
+  @media only screen and (min-width: 430px) and (max-width: 800px) {
+    html {
+      font-size: 16px;
+    }
+    .App {
+      max-width: 430px;
+      width: 100%;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 36px;
+    }
+
+    .navbar,
+    .top_header,
+    .top_header_page {
+      left: calc(50% - 215px); /* Center the navbar */
+      right: calc(50% - 215px); /* Center the navbar */
+      /* background-color: black; */
+    }
+  }
+
+  @media (min-width: 800px) {
+    html {
+      font-size: 18px;
+    }
+    .App {
+      /* width: 600px; */
+      max-width: 600px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 36px;
+    }
+
+    .navbar,
+    .top_header,
+    .top_header_page {
+      left: calc(50% - 300px); /* Center the navbar */
+      right: calc(50% - 300px); /* Center the navbar */
+      /* background-color: black; */
+      padding: 0.5rem 0;
+    }
+  }
+}
+
 @layer components {
   .map {
-    @apply h-screen w-screen;
+    @apply h-screen w-full;
   }
   .container {
     @apply h-full;
@@ -45,86 +183,6 @@
     width: 5rem;
     height: 5rem;
     z-index: 1;
-  }
-
-  @media (min-height: 100dvh) {
-    #root {
-      --app-height: 100%;
-    }
-  }
-
-  .App {
-    margin: 0 auto;
-    height: var(--app-height);
-  }
-  .Element {
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  .Element::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media only screen and (max-width: 430px) {
-    html {
-      font-size: 12px;
-    }
-    .App {
-      min-width: 320px;
-      width: 100%;
-      background-color: white;
-    }
-    .navbar,
-    .top_header {
-      width: 100%;
-      margin: 0 auto;
-      /* background-color: black; */
-    }
-    .top_header_page {
-      width: 100%;
-      margin: 0 auto;
-      left: 0;
-      right: 0;
-      top: 0.94rem;
-    }
-  }
-  @media only screen and (min-width: 430px) and (max-width: 800px) {
-    html {
-      font-size: 16px;
-    }
-    .App {
-      max-width: 430px;
-      width: 100%;
-      box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 36px;
-    }
-
-    .navbar,
-    .top_header,
-    .top_header_page {
-      left: calc(50% - 215px); /* Center the navbar */
-      right: calc(50% - 215px); /* Center the navbar */
-      /* background-color: black; */
-    }
-  }
-
-  @media (min-width: 800px) {
-    html {
-      font-size: 18px;
-    }
-    .App {
-      /* width: 600px; */
-      max-width: 600px;
-      box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 36px;
-    }
-
-    .navbar,
-    .top_header,
-    .top_header_page {
-      left: calc(50% - 300px); /* Center the navbar */
-      right: calc(50% - 300px); /* Center the navbar */
-      /* background-color: black; */
-      padding: 0.5rem 0;
-    }
   }
 }
 

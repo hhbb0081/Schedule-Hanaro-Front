@@ -4,7 +4,7 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
-      sm: '640px',
+      sm: '435px',
       md: '768px',
       lg: '1024px',
       xl: '1280px',
@@ -17,6 +17,14 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        // custom color
+        main: '#008485',
+        lightGray: '#666666',
+        error: '#E90061',
+        text: '#2B2B2B',
+        lightText: '#464646',
+        border: '#D9D9D9',
+
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -79,6 +87,11 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      fontFamily: {
+        pretendReg: ['Pretendard-Regular'],
+        pretendMed: ['Pretendard-Medium'],
+        pretendBold: ['Pretendard-Bold'],
       },
     },
   },
