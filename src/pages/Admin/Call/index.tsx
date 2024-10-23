@@ -1,5 +1,7 @@
+import WaitingNumber from '@/components/Admin/WaitingNum';
+
 function CallPage() {
-  return <div>전화 문의 관리 페이지</div>;
+  return <WaitingNumber />;
 }
 
 export default CallPage;
