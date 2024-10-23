@@ -104,8 +104,6 @@ export const useRouter = () =>
         },
       ],
     },
-<<<<<<< HEAD
-=======
     {
       path: '/admin',
       element: <AdminLayout />,
@@ -115,5 +113,4 @@ export const useRouter = () =>
         { path: '/admin/call', element: <CallPage /> },
       ],
     },
->>>>>>> 8bdf065 ([Admin]� Sidebar(Nav) 추가)
   ]);
