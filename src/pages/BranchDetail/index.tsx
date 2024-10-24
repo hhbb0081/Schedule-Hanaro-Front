@@ -12,6 +12,7 @@ import { ReactComponent as WaitPeople } from '@/assets/icons/branch/waitpeople.s
 
 import { Button } from '@/components/ui/button';
 import { MAP_MOCK } from '@/mock/map_mock';
+import { DirectionButton } from '@/components/ui/branch/direction';
 
 export function BranchDetailPage() {
   const { id } = useParams();
@@ -19,6 +20,7 @@ export function BranchDetailPage() {
     return;
   }
   const Branch = MAP_MOCK.find((br) => br.id === +id);
+
   return (
     <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow-lg md:max-w-lg'>
       <header className='flex h-14 items-center justify-between border'>
@@ -27,62 +29,67 @@ export function BranchDetailPage() {
         <Cross width={18} height={18} className='mr-4' />
       </header>
       <main>
-        <div>{/* <img src={branch} alt='' /> */}</div>
-        <div className='border-b p-4'>
+        {/* <img src={branch} alt='bank image' className='w-full' /> */}
+        <div className='border-b p-8'>
           <div className='flex items-center justify-between'>
-            <h3 className='font-bold'>기본정보</h3>
-            <Button className="font-['Hana2.0 CM'] text-center text-base font-normal text-[#5b5b5b]">
-              길찾기
-            </Button>
+            <h2 className='text-xl font-bold'>기본정보</h2>
+            <DirectionButton />
           </div>
           <ul className='list-none'>
-            <li className='mt-2 flex items-center justify-start gap-1'>
+            <li className='mt-4 flex items-center justify-start gap-2'>
               <Addrss width={20} height={23} className='relative' />
-              {Branch?.address}
+              <span className="font-['Inter'] text-base font-semibold text-[#464646]">
+                {Branch?.address}
+              </span>
             </li>
-            <li className='mt-2 flex items-center justify-start gap-1'>
+            <li className='mt-4 flex items-center justify-start gap-2'>
               <Hours width={20} height={20} />
-              {Branch?.business_hours}
+              <span className="font-['Inter'] text-base font-semibold text-[#464646]">
+                {Branch?.business_hours}
+              </span>
             </li>
-            <li className='mt-2 flex items-center justify-start gap-1'>
+            <li className='mt-4 flex items-center justify-start gap-2'>
               <Tel width={16} height={20} />
-              {Branch?.tel}
+              <span className="font-['Inter'] text-base font-semibold text-[#464646]">
+                {Branch?.tel}
+              </span>
             </li>
           </ul>
         </div>
-        <div className='p-4'>
-          <h3 className='font-bold'>대기 정보</h3>
-          <div className='mt-2 grid grid-cols-2 gap-2 text-sm'>
-            <div className='flex items-center'>
-              <Time width={24} height={24} className='mr-2' />
-              <div className="font-['Inter'] text-base font-medium text-[#666666]">
+        <div className='h-2 w-full bg-[#eeeeee]'></div>
+        <div className='p-8'>
+          <h3 className='text-left text-xl font-bold'>대기 정보</h3>
+          <div className='mt-8 grid grid-cols-2 gap-2 text-sm'>
+            <div className='flex items-center gap-2'>
+              <Time width={24} height={24} />
+              <span className="font-['Inter'] text-base font-medium text-[#666666]">
                 이동 소요 시간
-              </div>
+              </span>
             </div>
-            <div className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
+            <span className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
               15분
-            </div>
-            <div className='flex items-center'>
-              <WaitPeople width={24} height={24} className='mr-2' />
-              <div className="font-['Inter'] text-base font-medium text-[#666666]">
+            </span>
+            <div className='flex items-center gap-2'>
+              <WaitPeople width={24} height={24} />
+              <span className="font-['Inter'] text-base font-medium text-[#666666]">
                 현재 대기 인원
-              </div>
+              </span>
             </div>
-            <div className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
+            <span className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
               10명
-            </div>
-            <div className='flex items-center'>
-              <Time width={24} height={24} className='mr-2' />
-              <div className="font-['Inter'] text-base font-medium text-[#666666]">
+            </span>
+            <div className='flex items-center gap-2'>
+              <Time width={24} height={24} />
+              <span className="font-['Inter'] text-base font-medium text-[#666666]">
                 예상 대기 시간
-              </div>
+              </span>
             </div>
-            <div className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
+            <span className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
               20분
-            </div>
+            </span>
           </div>
         </div>
-        <div className='mt-4 flex items-center justify-center'>
+        <div className='mt-16 flex items-center justify-center p-4'>
           <Button>예약하기</Button>
         </div>
       </main>
