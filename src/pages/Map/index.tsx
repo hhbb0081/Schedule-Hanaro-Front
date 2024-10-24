@@ -5,7 +5,7 @@ export function MapPage() {
     console.log(id);
   };
   return (
-    <div className='map fixed'>
+    <div className='map'>
       <Map onClickMarker={onClickMarker} />
     </div>
   );

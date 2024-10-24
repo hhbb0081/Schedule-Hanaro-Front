@@ -7,13 +7,17 @@ import { useMap } from '@/hooks';
 import { MyLocation } from '../Map/MyLocation';
 import TopSheet from '@/pages/Direction/topSheet';
 import BottomSheet from '@/pages/Direction/bottomSheet';
+import { useAtom } from 'jotai';
+import {
+  currentAddressAtom,
+  endAtom,
+  startAtom,
+  totalDistanceAtom,
+  totalTimeAtom,
+} from '@/stores';
 
 dayjs.locale('ko');
 
-type DirectionProps = {
-  start: { latitude: number; longitude: number };
-  end: { latitude: number; longitude: number };
-};
 type Geolocation = {
   coords: {
     latitude: number;
@@ -39,12 +43,27 @@ const setMyLocation = (makeMarker: UpdateMarker) => {
   navigator.geolocation.getCurrentPosition(onSuccess);
 };
 
-export function Direction({ start, end }: DirectionProps) {
+export function Direction() {
+  const [start] = useAtom(startAtom);
+  const [end] = useAtom(endAtom);
+  const [, setCurrentAddress] = useAtom(currentAddressAtom);
+  const [, setTotalTime] = useAtom(totalTimeAtom);
+  const [, setTotalDistance] = useAtom(totalDistanceAtom);
   const mapRef = useRef<HTMLDivElement>(null);
-  const { mapInstance, makeMarker, setStartCoord, setEndCoord } =
-    useMap(mapRef);
+
+  const {
+    mapInstance,
+    makeMarker,
+    currentAddress,
+    setStartCoord,
+    setEndCoord,
+    currentTotalTime: time,
+    currentTotalDistance: distance,
+  } = useMap(mapRef);
 
   useEffect(() => {
+    if (!start || !end) return;
+
     setStartCoord({
       latitude: start.latitude,
       longitude: start.longitude,
@@ -54,7 +73,7 @@ export function Direction({ start, end }: DirectionProps) {
       longitude: end.longitude,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [end, start]);
 
   const onClickMyLocation = () => {
     setMyLocation(makeMarker);
@@ -65,6 +84,21 @@ export function Direction({ start, end }: DirectionProps) {
     onClickMyLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapInstance]);
+
+  useEffect(() => {
+    if (!time || !distance) return;
+
+    setTotalTime(time);
+    setTotalDistance(distance);
+    setCurrentAddress(currentAddress);
+  }, [
+    distance,
+    time,
+    currentAddress,
+    setTotalTime,
+    setTotalDistance,
+    setCurrentAddress,
+  ]);
 
   return (
     <div className='container'>
