@@ -5,8 +5,8 @@ import 'dayjs/locale/ko';
 
 import { useMap } from '@/hooks';
 import { MyLocation } from '../Map/MyLocation';
-import TopSheet from '@/pages/Direction/topSheet';
-import BottomSheet from '@/pages/Direction/bottomSheet';
+import TopSheet from '@/components/Direction/topSheet';
+import BottomSheet from '@/components/Direction/bottomSheet';
 import { useAtom } from 'jotai';
 import {
   currentAddressAtom,
