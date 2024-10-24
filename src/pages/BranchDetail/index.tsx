@@ -19,7 +19,7 @@ export function BranchDetailPage() {
   if (!id) {
     return;
   }
-  const Branch = BRANCH_MOCK.find((br) => br.id === +id);
+  const Branch = BRANCH_MOCK.find((br) => br.id === id);
 
   return (
     <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow-lg md:max-w-lg'>
