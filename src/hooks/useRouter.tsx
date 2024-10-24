@@ -6,6 +6,8 @@ import {
   MapDetailPage,
   MapPage,
   ReservationPage,
+  ReservationCallPage,
+  ReservationInquiryPage,
 } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -34,6 +36,38 @@ export const useRouter = () =>
     {
       path: '/reservation',
       element: <ReservationLayout />,
-      children: [{ index: true, element: <ReservationPage /> }],
+      children: [
+        { index: true, element: <ReservationPage /> },
+        {
+          path: '/reservation/call',
+          children: [
+            { index: true, element: <ReservationCallPage /> },
+            {
+              path: '/reservation/call/:id',
+              children: [{ index: true, element: <ReservationCallPage /> }],
+            },
+          ],
+        },
+        {
+          path: '/reservation/inquiry',
+          children: [
+            { index: true, element: <ReservationInquiryPage /> },
+            {
+              path: '/reservation/inquiry/:id',
+              children: [{ index: true, element: <ReservationInquiryPage /> }],
+            },
+          ],
+        },
+        {
+          path: '/reservation/visit',
+          children: [
+            { index: true, element: <ReservationPage /> },
+            {
+              path: '/reservation/visit/:id',
+              children: [{ index: true, element: <ReservationPage /> }],
+            },
+          ],
+        },
+      ],
     },
   ]);
