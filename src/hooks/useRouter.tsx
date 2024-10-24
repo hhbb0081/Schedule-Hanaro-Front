@@ -2,6 +2,7 @@ import { MapLayout, ReservationLayout } from '@/components/Layout';
 import { MainLayout } from '@/components/Layout/MainLayout';
 import {
   BranchDetailPage,
+  DirectionPage,
   MainPage,
   MapDetailPage,
   MapPage,
@@ -28,6 +29,10 @@ export const useRouter = () =>
           element: <MapDetailPage />,
         },
       ],
+    },
+    {
+      path: '/direction',
+      element: <DirectionPage />,
     },
     {
       path: '/branch/:id',

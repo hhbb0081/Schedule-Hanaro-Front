@@ -5,3 +5,4 @@ export * from './MapDetail';
 export * from './BranchDetail';
 export * from './Reservation/Call';
 export * from './Reservation/Inquiry';
+export * from './Direction';
