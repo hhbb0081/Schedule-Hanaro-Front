@@ -1,26 +1,38 @@
-// import { useMap } from '@/hooks';
-// import { useEffect } from 'react';
 import { Direction } from '@/components/Direction';
-import { MAP_MOCK } from '@/mock/map_mock';
+import { BRANCH_MOCK } from '@/mock/branch_mock';
+import { bankIdAtom, endAtom, startAtom } from '@/stores';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export function DirectionPage() {
+  const [, setStart] = useAtom(startAtom);
+  const [, setEnd] = useAtom(endAtom);
+  const [, setBankId] = useAtom(bankIdAtom);
+
   const [searchParams] = useSearchParams();
 
-  // const { setStartCoord, setEndCoord } = useMap();
+  const startLat = searchParams.get('startX') || '37.5631989425409';
+  const startLon = searchParams.get('startY') || '126.98732327063084';
 
-  const startLat = searchParams.get('startX') || 37.5631989425409;
-  const startLon = searchParams.get('startY') || 126.98732327063084;
-  const start = { latitude: +startLat, longitude: +startLon };
+  const endLat = searchParams.get('endX') || BRANCH_MOCK[1].position_y;
+  const endLon = searchParams.get('endY') || BRANCH_MOCK[1].position_x;
 
-  const endLat = searchParams.get('endX') || MAP_MOCK[1].position_y;
-  const endLon = searchParams.get('endY') || MAP_MOCK[1].position_x;
-  const end = { latitude: +endLat, longitude: +endLon };
+  useEffect(() => {
+    setStart({ latitude: +startLat, longitude: +startLon });
+    setEnd({ latitude: +endLat, longitude: +endLon });
 
-  console.log('🚀 ~ DirectionPage ~ startLat:', startLat);
-  console.log('🚀 ~ DirectionPage ~ startLon:', startLon);
-  console.log('🚀 ~ DirectionPage ~ endLat:', endLat);
-  console.log('🚀 ~ DirectionPage ~ endLon:', endLon);
+    setBankId(searchParams.get('bankId') || '232|0');
+  }, [
+    endLat,
+    endLon,
+    searchParams,
+    setBankId,
+    setEnd,
+    setStart,
+    startLat,
+    startLon,
+  ]);
 
-  return <Direction start={start} end={end} />;
+  return <Direction />;
 }

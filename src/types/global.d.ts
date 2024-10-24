@@ -28,7 +28,8 @@ declare global {
         path: TMapLatLng[];
         strokeColor: string;
         strokeWeight: number;
-        strokeStyle: string;
+        strokeOpacity?: number;
+        direction: boolean;
         map: TMap;
       }) => TMapPolyline;
     };

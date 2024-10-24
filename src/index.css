@@ -142,7 +142,7 @@
 
 @layer components {
   .map {
-    @apply z-0 h-screen w-screen;
+    @apply z-0 h-screen w-full;
   }
   .container {
     @apply h-full;

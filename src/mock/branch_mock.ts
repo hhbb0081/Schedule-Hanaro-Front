@@ -1,4 +1,4 @@
-export const MAP_MOCK = [
+export const BRANCH_MOCK = [
   {
     search_type: 'WAY',
     id: '7774',
@@ -7,8 +7,8 @@ export const MAP_MOCK = [
     address: '서울시 중구 을지로 35[을지로1가 101-1번지]',
     driving_directions: '',
     tel: '1577-4655',
-    position_x: 126.981867,
-    position_y: 37.566491,
+    position_x: '126.981867',
+    position_y: '37.566491',
     business_hours: '',
     atm_install_place: '을지로본점신축건물1층 주차장',
     atm_operating_hours: '24시간',
@@ -22,8 +22,8 @@ export const MAP_MOCK = [
     address: '서울특별시 중구 을지로 35[을지로1가 101-1]',
     driving_directions: '을지로입구역 1번출구',
     tel: '02-737-1111',
-    position_x: 126.981867,
-    position_y: 37.566491,
+    position_x: '126.981867',
+    position_y: '37.566491',
     branch_code: '0920',
     business_hours: '09:00~16:00',
     atm_install_place: '',
@@ -39,8 +39,8 @@ export const MAP_MOCK = [
       '서울특별시 중구 을지로 65 SK텔레콤빌딩 지하1층[을지로2가 36-1 SKT신사옥]',
     driving_directions: '지하철 2호선 을지로입구역 SKT신사옥 지하1층',
     tel: '',
-    position_x: 126.985212,
-    position_y: 37.56646,
+    position_x: '126.985212',
+    position_y: '37.56646',
     business_hours: '',
     atm_install_place: 'SKT신사옥 지하1층',
     atm_operating_hours: '06:00~24:00',
@@ -54,11 +54,34 @@ export const MAP_MOCK = [
     address: '을지로35[을지로1가 101-1]',
     driving_directions: '지하철2호선 을지로입구역 1번2번출구',
     tel: '1599-1111',
-    position_x: 126.981867,
-    position_y: 37.566491,
+    position_x: '126.981867',
+    position_y: '37.566491',
     business_hours: '09:00~16:00',
     atm_install_place: '',
     atm_operating_hours: '',
     branch_type: '은행점',
+  },
+];
+
+export const BRANCH_STATE_MOCK = [
+  {
+    id: '7774',
+    waitingNumber: '11',
+    waitingTime: '15',
+  },
+  {
+    id: '401|0',
+    waitingNumber: '11',
+    waitingTime: '15',
+  },
+  {
+    id: '1487|1',
+    waitingNumber: '11',
+    waitingTime: '15',
+  },
+  {
+    id: '232|0',
+    waitingNumber: '11',
+    waitingTime: '15',
   },
 ];
