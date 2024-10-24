@@ -2,7 +2,7 @@
 export const BRANCH_MOCK = [
   {
     search_type: 'WAY',
-    id: 1,
+    id: '7774',
     company_name: '하나은행',
     name: '을지로본점신축건물1층 주차장',
     address: '서울시 중구 을지로 35[을지로1가 101-1번지]',
@@ -17,7 +17,7 @@ export const BRANCH_MOCK = [
   },
   {
     search_type: 'WAY',
-    id: 2,
+    id: '401|0',
     company_name: '하나은행',
     name: '영업1부PB센터',
     address: '서울특별시 중구 을지로 35[을지로1가 101-1]',
@@ -33,7 +33,7 @@ export const BRANCH_MOCK = [
   },
   {
     search_type: 'WAY',
-    id: 3,
+    id: '1487|1',
     company_name: '하나은행',
     name: 'SKT신사옥 지하1층',
     address:
@@ -49,7 +49,7 @@ export const BRANCH_MOCK = [
   },
   {
     search_type: 'WAY',
-    id: 4,
+    id: '232|0',
     company_name: '하나은행',
     name: 'KEB하나은행 본점',
     address: '을지로35[을지로1가 101-1]',
