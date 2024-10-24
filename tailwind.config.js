@@ -18,8 +18,8 @@ export default {
       },
       colors: {
         // custom color
-        main: '#008485',
-        lightGray: '#666666',
+        main: 'rgba(0, 132, 133, 0.8)',
+        lightGrey: '#666666',
         error: '#E90061',
         text: '#2B2B2B',
         lightText: '#464646',
