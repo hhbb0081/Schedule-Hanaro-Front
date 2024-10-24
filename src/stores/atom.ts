@@ -14,3 +14,5 @@ export const departureTimeAtom = atom<Date | null>(null);
 export const arrivalTimeAtom = atom<Date | null>(null);
 export const totalTimeAtom = atom<number>(0);
 export const totalDistanceAtom = atom<number>(0);
+
+export const mapClickAtom = atom<boolean>(false);
