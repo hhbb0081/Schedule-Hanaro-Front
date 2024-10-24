@@ -59,15 +59,15 @@ export const useMap = (
   // =======================================
 
   // 좌표 -> 주소 변환 Query
-  // const { data: addressData } = useQuery({
-  //   ...queryKeys.tmap.getAddressFromCoord({
-  //     latitude: coord.latitude,
-  //     longitude: coord.longitude,
-  //   }),
+  const { data: addressData } = useQuery({
+    ...queryKeys.tmap.getAddressFromCoord({
+      latitude: startCoord.latitude,
+      longitude: startCoord.longitude,
+    }),
 
-  //   placeholderData: keepPreviousData,
-  // });
-  // const currentAddress = addressData?.addressInfo.fullAddress || '';
+    placeholderData: keepPreviousData,
+  });
+  const currentAddress = addressData?.addressInfo.fullAddress || '';
 
   // 보행자 경로 Query
   const { data: pathData } = useQuery({
@@ -154,8 +154,7 @@ export const useMap = (
       const marker = Marker({
         mapContent: mapInstance,
         position,
-        theme: 'green',
-        labelText: '출발지',
+        theme: 'start',
       });
 
       setCurrentStartMarker(marker);
@@ -181,8 +180,7 @@ export const useMap = (
       const marker = Marker({
         mapContent: mapInstance,
         position,
-        theme: 'green',
-        labelText: '도착지',
+        theme: 'end',
       });
 
       setCurrentEndMarker(marker);
@@ -200,7 +198,7 @@ export const useMap = (
       return;
     }
 
-    mapInstance.on('ConfigLoad', () => makePolyLine(currentPath, '#191970', 9));
+    mapInstance.on('ConfigLoad', () => makePolyLine(currentPath, '#3D8BFF', 9));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCoord, mapInstance, currentPath]);
@@ -343,7 +341,6 @@ export const useMap = (
         path: tempPath,
         strokeColor,
         strokeWeight,
-        strokeStyle: 'solid',
         mapContent: mapInstance,
       });
       setCurrentPolyline(polyline);
@@ -393,7 +390,7 @@ export const useMap = (
     makeMarker,
     makePolyLine,
     currentMarker,
-    // currentAddress,
+    currentAddress,
     currentPath,
     currentTotalDistance,
     currentTotalTime,
