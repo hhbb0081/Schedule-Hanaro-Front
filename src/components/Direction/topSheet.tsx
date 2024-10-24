@@ -1,8 +1,8 @@
 import { ReactComponent as Close } from '@/assets/icons/close.svg';
 import DirectionBar from './directionBar';
-import DepArrTime from './depArrTIme';
 import TotalTimeDistance from './totalTimeDistance';
 import OrgDestAddr from './orgDestAddr';
+import DepArrTime from './depArrTime';
 
 export default function TopSheet() {
   return (
