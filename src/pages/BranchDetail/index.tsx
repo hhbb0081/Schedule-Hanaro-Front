@@ -11,7 +11,7 @@ import { ReactComponent as WaitPeople } from '@/assets/icons/branch/waitpeople.s
 // import branch from '@/assets/images/branch.png';
 
 import { Button } from '@/components/ui/button';
-import { MAP_MOCK } from '@/mock/map_mock';
+import { BRANCH_MOCK } from '@/mock/branch_mock';
 import { DirectionButton } from '@/components/ui/branch/direction';
 
 export function BranchDetailPage() {
@@ -19,7 +19,7 @@ export function BranchDetailPage() {
   if (!id) {
     return;
   }
-  const Branch = MAP_MOCK.find((br) => br.id === +id);
+  const Branch = BRANCH_MOCK.find((br) => br.id === id);
 
   return (
     <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow-lg md:max-w-lg'>
