@@ -1,7 +1,9 @@
+// id를 편의를 위해 숫자로 바꿈
+
 export const MAP_MOCK = [
   {
     search_type: 'WAY',
-    id: '7774',
+    id: 1,
     company_name: '하나은행',
     name: '을지로본점신축건물1층 주차장',
     address: '서울시 중구 을지로 35[을지로1가 101-1번지]',
@@ -16,7 +18,7 @@ export const MAP_MOCK = [
   },
   {
     search_type: 'WAY',
-    id: '401|0',
+    id: 2,
     company_name: '하나은행',
     name: '영업1부PB센터',
     address: '서울특별시 중구 을지로 35[을지로1가 101-1]',
@@ -32,7 +34,7 @@ export const MAP_MOCK = [
   },
   {
     search_type: 'WAY',
-    id: '1487|1',
+    id: 3,
     company_name: '하나은행',
     name: 'SKT신사옥 지하1층',
     address:
@@ -48,7 +50,7 @@ export const MAP_MOCK = [
   },
   {
     search_type: 'WAY',
-    id: '232|0',
+    id: 4,
     company_name: '하나은행',
     name: 'KEB하나은행 본점',
     address: '을지로35[을지로1가 101-1]',
