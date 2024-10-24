@@ -11,15 +11,19 @@ import {
   INITIAL_LONGITUDE,
 } from '@/constants';
 import { queryKeys } from '@/queries';
-import { TMap, TMapEvent, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
+import { TMap, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
 import { PolyLine } from '@/components/Map/Polyline';
+import { useAtom } from 'jotai';
+import { mapClickAtom } from '@/stores';
 
 const { Tmapv3 } = window;
 
 export const useMap = (
   mapRef: React.RefObject<HTMLDivElement>,
-  useOnClick: boolean = false
+  useOnClick: boolean = true
 ) => {
+  const [, setMapClick] = useAtom(mapClickAtom);
+
   const [mapInstance, setMapInstance] = useState<TMap | null>(null);
   const [currentPath, setCurrentPath] = useState<TMapLatLng[]>([]);
   const [currentTotalDistance, setCurrentTotalDistance] = useState<
@@ -59,15 +63,15 @@ export const useMap = (
   // =======================================
 
   // 좌표 -> 주소 변환 Query
-  // const { data: addressData } = useQuery({
-  //   ...queryKeys.tmap.getAddressFromCoord({
-  //     latitude: coord.latitude,
-  //     longitude: coord.longitude,
-  //   }),
+  const { data: addressData } = useQuery({
+    ...queryKeys.tmap.getAddressFromCoord({
+      latitude: startCoord.latitude,
+      longitude: startCoord.longitude,
+    }),
 
-  //   placeholderData: keepPreviousData,
-  // });
-  // const currentAddress = addressData?.addressInfo.fullAddress || '';
+    placeholderData: keepPreviousData,
+  });
+  const currentAddress = addressData?.addressInfo.fullAddress || '';
 
   // 보행자 경로 Query
   const { data: pathData } = useQuery({
@@ -154,8 +158,7 @@ export const useMap = (
       const marker = Marker({
         mapContent: mapInstance,
         position,
-        theme: 'green',
-        labelText: '출발지',
+        theme: 'start',
       });
 
       setCurrentStartMarker(marker);
@@ -181,8 +184,7 @@ export const useMap = (
       const marker = Marker({
         mapContent: mapInstance,
         position,
-        theme: 'green',
-        labelText: '도착지',
+        theme: 'end',
       });
 
       setCurrentEndMarker(marker);
@@ -200,7 +202,7 @@ export const useMap = (
       return;
     }
 
-    mapInstance.on('ConfigLoad', () => makePolyLine(currentPath, '#191970', 9));
+    mapInstance.on('ConfigLoad', () => makePolyLine(currentPath, '#3D8BFF', 9));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCoord, mapInstance, currentPath]);
@@ -229,15 +231,17 @@ export const useMap = (
       return;
     }
 
-    const renderMarker = (e: TMapEvent) => {
-      const { lngLat } = e.data;
-      const position = new Tmapv3.LatLng(lngLat._lat, lngLat._lng);
+    // const renderMarker = (e: TMapEvent) => {
+    //   const { lngLat } = e.data;
+    //   const position = new Tmapv3.LatLng(lngLat._lat, lngLat._lng);
 
-      setCurrentCoord(position);
-    };
+    //   setCurrentCoord(position);
+    // };
 
-    mapInstance.on('Click', renderMarker);
-  }, [mapInstance, currentCoord, useOnClick]);
+    mapInstance.on('Click', () => {
+      setMapClick((cur) => !cur);
+    });
+  }, [mapInstance, currentCoord, useOnClick, setMapClick]);
 
   // currentCoord 변경
   const updateMarker = useCallback(
@@ -343,7 +347,6 @@ export const useMap = (
         path: tempPath,
         strokeColor,
         strokeWeight,
-        strokeStyle: 'solid',
         mapContent: mapInstance,
       });
       setCurrentPolyline(polyline);
@@ -393,7 +396,7 @@ export const useMap = (
     makeMarker,
     makePolyLine,
     currentMarker,
-    // currentAddress,
+    currentAddress,
     currentPath,
     currentTotalDistance,
     currentTotalTime,
