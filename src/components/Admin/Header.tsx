@@ -4,8 +4,8 @@ type HeaderProps = {
 
 export function Header({ bankName }: HeaderProps) {
   return (
-    <header className='fixed left-[225px] w-full py-5 pl-6 shadow-lg'>
-      <h1 className='text-[2.5rem] font-bold'>{bankName}</h1>
+    <header className='fixed left-52 w-full py-[0.5rem] pl-[1.5rem] text-left shadow-lg'>
+      <h1 className='text-[1.5rem] font-extrabold'>{bankName}</h1>
     </header>
   );
 }

@@ -4,11 +4,13 @@ function WaitingNumber() {
   const nextNumber = 953;
 
   return (
-    <div className='flex w-full flex-col items-center rounded-lg bg-white py-8'>
+    <div className='flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
       {/* 레이블 */}
       <div className='mb-4 flex w-full max-w-xl justify-between px-2 md:px-8'>
         <span className='text-sm text-gray-400 md:text-lg'>이전 대기번호</span>
-        <span className='text-sm text-gray-400 md:text-lg'>현재 대기번호</span>
+        <span className='pt-10 text-sm text-gray-400 md:text-lg'>
+          현재 대기번호
+        </span>
         <span className='text-sm text-gray-400 md:text-lg'>다음 대기번호</span>
       </div>
 
