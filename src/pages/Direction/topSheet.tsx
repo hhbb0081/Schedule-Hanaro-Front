@@ -37,7 +37,7 @@ export default function TopSheet() {
   }, [totalTime]);
 
   return (
-    <div className='fixed top-10 z-10 h-[12rem] w-[26rem] rounded-md bg-white px-6 py-4'>
+    <div className='fixed top-10 z-10 h-[13rem] w-[26rem] rounded-xl bg-white px-6 py-4'>
       <div className='flex h-full flex-col justify-between'>
         <div className='flex h-2/3 justify-between'>
           <div className='flex gap-3'>
@@ -55,9 +55,8 @@ export default function TopSheet() {
                   : `00:00`}
               </div>
             </div>
-            <div className='flex flex-col items-center justify-center gap-1'>
+            <div className='flex flex-col items-center justify-between gap-1'>
               <GreenCircle></GreenCircle>
-              <RegularBar></RegularBar>
               <RegularBar></RegularBar>
               <RegularBar></RegularBar>
               <RegularBar></RegularBar>

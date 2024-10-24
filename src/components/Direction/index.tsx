@@ -11,6 +11,7 @@ import { useAtom } from 'jotai';
 import {
   currentAddressAtom,
   endAtom,
+  mapClickAtom,
   startAtom,
   totalDistanceAtom,
   totalTimeAtom,
@@ -49,6 +50,7 @@ export function Direction() {
   const [, setCurrentAddress] = useAtom(currentAddressAtom);
   const [, setTotalTime] = useAtom(totalTimeAtom);
   const [, setTotalDistance] = useAtom(totalDistanceAtom);
+  const [mapClick] = useAtom(mapClickAtom);
   const mapRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -103,12 +105,18 @@ export function Direction() {
   return (
     <div className='container'>
       <div className='flex flex-col items-center'>
-        <TopSheet></TopSheet>
-        <BottomSheet></BottomSheet>
+        {!mapClick && (
+          <>
+            <TopSheet></TopSheet>
+            <BottomSheet></BottomSheet>
+          </>
+        )}
+        <div className='navbar fixed bottom-[16.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
+          <MyLocation onClick={onClickMyLocation} />
+        </div>
       </div>
 
       <div className='map' id='map' ref={mapRef} />
-      <MyLocation onClick={onClickMyLocation} />
     </div>
   );
 }

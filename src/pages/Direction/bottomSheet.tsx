@@ -9,7 +9,7 @@ export default function BottomSheet() {
 
   const reserved = 1;
   return (
-    <div className='fixed bottom-10 z-10 h-[12rem] w-[26rem] rounded-md bg-white p-8'>
+    <div className='fixed bottom-10 z-10 h-[12rem] w-[26rem] rounded-xl bg-white p-8'>
       <div className='flex h-full flex-col justify-between'>
         <div className='flex text-2xl font-extrabold'>
           {bankIdx === -1 ? '' : BRANCH_MOCK[bankIdx].name}

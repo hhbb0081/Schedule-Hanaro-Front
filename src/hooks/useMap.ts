@@ -11,15 +11,19 @@ import {
   INITIAL_LONGITUDE,
 } from '@/constants';
 import { queryKeys } from '@/queries';
-import { TMap, TMapEvent, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
+import { TMap, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
 import { PolyLine } from '@/components/Map/Polyline';
+import { useAtom } from 'jotai';
+import { mapClickAtom } from '@/stores';
 
 const { Tmapv3 } = window;
 
 export const useMap = (
   mapRef: React.RefObject<HTMLDivElement>,
-  useOnClick: boolean = false
+  useOnClick: boolean = true
 ) => {
+  const [, setMapClick] = useAtom(mapClickAtom);
+
   const [mapInstance, setMapInstance] = useState<TMap | null>(null);
   const [currentPath, setCurrentPath] = useState<TMapLatLng[]>([]);
   const [currentTotalDistance, setCurrentTotalDistance] = useState<
@@ -227,15 +231,17 @@ export const useMap = (
       return;
     }
 
-    const renderMarker = (e: TMapEvent) => {
-      const { lngLat } = e.data;
-      const position = new Tmapv3.LatLng(lngLat._lat, lngLat._lng);
+    // const renderMarker = (e: TMapEvent) => {
+    //   const { lngLat } = e.data;
+    //   const position = new Tmapv3.LatLng(lngLat._lat, lngLat._lng);
 
-      setCurrentCoord(position);
-    };
+    //   setCurrentCoord(position);
+    // };
 
-    mapInstance.on('Click', renderMarker);
-  }, [mapInstance, currentCoord, useOnClick]);
+    mapInstance.on('Click', () => {
+      setMapClick((cur) => !cur);
+    });
+  }, [mapInstance, currentCoord, useOnClick, setMapClick]);
 
   // currentCoord 변경
   const updateMarker = useCallback(
