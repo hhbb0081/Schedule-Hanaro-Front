@@ -3,7 +3,6 @@ import { MainLayout } from '@/components/Layout/MainLayout';
 import { BranchDetailPage, MapDetailPage, MapPage } from '@/pages';
 import { ReservationPage } from '@/pages';
 import { MainPage } from '@/pages';
-import { AdminMainPage } from '@/pages/Admin/Main';
 import AdminLayout from '@/components/Layout/AdminLayout';
 import CallPage from '@/pages/Admin/Call';
 import InquiryPage from '@/pages/Admin/Inquiry';
