@@ -2,7 +2,7 @@ import { arrivalTimeAtom, departureTimeAtom, totalTimeAtom } from '@/stores';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-export default function DepArrTime() {
+export default function DepartureArrivalTime() {
   const [departureTime, setDepartureTime] = useAtom(departureTimeAtom);
   const [arrivalTime, setArrivalTime] = useAtom(arrivalTimeAtom);
   const [totalTime] = useAtom(totalTimeAtom);
