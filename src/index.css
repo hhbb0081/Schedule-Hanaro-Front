@@ -46,7 +46,7 @@
   }
 
   .button {
-    @apply bg-main/80 hover:bg-main/90 text-white;
+    @apply bg-main/80 text-white hover:bg-main/90;
   }
 
   .input {
