@@ -7,7 +7,7 @@ type Coord = {
 
 export const startAtom = atom<Coord | null>(null);
 export const endAtom = atom<Coord | null>(null);
-export const bankIdAtom = atom<string | null>(null);
+export const branchIdAtom = atom<string | null>(null);
 
 export const currentAddressAtom = atom<string | null>(null);
 export const departureTimeAtom = atom<Date | null>(null);
