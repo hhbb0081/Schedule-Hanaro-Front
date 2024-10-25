@@ -5,8 +5,8 @@ import 'dayjs/locale/ko';
 
 import { useMap } from '@/hooks';
 import { MyLocation } from '../Map/MyLocation';
-import TopSheet from '@/components/Direction/topSheet';
-import BottomSheet from '@/components/Direction/bottomSheet';
+import TopSheet from '@/components/Direction/TopSheet';
+import BottomSheet from '@/components/Direction/BottomFloatingBox';
 import { useAtom } from 'jotai';
 import {
   currentAddressAtom,
@@ -63,6 +63,7 @@ export function Direction() {
     currentTotalDistance: distance,
   } = useMap(mapRef);
 
+  // 출발지 & 도착지 설정
   useEffect(() => {
     if (!start || !end) return;
 
@@ -87,6 +88,7 @@ export function Direction() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapInstance]);
 
+  // 소요시간 & 거리 설정
   useEffect(() => {
     if (!time || !distance) return;
 

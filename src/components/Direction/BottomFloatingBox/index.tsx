@@ -1,5 +1,5 @@
-import BankInfo from './bankInfo';
-import ReservationButton from './reservationButton';
+import BankInfo from './BankInfo';
+import ReservationButton from './ReservationButton';
 
 export default function BottomSheet() {
   return (

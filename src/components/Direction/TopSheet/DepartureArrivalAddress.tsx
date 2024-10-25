@@ -3,7 +3,7 @@ import { BRANCH_MOCK } from '@/mock/branch_mock';
 import { bankIdAtom, currentAddressAtom } from '@/stores';
 import { useAtom } from 'jotai';
 
-export default function OrgDestAddr() {
+export default function DepartureArrivalAddress() {
   const [currentAddress] = useAtom(currentAddressAtom);
   const [bankId] = useAtom(bankIdAtom);
   const bankIdx = BRANCH_MOCK.findIndex((bank) => bank.id === bankId);

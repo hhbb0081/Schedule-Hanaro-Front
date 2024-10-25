@@ -223,7 +223,6 @@ export const useMap = (
     setMapInstance(map);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapRef]);
-  // }, [mapRef, mapInstance]);
 
   // onClick true로 설정 시 지도 선택시 currentCoord 위치 변경
   useEffect(() => {
