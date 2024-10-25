@@ -46,15 +46,28 @@
   }
 
   .button {
-    @apply bg-main/80 hover:bg-main/90 text-white;
+    @apply bg-main text-white hover:bg-main;
   }
 
   .input {
-    @apply text-[theme('color.lightGray')] placeholder:text-[theme('colors.border')] focus:border-[theme('colors.lightGray')] focus:outline-none;
+    @apply text-[theme('colors.lightGrey')] placeholder:text-[theme('colors.border')] focus:border-[theme('colors.lightGrey')] focus:outline-none;
   }
 
   .selectTrigger {
     @apply focus:bg-['#F4F4F4'];
+  }
+
+  .badge {
+    @apply bg-[theme('colors.main')] text-white;
+  }
+
+  .customWidth {
+    @apply mx-auto w-full max-w-full sm:w-[430px] md:w-[600px];
+  }
+
+  .bg-main-opacity1 {
+    /* background-color: rgba(theme('colors.main'), 0.2); 투명도 10% */
+    background-color: theme('colors.main'); /* 투명도 10% */
   }
 
   @media (min-height: 100dvh) {
@@ -66,7 +79,7 @@
   .App {
     margin: 0 auto;
     height: var(--app-height);
-    height: 100dvh;
+    /* height: 100dvh; */
     /* width: 100%; */
   }
   .Element {
@@ -77,7 +90,7 @@
     display: none;
   }
 
-  @media only screen and (max-width: 430px) {
+  @media only screen and (max-width: 435px) {
     html {
       font-size: 12px;
     }
@@ -102,7 +115,7 @@
   }
   @media only screen and (min-width: 430px) and (max-width: 800px) {
     html {
-      font-size: 16px;
+      font-size: 14px;
     }
     .App {
       max-width: 430px;
@@ -121,7 +134,7 @@
 
   @media (min-width: 800px) {
     html {
-      font-size: 18px;
+      font-size: 16px;
     }
     .App {
       /* width: 600px; */
