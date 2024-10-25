@@ -9,6 +9,7 @@ import {
   ReservationPage,
   ReservationCallPage,
   ReservationInquiryPage,
+  ReservationDetailVisitPage,
 } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 
