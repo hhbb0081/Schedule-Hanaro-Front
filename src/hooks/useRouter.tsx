@@ -9,6 +9,7 @@ import {
   ReservationPage,
   ReservationCallPage,
   ReservationInquiryPage,
+  ReservationDetailVisitPage,
 } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -69,7 +70,9 @@ export const useRouter = () =>
             { index: true, element: <ReservationPage /> },
             {
               path: '/reservation/visit/:id',
-              children: [{ index: true, element: <ReservationPage /> }],
+              children: [
+                { index: true, element: <ReservationDetailVisitPage /> },
+              ],
             },
           ],
         },

@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow_left.svg';
-import { ReactComponent as Cross } from '@/assets/icons/cross.svg';
 import { ReactComponent as Addrss } from '@/assets/icons/branch/address.svg';
 import { ReactComponent as Hours } from '@/assets/icons/branch/business_hours.svg';
 import { ReactComponent as Tel } from '@/assets/icons/branch/tel.svg';
@@ -13,6 +12,7 @@ import { ReactComponent as WaitPeople } from '@/assets/icons/branch/waitpeople.s
 import { Button } from '@/components/ui/button';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
 import { DirectionButton } from '@/components/ui/branch/direction';
+import { CloseButton } from '@/components/ui/close';
 
 export function BranchDetailPage() {
   const { id } = useParams();
@@ -22,11 +22,11 @@ export function BranchDetailPage() {
   const Branch = BRANCH_MOCK.find((br) => br.id === id);
 
   return (
-    <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow-lg md:max-w-lg'>
+    <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white md:max-w-lg'>
       <header className='flex h-14 items-center justify-between border'>
         <ArrowLeft width={21} height={21} className='ml-4' />
         <div className='text-xl'>{Branch?.name}</div>
-        <Cross width={18} height={18} className='mr-4' />
+        <CloseButton />
       </header>
       <main>
         {/* <img src={branch} alt='bank image' className='w-full' /> */}
