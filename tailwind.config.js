@@ -17,7 +17,6 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
-<<<<<<< HEAD
         // custom color
         main: 'rgba(0, 132, 133, 0.8)',
         lightGrey: '#666666',
@@ -27,9 +26,6 @@ export default {
         border: '#D9D9D9',
         main07: 'rgba(0, 132, 133, 0.07)',
 
-=======
-        main: '#008485',
->>>>>>> a17d3fa ([Feat]🥚대기 현황 컴포넌트 ,버튼 컴포넌트 추가)
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

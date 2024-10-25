@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import { Header } from '@/components/Admin/Header';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '@/components/Admin/Sidebar';
