@@ -1,4 +1,4 @@
-import { ReactComponent as Close } from '@/assets/icons/close.svg';
+import { X } from 'lucide-react';
 import DirectionBar from './DirectionBar';
 import DepartureArrivalAddress from './DepartureArrivalAddress';
 import DepartureArrivalTime from './DepartureArrivalTime';
@@ -16,7 +16,7 @@ export default function TopSheet() {
             <DirectionBar />
             <DepartureArrivalAddress />
           </div>
-          <Close></Close>
+          <X />
         </div>
         <div className='mx-10 flex items-center justify-between'>
           <TotalTime />
