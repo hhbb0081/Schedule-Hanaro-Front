@@ -6,7 +6,10 @@ function VisitPage() {
   return (
     <div className='relative mx-[1.5rem] w-[90%]'>
       <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
-      <WaitingNumber />
+      <div className='my-[2.5rem]'>
+        <WaitingNumber />
+      </div>
+
       <div className='absolute bottom-[-6.25rem] left-[15%] right-[15%]'>
         <Next />
       </div>
