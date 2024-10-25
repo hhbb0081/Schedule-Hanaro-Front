@@ -145,8 +145,7 @@ export const useMap = (
       const marker = Marker({
         mapContent: mapInstance,
         position,
-        theme: 'red',
-        labelText: '현위치',
+        theme: 'current',
       });
 
       setCurrentMarker(marker);
@@ -279,7 +278,7 @@ export const useMap = (
   const makeMarker = useCallback(
     (
       tempCoord: { latitude: number | null; longitude: number | null },
-      theme: 'green' | 'red',
+      theme: 'green' | 'red' | 'current',
       labelText?: string
     ) => {
       const { latitude, longitude } = tempCoord;
@@ -379,19 +378,13 @@ export const useMap = (
   };
 
   // currentCoord 설정 및 중앙 설정
-  const setStartCoord = (startCoord: {
-    latitude: number;
-    longitude: number;
-  }) => {
-    const position = new Tmapv3.LatLng(
-      startCoord.latitude,
-      startCoord.longitude
-    );
+  const setStartCoord = (coord: { latitude: number; longitude: number }) => {
+    const position = new Tmapv3.LatLng(coord.latitude, coord.longitude);
     setCurrentStartCoord(position);
   };
 
-  const setEndCoord = (endCoord: { latitude: number; longitude: number }) => {
-    const position = new Tmapv3.LatLng(endCoord.latitude, endCoord.longitude);
+  const setEndCoord = (coord: { latitude: number; longitude: number }) => {
+    const position = new Tmapv3.LatLng(coord.latitude, coord.longitude);
     setCurrentEndCoord(position);
   };
 
