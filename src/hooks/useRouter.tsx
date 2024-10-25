@@ -1,5 +1,6 @@
 import { MapLayout, ReservationLayout } from '@/components/Layout';
 import { MainLayout } from '@/components/Layout/MainLayout';
+import { RegisterLayout } from '@/components/Layout/Register';
 import {
   BranchDetailPage,
   DirectionPage,
@@ -10,7 +11,9 @@ import {
   ReservationCallPage,
   ReservationInquiryPage,
   ReservationDetailVisitPage,
+  RegisterPage,
 } from '@/pages';
+import RegisterCallFormPage from '@/pages/Register/Call';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -75,6 +78,17 @@ export const useRouter = () =>
               ],
             },
           ],
+        },
+      ],
+    },
+    {
+      path: '/register',
+      element: <RegisterLayout />,
+      children: [
+        { index: true, element: <RegisterPage /> },
+        {
+          path: '/register/call',
+          element: <RegisterCallFormPage />,
         },
       ],
     },
