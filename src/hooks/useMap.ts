@@ -60,10 +60,21 @@ export const useMap = (
     latitude: currentEndCoord?.lat() || 0,
     longitude: currentEndCoord?.lng() || 0,
   };
-  // =======================================
+  // ======Query================================
 
-  // 좌표 -> 주소 변환 Query
+  // 현위치 좌표 -> 주소 변환 Query
   const { data: addressData } = useQuery({
+    ...queryKeys.tmap.getAddressFromCoord({
+      latitude: coord.latitude,
+      longitude: coord.longitude,
+    }),
+
+    placeholderData: keepPreviousData,
+  });
+  const currentAddress = addressData?.addressInfo.fullAddress || '';
+
+  // 출발지 좌표 -> 주소 변환 Query
+  const { data: startAddressData } = useQuery({
     ...queryKeys.tmap.getAddressFromCoord({
       latitude: startCoord.latitude,
       longitude: startCoord.longitude,
@@ -71,7 +82,7 @@ export const useMap = (
 
     placeholderData: keepPreviousData,
   });
-  const currentAddress = addressData?.addressInfo.fullAddress || '';
+  const currentStartAddress = startAddressData?.addressInfo.fullAddress || '';
 
   // 보행자 경로 Query
   const { data: pathData } = useQuery({
@@ -86,6 +97,8 @@ export const useMap = (
 
     placeholderData: keepPreviousData,
   });
+
+  //======================================================
 
   useEffect(() => {
     console.log('🚀 ~ useEffect ~ pathData:', pathData);
@@ -132,7 +145,8 @@ export const useMap = (
       const marker = Marker({
         mapContent: mapInstance,
         position,
-        theme: 'green',
+        theme: 'red',
+        labelText: '현위치',
       });
 
       setCurrentMarker(marker);
@@ -224,7 +238,7 @@ export const useMap = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapRef]);
 
-  // onClick true로 설정 시 지도 선택시 currentCoord 위치 변경
+  // onClick true로 설정 시 지도 선택시 지도만 표시
   useEffect(() => {
     if (!mapInstance || !useOnClick) {
       return;
@@ -318,7 +332,6 @@ export const useMap = (
     return true;
   };
 
-  // TODO:
   const makePolyLine = useCallback(
     (tempPath: TMapLatLng[], strokeColor: string, strokeWeight: number) => {
       if (!tempPath.length || !mapInstance) {
@@ -396,6 +409,7 @@ export const useMap = (
     makePolyLine,
     currentMarker,
     currentAddress,
+    currentStartAddress,
     currentPath,
     currentTotalDistance,
     currentTotalTime,
