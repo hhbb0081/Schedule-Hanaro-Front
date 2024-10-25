@@ -150,7 +150,7 @@ export default function InfoCard({
   return (
     <div className='flex justify-center'>
       <div
-        className={`mx-auto my-[2rem] w-${infoItems.length === 2 ? '10/12' : '11/12'} rounded-lg border border-gray-300 p-[1rem] ${infoItems.length === 2 ? 'h-[11.5rem]' : 'h-auto'}`}
+        className={`mx-auto w-${infoItems.length === 2 ? '10/12' : '11/12'} rounded-lg border border-gray-300 p-[1rem] ${infoItems.length === 2 ? 'h-[11.5rem]' : 'h-auto'}`}
       >
         <div
           className={`flex ${infoItems.length === 2 ? 'flex-col gap-[1rem]' : 'flex-row'} items-center justify-evenly`}
@@ -163,7 +163,9 @@ export default function InfoCard({
                 count={item.count}
               />
               {index < infoItems.length - 1 && (
-                <div className='h-[60%] w-[0.0625rem] bg-[#d9d9d9]'></div>
+                <div
+                  className={`${infoItems.length === 2 ? 'h-[0.0625rem] w-[60%]' : 'h-[5rem] w-[0.0625rem]'} bg-[#d9d9d9]`}
+                ></div>
               )}
             </React.Fragment>
           ))}
