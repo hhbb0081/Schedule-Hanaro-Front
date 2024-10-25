@@ -30,15 +30,15 @@ type UpdateMarker = (
     latitude: number | null;
     longitude: number | null;
   },
-  theme: 'green' | 'red',
-  labelText: string
+  theme: 'green' | 'red' | 'current',
+  labelText?: string
 ) => void;
 
 const setMyLocation = (makeMarker: UpdateMarker) => {
   const onSuccess = (position: Geolocation) => {
     const { latitude, longitude } = position.coords;
     // 현위치 Marker 생성
-    makeMarker({ latitude, longitude }, 'red', '현위치');
+    makeMarker({ latitude, longitude }, 'current');
   };
   // makeMarker : 함수
   navigator.geolocation.getCurrentPosition(onSuccess);

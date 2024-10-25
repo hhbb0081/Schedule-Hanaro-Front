@@ -1,6 +1,7 @@
 // import markermyGreen from '@/assets/icons/marker-my-green.svg';
 import markerMyRed from '@/assets/icons/marker-my-red.svg';
 import markerMyBlue from '@/assets/icons/marker-blue.svg';
+import markerCurrent from '@/assets/icons/marker-current.svg';
 import markerStart from '@/assets/icons/marker-start.svg';
 import markerEnd from '@/assets/icons/marker-end.svg';
 // import markerMyPurple from '@/assets/icons/marker-purple.svg';
@@ -13,7 +14,7 @@ const { Tmapv3 } = window;
 type MarkerProps = {
   mapContent: TMap;
   position: TMapLatLng;
-  theme: 'green' | 'red' | 'start' | 'end';
+  theme: 'green' | 'red' | 'start' | 'end' | 'current';
   icon?: string;
   labelText?: string;
 };
@@ -29,9 +30,11 @@ export function Marker({
       ? markerMyBlue
       : theme === 'red'
         ? markerMyRed
-        : theme === 'start'
-          ? markerStart
-          : markerEnd;
+        : theme === 'current'
+          ? markerCurrent
+          : theme === 'start'
+            ? markerStart
+            : markerEnd;
   return new Tmapv3.Marker({
     position,
     map: mapContent,

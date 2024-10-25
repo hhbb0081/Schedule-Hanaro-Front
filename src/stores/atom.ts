@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-type Coord = {
+export type Coord = {
   latitude: number;
   longitude: number;
 };
