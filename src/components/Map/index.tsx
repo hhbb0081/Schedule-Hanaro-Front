@@ -7,6 +7,7 @@ import { MAX_ZOOM_LEVEL } from '@/constants';
 import { useMap } from '@/hooks';
 
 import { Marker } from './Marker';
+import { MyLocation } from './MyLocation';
 
 const { Tmapv3 } = window;
 dayjs.locale('ko');
@@ -20,14 +21,7 @@ type Geolocation = {
     longitude: number;
   };
 };
-type UpdateMarker = (
-  coord: {
-    latitude: number | null;
-    longitude: number | null;
-  },
-  theme: 'green' | 'red',
-  labelText: string
-) => void;
+type SetCoord = (currCoord: { latitude: number; longitude: number }) => void;
 
 type BankListRes = {
   // 큰 수는 BigInt로 표시 했음(string임)
@@ -79,45 +73,11 @@ const testBank2: BankListRes = {
   group: {} as BankListRes,
 };
 
-// const testStart: BankListRes = {
-//   id: '1',
-//   groupId: '1',
-//   title: 'TestTitle',
-//   contents: 'TestContents',
-//   date: new Date(),
-//   maxHumanCount: 1,
-//   address: 'TestAddress',
-//   latitude: 37.54958997910813,
-//   longitude: 127.04632388764902,
-//   status: 'TestStatus',
-//   createdAt: new Date(),
-//   updatedAt: new Date(),
-//   deletedAt: null,
-//   group: {} as BankListRes,
-// };
-
-// const testEnd: BankListRes = {
-//   id: '1',
-//   groupId: '1',
-//   title: 'TestTitle',
-//   contents: 'TestContents',
-//   date: new Date(),
-//   maxHumanCount: 1,
-//   address: 'TestAddress',
-//   latitude: 37.5472649833669,
-//   longitude: 127.04738050398232,
-//   status: 'TestStatus',
-//   createdAt: new Date(),
-//   updatedAt: new Date(),
-//   deletedAt: null,
-//   group: {} as BankListRes,
-// };
-
-const setMyLocation = (makeMarker: UpdateMarker) => {
+const setMyLocation = (setCoord: SetCoord) => {
   const onSuccess = (position: Geolocation) => {
     const { latitude, longitude } = position.coords;
-    // 현위치 Marker 생성
-    makeMarker({ latitude, longitude }, 'red', '현위치');
+    // 현위치 설정
+    setCoord({ latitude, longitude });
   };
   // makeMarker : 함수
   navigator.geolocation.getCurrentPosition(onSuccess);
@@ -128,7 +88,11 @@ export function Map({ onClickMarker }: MapProps) {
   const bankList = [testBank1, testBank2];
 
   const mapRef = useRef<HTMLDivElement>(null);
-  const { mapInstance, makeMarker } = useMap(mapRef);
+  const { mapInstance, currentAddress, setCoord } = useMap(mapRef);
+
+  useEffect(() => {
+    console.log('🚀 ~ Map ~ currentAddress:', currentAddress);
+  }, [currentAddress]);
 
   // useEffect(() => {
   //   setStartCoord({
@@ -143,7 +107,7 @@ export function Map({ onClickMarker }: MapProps) {
   // }, []);
 
   const onClickMyLocation = () => {
-    setMyLocation(makeMarker);
+    setMyLocation(setCoord);
   };
 
   // 현위치 Marker 생성
@@ -184,7 +148,9 @@ export function Map({ onClickMarker }: MapProps) {
   return (
     <div className='container'>
       <div className='map' id='map' ref={mapRef} />
-      {/* <MyLocation onClick={onClickMyLocation} /> */}
+      <div className='navbar fixed bottom-[16.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
+        <MyLocation onClick={onClickMyLocation} />
+      </div>
     </div>
   );
 }

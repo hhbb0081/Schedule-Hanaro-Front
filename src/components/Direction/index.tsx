@@ -9,7 +9,7 @@ import TopSheet from '@/components/Direction/TopSheet';
 import BottomSheet from '@/components/Direction/BottomFloatingBox';
 import { useAtom } from 'jotai';
 import {
-  currentAddressAtom,
+  currentStartAddressAtom,
   endAtom,
   mapClickAtom,
   startAtom,
@@ -47,7 +47,7 @@ const setMyLocation = (makeMarker: UpdateMarker) => {
 export function Direction() {
   const [start] = useAtom(startAtom);
   const [end] = useAtom(endAtom);
-  const [, setCurrentAddress] = useAtom(currentAddressAtom);
+  const [, setCurrentStartAddress] = useAtom(currentStartAddressAtom);
   const [, setTotalTime] = useAtom(totalTimeAtom);
   const [, setTotalDistance] = useAtom(totalDistanceAtom);
   const [mapClick] = useAtom(mapClickAtom);
@@ -56,7 +56,7 @@ export function Direction() {
   const {
     mapInstance,
     makeMarker,
-    currentAddress,
+    currentStartAddress,
     setStartCoord,
     setEndCoord,
     currentTotalTime: time,
@@ -94,14 +94,14 @@ export function Direction() {
 
     setTotalTime(time);
     setTotalDistance(distance);
-    setCurrentAddress(currentAddress);
+    setCurrentStartAddress(currentStartAddress);
   }, [
     distance,
     time,
-    currentAddress,
+    currentStartAddress,
     setTotalTime,
     setTotalDistance,
-    setCurrentAddress,
+    setCurrentStartAddress,
   ]);
 
   return (
