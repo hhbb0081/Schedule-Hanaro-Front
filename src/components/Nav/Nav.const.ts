@@ -1,8 +1,8 @@
 import { ReactComponent as Home } from '@/assets/icons/ic_home.svg';
-import { ReactComponent as Mypage } from '@/assets/icons/ic_outline-account-circle.svg';
-import { ReactComponent as Calendar } from '@/assets/icons/ic_outline-calendar-today.svg';
-import { ReactComponent as Map } from '@/assets/icons/ic_round-map.svg';
-import { ReactComponent as List } from '@/assets/icons/streamline_task-list.svg';
+import { ReactComponent as Calendar } from '@/assets/icons/nav_calendar.svg';
+import { ReactComponent as Map } from '@/assets/icons/nav_map.svg';
+import { ReactComponent as Mypage } from '@/assets/icons/nav_mypage.svg';
+import { ReactComponent as List } from '@/assets/icons/nav_reservationList.svg';
 
 type NavItem = {
   name: string;

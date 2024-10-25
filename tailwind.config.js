@@ -5,7 +5,7 @@ export default {
   theme: {
     screens: {
       sm: '435px',
-      md: '768px',
+      md: '800px',
       lg: '1024px',
       xl: '1280px',
       '2xl': '1536px',
@@ -24,6 +24,7 @@ export default {
         text: '#2B2B2B',
         lightText: '#464646',
         border: '#D9D9D9',
+        main07: 'rgba(0, 132, 133, 0.07)',
 
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

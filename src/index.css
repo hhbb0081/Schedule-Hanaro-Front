@@ -65,6 +65,11 @@
     @apply mx-auto w-full max-w-full sm:w-[430px] md:w-[600px];
   }
 
+  .bg-main-opacity1 {
+    /* background-color: rgba(theme('colors.main'), 0.2); 투명도 10% */
+    background-color: theme('colors.main'); /* 투명도 10% */
+  }
+
   @media (min-height: 100dvh) {
     #root {
       --app-height: 100%;
@@ -85,7 +90,7 @@
     display: none;
   }
 
-  @media only screen and (max-width: 430px) {
+  @media only screen and (max-width: 435px) {
     html {
       font-size: 12px;
     }
@@ -110,7 +115,7 @@
   }
   @media only screen and (min-width: 430px) and (max-width: 800px) {
     html {
-      font-size: 16px;
+      font-size: 14px;
     }
     .App {
       max-width: 430px;
@@ -129,7 +134,7 @@
 
   @media (min-width: 800px) {
     html {
-      font-size: 18px;
+      font-size: 16px;
     }
     .App {
       /* width: 600px; */

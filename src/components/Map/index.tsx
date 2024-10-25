@@ -7,7 +7,6 @@ import { MAX_ZOOM_LEVEL } from '@/constants';
 import { useMap } from '@/hooks';
 
 import { Marker } from './Marker';
-import { MyLocation } from './MyLocation';
 
 const { Tmapv3 } = window;
 dayjs.locale('ko');
@@ -185,7 +184,7 @@ export function Map({ onClickMarker }: MapProps) {
   return (
     <div className='container'>
       <div className='map' id='map' ref={mapRef} />
-      <MyLocation onClick={onClickMyLocation} />
+      {/* <MyLocation onClick={onClickMyLocation} /> */}
     </div>
   );
 }

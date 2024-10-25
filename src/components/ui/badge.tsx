@@ -14,8 +14,9 @@ const badgeVariants = cva(
         destructive:
           'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
         outline: 'text-main border-main bg-white',
-        active: 'badge hover:bg-[main/90] active:bg-[main/90]',
-        noactive: 'text-[#C9C9C9] border-border bg-white',
+        lightSolid: 'border-none text-main bg-main07',
+        active: 'badge hover:bg-[main/90] active:bg-[main/90] cursor-pointer',
+        noactive: 'text-[#C9C9C9] border-border bg-white cursor-pointer',
       },
     },
     defaultVariants: {
