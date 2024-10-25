@@ -69,7 +69,9 @@ export const useRouter = () =>
             { index: true, element: <ReservationPage /> },
             {
               path: '/reservation/visit/:id',
-              children: [{ index: true, element: <ReservationPage /> }],
+              children: [
+                { index: true, element: <ReservationDetailVisitPage /> },
+              ],
             },
           ],
         },
