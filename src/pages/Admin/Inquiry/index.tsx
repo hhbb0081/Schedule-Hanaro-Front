@@ -1,11 +1,5 @@
-import { AnswerInput } from '@/components/Admin/AnswerInput';
-
 function InquiryPage() {
-  return (
-    <div>
-      <AnswerInput />
-    </div>
-  );
+  return <div>1:1문의</div>;
 }
 
 export default InquiryPage;
