@@ -15,7 +15,9 @@ import { Calendar } from '@/components/ui/calendar';
 import { CalendarIcon, Check, ClockIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { useState, useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
 
 type RegisterCallData = {
   name: string;
@@ -23,7 +25,6 @@ type RegisterCallData = {
   consultationType: string;
   reservationDate: Date | undefined;
   reservationTime: string;
-  didAgree: boolean;
 };
 
 // 영업점 운영 시간 데이터
@@ -61,28 +62,38 @@ function generateTimeSlots(startTime: string, endTime: string) {
 }
 
 export default function RegisterCallFormPage() {
+  const navigate = useNavigate();
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterCallData>();
 
-  const [submitted, setSubmitted] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-    new Date()
-  );
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const [timeSlots, setTimeSlots] = useState<string[]>([]);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [isChecked, setIsChecked] = useState(false);
   const [formattedPhone, setFormattedPhone] = useState('');
 
   const phoneValidationPattern = /^\d{3}-\d{3,4}-\d{4}$/;
 
   const onSubmit: SubmitHandler<RegisterCallData> = (data) => {
-    console.log('예약 정보:', { ...data, reservationDate: selectedDate });
+    if (!isChecked) {
+      alert('개인정보 수집 및 이용에 동의해야 합니다.');
+      return;
+    }
+    console.log('예약 정보:', {
+      ...data,
+      reservationDate: data.reservationDate, // 예약일
+      consultationType: data.consultationType, // 상담 종류
+      reservationTime: data.reservationTime,
+    });
     setSubmitted(true);
+    alert('예약이 완료되었습니다!');
+    navigate('/');
   };
+
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [timeSlots, setTimeSlots] = useState<string[]>([]);
+  const [isChecked, setIsChecked] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const slots = generateTimeSlots(
@@ -103,12 +114,6 @@ export default function RegisterCallFormPage() {
   // 체크박스
   const handleToggle = () => {
     setIsChecked((prev) => !prev);
-  };
-
-  // 날짜 선택
-  const handleDateSelect = (date: Date | undefined) => {
-    setSelectedDate(date);
-    setIsPopoverOpen(false);
   };
 
   // 남은 예약 가능 인원 계산 함수
@@ -139,14 +144,14 @@ export default function RegisterCallFormPage() {
             <label className='mb-1 block text-left text-lg font-semibold'>
               이름
             </label>
-            <input
+            <Input
               type='text'
               placeholder='ex) 김하나'
               {...register('name', { required: '이름을 입력해주세요.' })}
               className='w-full border-b-2 py-2 text-base outline-none'
             />
             {errors.name && (
-              <p className='text-left text-sm text-red-500'>
+              <p className='px-1 py-1 text-left text-xs text-red-500'>
                 {errors.name.message}
               </p>
             )}
@@ -157,7 +162,7 @@ export default function RegisterCallFormPage() {
             <label className='mb-1 block text-left text-lg font-semibold'>
               전화번호
             </label>
-            <input
+            <Input
               type='text'
               placeholder='ex) 010-1234-1234'
               value={formattedPhone}
@@ -172,7 +177,7 @@ export default function RegisterCallFormPage() {
               className='w-full border-b-2 py-2 text-base outline-none'
             />
             {errors.phone && (
-              <p className='text-left text-sm text-red-500'>
+              <p className='px-1 py-1 text-left text-xs text-red-500'>
                 {errors.phone.message}
               </p>
             )}
@@ -183,34 +188,46 @@ export default function RegisterCallFormPage() {
             <label className='mb-1 block pb-2 text-left text-lg font-semibold'>
               상담종류
             </label>
-            <Select {...register('consultationType', { required: true })}>
-              <SelectTrigger className='w-full'>
-                <SelectValue
-                  placeholder='상담 종류를 선택하세요'
-                  className='text-base'
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='예금' className='text-base'>
-                  예금
-                </SelectItem>
-                <SelectItem value='펀드' className='text-base'>
-                  펀드
-                </SelectItem>
-                <SelectItem value='대출' className='text-base'>
-                  대출
-                </SelectItem>
-                <SelectItem value='외환' className='text-base'>
-                  외환
-                </SelectItem>
-                <SelectItem
-                  value='마이데이터/모바일/인터넷뱅킹'
-                  className='text-base'
-                >
-                  마이데이터/모바일/인터넷뱅킹
-                </SelectItem>
-              </SelectContent>
-            </Select>
+            <Controller
+              name='consultationType'
+              control={control}
+              rules={{ required: '상담 종류를 선택해주세요.' }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className='w-full'>
+                    <SelectValue
+                      placeholder='상담 종류를 선택하세요'
+                      className='text-base'
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value='예금' className='text-base'>
+                      예금
+                    </SelectItem>
+                    <SelectItem value='펀드' className='text-base'>
+                      펀드
+                    </SelectItem>
+                    <SelectItem value='대출' className='text-base'>
+                      대출
+                    </SelectItem>
+                    <SelectItem value='외환' className='text-base'>
+                      외환
+                    </SelectItem>
+                    <SelectItem
+                      value='마이데이터/모바일/인터넷뱅킹'
+                      className='text-base'
+                    >
+                      마이데이터/모바일/인터넷뱅킹
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.consultationType && (
+              <p className='px-1 py-1 text-left text-xs text-red-500'>
+                {errors.consultationType.message}
+              </p>
+            )}
           </div>
 
           {/* 예약일시 */}
@@ -220,69 +237,97 @@ export default function RegisterCallFormPage() {
             </label>
             <div className='flex space-x-2'>
               <div className='w-1/2 flex-1'>
-                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant='outline'
-                      className='h-full w-full justify-start border-input pl-3 text-left text-lightGray'
+                <Controller
+                  name='reservationDate'
+                  control={control}
+                  rules={{ required: '예약일을 선택해주세요.' }}
+                  render={({ field }) => (
+                    <Popover
+                      open={isPopoverOpen}
+                      onOpenChange={setIsPopoverOpen}
                     >
-                      {selectedDate ? (
-                        <span className='text-base font-normal text-lightGray'>
-                          {format(selectedDate, 'yyyy-MM-dd')}
-                        </span>
-                      ) : (
-                        <span className='text-base font-normal text-lightGray'>
-                          예약일 선택
-                        </span>
-                      )}
-                      <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className='h-[400px] min-h-[300px] w-auto p-0'
-                    align='start'
-                  >
-                    <Calendar
-                      mode='single'
-                      selected={selectedDate}
-                      onSelect={handleDateSelect}
-                      disabled={(date) =>
-                        date < new Date(new Date().setHours(0, 0, 0, 0))
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant='outline'
+                          className='h-10 w-full justify-start border-input pl-3 text-left text-lightGray'
+                        >
+                          {field.value ? (
+                            <span className='text-base font-normal text-lightGray'>
+                              {format(field.value, 'yyyy-MM-dd')}
+                            </span>
+                          ) : (
+                            <span className='text-base font-normal text-lightGray'>
+                              예약일 선택
+                            </span>
+                          )}
+                          <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        className='h-[400px] min-h-[300px] w-auto p-0'
+                        align='start'
+                      >
+                        <Calendar
+                          mode='single'
+                          selected={field.value}
+                          onSelect={(date) => {
+                            field.onChange(date);
+                            setIsPopoverOpen(false);
+                          }}
+                          disabled={(date) =>
+                            date < new Date(new Date().setHours(0, 0, 0, 0))
+                          }
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                />
+                {errors.reservationDate && (
+                  <p className='px-1 py-1 text-left text-xs text-red-500'>
+                    {errors.reservationDate.message}
+                  </p>
+                )}
               </div>
 
               <div className='w-1/2 flex-1'>
-                <Select onValueChange={(value) => setSelectedTime(value)}>
-                  <SelectTrigger className='time-select flex items-center justify-between'>
-                    <SelectValue
-                      placeholder='시간대를 선택하세요'
-                      className='text-base'
+                <Controller
+                  name='reservationTime'
+                  control={control}
+                  rules={{ required: '시간대를 선택해주세요.' }}
+                  render={({ field }) => (
+                    <Select
+                      onValueChange={(value) => field.onChange(value)}
+                      value={field.value || ''}
                     >
-                      {selectedTime}
-                    </SelectValue>
-                    <ClockIcon className='clock-icon z-10 ml-2 h-5 w-5 text-gray-400' />
-                  </SelectTrigger>
-                  <SelectContent className='w-full'>
-                    {timeSlots.map((slot) => (
-                      <SelectItem
-                        key={slot}
-                        value={slot}
-                        className='flex w-full items-center justify-between py-2'
-                      >
-                        <span className='flex-1'>{slot}</span>
-                        <span className='ml-10'>
-                          {getRemainingCapacity(slot)}명
-                        </span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                      <SelectTrigger className='time-select w-full'>
+                        <SelectValue
+                          placeholder='시간대를 선택하세요'
+                          className='text-base'
+                        >
+                          {field.value
+                            ? field.value.split(' ')[0]
+                            : '시간대를 선택하세요'}
+                        </SelectValue>
+                        <ClockIcon className='clock-icon z-10 ml-2 h-5 w-5 text-gray-400' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {timeSlots.map((slot) => (
+                          <SelectItem
+                            key={slot}
+                            value={`${slot} ${getRemainingCapacity(slot)}명`}
+                          >
+                            <span className='flex-1'>{slot}</span>
+                            <span className='ml-11'>
+                              {getRemainingCapacity(slot)}명
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
                 {errors.reservationTime && (
-                  <p className='text-left text-sm text-red-500'>
+                  <p className='px-1 py-1 text-left text-xs text-red-500'>
                     {errors.reservationTime.message}
                   </p>
                 )}
@@ -294,23 +339,24 @@ export default function RegisterCallFormPage() {
         <div>
           {/* 개인정보 수집 동의 */}
           <div className='flex items-center space-x-2 pb-4'>
-            <div onClick={handleToggle} className='cursor-pointer'>
+            <div onClick={handleToggle}>
               <Check
                 className={`h-5 w-5 ${
                   isChecked ? 'text-black' : 'text-gray-400'
                 }`}
               />
             </div>
-            <label className='cursor-pointer text-sm' onClick={handleToggle}>
+            <label className='text-sm' onClick={handleToggle}>
               개인 정보 수집 및 이용 동의
             </label>
           </div>
-          {errors.didAgree && (
-            <p className='text-sm text-red-500'>{errors.didAgree.message}</p>
-          )}
-
           <div className='flex justify-between'>
-            <Button type='button' variant='outline' className='w-1/4'>
+            <Button
+              type='button'
+              onClick={() => navigate('/')}
+              variant='outline'
+              className='w-1/4'
+            >
               취소
             </Button>
             <Button type='submit' variant='default' className='ml-2 w-3/4'>
