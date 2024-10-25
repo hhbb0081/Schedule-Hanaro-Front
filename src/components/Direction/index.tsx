@@ -16,33 +16,9 @@ import {
   totalDistanceAtom,
   totalTimeAtom,
 } from '@/stores';
+import { setMyLocation } from '@/utils';
 
 dayjs.locale('ko');
-
-type Geolocation = {
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-};
-type UpdateMarker = (
-  coord: {
-    latitude: number | null;
-    longitude: number | null;
-  },
-  theme: 'green' | 'red' | 'current',
-  labelText?: string
-) => void;
-
-const setMyLocation = (makeMarker: UpdateMarker) => {
-  const onSuccess = (position: Geolocation) => {
-    const { latitude, longitude } = position.coords;
-    // 현위치 Marker 생성
-    makeMarker({ latitude, longitude }, 'current');
-  };
-  // makeMarker : 함수
-  navigator.geolocation.getCurrentPosition(onSuccess);
-};
 
 export function Direction() {
   const [start] = useAtom(startAtom);
@@ -55,7 +31,7 @@ export function Direction() {
 
   const {
     mapInstance,
-    makeMarker,
+    setCoord,
     currentStartAddress,
     setStartCoord,
     setEndCoord,
@@ -79,7 +55,7 @@ export function Direction() {
   }, [end, start]);
 
   const onClickMyLocation = () => {
-    setMyLocation(makeMarker);
+    setMyLocation(setCoord);
   };
 
   // 현위치 Marker 생성

@@ -8,6 +8,7 @@ import { useMap } from '@/hooks';
 
 import { Marker } from './Marker';
 import { MyLocation } from './MyLocation';
+import { setMyLocation } from '@/utils';
 
 const { Tmapv3 } = window;
 dayjs.locale('ko');
@@ -15,13 +16,6 @@ dayjs.locale('ko');
 type MapProps = {
   onClickMarker: (id: string) => void;
 };
-type Geolocation = {
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-};
-type SetCoord = (currCoord: { latitude: number; longitude: number }) => void;
 
 type BankListRes = {
   // 큰 수는 BigInt로 표시 했음(string임)
@@ -73,16 +67,6 @@ const testBank2: BankListRes = {
   group: {} as BankListRes,
 };
 
-const setMyLocation = (setCoord: SetCoord) => {
-  const onSuccess = (position: Geolocation) => {
-    const { latitude, longitude } = position.coords;
-    // 현위치 설정
-    setCoord({ latitude, longitude });
-  };
-  // makeMarker : 함수
-  navigator.geolocation.getCurrentPosition(onSuccess);
-};
-
 export function Map({ onClickMarker }: MapProps) {
   // Test용 위치 추가 및 기존 코드 삭제
   const bankList = [testBank1, testBank2];
@@ -91,20 +75,10 @@ export function Map({ onClickMarker }: MapProps) {
   const { mapInstance, currentAddress, setCoord } = useMap(mapRef);
 
   useEffect(() => {
+    // TODO:
+    // current Address를 여기서 전역상태로 저장해서 다른 컴포넌트에서 사용
     console.log('🚀 ~ Map ~ currentAddress:', currentAddress);
   }, [currentAddress]);
-
-  // useEffect(() => {
-  //   setStartCoord({
-  //     latitude: testStart.latitude,
-  //     longitude: testStart.longitude,
-  //   });
-  //   setEndCoord({
-  //     latitude: testEnd.latitude,
-  //     longitude: testEnd.longitude,
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   const onClickMyLocation = () => {
     setMyLocation(setCoord);
