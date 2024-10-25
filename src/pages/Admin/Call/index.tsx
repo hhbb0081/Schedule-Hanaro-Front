@@ -16,9 +16,9 @@ function CallPage() {
           birthDate='1977년 8월 24일'
           inquiryCount={3}
         />
-        <div className='ml-[2rem] mt-[-2rem]'>
+        <div className='ml-[2rem]'>
           <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={null} />
-          <div>
+          <div className='mt-[2rem]'>
             <Next />
           </div>
         </div>
