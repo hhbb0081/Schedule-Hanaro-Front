@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import { Header } from '@/components/Admin/Header';
 import React from 'react';
 >>>>>>> 8bdf065 ([Admin]� Sidebar(Nav) 추가)
