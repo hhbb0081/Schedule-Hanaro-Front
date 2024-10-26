@@ -75,15 +75,12 @@ export default function RegisterCallFormPage() {
     });
 
     showToast(toast, '예약 완료되었습니다!');
-    setSubmitted(true);
     setTimeout(() => {
       navigate('/');
     }, 1000);
   };
 
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [submitted, setSubmitted] = useState(false);
 
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
