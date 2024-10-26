@@ -89,7 +89,7 @@ export function Direction() {
             <BottomSheet></BottomSheet>
           </>
         )}
-        <div className='navbar fixed bottom-[16.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
+        <div className='navbar fixed bottom-[20.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
           <MyLocation onClick={onClickMyLocation} />
         </div>
       </div>

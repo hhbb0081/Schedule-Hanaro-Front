@@ -1,4 +1,5 @@
 import { Direction } from '@/components/Direction';
+import Nav from '@/components/Nav/Nav';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
 import { branchIdAtom, endAtom, startAtom } from '@/stores';
 import { useAtom } from 'jotai';
@@ -34,5 +35,10 @@ export function DirectionPage() {
     startLon,
   ]);
 
-  return <Direction />;
+  return (
+    <>
+      <Direction />;
+      <Nav />
+    </>
+  );
 }
