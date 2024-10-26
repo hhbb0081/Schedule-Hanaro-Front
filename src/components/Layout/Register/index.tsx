@@ -1,13 +1,13 @@
 import Header from '@/components/Header/Header';
+import Nav from '@/components/Nav/Nav';
 import { Outlet } from 'react-router-dom';
 
 export function RegisterLayout() {
   return (
     <>
-      <div className='App'>
-        <Header />
-        <Outlet />
-      </div>
+      <Header />
+      <Outlet />
+      <Nav />
     </>
   );
 }
