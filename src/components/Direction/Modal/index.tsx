@@ -57,8 +57,17 @@ export default function Modalbutton({
           </div>
         </DialogHeader>
         <div className='flex items-center justify-center gap-2'>
-          <Checkbox className='mt-0.5' onCheckedChange={toggleCheckBox} />
-          <div>확인하였습니다.</div>
+          <Checkbox
+            id='accept'
+            className='mt-0.5'
+            onCheckedChange={toggleCheckBox}
+          />
+          <label
+            htmlFor='accept'
+            className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+          >
+            확인하였습니다.
+          </label>
         </div>
 
         <DialogFooter>
