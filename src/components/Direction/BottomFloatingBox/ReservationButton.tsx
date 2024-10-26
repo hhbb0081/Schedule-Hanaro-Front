@@ -7,7 +7,7 @@ import { useAtom } from 'jotai';
 export default function ReservationButton() {
   const [branchId] = useAtom(branchIdAtom);
   const branchIdx = BRANCH_MOCK.findIndex((branch) => branch.id === branchId);
-  const reserved = 0;
+  const reserved = 1;
   return (
     <div className='flex gap-3'>
       {reserved ? (

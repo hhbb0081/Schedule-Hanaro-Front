@@ -1,42 +1,28 @@
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import { Card } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { ReactComponent as TrippleStar } from '@/assets/images/trippleStar.svg';
+import { ReactComponent as HanaAvengers } from '@/assets/images/hanaAvengers.svg';
 
 export function MainPage() {
   return (
-    <>
-      <Button>버튼</Button>
-      <Button variant='outline'>버튼</Button>
-      <Label>Input</Label>
-      <Input placeholder='예시입니다' />
-      <Calendar />
-      <Checkbox />
-      <Select>
-        <SelectTrigger className='w-full'>
-          <SelectValue placeholder='Select an option' />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value='option1'>Option 1</SelectItem>
-          <SelectItem value='option2'>Option 2</SelectItem>
-          <SelectItem value='option3'>Option 3</SelectItem>
-        </SelectContent>
-      </Select>
-      <Badge>뱃지</Badge>
-      <Badge variant='outline'>뱃지</Badge>
-      <Badge variant='active'>뱃지</Badge>
-      <Badge variant='noactive'>뱃지</Badge>
-      <Card>카드</Card>
-    </>
+    <div className='flex h-screen flex-col'>
+      <div className='flex h-1/3 bg-[#DCEFEA] p-3'>
+        <div className='flex'>
+          <div className='flex flex-col'>
+            <TrippleStar />
+            <div className='text-[1.5rem] font-bold'>반갑습니다</div>
+            <div className='flex items-end'>
+              <div className='text-[2.5rem] font-bold'>예나</div>
+              <div className='text-[1.5rem] font-bold'>님!</div>
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <HanaAvengers />
+          </div>
+        </div>
+      </div>
+      <div className='flex'></div>
+      <div className='flex'></div>
+      <div className='flex'></div>
+      <div className='flex'></div>
+    </div>
   );
 }
