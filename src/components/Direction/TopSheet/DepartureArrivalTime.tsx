@@ -13,7 +13,9 @@ export default function DepartureArrivalTime() {
     if (!departureTime) return;
 
     const tmpDate = new Date(departureTime);
-    tmpDate.setSeconds(tmpDate.getSeconds() + totalTime);
+    tmpDate.setSeconds(
+      tmpDate.getSeconds() + +(totalTime / 60).toFixed(0) * 60
+    );
     console.log('🚀 ~ TopSheet ~ tmpDate:', tmpDate);
     console.log('🚀 ~ TopSheet ~ totalTime:', totalTime);
     setArrivalTime(tmpDate);
