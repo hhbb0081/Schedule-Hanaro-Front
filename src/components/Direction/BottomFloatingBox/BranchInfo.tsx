@@ -1,3 +1,4 @@
+import { Separator } from '@/components/ui/separator';
 import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { branchIdAtom } from '@/stores';
 import { useAtom } from 'jotai';
@@ -14,6 +15,9 @@ export default function BranchInfo() {
         <div className='flex items-end gap-3'>
           <div className='text-sm'>대기인원</div>
           <div className='text-md font-bold'>{`${branchIdx === -1 ? 0 : BRANCH_STATE_MOCK[branchIdx].waitingNumber}명`}</div>
+        </div>
+        <div className='flex items-center'>
+          <Separator orientation='vertical' className='h-[0.6875rem]' />
         </div>
         <div className='flex items-end gap-3'>
           <div className='text-sm'>예상대기시간</div>
