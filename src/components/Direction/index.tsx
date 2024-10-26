@@ -6,7 +6,7 @@ import 'dayjs/locale/ko';
 import { useMap } from '@/hooks';
 import { MyLocation } from '../Map/MyLocation';
 import TopSheet from '@/components/Direction/TopSheet';
-import BottomSheet from '@/components/Direction/BottomFloatingBox';
+import BottomFloatingBox from '@/components/Direction/BottomFloatingBox';
 import { useAtom } from 'jotai';
 import {
   currentStartAddressAtom,
@@ -86,7 +86,7 @@ export function Direction() {
         {!mapClick && (
           <>
             <TopSheet></TopSheet>
-            <BottomSheet></BottomSheet>
+            <BottomFloatingBox></BottomFloatingBox>
           </>
         )}
         <div className='navbar fixed bottom-[20.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
