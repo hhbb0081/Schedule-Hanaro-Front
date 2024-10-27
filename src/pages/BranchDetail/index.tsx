@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
 import { DirectionButton } from '@/components/ui/branch/direction';
 import { CloseButton } from '@/components/ui/close';
+import Nav from '@/components/Nav/Nav';
 
 export function BranchDetailPage() {
   const navigate = useNavigate();
@@ -97,13 +98,7 @@ export function BranchDetailPage() {
         </div>
       </main>
       <footer>
-        <nav className='mt-4 flex items-center justify-between border bg-gray-300 p-4'>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-        </nav>
+        <Nav />
       </footer>
     </div>
   );
