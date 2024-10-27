@@ -16,7 +16,8 @@ import CallPage from '@/pages/Admin/Call';
 import InquiryPage from '@/pages/Admin/Inquiry';
 import VisitPage from '@/pages/Admin/Visit';
 import { createBrowserRouter } from 'react-router-dom';
-import { AnswerInput } from '@/pages/Admin/Inquiry/Answer';
+import { AnswerInput } from '@/pages/Admin/Inquiry/Answer/Input';
+import { AnswerDetail } from '@/pages/Admin/Inquiry/Answer/Detail';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -90,6 +91,7 @@ export const useRouter = () =>
         { index: true, element: <VisitPage /> },
         { path: '/admin/inquiry', element: <InquiryPage /> },
         { path: '/admin/inquiry/AnswerInput', element: <AnswerInput /> },
+        { path: '/admin/inquiry/AnswerDetail', element: <AnswerDetail /> },
         { path: '/admin/call', element: <CallPage /> },
       ],
     },
