@@ -7,7 +7,7 @@ import { useMap } from '@/hooks';
 import { MyLocation } from '../Map/MyLocation';
 import TopSheet from '@/components/Direction/TopSheet';
 import BottomFloatingBox from '@/components/Direction/BottomFloatingBox';
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import {
   currentStartAddressAtom,
   endAtom,
@@ -21,12 +21,12 @@ import { setMyLocation } from '@/utils';
 dayjs.locale('ko');
 
 export function Direction() {
-  const [start] = useAtom(startAtom);
-  const [end] = useAtom(endAtom);
-  const [, setCurrentStartAddress] = useAtom(currentStartAddressAtom);
-  const [, setTotalTime] = useAtom(totalTimeAtom);
-  const [, setTotalDistance] = useAtom(totalDistanceAtom);
-  const [mapClick] = useAtom(mapClickAtom);
+  const start = useAtomValue(startAtom);
+  const end = useAtomValue(endAtom);
+  const setCurrentStartAddress = useSetAtom(currentStartAddressAtom);
+  const setTotalTime = useSetAtom(totalTimeAtom);
+  const setTotalDistance = useSetAtom(totalDistanceAtom);
+  const mapClick = useAtomValue(mapClickAtom);
   const mapRef = useRef<HTMLDivElement>(null);
 
   const {

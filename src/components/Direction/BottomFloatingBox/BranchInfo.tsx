@@ -1,10 +1,10 @@
 import { Separator } from '@/components/ui/separator';
 import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { branchIdAtom } from '@/stores';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 export default function BranchInfo() {
-  const [branchId] = useAtom(branchIdAtom);
+  const branchId = useAtomValue(branchIdAtom);
   const branchIdx = BRANCH_MOCK.findIndex((branch) => branch.id === branchId);
   return (
     <>

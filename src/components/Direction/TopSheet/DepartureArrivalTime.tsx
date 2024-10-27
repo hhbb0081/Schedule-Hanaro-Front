@@ -1,11 +1,11 @@
 import { arrivalTimeAtom, departureTimeAtom, totalTimeAtom } from '@/stores';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 
 export default function DepartureArrivalTime() {
   const [departureTime, setDepartureTime] = useAtom(departureTimeAtom);
   const [arrivalTime, setArrivalTime] = useAtom(arrivalTimeAtom);
-  const [totalTime] = useAtom(totalTimeAtom);
+  const totalTime = useAtomValue(totalTimeAtom);
 
   useEffect(() => {
     setDepartureTime(new Date());

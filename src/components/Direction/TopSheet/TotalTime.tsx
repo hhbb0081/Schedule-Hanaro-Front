@@ -1,8 +1,8 @@
 import { totalTimeAtom } from '@/stores';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 export default function TotalTime() {
-  const [totalTime] = useAtom(totalTimeAtom);
+  const totalTime = useAtomValue(totalTimeAtom);
 
   return (
     <div className='flex items-end gap-3'>

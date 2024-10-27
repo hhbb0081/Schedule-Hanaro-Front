@@ -1,14 +1,16 @@
 import { totalDistanceAtom } from '@/stores';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
+
+const KILLOMETER = 1000;
 
 export default function TotalDistance() {
-  const [totalDistance] = useAtom(totalDistanceAtom);
+  const totalDistance = useAtomValue(totalDistanceAtom);
 
   return (
     <div className='flex items-end gap-3'>
       <div>거리</div>
       <div className='flex items-end'>
-        {totalDistance < 1000 ? (
+        {totalDistance < KILLOMETER ? (
           <>
             <div className='text-3xl font-bold'>{totalDistance}</div>
             <div>m</div>

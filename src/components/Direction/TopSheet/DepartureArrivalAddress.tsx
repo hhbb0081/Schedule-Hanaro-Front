@@ -1,11 +1,11 @@
 import { Separator } from '@/components/ui/separator';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
 import { branchIdAtom, currentStartAddressAtom } from '@/stores';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 export default function DepartureArrivalAddress() {
-  const [currentStartAddress] = useAtom(currentStartAddressAtom);
-  const [branchId] = useAtom(branchIdAtom);
+  const currentStartAddress = useAtomValue(currentStartAddressAtom);
+  const branchId = useAtomValue(branchIdAtom);
   const branchIdx = BRANCH_MOCK.findIndex((branch) => branch.id === branchId);
 
   return (

@@ -2,10 +2,10 @@ import { Button } from '@/components/ui/button';
 import Modalbutton from '../Modal';
 import { branchIdAtom } from '@/stores';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 export default function ReservationButton() {
-  const [branchId] = useAtom(branchIdAtom);
+  const branchId = useAtomValue(branchIdAtom);
   const branchIdx = BRANCH_MOCK.findIndex((branch) => branch.id === branchId);
   const reserved = 1;
   return (

@@ -37,7 +37,7 @@ export function DirectionPage() {
 
   return (
     <>
-      <Direction />;
+      <Direction />
       <Nav />
     </>
   );
