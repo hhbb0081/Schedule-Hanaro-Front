@@ -21,7 +21,7 @@ export const CustomerInfo = ({
   ];
 
   return (
-    <div className='flex h-[18rem] w-[50%] flex-col justify-between rounded-lg bg-white p-[3rem] drop-shadow-xl'>
+    <div className='flex h-[18rem] w-[50%] flex-col justify-between rounded-lg bg-white p-[3rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
       <div className='flex items-center justify-between'>
         <span className='text-[.875rem] font-extrabold text-[#464646]'>
           현재 고객 정보
