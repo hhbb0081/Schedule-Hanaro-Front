@@ -24,7 +24,7 @@ export function AnswerInput() {
   return (
     <form
       onSubmit={handleSubmit}
-      className='mx-auto h-[90%] w-[90%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'
+      className='mx-auto h-[90%] w-[83%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'
     >
       <div className='overflow-wrap break-word text-left text-[18px] font-bold text-[#464646]'>
         안녕하세요 문의드리려고 합니다 문의드려도 될까요?
