@@ -4,7 +4,7 @@ import WaitingNumber from '@/components/Admin/WaitingNum';
 
 function VisitPage() {
   return (
-    <div className='relative mx-[1.5rem] w-[90%]'>
+    <div className='relative mx-auto w-[90%]'>
       <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
       <div className='my-[2.5rem]'>
         <WaitingNumber />

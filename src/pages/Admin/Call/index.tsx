@@ -1,7 +1,6 @@
 import { CustomerInfo } from '@/components/Admin/Customer';
 import InfoCard from '@/components/Admin/Infocard';
 import Next from '@/components/Admin/Next';
-// import InfoCard from '@/components/Admin/Infocard';
 import WaitingNumber from '@/components/Admin/WaitingNum';
 
 function CallPage() {
@@ -17,7 +16,7 @@ function CallPage() {
           inquiryCount={3}
         />
         <div className='ml-[2rem]'>
-          <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={null} />
+          <InfoCard waitingCount={2} estimatedTime={15} />
           <div className='mt-[2rem]'>
             <Next />
           </div>
