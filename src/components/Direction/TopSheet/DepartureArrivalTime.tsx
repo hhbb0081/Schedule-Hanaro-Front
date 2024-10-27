@@ -1,11 +1,11 @@
 import { arrivalTimeAtom, departureTimeAtom, totalTimeAtom } from '@/stores';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 
-export default function DepArrTime() {
+export default function DepartureArrivalTime() {
   const [departureTime, setDepartureTime] = useAtom(departureTimeAtom);
   const [arrivalTime, setArrivalTime] = useAtom(arrivalTimeAtom);
-  const [totalTime] = useAtom(totalTimeAtom);
+  const totalTime = useAtomValue(totalTimeAtom);
 
   useEffect(() => {
     setDepartureTime(new Date());
@@ -13,7 +13,9 @@ export default function DepArrTime() {
     if (!departureTime) return;
 
     const tmpDate = new Date(departureTime);
-    tmpDate.setSeconds(tmpDate.getSeconds() + totalTime);
+    tmpDate.setSeconds(
+      tmpDate.getSeconds() + +(totalTime / 60).toFixed(0) * 60
+    );
     console.log('🚀 ~ TopSheet ~ tmpDate:', tmpDate);
     console.log('🚀 ~ TopSheet ~ totalTime:', totalTime);
     setArrivalTime(tmpDate);

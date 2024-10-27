@@ -46,7 +46,7 @@ export function BottomSheet() {
         <DrawerTrigger asChild>
           <Button className='w-1/2 rounded-full bg-white shadow-[2px_4px_4px_0px_rgba(0,0,0,0.15)] hover:bg-[#F9F9F9]'>
             <List width='1.0625rem' height='1.0625rem' color='#666666' />
-            <span className='font-[0.875rem] font-bold text-lightGrey'>
+            <span className='text-lightGrey font-[0.875rem] font-bold'>
               목록보기
             </span>
           </Button>
@@ -86,7 +86,7 @@ export function BottomSheet() {
                   </span>
                   <div className='flex cursor-pointer items-center gap-1'>
                     <Select>
-                      <SelectTrigger className='space-x-1 border-none text-lightGrey'>
+                      <SelectTrigger className='text-lightGrey space-x-1 border-none'>
                         <SelectValue placeholder='거리순' />
                       </SelectTrigger>
                       <SelectContent className='right-8'>

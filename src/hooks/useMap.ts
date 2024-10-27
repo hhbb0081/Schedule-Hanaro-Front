@@ -60,10 +60,21 @@ export const useMap = (
     latitude: currentEndCoord?.lat() || 0,
     longitude: currentEndCoord?.lng() || 0,
   };
-  // =======================================
+  // ======Query================================
 
-  // 좌표 -> 주소 변환 Query
+  // 현위치 좌표 -> 주소 변환 Query
   const { data: addressData } = useQuery({
+    ...queryKeys.tmap.getAddressFromCoord({
+      latitude: coord.latitude,
+      longitude: coord.longitude,
+    }),
+
+    placeholderData: keepPreviousData,
+  });
+  const currentAddress = addressData?.addressInfo.fullAddress || '';
+
+  // 출발지 좌표 -> 주소 변환 Query
+  const { data: startAddressData } = useQuery({
     ...queryKeys.tmap.getAddressFromCoord({
       latitude: startCoord.latitude,
       longitude: startCoord.longitude,
@@ -71,7 +82,7 @@ export const useMap = (
 
     placeholderData: keepPreviousData,
   });
-  const currentAddress = addressData?.addressInfo.fullAddress || '';
+  const currentStartAddress = startAddressData?.addressInfo.fullAddress || '';
 
   // 보행자 경로 Query
   const { data: pathData } = useQuery({
@@ -86,6 +97,8 @@ export const useMap = (
 
     placeholderData: keepPreviousData,
   });
+
+  //======================================================
 
   useEffect(() => {
     console.log('🚀 ~ useEffect ~ pathData:', pathData);
@@ -132,7 +145,7 @@ export const useMap = (
       const marker = Marker({
         mapContent: mapInstance,
         position,
-        theme: 'green',
+        theme: 'current',
       });
 
       setCurrentMarker(marker);
@@ -223,9 +236,8 @@ export const useMap = (
     setMapInstance(map);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapRef]);
-  // }, [mapRef, mapInstance]);
 
-  // onClick true로 설정 시 지도 선택시 currentCoord 위치 변경
+  // onClick true로 설정 시 지도 선택시 지도만 표시
   useEffect(() => {
     if (!mapInstance || !useOnClick) {
       return;
@@ -266,7 +278,7 @@ export const useMap = (
   const makeMarker = useCallback(
     (
       tempCoord: { latitude: number | null; longitude: number | null },
-      theme: 'green' | 'red',
+      theme: 'green' | 'red' | 'current',
       labelText?: string
     ) => {
       const { latitude, longitude } = tempCoord;
@@ -319,7 +331,6 @@ export const useMap = (
     return true;
   };
 
-  // TODO:
   const makePolyLine = useCallback(
     (tempPath: TMapLatLng[], strokeColor: string, strokeWeight: number) => {
       if (!tempPath.length || !mapInstance) {
@@ -367,19 +378,13 @@ export const useMap = (
   };
 
   // currentCoord 설정 및 중앙 설정
-  const setStartCoord = (startCoord: {
-    latitude: number;
-    longitude: number;
-  }) => {
-    const position = new Tmapv3.LatLng(
-      startCoord.latitude,
-      startCoord.longitude
-    );
+  const setStartCoord = (coord: { latitude: number; longitude: number }) => {
+    const position = new Tmapv3.LatLng(coord.latitude, coord.longitude);
     setCurrentStartCoord(position);
   };
 
-  const setEndCoord = (endCoord: { latitude: number; longitude: number }) => {
-    const position = new Tmapv3.LatLng(endCoord.latitude, endCoord.longitude);
+  const setEndCoord = (coord: { latitude: number; longitude: number }) => {
+    const position = new Tmapv3.LatLng(coord.latitude, coord.longitude);
     setCurrentEndCoord(position);
   };
 
@@ -397,6 +402,7 @@ export const useMap = (
     makePolyLine,
     currentMarker,
     currentAddress,
+    currentStartAddress,
     currentPath,
     currentTotalDistance,
     currentTotalTime,

@@ -1,6 +1,7 @@
 import { Direction } from '@/components/Direction';
+import Nav from '@/components/Nav/Nav';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
-import { bankIdAtom, endAtom, startAtom } from '@/stores';
+import { branchIdAtom, endAtom, startAtom } from '@/stores';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -8,7 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 export function DirectionPage() {
   const [, setStart] = useAtom(startAtom);
   const [, setEnd] = useAtom(endAtom);
-  const [, setBankId] = useAtom(bankIdAtom);
+  const [, setBranchId] = useAtom(branchIdAtom);
 
   const [searchParams] = useSearchParams();
 
@@ -22,17 +23,22 @@ export function DirectionPage() {
     setStart({ latitude: +startLat, longitude: +startLon });
     setEnd({ latitude: +endLat, longitude: +endLon });
 
-    setBankId(searchParams.get('bankId') || '232|0');
+    setBranchId(searchParams.get('branchId') || '232|0');
   }, [
     endLat,
     endLon,
     searchParams,
-    setBankId,
+    setBranchId,
     setEnd,
     setStart,
     startLat,
     startLon,
   ]);
 
-  return <Direction />;
+  return (
+    <>
+      <Direction />
+      <Nav />
+    </>
+  );
 }
