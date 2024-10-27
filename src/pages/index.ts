@@ -7,3 +7,6 @@ export * from './Reservation/Call';
 export * from './Reservation/Inquiry';
 export * from './Direction';
 export * from './ReservationDetail/Visit';
+export * from './Register';
+export * from './Register/Call';
+export * from './Register/Modal';
