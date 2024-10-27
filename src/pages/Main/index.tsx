@@ -1,6 +1,6 @@
 import { ReactComponent as TrippleStar } from '@/assets/images/trippleStar.svg';
 import { ReactComponent as HanaAvengers } from '@/assets/images/hanaAvengers.svg';
-import MyCard from './myCard';
+import MyCard from './MyCard';
 
 export function MainPage() {
   return (
