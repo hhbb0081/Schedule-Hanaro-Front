@@ -1,5 +1,7 @@
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
+import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,6 +32,11 @@ export function MainPage() {
           <SelectItem value='option3'>Option 3</SelectItem>
         </SelectContent>
       </Select>
+      <Badge>뱃지</Badge>
+      <Badge variant='outline'>뱃지</Badge>
+      <Badge variant='active'>뱃지</Badge>
+      <Badge variant='noactive'>뱃지</Badge>
+      <Card>카드</Card>
     </>
   );
 }

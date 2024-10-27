@@ -1,0 +1,41 @@
+.nav__icon__wrapper {
+  width: 2.625rem;
+  height: 2.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.nav__icon {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.nav__icon__home {
+  background: #469387;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.nav__icon span {
+  margin-top: 0.3rem;
+}
+
+.nav__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 0.84rem;
+  height: 3rem;
+  background-color: #fff;
+}

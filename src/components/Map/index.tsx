@@ -7,7 +7,6 @@ import { MAX_ZOOM_LEVEL } from '@/constants';
 import { useMap } from '@/hooks';
 
 import { Marker } from './Marker';
-import { MyLocation } from './MyLocation';
 
 const { Tmapv3 } = window;
 dayjs.locale('ko');
@@ -80,39 +79,39 @@ const testBank2: BankListRes = {
   group: {} as BankListRes,
 };
 
-const testStart: BankListRes = {
-  id: '1',
-  groupId: '1',
-  title: 'TestTitle',
-  contents: 'TestContents',
-  date: new Date(),
-  maxHumanCount: 1,
-  address: 'TestAddress',
-  latitude: 37.54958997910813,
-  longitude: 127.04632388764902,
-  status: 'TestStatus',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deletedAt: null,
-  group: {} as BankListRes,
-};
+// const testStart: BankListRes = {
+//   id: '1',
+//   groupId: '1',
+//   title: 'TestTitle',
+//   contents: 'TestContents',
+//   date: new Date(),
+//   maxHumanCount: 1,
+//   address: 'TestAddress',
+//   latitude: 37.54958997910813,
+//   longitude: 127.04632388764902,
+//   status: 'TestStatus',
+//   createdAt: new Date(),
+//   updatedAt: new Date(),
+//   deletedAt: null,
+//   group: {} as BankListRes,
+// };
 
-const testEnd: BankListRes = {
-  id: '1',
-  groupId: '1',
-  title: 'TestTitle',
-  contents: 'TestContents',
-  date: new Date(),
-  maxHumanCount: 1,
-  address: 'TestAddress',
-  latitude: 37.5472649833669,
-  longitude: 127.04738050398232,
-  status: 'TestStatus',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deletedAt: null,
-  group: {} as BankListRes,
-};
+// const testEnd: BankListRes = {
+//   id: '1',
+//   groupId: '1',
+//   title: 'TestTitle',
+//   contents: 'TestContents',
+//   date: new Date(),
+//   maxHumanCount: 1,
+//   address: 'TestAddress',
+//   latitude: 37.5472649833669,
+//   longitude: 127.04738050398232,
+//   status: 'TestStatus',
+//   createdAt: new Date(),
+//   updatedAt: new Date(),
+//   deletedAt: null,
+//   group: {} as BankListRes,
+// };
 
 const setMyLocation = (makeMarker: UpdateMarker) => {
   const onSuccess = (position: Geolocation) => {
@@ -129,20 +128,19 @@ export function Map({ onClickMarker }: MapProps) {
   const bankList = [testBank1, testBank2];
 
   const mapRef = useRef<HTMLDivElement>(null);
-  const { mapInstance, makeMarker, setStartCoord, setEndCoord } =
-    useMap(mapRef);
+  const { mapInstance, makeMarker } = useMap(mapRef);
 
-  useEffect(() => {
-    setStartCoord({
-      latitude: testStart.latitude,
-      longitude: testStart.longitude,
-    });
-    setEndCoord({
-      latitude: testEnd.latitude,
-      longitude: testEnd.longitude,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   setStartCoord({
+  //     latitude: testStart.latitude,
+  //     longitude: testStart.longitude,
+  //   });
+  //   setEndCoord({
+  //     latitude: testEnd.latitude,
+  //     longitude: testEnd.longitude,
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const onClickMyLocation = () => {
     setMyLocation(makeMarker);
@@ -186,7 +184,7 @@ export function Map({ onClickMarker }: MapProps) {
   return (
     <div className='container'>
       <div className='map' id='map' ref={mapRef} />
-      <MyLocation onClick={onClickMyLocation} />
+      {/* <MyLocation onClick={onClickMyLocation} /> */}
     </div>
   );
 }

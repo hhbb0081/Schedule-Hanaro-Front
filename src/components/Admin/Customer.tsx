@@ -13,8 +13,15 @@ export const CustomerInfo = ({
   birthDate,
   inquiryCount,
 }: CustomerInfoProps) => {
+  const customerDetails = [
+    { label: '이름', value: name },
+    { label: '전화번호', value: phoneNumber },
+    { label: '생년월일', value: birthDate },
+    { label: '전화 문의 이력', value: `${inquiryCount}회` },
+  ];
+
   return (
-    <div className='flex h-[18rem] w-[50%] flex-col justify-between rounded-lg bg-white p-[3rem] drop-shadow-xl'>
+    <div className='flex h-[18rem] w-[50%] flex-col justify-between rounded-lg bg-white p-[3rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
       <div className='flex items-center justify-between'>
         <span className='text-[.875rem] font-extrabold text-[#464646]'>
           현재 고객 정보
@@ -24,22 +31,15 @@ export const CustomerInfo = ({
         </span>
       </div>
       <hr />
-      <div className='flex justify-between text-[.8125rem] font-medium text-[#666666]'>
-        <span>이름</span>
-        <span className='font-bold'>{name}</span>
-      </div>
-      <div className='flex justify-between text-[.8125rem] font-medium text-[#666666]'>
-        <span>전화번호</span>
-        <span className='font-bold'>{phoneNumber}</span>
-      </div>
-      <div className='flex justify-between text-[.8125rem] font-medium text-[#666666]'>
-        <span>생년월일</span>
-        <span className='font-bold'>{birthDate}</span>
-      </div>
-      <div className='flex justify-between text-[.8125rem] font-medium text-[#666666]'>
-        <span>전화 문의 이력</span>
-        <span className='font-bold'>{inquiryCount}회</span>
-      </div>
+      {customerDetails.map((detail, index) => (
+        <div
+          key={index}
+          className='flex justify-between text-[.8125rem] font-medium text-[#666666]'
+        >
+          <span>{detail.label}</span>
+          <span className='font-bold'>{detail.value}</span>
+        </div>
+      ))}
     </div>
   );
 };
