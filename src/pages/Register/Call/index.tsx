@@ -5,7 +5,6 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
-import { ToastProvider } from '@/components/ui/toast';
 import { PhoneNumberInput } from '@/components/Register/PhoneNumberInput';
 import { NameInput } from '@/components/Register/NameInput';
 import { ConsultationSelect } from '@/components/Register/ConsultationSelect';
@@ -94,7 +93,6 @@ export default function RegisterCallFormPage() {
   }, []);
 
   return (
-    <ToastProvider>
       <div className='mx-auto flex min-h-[80%] w-[90%] flex-col justify-between py-5'>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -143,6 +141,5 @@ export default function RegisterCallFormPage() {
 
         <Toaster />
       </div>
-    </ToastProvider>
   );
 }

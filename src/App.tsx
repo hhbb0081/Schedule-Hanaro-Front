@@ -4,6 +4,7 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider } from 'jotai';
 import { useRouter } from '@/hooks';
+import { ToastProvider } from './components/ui/toast';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,10 +17,12 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Provider>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </Provider>
+      <ToastProvider>
+        <Provider>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Provider>
+      </ToastProvider>
     </QueryClientProvider>
   );
 }
