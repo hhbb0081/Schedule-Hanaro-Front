@@ -113,6 +113,10 @@ export function Map({ onClickMarker }: MapProps) {
           // setCoord({ latitude, longitude });
           mapInstance.setCenter(position);
           mapInstance.setZoom(MAX_ZOOM_LEVEL);
+          // if (currentBranchId !== id) {
+          //   setCurrentBranchId(id);
+          //   console.log(id, '번 지점 select');
+          // }
         });
       }
     });

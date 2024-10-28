@@ -53,7 +53,7 @@ export function BottomSheet() {
         </DrawerTrigger>
         <DrawerContent
           aria-describedby='custom-description'
-          className='customWidth max-h-[62rem] rounded-t-2xl bg-black/20 bg-white shadow-2xl dark:bg-gray-950'
+          className='customWidth h-[90%] rounded-t-2xl bg-black/20 bg-white shadow-2xl dark:bg-gray-950'
         >
           <div className='mx-auto h-full w-[90%]'>
             <div className='flex items-center justify-between'>
