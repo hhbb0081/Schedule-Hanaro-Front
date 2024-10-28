@@ -5,7 +5,7 @@ function Sidebar() {
 
   const isActive = (path: string) => location.pathname === path;
   return (
-    <div className='flex h-screen w-52 flex-col bg-gray-800 text-white'>
+    <div className='font-inter flex h-screen w-52 flex-col bg-gray-800 font-bold leading-normal text-white'>
       <ul className='m-auto flex w-full list-none flex-col items-center space-y-2 p-0'>
         <li className={`w-full ${isActive('/admin') ? 'bg-gray-700' : ''}`}>
           <Link
