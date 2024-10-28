@@ -1,14 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 
-interface ModalFormPageProps {
+type ModalFormPageProps = {
   isChecked1: boolean;
   isChecked2: boolean;
   setIsChecked1: React.Dispatch<React.SetStateAction<boolean>>;
   setIsChecked2: React.Dispatch<React.SetStateAction<boolean>>;
   handleAgree: () => void;
   handleClose: () => void;
-}
+};
 
 export default function ModalFormPage({
   isChecked1,
@@ -22,7 +22,6 @@ export default function ModalFormPage({
     <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
       <div className='w-[400px] space-y-4 rounded-lg bg-white p-6'>
         <h2 className='text-lg font-semibold'>이용 약관 동의</h2>
-
         <div className='space-y-4 text-left'>
           <div>
             <div
@@ -62,15 +61,24 @@ export default function ModalFormPage({
             />
           </div>
         </div>
+        {isChecked1 && isChecked2 ? (
+          <Button
+            onClick={handleAgree}
+            className='h-[3.1875rem] w-full rounded-[1.875rem] bg-[#454545] font-bold hover:bg-[#545454]'
+          >
+            동의합니다
+          </Button>
+        ) : (
+          <Button className='h-[3.1875rem] w-full rounded-[1.875rem] bg-[#E4E4E4] font-bold text-[#D2D2D2] hover:bg-[#E4E4E4]'>
+            동의합니다
+          </Button>
+        )}
 
         <Button
-          onClick={handleAgree}
-          className='mt-4 w-full bg-main text-white'
-          disabled={!isChecked1 || !isChecked2}
+          variant='outline'
+          className='h-[3.1875rem] w-full rounded-[1.875rem] border-[#454545] bg-white font-bold text-[#454545] hover:bg-[#f8f8f8]'
+          onClick={handleClose}
         >
-          동의합니다
-        </Button>
-        <Button variant='ghost' onClick={handleClose} className='mt-2 w-full'>
           닫기
         </Button>
       </div>
