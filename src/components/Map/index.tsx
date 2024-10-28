@@ -6,70 +6,48 @@ import 'dayjs/locale/ko';
 import { MAX_ZOOM_LEVEL } from '@/constants';
 import { useMap } from '@/hooks';
 
+import { BRANCH_MOCK } from '@/mock/branch_mock';
+import { branchIdAtom } from '@/stores';
+import { setMyLocation } from '@/utils';
+import { useAtom } from 'jotai';
+import { BottomSheet } from '../BottomSheet/BottomSheet';
+import BottomFloatingSheet from '../Direction/BottomFloatingSheet';
+import Nav from '../Nav/Nav';
 import { Marker } from './Marker';
 import { MyLocation } from './MyLocation';
-import { setMyLocation } from '@/utils';
 
 const { Tmapv3 } = window;
 dayjs.locale('ko');
 
-type MapProps = {
-  onClickMarker: (id: string) => void;
-};
+// type MapProps = {
+//   onClickMarker: (id: string) => void;
+// };
 
 type BankListRes = {
-  // 큰 수는 BigInt로 표시 했음(string임)
-  id: string;
-  groupId: string;
-  title: string;
-  contents: string;
-  date: Date;
-  maxHumanCount: number;
   address: string;
-  latitude: number;
-  longitude: number;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date | null;
-  group: BankListRes;
-};
-const testBank1: BankListRes = {
-  id: '1',
-  groupId: '1',
-  title: 'TestTitle',
-  contents: 'TestContents',
-  date: new Date(),
-  maxHumanCount: 1,
-  address: 'TestAddress',
-  latitude: 37.541443033738986,
-  longitude: 127.03916480015602,
-  status: 'TestStatus',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deletedAt: null,
-  group: {} as BankListRes,
-};
-const testBank2: BankListRes = {
-  id: '1',
-  groupId: '1',
-  title: 'TestTitle',
-  contents: 'TestContents',
-  date: new Date(),
-  maxHumanCount: 1,
-  address: 'TestAddress',
-  latitude: 37.566491,
-  longitude: 126.981867,
-  status: 'TestStatus',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deletedAt: null,
-  group: {} as BankListRes,
+  // category_group_code: string;
+  // category_group_name: string;
+  // category_name: string;
+  distance: string;
+  id: string;
+  tel: string;
+  name: string;
+  // place_url: string;
+  driving_directions: string;
+  position_x: string;
+  position_y: string;
+  business_hours: string;
 };
 
-export function Map({ onClickMarker }: MapProps) {
+export function Map() {
+  // { onClickMarker }: MapProps
   // Test용 위치 추가 및 기존 코드 삭제
-  const bankList = [testBank1, testBank2];
+  const branchList = [...BRANCH_MOCK];
+  const [currentBranchId, setCurrentBranchId] = useAtom(branchIdAtom);
+  const onClickMarker = (id: string) => {
+    console.log(id);
+    if (currentBranchId !== id) setCurrentBranchId(id);
+  };
 
   const mapRef = useRef<HTMLDivElement>(null);
   const { mapInstance, currentAddress, setCoord } = useMap(mapRef);
@@ -92,20 +70,22 @@ export function Map({ onClickMarker }: MapProps) {
 
   // 은행 위치 Marker 생성
   useEffect(() => {
+    console.log(BRANCH_MOCK);
+    console.log(mapInstance);
     if (!mapInstance) {
       return;
     }
 
-    bankList?.forEach((bank: BankListRes) => {
-      const { id, latitude, longitude } = bank;
+    branchList.forEach((bank: BankListRes) => {
+      const { id, name, position_x: longitude, position_y: latitude } = bank;
       if (latitude && longitude) {
-        const position = new Tmapv3.LatLng(latitude, longitude);
+        const position = new Tmapv3.LatLng(+latitude, +longitude);
         const marker = Marker({
           mapContent: mapInstance,
           position,
           theme: 'green',
           // TODO: 은행 이름으로 변경 필요
-          labelText: dayjs(bank.date).format('MM/DD(ddd) HH:mm'),
+          labelText: name,
         });
         marker.on('Click', () => {
           onClickMarker(id);
@@ -121,7 +101,7 @@ export function Map({ onClickMarker }: MapProps) {
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankList]);
+  }, [mapInstance]);
 
   return (
     <div className='container'>
@@ -129,6 +109,16 @@ export function Map({ onClickMarker }: MapProps) {
       <div className='navbar fixed bottom-[16.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
         <MyLocation onClick={onClickMyLocation} />
       </div>
+      {currentBranchId ? (
+        <div className='mx-auto w-full'>
+          <BottomFloatingSheet />
+        </div>
+      ) : (
+        <>
+          <BottomSheet currentAddress={currentAddress} />
+          <Nav />
+        </>
+      )}
     </div>
   );
 }

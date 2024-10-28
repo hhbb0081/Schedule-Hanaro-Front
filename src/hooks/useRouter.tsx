@@ -7,14 +7,14 @@ import {
   MainPage,
   MapDetailPage,
   MapPage,
-  ReservationPage,
-  ReservationCallPage,
-  ReservationInquiryPage,
-  ReservationVisitPage,
-  ReservationDetailVisitPage,
-  RegisterPage,
   RegisterCallFormPage,
   RegisterInquiryFormPage,
+  RegisterPage,
+  ReservationCallPage,
+  ReservationDetailVisitPage,
+  ReservationInquiryPage,
+  ReservationPage,
+  ReservationVisitPage,
 } from '@/pages';
 //수정 예정 ..
 import { createBrowserRouter } from 'react-router-dom';

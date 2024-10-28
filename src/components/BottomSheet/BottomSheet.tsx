@@ -21,13 +21,14 @@ import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { MAP_CHIPS } from '@/constants';
 import { List, MapPin } from 'lucide-react';
-import { useState } from 'react';
-import BranchCard from '../Map/BranchCard';
+import React, { useState } from 'react';
+import BranchCard, { BranchCardProps } from '../Map/BranchCard';
 import { Badge } from '../ui/badge';
 import {
   Select,
@@ -37,17 +38,70 @@ import {
   SelectValue,
 } from '../ui/select';
 
-export function BottomSheet() {
+export function BottomSheet({ currentAddress }: { currentAddress: string }) {
   const [selectedChipIdx, setSelectedChipIdx] = useState(0);
+  const MOCK: BranchCardProps[] = [
+    {
+      branchId: 0,
+      branchName: '성수역점',
+      isOpen: true,
+      address: '성수로1가 17',
+      distance: '503',
+      time: '10',
+      type: 'bank',
+    },
+    {
+      branchId: 1,
+      branchName: '성수역점',
+      isOpen: true,
+      address: '성수로1가 17',
+      distance: '503',
+      time: '10',
+      type: 'bank',
+    },
+    {
+      branchId: 2,
+      branchName: '성수역점',
+      isOpen: true,
+      address: '성수로1가 17',
+      distance: '503',
+      time: '10',
+      type: 'bank',
+    },
+    {
+      branchId: 3,
+      branchName: '성수역점',
+      isOpen: true,
+      address: '성수로1가 17',
+      distance: '503',
+      time: '10',
+      type: 'ATM',
+    },
+  ];
+
+  const [open, setOpen] = useState(false);
+
+  // const handleDrag = (
+  //   event: React.PointerEvent<HTMLDivElement>,
+  //   percentageDragged: number
+  // ) => {
+  //   console.log(event);
+  //   console.log('Dragged percentage:', percentageDragged);
+  // };
 
   return (
     <div className='navbar fixed bottom-24 left-1/2 z-50 -translate-x-1/2'>
-      <Drawer defaultOpen>
+      <Drawer
+        open={open}
+        onOpenChange={setOpen}
+        // onDrag={handleDrag}
+        snapPoints={[0.4, 1]}
+      >
         <DrawerTrigger asChild>
           <Button className='w-1/2 rounded-full bg-white shadow-[2px_4px_4px_0px_rgba(0,0,0,0.15)] hover:bg-[#F9F9F9]'>
             <List width='1.0625rem' height='1.0625rem' color='#666666' />
-            <span className='text-lightGrey font-[0.875rem] font-bold'>
-              목록보기
+            <span className='text-[0.875rem] font-bold text-lightGrey'>
+              지점목록
             </span>
           </Button>
         </DrawerTrigger>
@@ -55,16 +109,19 @@ export function BottomSheet() {
           aria-describedby='custom-description'
           className='customWidth h-[90%] rounded-t-2xl bg-black/20 bg-white shadow-2xl dark:bg-gray-950'
         >
-          <div className='mx-auto h-full w-[90%]'>
+          <DrawerDescription id='custom-description'></DrawerDescription>
+          <div className='mx-auto h-[90%] w-[90%]'>
             <div className='flex items-center justify-between'>
               <DrawerTitle className='w-full pt-6 text-center text-2xl font-bold'>
-                <div className='mx-auto w-[9.9375rem]'>
+                <div className='mx-auto w-fit min-w-[9.9375rem]'>
                   <Badge
                     variant='outline'
-                    className='flex w-full items-center justify-center gap-[0.3125rem] border-border bg-[#F8F8F8] py-3 text-text'
+                    className='flex w-full items-center justify-center gap-[0.3125rem] border-border bg-[#F8F8F8] px-5 py-3 tracking-wider text-text'
                   >
                     <MapPin width='1.25rem' height='1.25rem' />
-                    <span className='text-[1rem] font-bold'>성수로 1가 17</span>
+                    <span className='text-[1rem] font-bold'>
+                      {currentAddress}
+                    </span>
                   </Badge>
                 </div>
                 <div className='flex items-center justify-between py-5'>
@@ -76,7 +133,7 @@ export function BottomSheet() {
                           variant={
                             selectedChipIdx === id ? 'active' : 'noactive'
                           }
-                          className='px-6 py-1 text-[0.875rem]'
+                          className='px-6 py-1 text-[0.875rem] tracking-wider'
                           onClick={() => setSelectedChipIdx(id)}
                         >
                           {txt}
@@ -84,28 +141,49 @@ export function BottomSheet() {
                       )
                     )}
                   </span>
-                  <div className='flex cursor-pointer items-center gap-1'>
-                    <Select>
-                      <SelectTrigger className='text-lightGrey space-x-1 border-none'>
-                        <SelectValue placeholder='거리순' />
-                      </SelectTrigger>
-                      <SelectContent className='right-8'>
-                        <SelectItem value='거리순'>거리순</SelectItem>
-                        <SelectItem value='대기시간순'>대기시간순</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className='flex h-[90%] cursor-pointer items-center gap-1'>
+                    {selectedChipIdx === 0 && (
+                      <Select>
+                        <SelectTrigger className='space-x-1 border-none text-lightGrey'>
+                          <SelectValue placeholder='거리순' />
+                        </SelectTrigger>
+                        <SelectContent className='right-8'>
+                          <SelectItem value='거리순'>거리순</SelectItem>
+                          <SelectItem value='대기시간순'>대기시간순</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
                   </div>
                 </div>
               </DrawerTitle>
             </div>
-            <div className='scrollbar-none h-full space-y-6 overflow-y-auto p-1'>
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
+            <div className='h-full space-y-6 overflow-y-auto p-1 scrollbar-hide'>
+              {MOCK?.filter((m) => {
+                const type = selectedChipIdx === 0 ? 'bank' : 'ATM';
+                return m.type === type;
+              })?.map(
+                ({
+                  branchId,
+                  branchName,
+                  isOpen,
+                  address,
+                  distance,
+                  time,
+                  type,
+                }: BranchCardProps) => (
+                  <React.Fragment key={branchId}>
+                    <BranchCard
+                      branchId={branchId}
+                      branchName={branchName}
+                      isOpen={isOpen}
+                      address={address}
+                      distance={distance}
+                      time={time}
+                      type={type}
+                    />
+                  </React.Fragment>
+                )
+              )}
             </div>
           </div>
         </DrawerContent>
