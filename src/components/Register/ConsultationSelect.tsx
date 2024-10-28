@@ -1,4 +1,4 @@
-import { Controller, Control } from 'react-hook-form';
+import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 import {
   Select,
   SelectTrigger,
@@ -6,33 +6,42 @@ import {
   SelectItem,
   SelectValue,
 } from '@/components/ui/select';
-import { RegisterCallData } from '@/pages';
+import { RegisterCallData, RegisterInquiryData } from '@/pages';
+import { format } from 'date-fns';
+import { FormErrorMessage } from './FormErrorMessage';
 
-type ConsultationSelectProps = {
-  control: Control<RegisterCallData>;
+type ConsultationSelectProps<T extends FieldValues> = {
+  control: Control<T>;
   error: string | undefined;
+  fieldName: Path<T>;
 };
 
-export function ConsultationSelect({
-  control,
-  error,
-}: ConsultationSelectProps) {
+export function ConsultationSelect<
+  T extends RegisterCallData | RegisterInquiryData,
+>({ control, error, fieldName }: ConsultationSelectProps<T>) {
   return (
     <div>
       <label className='mb-1 block pb-2 text-left text-lg font-semibold'>
         상담종류
       </label>
       <Controller
-        name='consultationType'
+        name={fieldName}
         control={control}
         rules={{ required: '상담 종류를 선택해주세요.' }}
-        render={({ field }) => (
-          <Select onValueChange={field.onChange} value={field.value}>
+        render={({ field: { onChange, value } }) => (
+          <Select
+            onValueChange={onChange}
+            value={value ? String(value) : undefined}
+          >
             <SelectTrigger className='w-full'>
               <SelectValue
                 placeholder='상담 종류를 선택하세요'
                 className='text-base'
-              />
+              >
+                {value instanceof Date
+                  ? format(value, 'yyyy-MM-dd')
+                  : value || '상담 종류를 선택하세요'}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {[
@@ -50,6 +59,7 @@ export function ConsultationSelect({
           </Select>
         )}
       />
+      <FormErrorMessage error={error} />
     </div>
   );
 }

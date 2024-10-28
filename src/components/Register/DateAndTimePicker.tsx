@@ -1,4 +1,4 @@
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import {
   Select,
   SelectTrigger,
@@ -13,25 +13,33 @@ import {
 } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { CalendarIcon, ClockIcon } from 'lucide-react';
-import { MAX_CAPACITY, mockReservations } from '@/mock/mockReservationsNumber';
-import { RegisterCallData } from '@/pages';
+import {
+  mockReservations,
+  ReservationSlots,
+} from '@/mock/mockReservationsNumber';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { format } from 'date-fns';
+import { FormErrorMessage } from './FormErrorMessage';
+import { MAX_CAPACITY } from '@/constants/maxCapacity';
 
-interface DateAndTimePickerProps {
-  control: Control<RegisterCallData>;
+type DateAndTimePickerProps<T extends FieldValues> = {
+  control: Control<T>;
   timeSlots: string[];
   dateError: string | undefined;
   timeError: string | undefined;
-}
+  dateFieldName: Path<T>;
+  timeFieldName: Path<T>;
+};
 
-export function DateAndTimePicker({
+export function DateAndTimePicker<T extends FieldValues>({
   control,
   timeSlots,
   dateError,
   timeError,
-}: DateAndTimePickerProps) {
+  dateFieldName,
+  timeFieldName,
+}: DateAndTimePickerProps<T>) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   useEffect(() => {
@@ -41,9 +49,8 @@ export function DateAndTimePicker({
     }
   }, []);
 
-  const getRemainingCapacity = (slot: string) => {
-    const reserved =
-      mockReservations[slot as keyof typeof mockReservations] || 0;
+  const getRemainingCapacity = (slot: keyof ReservationSlots): number => {
+    const reserved = mockReservations[slot] || 0;
     return MAX_CAPACITY - reserved;
   };
 
@@ -55,19 +62,19 @@ export function DateAndTimePicker({
       <div className='flex space-x-2'>
         <div className='w-1/2 flex-1'>
           <Controller
-            name='reservationDate'
+            name={dateFieldName}
             control={control}
             rules={{ required: '예약일을 선택해주세요.' }}
-            render={({ field }) => (
+            render={({ field: { onChange, value } }) => (
               <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant='outline'
                     className='text-lightGray h-10 w-full justify-start border-input pl-3 text-left'
                   >
-                    {field.value ? (
+                    {value ? (
                       <span className='text-lightGray text-base font-normal'>
-                        {format(field.value, 'yyyy-MM-dd')}
+                        {format(value, 'yyyy-MM-dd')}
                       </span>
                     ) : (
                       <span className='text-lightGray text-base font-normal'>
@@ -83,9 +90,9 @@ export function DateAndTimePicker({
                 >
                   <Calendar
                     mode='single'
-                    selected={field.value}
+                    selected={value}
                     onSelect={(date) => {
-                      field.onChange(date);
+                      onChange(date);
                       setIsPopoverOpen(false);
                     }}
                     disabled={(date) =>
@@ -96,31 +103,25 @@ export function DateAndTimePicker({
               </Popover>
             )}
           />
-          {dateError && (
-            <p className='px-1 py-1 text-left text-xs text-red-500'>
-              {dateError}
-            </p>
-          )}
+          <FormErrorMessage error={dateError} />
         </div>
 
         <div className='w-1/2 flex-1'>
           <Controller
-            name='reservationTime'
+            name={timeFieldName}
             control={control}
             rules={{ required: '시간대를 선택해주세요.' }}
-            render={({ field }) => (
+            render={({ field: { onChange, value } }) => (
               <Select
-                onValueChange={(value) => field.onChange(value)}
-                value={field.value || ''}
+                onValueChange={(value) => onChange(value)}
+                value={value || ''}
               >
                 <SelectTrigger className='time-select w-full'>
                   <SelectValue
                     placeholder='시간대를 선택하세요'
                     className='text-base'
                   >
-                    {field.value
-                      ? field.value.split(' ')[0]
-                      : '시간대를 선택하세요'}
+                    {value ? value.split(' ')[0] : '시간대를 선택하세요'}
                   </SelectValue>
                   <ClockIcon className='clock-icon ml-2 h-5 w-5 text-gray-400' />
                 </SelectTrigger>
