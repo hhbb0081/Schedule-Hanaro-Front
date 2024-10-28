@@ -1,4 +1,3 @@
-import Header from '@/components/Header/Header';
 import { BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { ReservationPage } from '..';
 
@@ -9,20 +8,19 @@ export default function ReservationVisitPage() {
   }
   return (
     <div className='w-full'>
-      <Header />
-      <div className='mb-6 text-left text-2xl font-bold text-black'>
-        전화 상담 내역
+      <div className='mb-3 text-left text-2xl font-bold text-black'>
+        방문 상담
       </div>
       <hr />
       {branchState.map((branch) => (
-        <div key={branch.id} className='mt-[1.4375rem] px-2'>
-          <div className='flex justify-between'>
+        <button key={branch.id} className='mt-[1.4375rem] w-full'>
+          <div className='mx-2 flex justify-between'>
             <div className='text-2xl font-bold text-[#464646]'>
               {branch.name}
             </div>
             <div className='text-3xl font-bold text-[#008485]/80'>128</div>
           </div>
-          <div className='mt-4 flex justify-between'>
+          <div className='mx-2 mt-4 flex justify-between'>
             <div className='text-lg font-medium text-[#666666]'>
               현재 대기 인원
             </div>
@@ -30,7 +28,7 @@ export default function ReservationVisitPage() {
               {branch.waitingNumber}명
             </div>
           </div>
-          <div className='mt-4 flex justify-between'>
+          <div className='mx-2 mt-4 flex justify-between'>
             <div className='text-lg font-medium text-[#666666]'>
               예상 대기 시간
             </div>
@@ -39,7 +37,7 @@ export default function ReservationVisitPage() {
             </div>
           </div>
           <hr className='mt-[1.4375rem]' />
-        </div>
+        </button>
       ))}
     </div>
   );
