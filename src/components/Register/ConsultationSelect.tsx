@@ -50,9 +50,6 @@ export function ConsultationSelect({
           </Select>
         )}
       />
-      {error && (
-        <p className='px-1 py-1 text-left text-xs text-red-500'>{error}</p>
-      )}
     </div>
   );
 }

@@ -140,11 +140,7 @@ export function DateAndTimePicker({
               </Select>
             )}
           />
-          {timeError && (
-            <p className='px-1 py-1 text-left text-xs text-red-500'>
-              {timeError}
-            </p>
-          )}
+          <FormErrorMessage error={timeError} />
         </div>
       </div>
     </div>

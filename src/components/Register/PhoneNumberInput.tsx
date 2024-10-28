@@ -41,9 +41,6 @@ export function PhoneNumberInput({ register, error }: PhoneInputProps) {
         })}
         className='w-full border-b-2 py-2 text-base outline-none'
       />
-      {error && (
-        <p className='px-1 py-1 text-left text-xs text-red-500'>{error}</p>
-      )}
     </div>
   );
 }
