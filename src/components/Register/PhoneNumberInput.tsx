@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input';
 import { RegisterCallData } from '@/pages';
 import { ChangeEvent, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
+import { FormErrorMessage } from './FormErrorMessage';
 
 type PhoneInputProps = {
   register: UseFormRegister<RegisterCallData>;
@@ -41,6 +42,7 @@ export function PhoneNumberInput({ register, error }: PhoneInputProps) {
         })}
         className='w-full border-b-2 py-2 text-base outline-none'
       />
+      <FormErrorMessage error={error} />
     </div>
   );
 }
