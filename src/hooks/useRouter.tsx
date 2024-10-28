@@ -10,14 +10,13 @@ import {
   ReservationPage,
   ReservationCallPage,
   ReservationInquiryPage,
+  ReservationVisitPage,
   ReservationDetailVisitPage,
   RegisterPage,
   RegisterCallFormPage,
   RegisterInquiryFormPage,
 } from '@/pages';
 //수정 예정 ..
-import RegisterCallFormPage from '@/pages/Register/Call';
-import ReservationVisitPage from '@/pages/Reservation/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>

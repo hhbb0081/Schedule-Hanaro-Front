@@ -1,7 +1,7 @@
 import { BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { ReservationPage } from '..';
 
-export default function ReservationVisitPage() {
+export function ReservationVisitPage() {
   const branchState = BRANCH_STATE_MOCK;
   if (!branchState) {
     return <ReservationPage />;
