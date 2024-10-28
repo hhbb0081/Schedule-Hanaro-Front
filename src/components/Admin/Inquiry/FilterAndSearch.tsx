@@ -9,23 +9,31 @@ import {
 import { Input } from '../../ui/input';
 import { Search } from 'lucide-react';
 
-function FilterAndSearch() {
+function FilterAndSearch({
+  setActiveCategory,
+}: {
+  setActiveCategory: (category: string) => void;
+}) {
   const [selectedCategory, setSelectedCategory] = useState('전체');
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setActiveCategory(category); // 상위 컴포넌트에 카테고리 변경 전달
+  };
 
   return (
     <div className='flex items-center space-x-5'>
-      {/* Custom Select Dropdown using shadcn-ui Select */}
       <div
         className='relative flex-shrink-0'
         style={{ width: '8rem', height: '2.0625rem' }}
       >
-        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+        <Select value={selectedCategory} onValueChange={handleCategoryChange}>
           <SelectTrigger className='h-full w-full rounded-full border-none bg-white px-4 py-2 text-[0.875rem] font-normal text-gray-600 shadow-md'>
             <SelectValue placeholder='전체' />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='전체'>전체</SelectItem>
-            <SelectItem value='예금'>예금</SelectItem>
+            <SelectItem value='예적금'>예적금</SelectItem>
             <SelectItem value='펀드'>펀드</SelectItem>
             <SelectItem value='대출'>대출</SelectItem>
             <SelectItem value='외환'>외환</SelectItem>
@@ -36,7 +44,6 @@ function FilterAndSearch() {
         </Select>
       </div>
 
-      {/* Search Input using shadcn-ui Input */}
       <div
         className='relative flex flex-shrink-0 items-center'
         style={{ width: '11.9375rem', height: '2.0625rem' }}
