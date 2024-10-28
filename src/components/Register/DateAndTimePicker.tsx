@@ -13,11 +13,12 @@ import {
 } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { CalendarIcon, ClockIcon } from 'lucide-react';
-import { MAX_CAPACITY, mockReservations } from '@/mock/mockReservationsNumber';
+import { mockReservations } from '@/mock/mockReservationsNumber';
 import { RegisterCallData } from '@/pages';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { format } from 'date-fns';
+import { MAX_CAPACITY } from '@/constants/maxCapacity';
 
 interface DateAndTimePickerProps {
   control: Control<RegisterCallData>;
