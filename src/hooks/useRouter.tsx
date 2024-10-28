@@ -12,9 +12,9 @@ import {
   ReservationInquiryPage,
   ReservationDetailVisitPage,
   RegisterPage,
+  RegisterCallFormPage,
+  RegisterInquiryFormPage,
 } from '@/pages';
-//수정 예정 ..
-import RegisterCallFormPage from '@/pages/Register/Call';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -90,6 +90,10 @@ export const useRouter = () =>
         {
           path: '/register/call',
           element: <RegisterCallFormPage />,
+        },
+        {
+          path: '/register/inquiry',
+          element: <RegisterInquiryFormPage />,
         },
       ],
     },

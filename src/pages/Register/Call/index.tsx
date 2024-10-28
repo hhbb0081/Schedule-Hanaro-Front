@@ -5,12 +5,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
-import { ToastProvider } from '@/components/ui/toast';
 import { PhoneNumberInput } from '@/components/Register/PhoneNumberInput';
-import { NameInput } from '@/components/Register/NameInput';
 import { ConsultationSelect } from '@/components/Register/ConsultationSelect';
 import { DateAndTimePicker } from '@/components/Register/DateAndTimePicker';
 import { AgreementCheckbox } from '@/components/Register/AgreementCheckbox';
+import { ReusableInput } from '@/components/Register/ReusableInput';
 
 export type RegisterCallData = {
   name: string;
@@ -52,7 +51,7 @@ function generateTimeSlots(startTime: string, endTime: string) {
   return slots;
 }
 
-export default function RegisterCallFormPage() {
+export function RegisterCallFormPage() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const {
@@ -94,55 +93,57 @@ export default function RegisterCallFormPage() {
   }, []);
 
   return (
-    <ToastProvider>
-      <div className='mx-auto flex min-h-[80%] w-[90%] flex-col justify-between py-5'>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className='flex flex-1 flex-col'
-        >
-          <div className='flex-1 space-y-4'>
-            <NameInput register={register} error={errors.name?.message} />
-            <PhoneNumberInput
-              register={register}
-              error={errors.phone?.message}
-            />
-            <ConsultationSelect
-              control={control}
-              error={errors.consultationType?.message}
-            />
-            <DateAndTimePicker
-              control={control}
-              timeSlots={timeSlots}
-              dateError={errors.reservationDate?.message}
-              timeError={errors.reservationTime?.message}
-            />
-          </div>
+    <div className='mx-auto flex min-h-[80%] w-[90%] flex-col justify-between py-5'>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-1 flex-col'>
+        <div className='flex-1 space-y-4'>
+          <ReusableInput
+            register={register}
+            fieldName='name'
+            error={errors.name?.message}
+            label='이름'
+            placeholder='ex) 김하나'
+            type='text'
+          />
+          <PhoneNumberInput register={register} error={errors.phone?.message} />
+          <ConsultationSelect
+            control={control}
+            error={errors.consultationType?.message}
+            fieldName={'consultationType'}
+          />
+          <DateAndTimePicker<RegisterCallData>
+            control={control}
+            timeSlots={timeSlots}
+            dateError={errors.reservationDate?.message}
+            timeError={errors.reservationTime?.message}
+            dateFieldName={'reservationDate'}
+            timeFieldName={'reservationTime'}
+          />
+        </div>
 
-          <div>
-            <AgreementCheckbox
-              isChecked1={isChecked1}
-              isChecked2={isChecked2}
-              setIsChecked1={setIsChecked1}
-              setIsChecked2={setIsChecked2}
-            />
-            <div className='flex justify-between'>
-              <Button
-                type='button'
-                onClick={() => navigate('/')}
-                variant='ghost'
-                className='w-1/4'
-              >
-                취소
-              </Button>
-              <Button type='submit' variant='default' className='ml-2 w-3/4'>
-                예약하기
-              </Button>
-            </div>
+        <div>
+          <AgreementCheckbox
+            isChecked1={isChecked1}
+            isChecked2={isChecked2}
+            setIsChecked1={setIsChecked1}
+            setIsChecked2={setIsChecked2}
+          />
+          <div className='flex justify-between'>
+            <Button
+              type='button'
+              onClick={() => navigate('/')}
+              variant='ghost'
+              className='w-1/4'
+            >
+              취소
+            </Button>
+            <Button type='submit' variant='default' className='ml-2 w-3/4'>
+              예약하기
+            </Button>
           </div>
-        </form>
+        </div>
+      </form>
 
-        <Toaster />
-      </div>
-    </ToastProvider>
+      <Toaster />
+    </div>
   );
 }
