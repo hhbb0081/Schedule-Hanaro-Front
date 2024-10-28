@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 export function AnswerDetail() {
   const navigate = useNavigate();
   return (
-    <div className='h-full'>
+    <div className='mx-auto h-full w-[83%]'>
       <button
         className='mb-[1rem] flex items-center text-gray-600 hover:text-gray-800'
         onClick={() => navigate(-1)}
       >
-        <span className='ml-[6rem] mr-1 text-[0.825rem]'>&lt;</span>{' '}
+        <span className='mr-1 text-[0.825rem]'>&lt;</span>{' '}
         <span className='text-[0.825rem] font-bold text-[#464646]'>
           뒤로가기
         </span>
       </button>
-      <div className='mx-auto h-[85%] w-[83%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
+      <div className='mx-auto h-[85%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
         <div className='overflow-wrap break-word text-left text-[1.125rem] font-bold text-[#464646]'>
           안녕하세요 문의드리려고 합니다 문의드려도 될까요?
         </div>

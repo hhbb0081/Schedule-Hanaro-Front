@@ -1,15 +1,20 @@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+// import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function AnswerInput() {
+  // const { toast } = useToast();
   const [answer, setAnswer] = useState('');
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!answer.trim()) {
       alert('답변을 입력하세요');
+      // toast({
+      //   title: '답변을 입력하세요.',
+      // });
       return;
     }
 
