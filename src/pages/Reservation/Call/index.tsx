@@ -1,18 +1,18 @@
 import '@/index.css';
-import Header from '@/components/Header/ReservationHeader';
 import TimerIcon from '@/assets/icons/reservaion/timer.svg';
-import { useState } from 'react';
+// import Header from '@/components/Header/ReservationHeader';
+// import { useState } from 'react';
 
 export function ReservationCallPage() {
-  const [ActiveTab, ChangeTab] = useState<'visit' | 'call'>('call');
+  // const [ActiveTab, ChangeTab] = useState<'visit' | 'call'>('call');
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className='flex items-center justify-center'>
-        <div className='flex w-[90%] flex-col'>
-          <div className='mb-[1.75rem] flex flex-col items-center'>
-            <div className='mt-[2.1875rem] flex w-full justify-center'>
+        <div className='flex w-full flex-col'>
+          {/* <div className='mb-[1.75rem] flex flex-col items-center'> */}
+          {/* <div className='mt-[2.1875rem] flex w-full justify-center'>
               <button
                 className={`text-center transition-all duration-300 ease-in-out ${
                   ActiveTab === 'visit'
@@ -33,11 +33,11 @@ export function ReservationCallPage() {
               >
                 전화 / 1:1 상담
               </button>
-            </div>
+            </div> */}
 
-            <div className='relative mt-[0.5rem] h-[.125rem] w-full bg-[#d9d9d9]'>
-              {/* 선택된 탭의 검은색 밑줄 */}
-              <div
+          {/* <div className='relative mt-[0.5rem] h-[.125rem] w-full bg-[#d9d9d9]'> */}
+          {/* 선택된 탭의 검은색 밑줄 */}
+          {/* <div
                 className={`absolute h-[.125rem] transform bg-[#464646] transition-all duration-700 ease-in-out ${
                   ActiveTab === 'visit'
                     ? 'left-0 w-1/2 scale-x-100'
@@ -49,7 +49,7 @@ export function ReservationCallPage() {
                 }}
               />
             </div>
-          </div>
+          </div> */}
 
           <div className='mb-[1.6875rem] text-left text-[1.5rem] font-bold text-[#2b2b2b]'>
             전화 상담 내역

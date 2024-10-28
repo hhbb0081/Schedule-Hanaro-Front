@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow_left.svg';
 import { ReactComponent as Addrss } from '@/assets/icons/branch/address.svg';
@@ -13,14 +13,18 @@ import { Button } from '@/components/ui/button';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
 import { DirectionButton } from '@/components/ui/branch/direction';
 import { CloseButton } from '@/components/ui/close';
+import Nav from '@/components/Nav/Nav';
 
 export function BranchDetailPage() {
+  const navigate = useNavigate();
   const { id } = useParams();
   if (!id) {
     return;
   }
   const Branch = BRANCH_MOCK.find((br) => br.id === id);
-
+  const moveToReservation = () => {
+    navigate('/reservation/visit/1');
+  };
   return (
     <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white md:max-w-lg'>
       <header className='flex h-14 items-center justify-between border'>
@@ -90,17 +94,11 @@ export function BranchDetailPage() {
           </div>
         </div>
         <div className='mt-16 flex items-center justify-center p-4'>
-          <Button>예약하기</Button>
+          <Button onClick={moveToReservation}>예약하기</Button>
         </div>
       </main>
       <footer>
-        <nav className='mt-4 flex items-center justify-between border bg-gray-300 p-4'>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-          <div className='h-8 w-8 bg-white'></div>
-        </nav>
+        <Nav />
       </footer>
     </div>
   );

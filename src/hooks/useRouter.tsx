@@ -10,11 +10,13 @@ import {
   ReservationPage,
   ReservationCallPage,
   ReservationInquiryPage,
+  ReservationVisitPage,
   ReservationDetailVisitPage,
   RegisterPage,
   RegisterCallFormPage,
   RegisterInquiryFormPage,
 } from '@/pages';
+//수정 예정 ..
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -71,7 +73,7 @@ export const useRouter = () =>
         {
           path: '/reservation/visit',
           children: [
-            { index: true, element: <ReservationPage /> },
+            { index: true, element: <ReservationVisitPage /> },
             {
               path: '/reservation/visit/:id',
               children: [

@@ -67,21 +67,25 @@ export const BRANCH_MOCK = [
 export const BRANCH_STATE_MOCK = [
   {
     id: '7774',
+    name: '을지로본점신축건물1층 주차장',
     waitingNumber: '11',
     waitingTime: '15',
   },
   {
     id: '401|0',
+    name: '영업1부PB센터',
     waitingNumber: '11',
     waitingTime: '15',
   },
   {
     id: '1487|1',
+    name: 'SKT신사옥 지하1층',
     waitingNumber: '11',
     waitingTime: '15',
   },
   {
     id: '232|0',
+    name: 'KEB하나은행 본점',
     waitingNumber: '11',
     waitingTime: '15',
   },

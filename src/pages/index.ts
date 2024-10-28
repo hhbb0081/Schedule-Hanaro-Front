@@ -5,6 +5,7 @@ export * from './MapDetail';
 export * from './BranchDetail';
 export * from './Reservation/Call';
 export * from './Reservation/Inquiry';
+export * from './Reservation/Visit';
 export * from './Direction';
 export * from './ReservationDetail/Visit';
 export * from './Register';
