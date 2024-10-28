@@ -17,7 +17,7 @@ export default function BankInfo() {
         <Close
           width={18}
           height={18}
-          className='ml-4 cursor-auto'
+          className='ml-4 cursor-pointer'
           onClick={initBranchId}
         />
       </div>
