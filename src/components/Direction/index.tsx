@@ -3,11 +3,9 @@ import { useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
-import { useMap } from '@/hooks';
-import { MyLocation } from '../Map/MyLocation';
-import TopSheet from '@/components/Direction/TopSheet';
 import BottomFloatingBox from '@/components/Direction/BottomFloatingBox';
-import { useAtomValue, useSetAtom } from 'jotai';
+import TopSheet from '@/components/Direction/TopSheet';
+import { useMap } from '@/hooks';
 import {
   currentStartAddressAtom,
   endAtom,
@@ -17,6 +15,8 @@ import {
   totalTimeAtom,
 } from '@/stores';
 import { setMyLocation } from '@/utils';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { MyLocation } from '../Map/MyLocation';
 
 dayjs.locale('ko');
 

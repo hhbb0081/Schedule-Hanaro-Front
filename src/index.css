@@ -28,21 +28,9 @@
 
 @layer base {
   html {
-    font-family: font-pretendReg;
+    font-family: Pretendard-Regular;
     text-align: center;
     height: 100dvh;
-  }
-
-  .bold-text {
-    font-family: font-pretendBold;
-  }
-
-  .medium-text {
-    font-family: font-pretendMed;
-  }
-
-  .regular-text {
-    font-family: font-pretendReg;
   }
 
   .button {

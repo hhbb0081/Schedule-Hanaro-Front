@@ -17,18 +17,25 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+import { ReactComponent as Close } from '@/assets/icons/close.svg';
 import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { MAP_CHIPS } from '@/constants';
+import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
+import { branchIdAtom } from '@/stores';
+import { BranchInfo } from '@/types/branch';
+import { useSetAtom } from 'jotai';
 import { List, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import BranchCard from '../Map/BranchCard';
 import { Badge } from '../ui/badge';
+import { SearchInput } from '../ui/searchInput';
 import {
   Select,
   SelectContent,
@@ -37,80 +44,134 @@ import {
   SelectValue,
 } from '../ui/select';
 
-export function BottomSheet() {
-  const [selectedChipIdx, setSelectedChipIdx] = useState(0);
+export function BottomSheet({ currentAddress }: { currentAddress: string }) {
+  const [selectedChipIdx, setSelectedChipIdx] = useState(0); // 영업점 | ATM chip
+
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen((prev) => !prev);
+
+  const setCurrentBranchId = useSetAtom(branchIdAtom);
+
+  const handleDetailPage = (id: string) => {
+    toggleOpen();
+    setTimeout(() => setCurrentBranchId(id), 200);
+  };
+
+  const findWaitingInfo = (branchId: string) => {
+    const targetBranch = BRANCH_STATE_MOCK.find(({ id }) => id === branchId);
+    return {
+      waiting_number: targetBranch?.waiting_number ?? '-1',
+      waiting_time: targetBranch?.waiting_time ?? '-1',
+    };
+  };
 
   return (
-    <div className='navbar fixed bottom-24 left-1/2 z-50 -translate-x-1/2'>
-      <Drawer defaultOpen>
-        <DrawerTrigger asChild>
-          <Button className='w-1/2 rounded-full bg-white shadow-[2px_4px_4px_0px_rgba(0,0,0,0.15)] hover:bg-[#F9F9F9]'>
-            <List width='1.0625rem' height='1.0625rem' color='#666666' />
-            <span className='text-lightGrey font-[0.875rem] font-bold'>
-              목록보기
-            </span>
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent
-          aria-describedby='custom-description'
-          className='customWidth max-h-[62rem] rounded-t-2xl bg-black/20 bg-white shadow-2xl dark:bg-gray-950'
-        >
-          <div className='mx-auto h-full w-[90%]'>
-            <div className='flex items-center justify-between'>
-              <DrawerTitle className='w-full pt-6 text-center text-2xl font-bold'>
-                <div className='mx-auto w-[9.9375rem]'>
-                  <Badge
-                    variant='outline'
-                    className='flex w-full items-center justify-center gap-[0.3125rem] border-border bg-[#F8F8F8] py-3 text-text'
-                  >
-                    <MapPin width='1.25rem' height='1.25rem' />
-                    <span className='text-[1rem] font-bold'>성수로 1가 17</span>
-                  </Badge>
-                </div>
-                <div className='flex items-center justify-between py-5'>
-                  <span className='space-x-2'>
-                    {MAP_CHIPS.map(
-                      ({ id, txt }: { id: number; txt: string }) => (
-                        <Badge
-                          key={id}
-                          variant={
-                            selectedChipIdx === id ? 'active' : 'noactive'
-                          }
-                          className='px-6 py-1 text-[0.875rem]'
-                          onClick={() => setSelectedChipIdx(id)}
-                        >
-                          {txt}
-                        </Badge>
-                      )
-                    )}
-                  </span>
-                  <div className='flex cursor-pointer items-center gap-1'>
-                    <Select>
-                      <SelectTrigger className='text-lightGrey space-x-1 border-none'>
-                        <SelectValue placeholder='거리순' />
-                      </SelectTrigger>
-                      <SelectContent className='right-8'>
-                        <SelectItem value='거리순'>거리순</SelectItem>
-                        <SelectItem value='대기시간순'>대기시간순</SelectItem>
-                      </SelectContent>
-                    </Select>
+    <>
+      <SearchInput />
+      <div className='navbar fixed bottom-24 left-1/2 z-10 -translate-x-1/2'>
+        <Drawer open={open} onOpenChange={setOpen} snapPoints={[0.4, 1]}>
+          <DrawerTrigger asChild>
+            <Button className='w-1/2 rounded-full bg-white shadow-[2px_4px_4px_0px_rgba(0,0,0,0.15)] hover:bg-[#F9F9F9]'>
+              <List width='1.0625rem' height='1.0625rem' color='#666666' />
+              <span className='text-[0.875rem] font-bold text-lightGrey'>
+                지점목록
+              </span>
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent
+            aria-describedby='custom-description'
+            className='customWidth h-[90%] rounded-t-2xl bg-black/20 bg-white shadow-2xl dark:bg-gray-950'
+          >
+            <div className='mx-auto h-[90%] w-[90%]'>
+              {/* <DrawerHeader> */}
+              <DrawerDescription id='custom-description'></DrawerDescription>
+              <div className='flex items-center justify-between'>
+                <DrawerTitle className='w-full pt-6 text-center text-2xl font-bold'>
+                  <div className='flex items-center justify-between'>
+                    <div></div>
+                    <Badge
+                      variant='outline'
+                      className='ml-[18px] flex w-fit items-center justify-center gap-[0.3125rem] border-border bg-[#F8F8F8] px-5 py-3 tracking-wider text-text'
+                    >
+                      <MapPin width='1.25rem' height='1.25rem' />
+                      <span className='text-[1rem] font-bold'>
+                        {currentAddress}
+                      </span>
+                    </Badge>
+                    <Close
+                      width={18}
+                      height={18}
+                      className='ml-4 cursor-pointer'
+                      onClick={toggleOpen}
+                    />
                   </div>
-                </div>
-              </DrawerTitle>
+                  <div className='flex items-center justify-between py-5'>
+                    <span className='space-x-2'>
+                      {MAP_CHIPS.map(
+                        ({ id, txt }: { id: number; txt: string }) => (
+                          <Badge
+                            key={id}
+                            variant={
+                              selectedChipIdx === id ? 'active' : 'noactive'
+                            }
+                            className='px-6 py-1 text-[0.875rem] tracking-wider'
+                            onClick={() => setSelectedChipIdx(id)}
+                          >
+                            {txt}
+                          </Badge>
+                        )
+                      )}
+                    </span>
+                    <div className='flex h-[90%] cursor-pointer items-center gap-1'>
+                      {selectedChipIdx === 0 && (
+                        <Select>
+                          <SelectTrigger className='space-x-1 border-none text-lightGrey'>
+                            <SelectValue placeholder='거리순' />
+                          </SelectTrigger>
+                          <SelectContent className='right-8'>
+                            <SelectItem value='거리순'>거리순</SelectItem>
+                            <SelectItem value='대기시간순'>
+                              대기시간순
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    </div>
+                  </div>
+                </DrawerTitle>
+              </div>
+              {/* </DrawerHeader> */}
+              <ul className='h-full space-y-6 overflow-y-auto p-1 scrollbar-hide'>
+                {BRANCH_MOCK
+                  // ?.filter(({ type }) => {
+                  //   const stype = selectedChipIdx === 0 ? 'bank' : 'ATM';
+                  //   return type === stype;
+                  // })
+                  ?.map(({ id, name, address, business_hours }: BranchInfo) => {
+                    // TODO: waiting_number -> distance로 수정
+                    const { waiting_number, waiting_time } =
+                      findWaitingInfo(id);
+                    return (
+                      <li key={id} onClick={() => handleDetailPage(id)}>
+                        <BranchCard
+                          id={id}
+                          name={name}
+                          isOpen={true}
+                          address={address}
+                          distance={waiting_number}
+                          openTime={business_hours}
+                          waitingNumber={waiting_number}
+                          waitingTime={waiting_time}
+                        />
+                      </li>
+                    );
+                  })}
+              </ul>
             </div>
-            <div className='scrollbar-none h-full space-y-6 overflow-y-auto p-1'>
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-              <BranchCard />
-            </div>
-          </div>
-        </DrawerContent>
-      </Drawer>
-    </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
+    </>
   );
 }
 
