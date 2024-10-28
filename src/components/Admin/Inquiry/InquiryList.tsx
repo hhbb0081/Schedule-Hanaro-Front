@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Accordion,
   AccordionItem,
@@ -7,101 +6,89 @@ import {
 } from '../../ui/accordion';
 import { Button } from '../../ui/button';
 import { Badge } from '../../ui/badge';
-// 아직 작업중
-function InquiryList() {
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+import FilterAndSearch from './FilterAndSearch';
 
-  const toggleItem = (itemId: string) => {
-    setExpandedItem(expandedItem === itemId ? null : itemId);
-  };
+function InquiryList({ activeTab }: { activeTab: '답변대기' | '답변완료' }) {
+  // 예시 데이터
+  const inquiries = [
+    { id: 'item-1', title: '안녕하세요 문의드리려고합니다...', status: '답변대기' },
+    { id: 'item-2', title: '안녕하세요 좀 궁금한게 있는...', status: '답변대기' },
+    { id: 'item-3', title: '안녕하세요, 예금 관련 문의드립니다.', status: '답변완료' },
+  ];
+
+  // activeTab에 따라 필터링된 목록
+  const filteredInquiries = inquiries.filter(
+    (inquiry) => inquiry.status === activeTab
+  );
 
   return (
-    <div className='mx-auto max-w-3xl rounded-lg bg-white p-4 shadow-md'>
-      <h2 className='mb-4 text-lg font-semibold'>총 12건</h2>
+    <div
+      className='mx-auto max-w-3xl rounded-lg border-gray-200 bg-white p-6 shadow-lg'
+      style={{
+        boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.10)',
+      }}
+    >
+      {/* Header with Filter and Search */}
+      <div className='mb-4 flex items-center justify-between border-b pb-4'>
+        <h2 className='text-lg font-semibold text-gray-800'>
+          총 <span className='text-teal-600'>{filteredInquiries.length}</span>건
+        </h2>
+        <FilterAndSearch />
+      </div>
 
+      {/* Accordion List */}
       <Accordion type='single' collapsible>
-        {/* Item 1 */}
-        <AccordionItem value='item-1'>
-          <div className='flex items-center justify-between py-2'>
-            <div className='flex items-center space-x-2'>
-              <span className='font-medium'>1</span>
-              <AccordionTrigger className='text-gray-800'>
-                안녕하세요 문의드리려고합니다...
-              </AccordionTrigger>
-              <Badge
-                variant='outline'
-                className='border-main bg-teal-100 text-main'
-              >
-                답변대기
-              </Badge>
-            </div>
-            <button
-              className='text-sm text-gray-500'
-              onClick={() => toggleItem('item-1')}
-            >
-              {expandedItem === 'item-1' ? '접기' : '펼쳐보기'}
-            </button>
-          </div>
-          <AccordionContent>
-            <div className='rounded-md bg-gray-50 p-4'>
-              <p className='mb-2 font-semibold text-gray-800'>
-                안녕하세요 문의드리려고합니다 문의드려도 될까요?
-              </p>
-              <p className='mb-4 text-sm text-gray-600'>
-                이규호 · 12분 전 · 예금
-              </p>
-              <p className='text-sm text-gray-700'>
-                안녕하세요 좀 궁금한게 있는데 예금이 궁금한지는 잘 모르겠어서
-                생각좀 해보고 다시 문의드릴게요 감사합니다. 반갑습니다. 다시
-                연락해서 문의드리겠습니다...
-              </p>
-              <div className='mt-4 w- flex justify-center'>
-                <Button>답변하기</Button>
+        {filteredInquiries.map((inquiry) => (
+          <AccordionItem key={inquiry.id} value={inquiry.id}>
+            <div className='flex items-center justify-between py-4'>
+              <div className='flex items-center space-x-2'>
+                <span className='font-medium text-gray-700'>
+                  {inquiry.id.split('-')[1]}
+                </span>
+                <span className='font-semibold text-gray-800'>
+                  {inquiry.title}
+                </span>
+                <Badge
+                  variant='lightSolid'
+                  className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                    inquiry.status === '답변대기'
+                      ? 'bg-teal-50 text-teal-600'
+                      : 'bg-gray-200 text-gray-600'
+                  }`}
+                >
+                  {inquiry.status}
+                </Badge>
               </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        {/* Item 2 */}
-        <AccordionItem value='item-2'>
-          <div className='flex items-center justify-between py-2'>
-            <div className='flex items-center space-x-2'>
-              <span className='font-medium'>2</span>
-              <AccordionTrigger className='text-gray-800'>
-                안녕하세요 좀 궁금한게 있는...
+              <AccordionTrigger className='flex items-center text-sm text-gray-500'>
+                <span className='[data-state="open"]:hidden'>펼쳐보기</span>
+                <span className='[data-state="closed"]:hidden'>접기</span>
               </AccordionTrigger>
-              <Badge
-                variant='outline'
-                className='border-main bg-teal-100 text-main'
-              >
-                답변대기
-              </Badge>
             </div>
-            <button
-              className='text-sm text-gray-500'
-              onClick={() => toggleItem('item-2')}
-            >
-              {expandedItem === 'item-2' ? '접기' : '펼쳐보기'}
-            </button>
-          </div>
-          <AccordionContent>
-            <div className='rounded-md bg-gray-50 p-4'>
-              <p className='mb-2 font-semibold text-gray-800'>
-                안녕하세요 좀 궁금한게 있습니다...
-              </p>
-              <p className='mb-4 text-sm text-gray-600'>
-                김영희 · 5분 전 · 펀드
-              </p>
-              <p className='text-sm text-gray-700'>
-                안녕하세요, 펀드 관련해서 질문이 있어서 문의드립니다. 자세한
-                내용은 다음과 같습니다...
-              </p>
-              <div className='mt-4 flex justify-end'>
-                <Button>답변하기</Button>
+            <AccordionContent>
+              <div className='mt-2 rounded-md p-4 shadow-inner'>
+                <div className='mb-1 flex items-center justify-between'>
+                  <p className='font-semibold text-gray-800'>
+                    {inquiry.title}
+                  </p>
+                  {inquiry.status === '답변대기' && (
+                    <Button
+                      variant='default'
+                      className='h-[2.4375rem] w-[7.5rem] rounded-full bg-main px-4 py-1 text-sm text-white'
+                    >
+                      답변하기
+                    </Button>
+                  )}
+                </div>
+                <p className='mb-2 text-left text-[0.75rem] text-gray-400'>
+                  작성자 · 시간 · 카테고리
+                </p>
+                <p className='text-left text-sm leading-relaxed text-gray-700'>
+                  문의 내용에 대한 상세 설명이 여기에 표시됩니다.
+                </p>
               </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
       </Accordion>
     </div>
   );

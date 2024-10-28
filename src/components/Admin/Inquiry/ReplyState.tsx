@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function ReplyState() {
-  const [activeTab, setActiveTab] = useState<'답변대기' | '답변완료'>(
-    '답변대기'
-  );
-
+function ReplyState({
+  activeTab,
+  setActiveTab,
+}: {
+  activeTab: '답변대기' | '답변완료';
+  setActiveTab: React.Dispatch<React.SetStateAction<'답변대기' | '답변완료'>>;
+}) {
   return (
     <div
       className='relative flex w-full max-w-md rounded-full bg-white p-1'
       style={{
-        boxShadow: '0px -2px 15px rgba(0, 0, 0, 0.15), 0px 6px 10px rgba(0, 0, 0, 0.15)',
+        boxShadow:
+          '0px -2px 15px rgba(0, 0, 0, 0.15), 0px 6px 10px rgba(0, 0, 0, 0.15)',
       }}
     >
       {/* 이동하는 배경 */}
       <div
-        className={`h-16 absolute -bottom-0 -left-0.5 w-[54%] rounded-full bg-gray-600 transition-transform duration-300 ease-in-out ${
+        className={`absolute -bottom-0 -left-0.5 h-16 w-[54%] rounded-full bg-gray-600 transition-transform duration-300 ease-in-out ${
           activeTab === '답변완료' ? 'translate-x-[86%]' : 'translate-x-0'
         }`}
       ></div>
