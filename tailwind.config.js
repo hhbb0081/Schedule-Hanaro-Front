@@ -94,6 +94,9 @@ export default {
         pretendMed: ['Pretendard-Medium'],
         pretendBold: ['Pretendard-Bold'],
       },
+      dropShadow: {
+        DEFAULT: '0 4px 10px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
