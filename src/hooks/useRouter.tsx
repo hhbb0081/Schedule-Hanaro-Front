@@ -111,8 +111,8 @@ export const useRouter = () =>
       children: [
         { index: true, element: <VisitPage /> },
         { path: '/admin/inquiry', element: <InquiryPage /> },
-        { path: '/admin/inquiry/AnswerInput', element: <AnswerInput /> },
-        { path: '/admin/inquiry/AnswerDetail', element: <AnswerDetail /> },
+        { path: '/admin/inquiry/answerInput', element: <AnswerInput /> },
+        { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/call', element: <CallPage /> },
       ],
     },
