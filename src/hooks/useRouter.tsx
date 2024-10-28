@@ -12,6 +12,7 @@ import {
   ReservationInquiryPage,
   ReservationDetailVisitPage,
   RegisterPage,
+  RegisterInquiryFormPage,
 } from '@/pages';
 //수정 예정 ..
 import RegisterCallFormPage from '@/pages/Register/Call';
@@ -90,6 +91,10 @@ export const useRouter = () =>
         {
           path: '/register/call',
           element: <RegisterCallFormPage />,
+        },
+        {
+          path: '/register/inquiry',
+          element: <RegisterInquiryFormPage />,
         },
       ],
     },

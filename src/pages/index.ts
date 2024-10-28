@@ -9,4 +9,5 @@ export * from './Direction';
 export * from './ReservationDetail/Visit';
 export * from './Register';
 export * from './Register/Call';
+export * from './Register/Inquiry';
 export * from './Register/Modal';
