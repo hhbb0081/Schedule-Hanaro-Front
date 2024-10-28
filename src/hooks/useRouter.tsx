@@ -15,6 +15,9 @@ import {
   RegisterCallFormPage,
   RegisterInquiryFormPage,
 } from '@/pages';
+//수정 예정 ..
+import RegisterCallFormPage from '@/pages/Register/Call';
+import ReservationVisitPage from '@/pages/Reservation/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -71,7 +74,7 @@ export const useRouter = () =>
         {
           path: '/reservation/visit',
           children: [
-            { index: true, element: <ReservationPage /> },
+            { index: true, element: <ReservationVisitPage /> },
             {
               path: '/reservation/visit/:id',
               children: [
