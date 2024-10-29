@@ -1,22 +1,23 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow_left.svg';
 import { ReactComponent as Addrss } from '@/assets/icons/branch/address.svg';
 import { ReactComponent as Hours } from '@/assets/icons/branch/business_hours.svg';
 import { ReactComponent as Tel } from '@/assets/icons/branch/tel.svg';
 import { ReactComponent as WaitPeople } from '@/assets/icons/branch/waitpeople.svg';
+import { ReactComponent as BranchImage } from '@/assets/icons/branch/branch_img.svg';
 import { ReactComponent as Time } from '@/assets/icons/branch/walktime.svg';
 
 // import branch from '@/assets/images/branch.png';
 
-import Nav from '@/components/Nav/Nav';
-import { Button } from '@/components/ui/button';
-import { CloseButton } from '@/components/ui/close';
-import { DirectionButton } from '@/components/ui/direction';
 import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
+import { DirectionButton } from '@/components/ui/direction';
+import { CloseButton } from '@/components/ui/close';
+import Nav from '@/components/Nav/Nav';
+import ReservationButton from '@/components/Direction/BottomFloatingBox/ReservationButton';
 
 export function BranchDetailPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { id } = useParams();
   if (!id) {
     return;
@@ -28,18 +29,21 @@ export function BranchDetailPage() {
   }
   const { name, address, business_hours, tel } = branch;
   const state = BRANCH_STATE_MOCK.find((br) => br.id === id);
-  const moveToReservation = () => {
-    navigate(`/reservation/visit/${id}`);
-  };
+  // 예약하고 번호표 상세로 넘어가는 함수인데 버튼을 컴포넌트화 해서 추후 수정
+  // const moveToReservation = () => {
+  //   navigate(`/reservation/visit/${id}`);
+  // };
   return (
-    <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white md:max-w-lg'>
+    <div className=''>
       <header className='flex h-14 items-center justify-between border'>
         <ArrowLeft width={21} height={21} className='ml-4' />
         <div className='text-xl'>{name}</div>
-        <CloseButton />
+        <CloseButton className='mr-4' />
       </header>
       <main>
-        {/* <img src={branch} alt='bank image' className='w-full' /> */}
+        <div className='w-full'>
+          <BranchImage />
+        </div>
         <div className='border-b p-8'>
           <div className='flex items-center justify-between'>
             <h2 className='text-xl font-bold'>기본정보</h2>
@@ -99,8 +103,8 @@ export function BranchDetailPage() {
             </span>
           </div>
         </div>
-        <div className='mt-16 flex items-center justify-center p-4'>
-          <Button onClick={moveToReservation}>예약하기</Button>
+        <div className='p-8'>
+          <ReservationButton />
         </div>
       </main>
       <footer>
