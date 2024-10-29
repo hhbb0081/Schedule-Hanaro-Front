@@ -101,7 +101,7 @@ function InquiryList({
                     className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    }
+                    } // 아코디언 열고 닫기
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
