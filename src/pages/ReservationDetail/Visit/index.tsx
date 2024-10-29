@@ -1,10 +1,11 @@
 import { ReactComponent as Check } from '@/assets/icons/reservation/check.svg';
+import '@/index.css';
 import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
 import Nav from '@/components/Nav/Nav';
-import { Button } from '@/components/ui/button';
 import { DirectionButton } from '@/components/ui/direction';
 import '@/index.css';
 import { useParams } from 'react-router-dom';
+import Modalbutton from '@/components/Direction/Modal';
 export function ReservationDetailVisitPage() {
   const { id } = useParams();
   if (!id) {
@@ -56,12 +57,17 @@ export function ReservationDetailVisitPage() {
             <div className='text-lg font-bold text-[#464646]'>15분</div>
           </div>
         </div>
-        <Button
-          className='mt-28 h-[3.75rem] w-[23.75rem] rounded-[1.25rem] py-[1.125rem] text-xl font-bold text-[#2b2b2b]'
-          variant={'outline'}
-        >
-          예약 취소
-        </Button>
+        <div className='mt-20'>
+          <Modalbutton
+            buttonTitle='예약 취소'
+            buttonVariant='outline'
+            buttonSize='h-[3.75rem] w-[23.75rem]'
+            modalTitle='영업점 예약 취소'
+            modalDescription1='취소 시 30분 후부터 재예약이 가능합니다.'
+            modalDescription2=''
+            modalButtonTitle='확인'
+          ></Modalbutton>
+        </div>
       </body>
       <footer className='mt-7'>
         <Nav />
