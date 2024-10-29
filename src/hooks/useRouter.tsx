@@ -5,6 +5,7 @@ import AdminLayout from '@/components/Layout/AdminLayout';
 import {
   BranchDetailPage,
   DirectionPage,
+  InquiryDetailPage,
   MainPage,
   MapDetailPage,
   MapPage,
@@ -12,6 +13,8 @@ import {
   RegisterInquiryFormPage,
   RegisterPage,
   ReservationCallPage,
+  ReservationDetailCallPage,
+  ReservationDetailInquiryPage,
   ReservationDetailVisitPage,
   ReservationInquiryPage,
   ReservationPage,
@@ -63,7 +66,9 @@ export const useRouter = () =>
             { index: true, element: <ReservationCallPage /> },
             {
               path: '/reservation/call/:id',
-              children: [{ index: true, element: <ReservationCallPage /> }],
+              children: [
+                { index: true, element: <ReservationDetailCallPage /> },
+              ],
             },
           ],
         },
@@ -73,7 +78,13 @@ export const useRouter = () =>
             { index: true, element: <ReservationInquiryPage /> },
             {
               path: '/reservation/inquiry/:id',
-              children: [{ index: true, element: <ReservationInquiryPage /> }],
+              children: [
+                { index: true, element: <ReservationDetailInquiryPage /> },
+              ],
+            },
+            {
+              path: '/reservation/inquiry/:id/detail',
+              children: [{ index: true, element: <InquiryDetailPage /> }],
             },
           ],
         },

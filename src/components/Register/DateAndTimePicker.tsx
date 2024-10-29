@@ -16,7 +16,7 @@ import { CalendarIcon, ClockIcon } from 'lucide-react';
 import {
   mockReservations,
   ReservationSlots,
-} from '@/mock/mockReservationsNumber';
+} from '@/mock/mockReservationsCall';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { format } from 'date-fns';
