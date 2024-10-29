@@ -83,7 +83,7 @@ function InquiryList({
         boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.10)',
       }}
     >
-      <div className='font-inter mb-4 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
+      <div className='font-inter mb-0 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
         <h2 className='text-[1.125rem] font-bold text-gray-800'>
           총{' '}
           <span className='text-[1.4rem] font-extrabold text-teal-600'>
@@ -105,7 +105,6 @@ function InquiryList({
                   </span>
                   <span
                     className='pl-5 pr-2 text-[1.25rem] font-bold text-gray-800'
-                    // 클릭 이벤트를 제거하고 커서 스타일을 변경
                     style={{ cursor: 'default' }}
                   >
                     {title.length <= 15
@@ -125,25 +124,27 @@ function InquiryList({
                 </div>
                 {status === '답변완료' ? (
                   <span
-                    className='cursor-pointer text-sm font-normal text-gray-500'
+                    className='mr-5 cursor-pointer text-sm font-normal py-4 text-gray-500'
                     onClick={() => navigate('/admin/inquiry/answerDetail')}
                   >
                     상세보기 &gt;
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='flex items-center text-[0.875rem] font-normal text-gray-500'
+                    className='mr-5 flex items-center text-[0.875rem] font-normal text-gray-500'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    } // 아코디언 열고 닫기
+                    }
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
                 )}
               </div>
-              <AccordionContent>
-                <div className='font-inter mt-2 rounded-md p-4 leading-normal shadow-inner'>
-                  <div className='mb-1 flex items-center justify-between'>
+              <AccordionContent className='-mb-4 mt-0'>
+                {' '}
+                {/* mb-4로 하단 여백 조정 */}
+                <div className='font-inter rounded-md bg-gray-50 p-4 leading-normal'>
+                  <div className='mb-2 flex items-center justify-between'>
                     <p className='text-[1.25rem] font-bold text-gray-800'>
                       {title}
                     </p>
