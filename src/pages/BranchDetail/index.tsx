@@ -86,7 +86,7 @@ export function BranchDetailPage() {
               </span>
             </div>
             <span className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
-              {state?.waitingNumber}명
+              {state?.waiting_number}명
             </span>
             <div className='flex items-center gap-2'>
               <Time width={24} height={24} />
@@ -95,7 +95,7 @@ export function BranchDetailPage() {
               </span>
             </div>
             <span className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
-              {state?.waitingTime}분
+              {state?.waiting_time}분
             </span>
           </div>
         </div>
