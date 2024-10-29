@@ -9,12 +9,13 @@ import { Badge } from '../../ui/badge';
 import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ActiveTab } from '@/types/inquiry';
 
 // Inquiry 타입 정의
 type Inquiry = {
   id: string;
   title: string;
-  status: '답변대기' | '답변완료';
+  status: ActiveTab; // ActiveTab 사용
   category: string;
   time: string;
 };
@@ -24,7 +25,7 @@ function InquiryList({
   activeCategory,
   setActiveCategory,
 }: {
-  activeTab: '답변대기' | '답변완료' | '전체';
+  activeTab: ActiveTab; // ActiveTab 사용
   activeCategory: string;
   setActiveCategory: (category: string) => void;
 }) {
@@ -68,7 +69,7 @@ function InquiryList({
 
   const filteredInquiries = inquiries.filter(
     ({ status, category }) =>
-      (activeTab === '전체' || status === activeTab) &&
+      status === activeTab &&
       (activeCategory === '전체' || category === activeCategory)
   );
 
@@ -83,9 +84,9 @@ function InquiryList({
       }}
     >
       <div className='font-inter mb-4 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
-        <h2 className='text-[1.25rem] font-bold text-gray-800'>
+        <h2 className='text-[1.125rem] font-bold text-gray-800'>
           총{' '}
-          <span className='text-[1.5rem] font-extrabold text-teal-600'>
+          <span className='text-[1.4rem] font-extrabold text-teal-600'>
             {filteredInquiries.length}
           </span>
           건
@@ -99,10 +100,14 @@ function InquiryList({
             <AccordionItem key={id} value={id}>
               <div className='font-inter flex items-center justify-between py-4 font-normal leading-normal'>
                 <div className='flex items-center space-x-2'>
-                  <span className='text-[1.25rem] font-bold text-gray-700'>
+                  <span className='pl-5 text-[1.25rem] font-bold text-gray-700'>
                     {index + 1}
                   </span>
-                  <span className='text-[1.375rem] font-bold text-gray-800'>
+                  <span
+                    className='pl-5 pr-2 text-[1.25rem] font-bold text-gray-800'
+                    // 클릭 이벤트를 제거하고 커서 스타일을 변경
+                    style={{ cursor: 'default' }}
+                  >
                     {title.length <= 15
                       ? title
                       : `${title.substring(0, 15)}...`}
@@ -120,17 +125,17 @@ function InquiryList({
                 </div>
                 {status === '답변완료' ? (
                   <span
-                    className='cursor-pointer text-sm font-semibold text-gray-500'
+                    className='cursor-pointer text-sm font-normal text-gray-500'
                     onClick={() => navigate('/admin/inquiry/answerDetail')}
                   >
                     상세보기 &gt;
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='flex items-center text-[1rem] font-normal text-gray-500'
+                    className='flex items-center text-[0.875rem] font-normal text-gray-500'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    }
+                    } // 아코디언 열고 닫기
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
@@ -139,23 +144,23 @@ function InquiryList({
               <AccordionContent>
                 <div className='font-inter mt-2 rounded-md p-4 leading-normal shadow-inner'>
                   <div className='mb-1 flex items-center justify-between'>
-                    <p className='text-[1.375rem] font-bold text-gray-800'>
+                    <p className='text-[1.25rem] font-bold text-gray-800'>
                       {title}
                     </p>
                     {status === '답변대기' && (
                       <Button
                         variant='default'
-                        className='h-[2.4375rem] w-[7.5rem] rounded-full bg-main px-4 py-1 text-[1rem] font-extrabold text-white'
+                        className='h-[2.4375rem] w-[7.5rem] rounded-full bg-main px-4 py-1 text-[1rem] font-bold text-white'
                         onClick={() => navigate('/admin/inquiry/answerInput')}
                       >
                         답변하기
                       </Button>
                     )}
                   </div>
-                  <p className='mb-2 text-left text-[1rem] font-medium text-gray-400'>
+                  <p className='mb-2 text-left text-[0.85rem] font-medium text-gray-400'>
                     작성자 · {time} · {category}
                   </p>
-                  <p className='text-left text-[1.125rem] font-medium leading-normal text-gray-700'>
+                  <p className='text-left text-[1rem] font-medium leading-normal text-gray-700'>
                     문의 내용에 대한 상세 설명이 여기에 표시됩니다.
                   </p>
                 </div>
