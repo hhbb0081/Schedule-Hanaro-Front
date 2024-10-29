@@ -2,7 +2,7 @@ import { ChevronRight, Clock4, MapPin } from 'lucide-react';
 import { Badge } from '../ui/badge';
 
 export type BranchCardProps = {
-  id: string;
+  id?: string;
   name: string;
   isOpen?: boolean;
   address: string;
@@ -14,8 +14,6 @@ export type BranchCardProps = {
 };
 
 function BranchCard({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  id,
   name,
   isOpen = true,
   address,
