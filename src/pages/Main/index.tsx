@@ -1,7 +1,7 @@
 import { ReactComponent as HanaAvengers } from '@/assets/images/hanaAvengers.svg';
 import { ReactComponent as MapImg } from '@/assets/images/map.svg';
-import MyCard from './MyCard';
 import { useNavigate } from 'react-router-dom';
+import MyCard from './MyCard';
 import RecommendCard from './RecommendCard';
 
 export function MainPage() {

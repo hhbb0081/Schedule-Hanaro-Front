@@ -1,14 +1,14 @@
+import { SELECT_ITEMS } from '@/constants';
+import { Search } from 'lucide-react';
 import { useState } from 'react';
+import { Input } from '../../ui/input';
 import {
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from '../../ui/select';
-import { Input } from '../../ui/input';
-import { Search } from 'lucide-react';
-import { SELECT_ITEMS } from '@/constants/inquiryCategory'; // 같은 폴더에서 임포트
 
 function FilterAndSearch({
   setActiveCategory,

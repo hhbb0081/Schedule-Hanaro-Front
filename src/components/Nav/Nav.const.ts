@@ -25,7 +25,7 @@ export const NavIcons: NavItem[] = [
   {
     name: '예약내역',
     icon: List,
-    route: 'reservation',
+    route: 'reservation/visit',
   },
   {
     name: '마이페이지',

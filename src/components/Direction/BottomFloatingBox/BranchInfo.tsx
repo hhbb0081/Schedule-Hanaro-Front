@@ -14,7 +14,10 @@ export default function BranchInfo({ type }: FloatingType) {
     (branch) => branch.id === branchId
   );
 
-  const handleDirection = () => {
+  const handleDirection = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
     if (targetBranch) {
       const { position_x: longitude, position_y: latitude } = targetBranch;
       // TODO: startLat, startLon 현 위치로 수정
@@ -26,9 +29,9 @@ export default function BranchInfo({ type }: FloatingType) {
 
   return (
     <>
-      <div className='flex items-center justify-between gap-12'>
+      <div className='flex items-center justify-between'>
         <div className='flex flex-col items-start justify-center gap-1'>
-          <span className='flex whitespace-nowrap text-2xl font-extrabold'>
+          <span className='flex text-2xl font-extrabold'>
             {targetBranch?.name ?? ''}
           </span>
           <div className='flex flex-wrap items-center justify-center gap-2'>
