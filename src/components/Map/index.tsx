@@ -57,25 +57,32 @@ export function Map() {
       return;
     }
 
-    branchList.forEach((bank: BranchInfo) => {
-      const { id, name, position_x: longitude, position_y: latitude } = bank;
-      if (latitude && longitude) {
-        const position = new Tmapv3.LatLng(+latitude, +longitude);
-        const marker = Marker({
-          mapContent: mapInstance,
-          position,
-          theme: 'green',
-          // TODO: 은행 이름으로 변경 필요
-          labelText: name,
-        });
-        marker.on('Click', () => {
-          onClickMarker(id);
-          // Marker 클릭 시 주소 받아옴
-          mapInstance.setCenter(position);
-          mapInstance.setZoom(MAX_ZOOM_LEVEL);
-        });
+    branchList.forEach(
+      ({
+        id,
+        name,
+        position_x: longitude,
+        position_y: latitude,
+        type,
+      }: BranchInfo) => {
+        if (latitude && longitude) {
+          console.log(type);
+          const position = new Tmapv3.LatLng(+latitude, +longitude);
+          const marker = Marker({
+            mapContent: mapInstance,
+            position,
+            theme: type,
+            labelText: name,
+          });
+          marker.on('Click', () => {
+            onClickMarker(id);
+            // Marker 클릭 시 주소 받아옴
+            mapInstance.setCenter(position);
+            mapInstance.setZoom(MAX_ZOOM_LEVEL);
+          });
+        }
       }
-    });
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapInstance]);
 

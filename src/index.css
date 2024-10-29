@@ -151,13 +151,17 @@
   .label-green {
     position: absolute;
     padding: 0.2rem;
-    color: #fbfbfb;
+    color: #000;
+    -webkit-text-stroke: #fbfbfb;
+    font-weight: 700;
     border-radius: 0.5rem;
-    top: -5.5rem;
+    top: -1.2rem;
     left: 50%;
     transform: translate(-50%);
     white-space: pre;
-    background: #008485;
+    /* background: #008485; */
+    height: 1.4rem;
+    @apply text-[0.7rem];
   }
   .label-red {
     position: absolute;
@@ -177,8 +181,8 @@
     padding: 0.25rem;
   }
   .marker-image {
-    width: 5rem;
-    height: 5rem;
+    width: 45px !important;
+    height: 70px !important;
     z-index: 1;
   }
 }

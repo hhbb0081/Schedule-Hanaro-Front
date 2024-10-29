@@ -10,7 +10,7 @@ import { ReactComponent as WaitPeople } from '@/assets/icons/branch/waitpeople.s
 // import branch from '@/assets/images/branch.png';
 
 import { Button } from '@/components/ui/button';
-import { BRANCH_MOCK } from '@/mock/branch_mock';
+import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { DirectionButton } from '@/components/ui/branch/direction';
 import { CloseButton } from '@/components/ui/close';
 import Nav from '@/components/Nav/Nav';
@@ -21,15 +21,21 @@ export function BranchDetailPage() {
   if (!id) {
     return;
   }
-  const Branch = BRANCH_MOCK.find((br) => br.id === id);
+  const branch = BRANCH_MOCK.find((br) => br.id === id);
+  // undefined에러 추후 처리
+  if (!branch) {
+    return;
+  }
+  const { name, address, business_hours, tel } = branch;
+  const state = BRANCH_STATE_MOCK.find((br) => br.id === id);
   const moveToReservation = () => {
-    navigate('/reservation/visit/1');
+    navigate(`/reservation/visit/${id}`);
   };
   return (
     <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white md:max-w-lg'>
       <header className='flex h-14 items-center justify-between border'>
         <ArrowLeft width={21} height={21} className='ml-4' />
-        <div className='text-xl'>{Branch?.name}</div>
+        <div className='text-xl'>{name}</div>
         <CloseButton />
       </header>
       <main>
@@ -43,19 +49,19 @@ export function BranchDetailPage() {
             <li className='mt-4 flex items-center justify-start gap-2'>
               <Addrss width={20} height={23} className='relative' />
               <span className="font-['Inter'] text-base font-semibold text-[#464646]">
-                {Branch?.address}
+                {address}
               </span>
             </li>
             <li className='mt-4 flex items-center justify-start gap-2'>
               <Hours width={20} height={20} />
               <span className="font-['Inter'] text-base font-semibold text-[#464646]">
-                {Branch?.business_hours}
+                {business_hours}
               </span>
             </li>
             <li className='mt-4 flex items-center justify-start gap-2'>
               <Tel width={16} height={20} />
               <span className="font-['Inter'] text-base font-semibold text-[#464646]">
-                {Branch?.tel}
+                {tel}
               </span>
             </li>
           </ul>
@@ -80,7 +86,7 @@ export function BranchDetailPage() {
               </span>
             </div>
             <span className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
-              10명
+              {state?.waiting_number}명
             </span>
             <div className='flex items-center gap-2'>
               <Time width={24} height={24} />
@@ -89,7 +95,7 @@ export function BranchDetailPage() {
               </span>
             </div>
             <span className="text-right font-['Inter'] text-lg font-bold text-[#464646]">
-              20분
+              {state?.waiting_time}분
             </span>
           </div>
         </div>

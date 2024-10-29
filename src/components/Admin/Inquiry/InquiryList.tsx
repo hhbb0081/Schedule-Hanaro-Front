@@ -10,13 +10,14 @@ import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface Inquiry {
+// Inquiry 타입 정의
+type Inquiry = {
   id: string;
   title: string;
   status: '답변대기' | '답변완료';
   category: string;
   time: string;
-}
+};
 
 function InquiryList({
   activeTab,
@@ -76,7 +77,7 @@ function InquiryList({
 
   return (
     <div
-      className='mx-auto max-w-3xl rounded-lg border-gray-200 bg-white p-6 shadow-lg'
+      className='font-inter mx-auto max-w-3xl rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal shadow-lg'
       style={{
         boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.10)',
       }}

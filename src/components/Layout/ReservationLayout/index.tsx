@@ -1,4 +1,5 @@
 import ReservationHeader from '@/components/Header/ReservationHeader';
+import Nav from '@/components/Nav/Nav';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
@@ -73,6 +74,9 @@ export function ReservationLayout() {
         </div>
         <Outlet />
       </div>
+      <footer>
+        <Nav />
+      </footer>
     </>
   );
 }

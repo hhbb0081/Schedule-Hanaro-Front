@@ -8,6 +8,7 @@ import {
 } from '../../ui/select';
 import { Input } from '../../ui/input';
 import { Search } from 'lucide-react';
+import { SELECT_ITEMS } from '@/constants/inquiryCategory'; // 같은 폴더에서 임포트
 
 function FilterAndSearch({
   setActiveCategory,
@@ -32,14 +33,11 @@ function FilterAndSearch({
             <SelectValue placeholder='전체' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='전체'>전체</SelectItem>
-            <SelectItem value='예적금'>예적금</SelectItem>
-            <SelectItem value='펀드'>펀드</SelectItem>
-            <SelectItem value='대출'>대출</SelectItem>
-            <SelectItem value='외환'>외환</SelectItem>
-            <SelectItem value='마이데이터'>마이데이터</SelectItem>
-            <SelectItem value='모바일'>모바일</SelectItem>
-            <SelectItem value='인터넷뱅킹'>인터넷뱅킹</SelectItem>
+            {SELECT_ITEMS.map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
