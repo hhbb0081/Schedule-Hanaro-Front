@@ -7,7 +7,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { RegisterCallData, RegisterInquiryData } from '@/pages';
-import { format } from 'date-fns';
 import { FormErrorMessage } from './FormErrorMessage';
 
 type ConsultationSelectProps<T extends FieldValues> = {
@@ -28,36 +27,37 @@ export function ConsultationSelect<
         name={fieldName}
         control={control}
         rules={{ required: '상담 종류를 선택해주세요.' }}
-        render={({ field: { onChange, value } }) => (
-          <Select
-            onValueChange={onChange}
-            value={value ? String(value) : undefined}
-          >
-            <SelectTrigger className='w-full'>
-              <SelectValue
-                placeholder='상담 종류를 선택하세요'
-                className='text-base'
-              >
-                {value instanceof Date
-                  ? format(value, 'yyyy-MM-dd')
-                  : value || '상담 종류를 선택하세요'}
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              {[
-                '예금',
-                '펀드',
-                '대출',
-                '외환',
-                '마이데이터/모바일/인터넷뱅킹',
-              ].map((type) => (
-                <SelectItem key={type} value={type}>
-                  {type}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
+        render={({ field: { onChange, value } }) => {
+          const selectedValue = typeof value === 'string' ? value : '';
+          return (
+            <Select
+              onValueChange={onChange}
+              value={value ? String(value) : undefined}
+            >
+              <SelectTrigger className='w-full'>
+                <SelectValue
+                  placeholder='상담 종류를 선택하세요'
+                  className='text-base'
+                >
+                  {selectedValue || '상담 종류를 선택하세요'}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {[
+                  '예금',
+                  '펀드',
+                  '대출',
+                  '외환',
+                  '마이데이터/모바일/인터넷뱅킹',
+                ].map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          );
+        }}
       />
       <FormErrorMessage error={error} />
     </div>
