@@ -2,6 +2,7 @@ import '@/index.css';
 import { useState } from 'react';
 import CallList from '@/components/Reservation/CallList';
 import { ChangeToggle } from '@/components/Reservation/ChangeToggle';
+import { callListData } from '@/mock/mockReservationObject';
 
 export function ReservationCallPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,18 +30,15 @@ export function ReservationCallPage() {
           />
 
           <div className='space-y-[1.5rem]'>
-            <CallList
-              consultationType='펀드'
-              consultationDate='2024년 10월 8일'
-              consultationTime='13:00'
-              timerText='15분 후'
-            />
-            <CallList
-              consultationType='예금'
-              consultationDate='2024년 10월 10일'
-              consultationTime='16:00'
-              timerText='2분 후'
-            />
+            {callListData.map((call, index) => (
+              <CallList
+                key={index}
+                consultationType={call.consultationType}
+                consultationDate={call.consultationDate}
+                consultationTime={call.consultationTime}
+                timerText={call.timerText}
+              />
+            ))}
           </div>
         </div>
       </div>
