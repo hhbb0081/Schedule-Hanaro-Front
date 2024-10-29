@@ -14,7 +14,7 @@ import { queryKeys } from '@/queries';
 import { TMap, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
 import { PolyLine } from '@/components/Map/Polyline';
 import { useAtom } from 'jotai';
-import { mapClickAtom } from '@/stores';
+import { Coord, mapClickAtom } from '@/stores';
 
 const { Tmapv3 } = window;
 
@@ -60,7 +60,10 @@ export const useMap = (
     latitude: currentEndCoord?.lat() || 0,
     longitude: currentEndCoord?.lng() || 0,
   };
-  // ======Query================================
+  // ======================================
+
+  const isEnabled = (coords: Coord[]) =>
+    coords.some(({ latitude, longitude }) => !!latitude || !!longitude);
 
   // 현위치 좌표 -> 주소 변환 Query
   const { data: addressData } = useQuery({
@@ -70,6 +73,7 @@ export const useMap = (
     }),
 
     placeholderData: keepPreviousData,
+    enabled: isEnabled([coord]),
   });
   const currentAddress = addressData?.addressInfo.fullAddress || '';
 
@@ -81,6 +85,7 @@ export const useMap = (
     }),
 
     placeholderData: keepPreviousData,
+    enabled: isEnabled([startCoord]),
   });
   const currentStartAddress = startAddressData?.addressInfo.fullAddress || '';
 
@@ -96,6 +101,7 @@ export const useMap = (
     }),
 
     placeholderData: keepPreviousData,
+    enabled: isEnabled([startCoord, endCoord]),
   });
 
   //======================================================

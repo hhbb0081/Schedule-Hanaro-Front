@@ -11,7 +11,7 @@ export function MainPage() {
           <div className='text-[1.5rem] font-bold'>반갑습니다</div>
           <div className='flex items-end'>
             <div className='text-[2.5rem] font-bold'>예나</div>
-            <div className='text-[1.5rem] font-bold'>님!</div>
+            <div className='pb-[0.2rem] text-[1.5rem] font-bold'>님!</div>
           </div>
         </div>
         <div className='absolute bottom-[2.75rem] right-[2rem] z-0'>

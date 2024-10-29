@@ -32,7 +32,7 @@ export function PhoneNumberInput({ register, error }: PhoneInputProps) {
         type='text'
         placeholder='ex) 010-1234-1234'
         value={formattedPhone}
-        {...register('phone', {
+        {...register('tel', {
           required: '전화번호를 입력해주세요.',
           pattern: {
             value: /^\d{3}-\d{3,4}-\d{4}$/,

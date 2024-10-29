@@ -5,7 +5,7 @@ import { useAtomValue } from 'jotai';
 
 export default function BranchInfo() {
   const branchId = useAtomValue(branchIdAtom);
-  const branchIdx = BRANCH_MOCK.findIndex((branch) => branch.id === branchId);
+  const branchIdx = BRANCH_MOCK.findIndex(({ id }) => id === branchId);
   return (
     <>
       <div className='flex text-2xl font-extrabold'>
