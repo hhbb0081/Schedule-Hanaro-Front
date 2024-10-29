@@ -1,11 +1,16 @@
 import { BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { ReservationPage } from '..';
+import { useNavigate } from 'react-router-dom';
 
 export function ReservationVisitPage() {
   const branchState = BRANCH_STATE_MOCK;
+  const navigate = useNavigate();
   if (!branchState) {
     return <ReservationPage />;
   }
+  const moveToDetail = (id: string) => {
+    navigate(`/reservation/visit/${id}`);
+  };
   return (
     <div className='w-full'>
       <div className='mb-3 text-left text-2xl font-bold text-black'>
@@ -13,7 +18,11 @@ export function ReservationVisitPage() {
       </div>
       <hr />
       {branchState.map(({ id, name, waiting_number, waiting_time }) => (
-        <button key={id} className='mt-[1.4375rem] w-full'>
+        <button
+          onClick={() => moveToDetail(id)}
+          key={id}
+          className='mt-[1.4375rem] w-full'
+        >
           <div className='mx-2 flex justify-between'>
             <div className='text-2xl font-bold text-[#464646]'>{name}</div>
             <div className='text-3xl font-bold text-[#008485]/80'>128</div>
