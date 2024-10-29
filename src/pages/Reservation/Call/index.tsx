@@ -18,7 +18,7 @@ export function ReservationCallPage() {
                   ActiveTab === 'visit'
                     ? 'scale-105 font-bold text-[#2b2b2b]'
                     : 'scale-100 text-[#a6a6a6]'
-                } ml-[4rem] mr-auto md:ml-[5.5rem] lg:ml-[5.5rem]`}
+                } ml-[4.6rem] mr-auto md:ml-[6rem] lg:ml-[6rem]`}
                 onClick={() => ChangeTab('visit')}
               >
                 방문 상담
@@ -28,7 +28,7 @@ export function ReservationCallPage() {
                   ActiveTab === 'call'
                     ? 'scale-105 font-bold text-[#2b2b2b]'
                     : 'scale-100 text-[#a6a6a6]'
-                } ml-auto mr-[2.5rem] md:mr-[4rem] lg:mr-[4rem]`}
+                } ml-auto mr-[3.2rem] md:mr-[4.7rem] lg:mr-[4.7rem]`}
                 onClick={() => ChangeTab('call')}
               >
                 전화 / 1:1 상담
