@@ -124,7 +124,7 @@ function InquiryList({
                 </div>
                 {status === '답변완료' ? (
                   <span
-                    className='mr-5 cursor-pointer text-sm font-normal py-4 text-gray-500'
+                    className='mr-5 cursor-pointer py-4 text-sm font-normal text-gray-500'
                     onClick={() => navigate('/admin/inquiry/answerDetail')}
                   >
                     상세보기 &gt;
@@ -134,7 +134,7 @@ function InquiryList({
                     className='mr-5 flex items-center text-[0.875rem] font-normal text-gray-500'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    }
+                    } // 아코디언 열고 닫기
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
