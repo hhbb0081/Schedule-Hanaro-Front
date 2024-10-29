@@ -1,12 +1,31 @@
-function WaitingNumber() {
-  const previousNumber = 951;
-  const currentNumber = 952;
-  const nextNumber = 953;
+import { useState, useEffect } from 'react';
+
+type WaitingNum = {
+  previousNumber: number;
+  currentNumber: number;
+  nextNumber: number;
+};
+
+function WaitingNumber({
+  previousNumber,
+  currentNumber,
+  nextNumber,
+}: WaitingNum) {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    setVisible(false);
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [currentNumber]);
 
   return (
-    <div className='flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
+    <div className='mx-auto flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
       {/* 레이블 */}
-      <div className='mb-0 flex w-full max-w-xl justify-between px-2 md:px-8'>
+      <div className='mb-4 flex w-full max-w-[75%] justify-between px-[0.5rem] md:px-[2rem]'>
         <span className='text-sm text-gray-400 md:text-lg'>이전 대기번호</span>
         <span className='pt-8 text-sm text-gray-400 md:text-lg'>
           현재 대기번호
@@ -15,14 +34,20 @@ function WaitingNumber() {
       </div>
 
       {/* 대기번호 */}
-      <div className='mb-2 flex w-full max-w-xl items-end justify-between px-2 pb-6 md:px-8'>
-        <span className='text-4xl font-bold text-gray-600 md:text-6xl'>
+      <div className='flex w-full max-w-[75%] items-end justify-between px-2 md:px-8'>
+        <span
+          className={`text-4xl font-bold text-gray-600 transition-opacity duration-300 md:text-6xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+        >
           {previousNumber}
         </span>
-        <span className='relative top-16 text-6xl font-extrabold text-black md:text-8xl'>
+        <span
+          className={`relative top-10 text-6xl font-extrabold text-black transition-opacity duration-300 md:text-8xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+        >
           {currentNumber}
         </span>
-        <span className='text-4xl font-bold text-gray-600 md:text-6xl'>
+        <span
+          className={`text-4xl font-bold text-gray-600 transition-opacity duration-300 md:text-6xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+        >
           {nextNumber}
         </span>
       </div>
