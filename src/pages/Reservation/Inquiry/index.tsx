@@ -1,9 +1,13 @@
 import '@/index.css';
+import Header from '@/components/Header/ReservationHeader';
 
 export function ReservationInquiryPage() {
   return (
-    <div className='text-6xl'>
-      <div className='text-center'>1:1 예약내역</div>
-    </div>
+    <>
+      <Header />
+      <div className='text-6xl'>
+        <div className='text-center'></div>
+      </div>
+    </>
   );
 }
