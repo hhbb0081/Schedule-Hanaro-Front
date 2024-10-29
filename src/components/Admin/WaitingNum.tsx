@@ -31,6 +31,7 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
         </span>
         <span className='text-sm text-gray-400 md:text-lg'>다음 대기번호</span>
       </div>
+<<<<<<< HEAD
       <div className='relative w-full max-w-xl'>
         <div
           className='scene relative mx-auto h-[140px] w-[210px]'
@@ -57,6 +58,26 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
             ))}
           </div>
         </div>
+=======
+
+      {/* 대기번호 */}
+      <div className='flex w-full max-w-[75%] items-end justify-between px-2 md:px-8'>
+        <span
+          className={`text-4xl font-bold text-gray-600 transition-opacity duration-300 md:text-6xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {previousNumber}
+        </span>
+        <span
+          className={`relative top-10 text-6xl font-extrabold text-black transition-opacity duration-300 md:text-8xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {currentNumber}
+        </span>
+        <span
+          className={`text-4xl font-bold text-gray-600 transition-opacity duration-300 md:text-6xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {nextNumber}
+        </span>
+>>>>>>> 5dfb285 ([Feat]🥚다음 번호 호출)
       </div>
     </div>
   );
