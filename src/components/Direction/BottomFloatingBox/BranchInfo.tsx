@@ -19,7 +19,7 @@ export default function BranchInfo({ type }: FloatingType) {
       const { position_x: longitude, position_y: latitude } = targetBranch;
       // TODO: startLat, startLon 현 위치로 수정
       navigate(
-        `/direction?startLat=37.5631989425409&startLon=126.98732327063084&endLat=${latitude}&endLon=${longitude}`
+        `/direction?startLat=37.5631989425409&startLon=126.98732327063084&endLat=${latitude}&endLon=${longitude}&branchId=${branchId}`
       );
     }
   };
