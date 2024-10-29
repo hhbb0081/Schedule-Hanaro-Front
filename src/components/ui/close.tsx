@@ -14,7 +14,7 @@ export const CloseButton = ({ className = '' }: Props) => {
   };
   return (
     <button className={`${className}`} onClick={close}>
-      <Close width={18} height={18} className='mr-4' />
+      <Close width={18} height={18} className='mr-2' />
     </button>
   );
 };

@@ -6,7 +6,7 @@ import { useAtomValue } from 'jotai';
 export default function DepartureArrivalAddress() {
   const currentStartAddress = useAtomValue(currentStartAddressAtom);
   const branchId = useAtomValue(branchIdAtom);
-  const branchIdx = BRANCH_MOCK.findIndex((branch) => branch.id === branchId);
+  const branchIdx = BRANCH_MOCK.findIndex(({ id }) => id === branchId);
 
   return (
     <div className='flex flex-col justify-between gap-1 text-left'>

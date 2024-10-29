@@ -22,7 +22,7 @@ export function ConsultationSelect<
   return (
     <div>
       <label className='mb-1 block pb-2 text-left text-lg font-semibold'>
-        상담종류
+        상담 종류
       </label>
       <Controller
         name={fieldName}

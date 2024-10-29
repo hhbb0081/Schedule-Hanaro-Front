@@ -17,6 +17,7 @@ import {
 import { setMyLocation } from '@/utils';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { MyLocation } from '../Map/MyLocation';
+import { useNavigate } from 'react-router-dom';
 
 dayjs.locale('ko');
 
@@ -28,6 +29,8 @@ export function Direction() {
   const setTotalDistance = useSetAtom(totalDistanceAtom);
   const mapClick = useAtomValue(mapClickAtom);
   const mapRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
 
   const {
     mapInstance,
@@ -80,12 +83,16 @@ export function Direction() {
     setCurrentStartAddress,
   ]);
 
+  const closeDirection = () => {
+    navigate('/map');
+  };
+
   return (
     <div className='container'>
       <div className='flex flex-col items-center'>
         {!mapClick && (
           <>
-            <TopSheet></TopSheet>
+            <TopSheet closeDirection={closeDirection}></TopSheet>
             <BottomFloatingBox></BottomFloatingBox>
           </>
         )}

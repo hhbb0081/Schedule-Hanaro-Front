@@ -18,6 +18,7 @@ import {
   ReservationVisitPage,
 } from '@/pages';
 //수정 예정 ..
+import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import CallPage from '@/pages/Admin/Call';
 import InquiryPage from '@/pages/Admin/Inquiry';
 import VisitPage from '@/pages/Admin/Visit';
@@ -102,6 +103,10 @@ export const useRouter = () =>
         {
           path: '/register/inquiry',
           element: <RegisterInquiryFormPage />,
+        },
+        {
+          path: '/register/visit',
+          element: <RegisterVisitFormPage />,
         },
       ],
     },

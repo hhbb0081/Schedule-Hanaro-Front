@@ -26,3 +26,6 @@ dist-ssr
 # TypeScript build info files
 tsconfig.app.tsbuildinfo
 tsconfig.node.tsbuildinfo
+
+#buildInfo
+*.tsbuildinfo

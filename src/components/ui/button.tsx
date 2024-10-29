@@ -15,6 +15,7 @@ const buttonVariants = cva(
         outline: 'border border-[#464646] justify-center items-center ',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        // TODO: ghost Hover시 text 색상 수정 필요
         ghost:
           'border border-input bg-background hover:bg-accent hover:text-accent-foreground border-main/80 border-[1px] text-main',
         link: 'text-primary underline-offset-4 hover:underline',
