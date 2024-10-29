@@ -12,12 +12,10 @@ export function ReservationVisitPage() {
         방문 상담
       </div>
       <hr />
-      {branchState.map((branch) => (
-        <button key={branch.id} className='mt-[1.4375rem] w-full'>
+      {branchState.map(({ id, name, waiting_number, waiting_time }) => (
+        <button key={id} className='mt-[1.4375rem] w-full'>
           <div className='mx-2 flex justify-between'>
-            <div className='text-2xl font-bold text-[#464646]'>
-              {branch.name}
-            </div>
+            <div className='text-2xl font-bold text-[#464646]'>{name}</div>
             <div className='text-3xl font-bold text-[#008485]/80'>128</div>
           </div>
           <div className='mx-2 mt-4 flex justify-between'>
@@ -25,7 +23,7 @@ export function ReservationVisitPage() {
               현재 대기 인원
             </div>
             <div className='text-xl font-bold text-[#464646]'>
-              {branch.waitingNumber}명
+              {waiting_number}명
             </div>
           </div>
           <div className='mx-2 mt-4 flex justify-between'>
@@ -33,7 +31,7 @@ export function ReservationVisitPage() {
               예상 대기 시간
             </div>
             <div className='text-xl font-bold text-[#464646]'>
-              {branch.waitingTime}분
+              {waiting_time}분
             </div>
           </div>
           <hr className='mt-[1.4375rem]' />

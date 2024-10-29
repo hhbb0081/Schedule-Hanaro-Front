@@ -7,10 +7,12 @@ export type BranchInfo = {
   position_x: string;
   position_y: string;
   business_hours: string;
+  type: 'atm' | 'bank' | 'reservedBank';
 };
 
 export type BranchStateInfo = {
   id: string;
   waiting_number: string;
   waiting_time: string;
+  name: string;
 };

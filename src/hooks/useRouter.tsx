@@ -17,6 +17,7 @@ import {
   ReservationVisitPage,
 } from '@/pages';
 //수정 예정 ..
+import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
@@ -96,6 +97,10 @@ export const useRouter = () =>
         {
           path: '/register/inquiry',
           element: <RegisterInquiryFormPage />,
+        },
+        {
+          path: '/register/visit',
+          element: <RegisterVisitFormPage />,
         },
       ],
     },

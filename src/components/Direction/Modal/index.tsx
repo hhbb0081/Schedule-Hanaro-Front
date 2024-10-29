@@ -14,7 +14,7 @@ import { useState } from 'react';
 
 type Props = {
   buttonTitle: string;
-  buttonVariant: 'default' | 'outline';
+  buttonVariant: 'default' | 'ghost';
   buttonSize: string;
   modalTitle: string;
   modalDescription1: string;
@@ -44,7 +44,7 @@ export default function Modalbutton({
           {buttonTitle}
         </Button>
       </DialogTrigger>
-      <DialogContent className='h-[15.0625rem w-[21.375rem]'>
+      <DialogContent className='h-[15.0625rem] w-[21.375rem]'>
         <DialogHeader>
           <div className='flex flex-col gap-3'>
             <DialogTitle className='text-center text-[1.375rem]'>

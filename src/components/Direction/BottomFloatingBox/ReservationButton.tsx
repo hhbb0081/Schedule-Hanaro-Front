@@ -6,7 +6,7 @@ import { useAtomValue } from 'jotai';
 
 export default function ReservationButton() {
   const branchId = useAtomValue(branchIdAtom);
-  const branchIdx = BRANCH_MOCK.findIndex((branch) => branch.id === branchId);
+  const branchIdx = BRANCH_MOCK.findIndex(({ id }) => id === branchId);
   const reserved = 1;
   return (
     <div className='flex gap-3'>
@@ -14,7 +14,7 @@ export default function ReservationButton() {
         <>
           <Modalbutton
             buttonTitle='예약 취소'
-            buttonVariant='outline'
+            buttonVariant='ghost'
             buttonSize='w-1/4'
             modalTitle='영업점 예약 취소'
             modalDescription1='취소 시 30분 후부터 재예약이 가능합니다.'
