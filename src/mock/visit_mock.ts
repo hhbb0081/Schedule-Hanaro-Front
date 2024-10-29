@@ -1,0 +1,51 @@
+export const VISIT_MOCK = [
+  {
+    id: '8124674',
+    waiting_number: '4',
+    waiting_time: '20',
+    name: '하나은행 본점',
+    my_num: '23',
+  },
+  {
+    id: '10619785',
+    waiting_number: '20',
+    waiting_time: '100',
+    name: '하나은행 청량리금융센터지점',
+    my_num: '24',
+  },
+  {
+    id: '2001659062',
+    waiting_number: '12',
+    waiting_time: '60',
+    name: '하나은행 영업부지점',
+    my_num: '33',
+  },
+  {
+    id: '20524344',
+    waiting_number: '16',
+    waiting_time: '80',
+    name: '하나은행 고대지점',
+    my_num: '20',
+  },
+  {
+    id: '10864094',
+    waiting_number: '11',
+    waiting_time: '55',
+    name: '하나은행 서대문역지점',
+    my_num: '19',
+  },
+  {
+    id: '8130313',
+    waiting_number: '15',
+    waiting_time: '75',
+    name: '하나은행 월곡동지점',
+    my_num: '33',
+  },
+  {
+    id: '703706628',
+    waiting_number: '20',
+    waiting_time: '100',
+    name: '하나은행 구로역지점',
+    my_num: '42',
+  },
+];
