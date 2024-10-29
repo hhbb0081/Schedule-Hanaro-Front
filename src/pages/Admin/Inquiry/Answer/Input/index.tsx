@@ -42,7 +42,7 @@ export function AnswerInput() {
         <span className='text-[0.7rem] font-medium text-[#b3b3b3]'>예금</span>
       </div>
 
-      <div className='overflow-wrap break-word mb-[1rem] mt-[1rem] flex flex-wrap text-left text-[0.675rem] font-medium text-[#666666]'>
+      <div className='overflow-wrap break-word mb-[1rem] mt-[1rem] flex flex-wrap whitespace-pre-wrap text-left text-[0.675rem] font-medium text-[#666666]'>
         안녕하세요 좀 궁금한게 있는데 어떤게 궁금한지는 잘 모르겠어서 생각 좀
         해보고 다시 문의드릴게요 감사합니다. 반갑습니다 수고하세요 안녕하세요
         다시 왔어요 궁금한게 생각나기는 했는데 정확히 어떤건지는 잘 모르겠어서

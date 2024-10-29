@@ -15,12 +15,7 @@ export const CustomerInfo = ({
   birthDate,
   inquiryCount,
 }: CustomerInfoProps) => {
-  const customerDetails = [
-    { label: label[0].label, id: label[0].id, value: name },
-    { label: label[1].label, id: label[0].id, value: phoneNumber },
-    { label: label[2].label, id: label[0].id, value: birthDate },
-    { label: label[3].label, id: label[0].id, value: `${inquiryCount}회` },
-  ];
+  const customerDetails = [name, phoneNumber, birthDate, `${inquiryCount}회`];
 
   return (
     <div className='flex h-[18rem] w-[50%] flex-col justify-between rounded-lg bg-white p-[3rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
@@ -34,12 +29,12 @@ export const CustomerInfo = ({
       </div>
       <hr />
 
-      {customerDetails.map(({ label, id, value }) => (
+      {customerDetails.map((value, index) => (
         <div
-          key={id}
+          key={label[index].id}
           className='flex justify-between text-[.8125rem] font-medium text-[#666666]'
         >
-          <span>{label}</span>
+          <span>{label[index].label}</span>
           <span className='font-bold'>{value}</span>
         </div>
       ))}
