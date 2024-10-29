@@ -34,12 +34,12 @@ export const CustomerInfo = ({
       </div>
       <hr />
 
-      {customerDetails.map(({ label, id, value }) => (
+      {customerDetails.map((value, index) => (
         <div
-          key={id}
+          key={label[index].id}
           className='flex justify-between text-[.8125rem] font-medium text-[#666666]'
         >
-          <span>{label}</span>
+          <span>{label[index].label}</span>
           <span className='font-bold'>{value}</span>
         </div>
       ))}
