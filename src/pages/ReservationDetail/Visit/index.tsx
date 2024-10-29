@@ -2,23 +2,19 @@ import { useParams } from 'react-router-dom';
 import { ReactComponent as Check } from '@/assets/icons/reservaion/check.svg';
 import '@/index.css';
 import { DirectionButton } from '@/components/ui/branch/direction';
-import { RefreshButton } from '@/components/ui/refresh';
 import { Button } from '@/components/ui/button';
 import Nav from '@/components/Nav/Nav';
-import { CloseButton } from '@/components/ui/close';
+import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
 export function ReservationDetailVisitPage() {
   const { id } = useParams();
   if (!id) {
     return;
   }
   return (
-    <div className='mx-auto max-w-md overflow-hidden rounded-lg border bg-white md:max-w-lg'>
-      <header className='flex h-14 items-center justify-between'>
-        <RefreshButton className='ml-4 mt-4 h-[2.375rem]' />
-        <CloseButton />
-      </header>
-      <main className='mt-2 flex flex-col items-center justify-center'>
-        <div className='flex justify-center'>
+    <div className='w-[90%] justify-self-center'>
+      <body className='flex flex-col items-center justify-center'>
+        <ReservationDetailHeader />
+        <div className='mt-4 flex justify-center'>
           <Check className='h-auto w-[4.5rem]' />
         </div>
         <div className='mt-4 text-center text-[1.75rem] font-bold text-black'>
@@ -66,7 +62,7 @@ export function ReservationDetailVisitPage() {
         >
           예약 취소
         </Button>
-      </main>
+      </body>
       <footer className='mt-7'>
         <Nav />
       </footer>
