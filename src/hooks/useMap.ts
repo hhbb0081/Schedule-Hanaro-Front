@@ -284,7 +284,7 @@ export const useMap = (
   const makeMarker = useCallback(
     (
       tempCoord: { latitude: number | null; longitude: number | null },
-      theme: 'green' | 'red' | 'current',
+      theme: 'current',
       labelText?: string
     ) => {
       const { latitude, longitude } = tempCoord;

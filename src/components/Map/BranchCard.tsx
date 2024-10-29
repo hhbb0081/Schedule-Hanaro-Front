@@ -14,8 +14,6 @@ export type BranchCardProps = {
 };
 
 function BranchCard({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  id,
   name,
   isOpen = true,
   address,
