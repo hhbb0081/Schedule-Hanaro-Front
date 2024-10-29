@@ -1,5 +1,4 @@
 import MapChips from '@/components/Map/MapChips';
-import { SearchInput } from '@/components/ui/searchInput';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -9,7 +8,8 @@ export function MapLayout() {
   return (
     <>
       <div className='fixed'>
-        <SearchInput />
+        {/* TODO: 검색 화면 구현시 SearchInput 설정 */}
+        {/* <SearchInput /> */}
         <MapChips value={selectedChipIdx} setValue={changeIdx} />
       </div>
       <Outlet />

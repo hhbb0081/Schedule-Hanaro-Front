@@ -3,18 +3,18 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 import { Marker } from '@/components/Map/Marker';
+import { PolyLine } from '@/components/Map/Polyline';
 import {
   DEFAULT_ZOOM_LEVEL,
-  MAX_ZOOM_LEVEL,
-  MIN_ZOOM_LEVEL,
   INITIAL_LATITUDE,
   INITIAL_LONGITUDE,
+  MAX_ZOOM_LEVEL,
+  MIN_ZOOM_LEVEL,
 } from '@/constants';
 import { queryKeys } from '@/queries';
-import { TMap, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
-import { PolyLine } from '@/components/Map/Polyline';
-import { useAtom } from 'jotai';
 import { Coord, mapClickAtom } from '@/stores';
+import { TMap, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
+import { useAtom } from 'jotai';
 
 const { Tmapv3 } = window;
 
@@ -259,7 +259,9 @@ export const useMap = (
     mapInstance.on('Click', () => {
       setMapClick((cur) => !cur);
     });
-  }, [mapInstance, currentCoord, useOnClick, setMapClick]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentCoord, useOnClick, setMapClick]);
 
   // currentCoord 변경
   const updateMarker = useCallback(
