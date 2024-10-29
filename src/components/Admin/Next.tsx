@@ -1,4 +1,5 @@
 import { Button } from '../ui/button';
+import next from '../../assets/icons/next.svg';
 
 type NextProps = {
   onClick: () => void;
@@ -12,22 +13,7 @@ export default function Next({ onClick }: NextProps) {
     >
       <div className='text-[1.75rem] font-extrabold text-white'>다음으로</div>
       <div className='relative flex h-[1.5rem] w-[1.5rem] items-center justify-center'>
-        <svg
-          width='10%'
-          height='10%'
-          viewBox='0 0 11527 7244'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <rect
-            x='1'
-            y='1'
-            width='11526'
-            height='7243'
-            fill='white'
-            stroke='black'
-          />
-        </svg>
+        <img src={next} alt='다음 아이콘' className='h-full w-full' />
       </div>
     </Button>
   );
