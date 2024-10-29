@@ -20,7 +20,7 @@ function ReplyState({
     >
       {/* 이동하는 배경 */}
       <div
-        className={`absolute -left-0.5 -top-1 h-[3.9375rem] w-[15.5rem] rounded-full bg-gray-600 transition-transform duration-300 ease-in-out ${
+        className={`absolute -left-0.5 -top-2 h-[3.9375rem] w-[15.5rem] rounded-full bg-gray-600 transition-transform duration-300 ease-in-out ${
           activeTab === '답변완료' ? 'translate-x-[92%]' : 'translate-x-0'
         }`}
       ></div>
