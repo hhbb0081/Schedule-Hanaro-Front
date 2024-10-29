@@ -16,8 +16,8 @@ import {
 } from '@/stores';
 import { setMyLocation } from '@/utils';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { MyLocation } from '../Map/MyLocation';
 import { useNavigate } from 'react-router-dom';
+import { MyLocation } from '../Map/MyLocation';
 
 dayjs.locale('ko');
 
@@ -89,14 +89,14 @@ export function Direction() {
 
   return (
     <div className='container'>
-      <div className='flex flex-col items-center'>
+      <div className='flex w-full flex-col items-center'>
         {!mapClick && (
           <>
             <TopSheet closeDirection={closeDirection}></TopSheet>
-            <BottomFloatingBox></BottomFloatingBox>
+            <BottomFloatingBox type='dir' />
           </>
         )}
-        <div className='navbar fixed bottom-[20.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
+        <div className='navbar fixed bottom-[20.5rem] z-10 mx-auto flex w-[30rem] justify-end'>
           <MyLocation onClick={onClickMyLocation} />
         </div>
       </div>
