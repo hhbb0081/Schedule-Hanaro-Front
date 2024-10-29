@@ -1,11 +1,9 @@
 import { MapLayout, ReservationLayout } from '@/components/Layout';
-import { MainLayout } from '@/components/Layout/MainLayout';
-import { RegisterLayout } from '@/components/Layout/Register';
 import AdminLayout from '@/components/Layout/AdminLayout';
+import { RegisterLayout } from '@/components/Layout/Register';
 import {
   BranchDetailPage,
   DirectionPage,
-  InquiryDetailPage,
   MainPage,
   MapDetailPage,
   MapPage,
@@ -13,111 +11,106 @@ import {
   RegisterInquiryFormPage,
   RegisterPage,
   ReservationCallPage,
-  ReservationDetailCallPage,
-  ReservationDetailInquiryPage,
   ReservationDetailVisitPage,
   ReservationInquiryPage,
   ReservationPage,
   ReservationVisitPage,
 } from '@/pages';
 //수정 예정 ..
-import { RegisterVisitFormPage } from '@/pages/Register/Visit';
+import { ClientLayout } from '@/components/Layout/ClientLayout';
 import CallPage from '@/pages/Admin/Call';
 import InquiryPage from '@/pages/Admin/Inquiry';
-import VisitPage from '@/pages/Admin/Visit';
-import { createBrowserRouter } from 'react-router-dom';
-import { AnswerInput } from '@/pages/Admin/Inquiry/Answer/Input';
 import { AnswerDetail } from '@/pages/Admin/Inquiry/Answer/Detail';
+import { AnswerInput } from '@/pages/Admin/Inquiry/Answer/Input';
+import VisitPage from '@/pages/Admin/Visit';
+import { RegisterVisitFormPage } from '@/pages/Register/Visit';
+import { createBrowserRouter } from 'react-router-dom';
 
 export const useRouter = () =>
   createBrowserRouter([
     {
       path: '/',
-      element: <MainLayout />,
-      children: [{ index: true, element: <MainPage /> }],
-    },
-    {
-      path: '/map',
-      element: <MapLayout />,
+      element: <ClientLayout />,
       children: [
-        { index: true, element: <MapPage /> },
+        { index: true, element: <MainPage /> },
         {
-          path: '/map/:id',
-          element: <MapDetailPage />,
-        },
-      ],
-    },
-    {
-      path: '/direction',
-      element: <DirectionPage />,
-    },
-    {
-      path: '/branch/:id',
-      element: <BranchDetailPage />,
-    },
-    {
-      path: '/reservation',
-      element: <ReservationLayout />,
-      children: [
-        { index: true, element: <ReservationPage /> },
-        {
-          path: '/reservation/call',
+          path: '/map',
+          element: <MapLayout />,
           children: [
-            { index: true, element: <ReservationCallPage /> },
+            { index: true, element: <MapPage /> },
             {
-              path: '/reservation/call/:id',
+              path: '/map/:id',
+              element: <MapDetailPage />,
+            },
+          ],
+        },
+        {
+          path: '/direction',
+          element: <DirectionPage />,
+        },
+        {
+          path: '/branch/:id',
+          element: <BranchDetailPage />,
+        },
+        {
+          path: '/reservation',
+          element: <ReservationLayout />,
+          children: [
+            { index: true, element: <ReservationPage /> },
+            {
+              path: '/reservation/call',
               children: [
-                { index: true, element: <ReservationDetailCallPage /> },
+                { index: true, element: <ReservationCallPage /> },
+                {
+                  path: '/reservation/call/:id',
+                  children: [{ index: true, element: <ReservationCallPage /> }],
+                },
+              ],
+            },
+            {
+              path: '/reservation/inquiry',
+              children: [
+                { index: true, element: <ReservationInquiryPage /> },
+                {
+                  path: '/reservation/inquiry/:id',
+                  children: [
+                    { index: true, element: <ReservationInquiryPage /> },
+                  ],
+                },
+              ],
+            },
+            {
+              path: '/reservation/visit',
+              children: [
+                { index: true, element: <ReservationVisitPage /> },
+                {
+                  path: '/reservation/visit/:id',
+                  children: [
+                    { index: true, element: <ReservationDetailVisitPage /> },
+                  ],
+                },
               ],
             },
           ],
         },
         {
-          path: '/reservation/inquiry',
+          path: '/register',
+          element: <RegisterLayout />,
           children: [
-            { index: true, element: <ReservationInquiryPage /> },
+            { index: true, element: <RegisterPage /> },
             {
-              path: '/reservation/inquiry/:id',
-              children: [
-                { index: true, element: <ReservationDetailInquiryPage /> },
-              ],
+              path: '/register/call',
+              element: <RegisterCallFormPage />,
             },
             {
-              path: '/reservation/inquiry/:id/detail',
-              children: [{ index: true, element: <InquiryDetailPage /> }],
+              path: '/register/inquiry',
+              element: <RegisterInquiryFormPage />,
+            },
+            {
+              path: '/register/visit',
+              element: <RegisterVisitFormPage />,
             },
           ],
-        },
-        {
-          path: '/reservation/visit',
-          children: [
-            { index: true, element: <ReservationVisitPage /> },
-            {
-              path: '/reservation/visit/:id',
-              children: [
-                { index: true, element: <ReservationDetailVisitPage /> },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      path: '/register',
-      element: <RegisterLayout />,
-      children: [
-        { index: true, element: <RegisterPage /> },
-        {
-          path: '/register/call',
-          element: <RegisterCallFormPage />,
-        },
-        {
-          path: '/register/inquiry',
-          element: <RegisterInquiryFormPage />,
-        },
-        {
-          path: '/register/visit',
-          element: <RegisterVisitFormPage />,
         },
       ],
     },
