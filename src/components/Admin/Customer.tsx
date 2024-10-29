@@ -1,3 +1,5 @@
+import { label } from '@/constants/customer';
+
 type CustomerInfoProps = {
   customerCount: number;
   name: string;
@@ -14,10 +16,10 @@ export const CustomerInfo = ({
   inquiryCount,
 }: CustomerInfoProps) => {
   const customerDetails = [
-    { label: '이름', value: name },
-    { label: '전화번호', value: phoneNumber },
-    { label: '생년월일', value: birthDate },
-    { label: '전화 문의 이력', value: `${inquiryCount}회` },
+    { label: label[0].label, id: label[0].id, value: name },
+    { label: label[1].label, id: label[0].id, value: phoneNumber },
+    { label: label[2].label, id: label[0].id, value: birthDate },
+    { label: label[3].label, id: label[0].id, value: `${inquiryCount}회` },
   ];
 
   return (
@@ -31,9 +33,10 @@ export const CustomerInfo = ({
         </span>
       </div>
       <hr />
-      {customerDetails.map(({ label, value }, index) => (
+
+      {customerDetails.map(({ label, id, value }) => (
         <div
-          key={index}
+          key={id}
           className='flex justify-between text-[.8125rem] font-medium text-[#666666]'
         >
           <span>{label}</span>
