@@ -1,13 +1,12 @@
 import React from 'react';
+import { ActiveTab } from '@/types/inquiry';
 
 function ReplyState({
   activeTab,
   setActiveTab,
 }: {
-  activeTab: '답변대기' | '답변완료' | '전체';
-  setActiveTab: React.Dispatch<
-    React.SetStateAction<'답변대기' | '답변완료' | '전체'>
-  >;
+  activeTab: ActiveTab;
+  setActiveTab: React.Dispatch<React.SetStateAction<ActiveTab>>;
 }) {
   return (
     <div
