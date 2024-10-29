@@ -18,7 +18,6 @@ import {
   ReservationVisitPage,
 } from '@/pages';
 //수정 예정 ..
-import AdminLayout from '@/components/Layout/AdminLayout';
 import CallPage from '@/pages/Admin/Call';
 import InquiryPage from '@/pages/Admin/Inquiry';
 import VisitPage from '@/pages/Admin/Visit';
