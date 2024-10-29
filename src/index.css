@@ -34,7 +34,7 @@
   }
 
   .button {
-    @apply bg-main text-white hover:bg-main;
+    @apply bg-main/80 text-white hover:bg-main/90;
   }
 
   .input {
