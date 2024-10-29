@@ -35,7 +35,6 @@ import { List, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import BranchCard from '../Map/BranchCard';
 import { Badge } from '../ui/badge';
-import { SearchInput } from '../ui/searchInput';
 import {
   Select,
   SelectContent,
@@ -44,7 +43,12 @@ import {
   SelectValue,
 } from '../ui/select';
 
-export function BottomSheet({ currentAddress }: { currentAddress: string }) {
+type Props = {
+  currentAddress: string;
+  focusSelectedBranch: (lat: number, lon: number) => void;
+};
+
+export function BottomSheet({ currentAddress, focusSelectedBranch }: Props) {
   const [selectedChipIdx, setSelectedChipIdx] = useState(0); // 영업점 | ATM chip
 
   const [open, setOpen] = useState(false);
@@ -52,9 +56,16 @@ export function BottomSheet({ currentAddress }: { currentAddress: string }) {
 
   const setCurrentBranchId = useSetAtom(branchIdAtom);
 
-  const handleDetailPage = (id: string) => {
+  const handleDetailPage = (branchId: string) => {
     toggleOpen();
-    setTimeout(() => setCurrentBranchId(id), 200);
+    const targetBranch = BRANCH_MOCK.find(
+      ({ id }) => id === branchId
+    ) as BranchInfo;
+    const { position_x: lat, position_y: lon } = targetBranch;
+    setTimeout(() => {
+      setCurrentBranchId(branchId);
+      if (lat && lon) focusSelectedBranch(+lon, +lat);
+    }, 200);
   };
 
   const findWaitingInfo = (branchId: string) => {
@@ -67,11 +78,12 @@ export function BottomSheet({ currentAddress }: { currentAddress: string }) {
 
   return (
     <>
-      <SearchInput />
+      {/* TODO: 검색 화면 구현시 SearchInput 설정 */}
+      {/* <SearchInput /> */}
       <div className='navbar fixed bottom-24 left-1/2 z-10 -translate-x-1/2'>
         <Drawer open={open} onOpenChange={setOpen} snapPoints={[0.4, 1]}>
           <DrawerTrigger asChild>
-            <Button className='w-1/2 rounded-full bg-white shadow-[2px_4px_4px_0px_rgba(0,0,0,0.15)] hover:bg-[#F9F9F9]'>
+            <Button className='w-fit rounded-full bg-white px-5 py-2 shadow-[2px_4px_4px_0px_rgba(0,0,0,0.15)] hover:bg-[#F9F9F9]'>
               <List width='1.0625rem' height='1.0625rem' color='#666666' />
               <span className='text-[0.875rem] font-bold text-lightGrey'>
                 지점목록
