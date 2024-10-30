@@ -20,7 +20,7 @@ export type RegisterCallData = {
   reservationTime: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, react-refresh/only-export-components
 export const showToast = (toast: any, description: string) => {
   toast({
     description,
