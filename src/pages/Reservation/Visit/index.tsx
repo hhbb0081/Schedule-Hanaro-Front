@@ -12,9 +12,9 @@ export function ReservationVisitPage() {
     navigate(`/reservation/visit/${id}`);
   };
   return (
-    <div className='w-full'>
+    <div className='h-full w-full overflow-auto'>
       <hr />
-      <div>
+      <div className=''>
         {visitNum.map(({ id, my_num, name, waiting_number, waiting_time }) => (
           <div key={id}>
             <button
