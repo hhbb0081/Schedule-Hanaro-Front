@@ -1,4 +1,4 @@
-import { label } from '@/constants/customer';
+import { LABEL } from '@/constants';
 
 type CustomerInfoProps = {
   customerCount: number;
@@ -15,7 +15,12 @@ export const CustomerInfo = ({
   birthDate,
   inquiryCount,
 }: CustomerInfoProps) => {
-  const customerDetails = [name, phoneNumber, birthDate, `${inquiryCount}회`];
+  const customerDetails = [
+    { label: LABEL[0].label, id: LABEL[0].id, value: name },
+    { label: LABEL[1].label, id: LABEL[0].id, value: phoneNumber },
+    { label: LABEL[2].label, id: LABEL[0].id, value: birthDate },
+    { label: LABEL[3].label, id: LABEL[0].id, value: `${inquiryCount}회` },
+  ];
 
   return (
     <div className='flex h-[18rem] w-[50%] flex-col justify-between rounded-lg bg-white p-[3rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>

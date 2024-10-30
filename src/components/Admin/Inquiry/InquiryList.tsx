@@ -10,6 +10,7 @@ import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActiveTab } from '@/types/inquiry';
+import rightArrow from '../../../../public/svg/right_arrow.svg';
 
 // Inquiry 타입 정의
 type Inquiry = {
@@ -83,7 +84,7 @@ function InquiryList({
         boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.10)',
       }}
     >
-      <div className='font-inter mb-4 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
+      <div className='font-inter mb-0 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
         <h2 className='text-[1.125rem] font-bold text-gray-800'>
           총{' '}
           <span className='text-[1.4rem] font-extrabold text-teal-600'>
@@ -105,7 +106,6 @@ function InquiryList({
                   </span>
                   <span
                     className='pl-5 pr-2 text-[1.25rem] font-bold text-gray-800'
-                    // 클릭 이벤트를 제거하고 커서 스타일을 변경
                     style={{ cursor: 'default' }}
                   >
                     {title.length <= 15
@@ -125,14 +125,19 @@ function InquiryList({
                 </div>
                 {status === '답변완료' ? (
                   <span
-                    className='cursor-pointer text-sm font-normal text-gray-500'
+                    className='mr-6 flex cursor-pointer items-center pb-[1.05rem] pt-[1rem] text-sm font-normal text-black'
                     onClick={() => navigate('/admin/inquiry/answerDetail')}
                   >
-                    상세보기 &gt;
+                    상세보기
+                    <img
+                      src={rightArrow}
+                      alt='Go'
+                      className='ml-0 inline-block'
+                    />
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='flex items-center text-[0.875rem] font-normal text-gray-500'
+                    className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
                     } // 아코디언 열고 닫기
@@ -141,9 +146,9 @@ function InquiryList({
                   </AccordionTrigger>
                 )}
               </div>
-              <AccordionContent>
-                <div className='font-inter mt-2 rounded-md p-4 leading-normal shadow-inner'>
-                  <div className='mb-1 flex items-center justify-between'>
+              <AccordionContent className='-mb-4 mt-0'>
+                <div className='font-inter rounded-md border-t bg-gray-50 p-4 leading-normal'>
+                  <div className='mb-2 flex items-center justify-between'>
                     <p className='text-[1.25rem] font-bold text-gray-800'>
                       {title}
                     </p>
