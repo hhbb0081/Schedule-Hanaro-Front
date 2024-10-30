@@ -36,11 +36,11 @@ function InquiryList({
 
   const filteredInquiries = formattedInquiries.filter(
     ({ status, category }) =>
-      status === activeTab &&
+      (activeTab === '전체' || status === activeTab) &&
       (activeCategory === '전체' || category === activeCategory)
   );
 
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [expandedItem, setExpandedItem] = useState<number | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -62,20 +62,15 @@ function InquiryList({
             <AccordionItem key={id} value={id}>
               <div className='font-inter flex items-center justify-between py-4 font-normal leading-normal'>
                 <div className='flex items-center space-x-2'>
-                  <span className='pl-5 text-[1.25rem] font-bold text-gray-700'>
-                    {index + 1}
-                  </span>
-                  <span
-                    className='pl-5 pr-2 text-[1.25rem] font-bold text-gray-800'
-                    style={{ cursor: 'default' }}
-                  >
+                  <span className='font-medium text-gray-700'>{index + 1}</span>
+                  <span className='font-semibold text-gray-800'>
                     {title.length <= 15
                       ? title
                       : `${title.substring(0, 15)}...`}
                   </span>
                   <Badge
                     variant='lightSolid'
-                    className={`rounded-full px-2 py-0.5 text-[0.875rem] font-normal ${
+                    className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
                       status === '답변대기'
                         ? 'bg-teal-50 text-teal-600'
                         : 'bg-gray-200 text-gray-600'
@@ -89,35 +84,30 @@ function InquiryList({
                     className='mr-6 flex cursor-pointer items-center pb-[1.05rem] pt-[1rem] text-sm font-normal text-black'
                     onClick={() => navigate(`/admin/inquiry/${id}`)}
                   >
-                    상세보기
-                    <img
-                      src={rightArrow}
-                      alt='Go'
-                      className='ml-0 inline-block'
-                    />
+                    상세보기 &gt;
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
+                    className='flex items-center text-sm text-gray-500'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    } // 아코디언 열고 닫기
+                    }
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
                 )}
               </div>
-              <AccordionContent className='-mb-4 mt-0'>
-                <div className='font-inter rounded-md border-t bg-gray-50 p-4 leading-normal'>
-                  <div className='mb-2 flex items-center justify-between'>
-                    <p className='text-[1.25rem] font-bold text-gray-800'>
-                      {title}
-                    </p>
+              <AccordionContent>
+                <div className='mt-2 rounded-md p-4 shadow-inner'>
+                  <div className='mb-1 flex items-center justify-between'>
+                    <p className='font-semibold text-gray-800'>{title}</p>
                     {status === '답변대기' && (
                       <Button
                         variant='default'
-                        className='h-[2.4375rem] w-[7.5rem] rounded-full bg-main px-4 py-1 text-[1rem] font-bold text-white'
-                        onClick={() => navigate('/admin/inquiry/answerInput')}
+                        className='h-[2.4375rem] w-[7.5rem] rounded-full bg-main px-4 py-1 text-sm text-white'
+                        onClick={() =>
+                          navigate('/admin/inquiry/register/' + id)
+                        }
                       >
                         답변하기
                       </Button>
