@@ -9,6 +9,7 @@ function CallPage() {
     952, 953, 954, 955, 956, 957, 958, 951,
   ]);
   const [angle, setAngle] = useState(0);
+  const [displayNum, setDisplayNum] = useState([7, 0, 1]);
   const rotateAngle = 360 / 8;
 
   const handleNext = () => {
@@ -21,10 +22,13 @@ function CallPage() {
       return prevNumbers.map((num) => num + 1);
     });
     setAngle((prev) => prev + rotateAngle);
+    setDisplayNum((prevNumbers) =>
+      prevNumbers.map((num) => (num + 1 > 7 ? 0 : num + 1))
+    );
   };
   return (
     <>
-      <WaitingNumber numbers={numbers} angle={angle} />
+      <WaitingNumber numbers={numbers} angle={angle} displayNum={displayNum} />
       <div className='flex items-start justify-center'>
         <CustomerInfo
           customerCount={952}

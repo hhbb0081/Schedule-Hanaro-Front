@@ -9,6 +9,8 @@ function VisitPage() {
     952, 953, 954, 955, 956, 957, 958, 951,
   ]);
   const [angle, setAngle] = useState(0);
+  const [displayNum, setDisplayNum] = useState([7, 0, 1]);
+
   const rotateAngle = 360 / 8;
 
   const handleNext = () => {
@@ -21,13 +23,21 @@ function VisitPage() {
       return prevNumbers.map((num) => num + 1);
     });
     setAngle((prev) => prev + rotateAngle);
+
+    setDisplayNum((prevNumbers) =>
+      prevNumbers.map((num) => (num + 1 > 7 ? 0 : num + 1))
+    );
   };
 
   return (
     <div className='relative mx-auto w-full max-w-screen-lg'>
       <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
       <div className='my-[2.5rem]'>
-        <WaitingNumber numbers={numbers} angle={angle} />
+        <WaitingNumber
+          numbers={numbers}
+          angle={angle}
+          displayNum={displayNum}
+        />
       </div>
       <div className='absolute bottom-[-6.25rem] left-[15%] right-[15%]'>
         <Next onClick={handleNext} />
