@@ -68,6 +68,9 @@ export function AnswerInput() {
           {inquiryData.category}
         </span>
       </div>
+      <div className='overflow-wrap break-word mb-[1rem] mt-[1rem] flex flex-wrap whitespace-pre-wrap text-left text-[1rem] font-medium text-[#666666]'>
+        {inquiryData.content}
+      </div>
       <hr />
       <div className='mb-[0.5rem] mt-[0.75rem] text-left text-[0.9rem] font-bold text-[#464646]'>
         답변 입력

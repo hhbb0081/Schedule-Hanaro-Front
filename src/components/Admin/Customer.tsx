@@ -1,4 +1,4 @@
-import { LABEL } from '@/constants';
+import { LABEL } from '@/constants/admin';
 
 type CustomerInfoProps = {
   customerCount: number;
@@ -34,12 +34,12 @@ export const CustomerInfo = ({
       </div>
       <hr />
 
-      {customerDetails.map((value, index) => (
+      {customerDetails.map(({ label, id, value }) => (
         <div
-          key={label[index].id}
+          key={id}
           className='flex justify-between text-[.8125rem] font-medium text-[#666666]'
         >
-          <span>{label[index].label}</span>
+          <span>{label}</span>
           <span className='font-bold'>{value}</span>
         </div>
       ))}
