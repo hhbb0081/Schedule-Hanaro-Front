@@ -4,6 +4,7 @@ import {
   mockReservationInquiryDetails,
 } from '@/mock/mockReservationsInquiry';
 import Header from '@/components/Header/Header';
+import Nav from '@/components/Nav/Nav';
 
 export function InquiryDetailPage() {
   const { id: inquiryId } = useParams<{ id: string }>();
@@ -69,6 +70,7 @@ export function InquiryDetailPage() {
             <div className='text-lg text-[#464646]'>{content2}</div>
           </div>
         </div>
+        <Nav />
       </div>
     </>
   );

@@ -5,11 +5,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 export function ReservationLayout() {
   const location = useLocation();
-  const noLayoutPaths = [
-    '/reservation/visit/',
-    '/reservation/call/',
-    '/reservation/inquiry/,',
-  ];
 
   const noLayoutPaths = [
     '/reservation/visit/',
