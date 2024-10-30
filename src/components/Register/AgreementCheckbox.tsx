@@ -27,7 +27,7 @@ export function AgreementCheckbox({
   };
 
   return (
-    <div className='flex items-center space-x-2 pb-4'>
+    <div className='flex items-center space-x-2 pb-2'>
       <div onClick={handleOpenModal}>
         <Check
           className={`h-5 w-5 ${isChecked1 && isChecked2 ? 'text-black' : 'text-gray-400'}`}
