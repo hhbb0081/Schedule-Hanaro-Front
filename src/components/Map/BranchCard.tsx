@@ -10,7 +10,7 @@ export type BranchCardProps = {
   openTime?: string;
   waitingNumber: string;
   waitingTime: string;
-  type?: 'bank' | 'ATM';
+  type?: 'bank' | 'atm' | 'reservedBank';
 };
 
 function BranchCard({

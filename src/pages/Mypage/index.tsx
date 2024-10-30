@@ -1,20 +1,8 @@
+import { MYPAGECONSTANTS } from '@/constants/mypage';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Mypage() {
-  const MYPAGECONSTANTS = {
-    edit: { name: '프로필 수정', path: '/mypage/edit' },
-    status: { name: '예약내역', path: '/reservation/visit' },
-    menu: [
-      { name: '고객센터', path: '/customerservice' },
-      { name: '이용약관', path: '/policy' },
-    ],
-    bottomMenu: [
-      { name: '로그아웃', color: '#191919', path: '/logout' },
-      { name: '회원탈퇴', color: '#D01A1A', path: '/secession' },
-    ],
-  };
-
   const name = '김예나';
   const userId = 'isad';
   const phoneNumber = '010-1234-1234';
@@ -44,7 +32,7 @@ function Mypage() {
     <div className='m-auto flex h-[100dvh] flex-col'>
       <div className='relative'>
         <div className='mt-[-1px] h-[15rem] rounded-b-lg bg-[#469387]' />
-        <div className='absolute left-[5%] top-[5.5rem] w-[90%] md:top-[1rem]'>
+        <div className='absolute left-[5%] top-[5.5rem] w-[90%]'>
           <div className='flex items-center'>
             {/* <img
               src={room}

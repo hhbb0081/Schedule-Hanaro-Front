@@ -1,16 +1,34 @@
 import { ReactComponent as Check } from '@/assets/icons/reservation/check.svg';
-import '@/index.css';
+import Modalbutton from '@/components/Direction/Modal';
 import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
 import Nav from '@/components/Nav/Nav';
 import { DirectionButton } from '@/components/ui/direction';
+import { useToast } from '@/hooks/use-toast';
 import '@/index.css';
 import { useParams } from 'react-router-dom';
-import Modalbutton from '@/components/Direction/Modal';
 export function ReservationDetailVisitPage() {
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const { id } = useParams();
   if (!id) {
     return;
   }
+
+  const branch = BRANCH_MOCK.find((br) => br.id === id);
+
+  const handleDirection = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    if (branch) {
+      const { position_x: longitude, position_y: latitude } = branch;
+      // TODO: startLat, startLon 현 위치로 수정
+      navigate(
+        `/direction?startLat=37.5631989425409&startLon=126.98732327063084&endLat=${latitude}&endLon=${longitude}&branchId=${id}`
+      );
+      showToast(toast, '길 안내를 시작합니다.');
+    }
+  };
   return (
     <div className='h-screen w-[90%] justify-self-center'>
       <div className='flex h-full flex-col'>

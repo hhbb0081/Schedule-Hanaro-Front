@@ -5,12 +5,12 @@ import { cn } from '@/lib/utils';
 import { Button } from './button';
 
 const DirectionButtonVariants = cva(
-  'flex items-center gap-2 border text-center w-fit h-fit',
+  'flex items-center gap-2 text-center w-fit h-fit hover:bg-[#F8F8F8]',
   {
     variants: {
       variant: {
         default:
-          'border-black bg-white px-[0.8125rem] py-[0.4375rem] rounded-[0.625rem] ',
+          'border-[#5b5b5b] bg-white border-2 px-[0.8125rem] py-[0.4375rem] rounded-[0.625rem] ',
         square:
           'bg-[#454545] rounded-[0.9375rem] flex-col gap-1 text-white px-[0.625rem] py-[0.625rem] text-white h-fit hover:bg-[#545454]',
         destructive:
@@ -49,7 +49,7 @@ export const DirectionButton = ({
         {variant === 'square' ? (
           <Direction className='h-full w-full' fill='#ffffff' />
         ) : (
-          <Direction className='h-full w-full' fill='#000000' />
+          <Direction className='h-full w-full' fill='#5b5b5b' />
         )}
       </div>
       <span

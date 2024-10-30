@@ -1,15 +1,15 @@
 import { Button } from '@/components/ui/button';
 
-import { useState, useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useToast } from '@/hooks/use-toast';
-import { Toaster } from '@/components/ui/toaster';
-import { PhoneNumberInput } from '@/components/Register/PhoneNumberInput';
+import { AgreementCheckbox } from '@/components/Register/AgreementCheckbox';
 import { ConsultationSelect } from '@/components/Register/ConsultationSelect';
 import { DateAndTimePicker } from '@/components/Register/DateAndTimePicker';
-import { AgreementCheckbox } from '@/components/Register/AgreementCheckbox';
+import { PhoneNumberInput } from '@/components/Register/PhoneNumberInput';
 import { ReusableInput } from '@/components/Register/ReusableInput';
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/hooks/use-toast';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export type RegisterCallData = {
   name: string;
@@ -20,7 +20,7 @@ export type RegisterCallData = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const showToast = (toast: any, description: string) => {
+export const showToast = (toast: any, description: string) => {
   toast({
     description,
     duration: 3000,

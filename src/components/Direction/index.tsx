@@ -7,6 +7,7 @@ import BottomFloatingBox from '@/components/Direction/BottomFloatingBox';
 import TopSheet from '@/components/Direction/TopSheet';
 import { useMap } from '@/hooks';
 import {
+  branchIdAtom,
   currentStartAddressAtom,
   endAtom,
   mapClickAtom,
@@ -18,6 +19,7 @@ import { setMyLocation } from '@/utils';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { MyLocation } from '../Map/MyLocation';
+import { Toaster } from '../ui/toaster';
 
 dayjs.locale('ko');
 
@@ -83,8 +85,13 @@ export function Direction() {
     setCurrentStartAddress,
   ]);
 
+  // const { toast } = useToast();
+  const setBranchId = useSetAtom(branchIdAtom);
+
   const closeDirection = () => {
+    // showToast(toast, '길 안내를 종료합니다.');
     navigate('/map');
+    setBranchId(null);
   };
 
   return (
@@ -102,6 +109,7 @@ export function Direction() {
       </div>
 
       <div className='map' id='map' ref={mapRef} />
+      <Toaster />
     </div>
   );
 }

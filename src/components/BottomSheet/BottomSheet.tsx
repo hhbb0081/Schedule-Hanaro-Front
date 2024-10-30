@@ -154,30 +154,39 @@ export function BottomSheet({ currentAddress, focusSelectedBranch }: Props) {
               </div>
               {/* </DrawerHeader> */}
               <ul className='h-full space-y-6 overflow-y-auto p-1 scrollbar-hide'>
-                {BRANCH_MOCK
-                  // ?.filter(({ type }) => {
-                  //   const stype = selectedChipIdx === 0 ? 'bank' : 'ATM';
-                  //   return type === stype;
-                  // })
-                  ?.map(({ id, name, address, business_hours }: BranchInfo) => {
-                    // TODO: waiting_number -> distance로 수정
-                    const { waiting_number, waiting_time } =
-                      findWaitingInfo(id);
-                    return (
-                      <li key={id} onClick={() => handleDetailPage(id)}>
-                        <BranchCard
-                          id={id}
-                          name={name}
-                          isOpen={true}
-                          address={address}
-                          distance={waiting_number}
-                          openTime={business_hours}
-                          waitingNumber={waiting_number}
-                          waitingTime={waiting_time}
-                        />
-                      </li>
-                    );
-                  })}
+                {BRANCH_MOCK?.filter(({ type }) => {
+                  const stype = selectedChipIdx === 0 ? 'bank' : 'atm';
+                  return type === stype;
+                })
+                  ?.map(
+                    ({
+                      id,
+                      name,
+                      address,
+                      business_hours,
+                      type,
+                    }: BranchInfo) => {
+                      // TODO: waiting_number -> distance로 수정
+                      const { waiting_number, waiting_time } =
+                        findWaitingInfo(id);
+                      return (
+                        <li key={id} onClick={() => handleDetailPage(id)}>
+                          <BranchCard
+                            id={id}
+                            name={name}
+                            isOpen={true}
+                            address={address}
+                            distance={waiting_number}
+                            openTime={business_hours}
+                            waitingNumber={waiting_number}
+                            waitingTime={waiting_time}
+                            type={type}
+                          />
+                        </li>
+                      );
+                    }
+                  )
+                  ?.sort((a, b) => +a.props.distance - +b.props.distance)}
               </ul>
             </div>
           </DrawerContent>
