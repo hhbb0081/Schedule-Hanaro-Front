@@ -13,8 +13,8 @@ export function DirectionPage() {
 
   const [searchParams] = useSearchParams();
 
-  const startLat = searchParams.get('startLat') || '37.5631989425409';
-  const startLon = searchParams.get('startLon') || '126.98732327063084';
+  const startLat = searchParams.get('startLat') || '37.54463002278825';
+  const startLon = searchParams.get('startLon') || '127.05656718408437';
 
   const endLat = searchParams.get('endLat') || BRANCH_MOCK[1].position_y;
   const endLon = searchParams.get('endLon') || BRANCH_MOCK[1].position_x;
