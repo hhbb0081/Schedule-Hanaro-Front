@@ -16,7 +16,7 @@ export function ReservationPage() {
   };
   return (
     <>
-      <div className='mx-auto flex h-screen w-[90%] flex-col justify-between pb-[7rem] pt-[5rem]'>
+      <div className='mx-auto flex h-screen w-[90%] flex-col justify-between pb-[7rem] pt-[2rem]'>
         <div className='space-y-4'>
           <div className='flex flex-col items-start justify-center text-3xl font-bold'>
             <span>상담 유형을</span>
@@ -34,9 +34,11 @@ export function ReservationPage() {
             ))}
           </ul>
         </div>
-        <div>
-          <Button onClick={handlePage}>상담 유형 선택하기</Button>
-        </div>
+      </div>
+      <div className='customWidth fixed bottom-[6.5rem]'>
+        <Button className='w-[90%]' onClick={handlePage}>
+          상담 유형 선택하기
+        </Button>
       </div>
       <Nav />
     </>
