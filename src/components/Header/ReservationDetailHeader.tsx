@@ -3,10 +3,10 @@ import { RefreshButton } from '../ui/refresh';
 
 function ReservationDetailHeader() {
   return (
-    <header className='mt-6 flex w-full items-center justify-between'>
+    <div className='flex w-full items-center justify-between pt-6'>
       <RefreshButton className='h-[2.375rem]' />
-      <CloseButton />
-    </header>
+      <CloseButton location='reservation/visit' />
+    </div>
   );
 }
 
