@@ -10,6 +10,8 @@ import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InquiryDetail } from '@/types/inquiryDetail';
+import { ActiveTab } from '@/types/inquiry';
+import rightArrow from '../../../assets/icons/right_arrow.svg';
 
 function InquiryList({
   activeTab,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import './YourStyles.css';
+import './YourStyles.css';
 
 type WaitingNumberProps = {
   numbers: number[];
@@ -25,41 +25,12 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
   return (
     <div className='mt-10 flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
       <div className='mb-[-5rem] flex w-full max-w-xl justify-between px-2 md:px-8'>
-    <div className='mt-10 flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
-      <div className='mb-[-5rem] flex w-full max-w-xl justify-between px-2 md:px-8'>
         <span className='text-sm text-gray-400 md:text-lg'>이전 대기번호</span>
-        <span className='pt-2 text-sm text-gray-400 md:text-lg'>
         <span className='pt-2 text-sm text-gray-400 md:text-lg'>
           현재 대기번호
         </span>
         <span className='text-sm text-gray-400 md:text-lg'>다음 대기번호</span>
       </div>
-      <div className='relative w-full max-w-xl'>
-        <div
-          className='scene relative mx-auto h-[140px] w-[210px]'
-          style={{
-            perspective: '1200px',
-          }}
-        >
-          <div
-            className='carousel transform-style-preserve-3d absolute h-full w-full transition-transform duration-500'
-            style={{
-              transform: `rotateY(${-angle}deg)`,
-            }}
-          >
-            {numbers.map((number, idx) => (
-              <div
-                key={idx}
-                className='carousel-card absolute flex h-[120px] w-[190px] flex-col items-center justify-center bg-white opacity-90 transition-all duration-500'
-              >
-                <span className='text-sm text-gray-400 md:text-lg'></span>
-                <span className='text-4xl font-bold text-gray-600 md:text-6xl'>
-                  {number}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
       <div className='relative w-full max-w-xl'>
         <div
           className='scene relative mx-auto h-[140px] w-[210px]'

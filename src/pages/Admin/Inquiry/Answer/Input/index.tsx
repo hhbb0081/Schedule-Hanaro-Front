@@ -67,25 +67,7 @@ export function AnswerInput() {
         <span className='text-[0.9rem] font-medium text-[#b3b3b3]'>
           {inquiryData.category}
         </span>
-      <div className='mt-[1rem] flex items-center'>
-        <span className='text-[0.9rem] font-medium text-[#b3b3b3]'>
-          {inquiryData.name}
-        </span>
-        <span className='mx-1 text-[0.65rem] text-[#b3b3b3]'>
-          <img src={dot} alt='점' className='h-full w-full' />
-        </span>
-        <span className='text-[0.9rem] font-medium text-[#b3b3b3]'>
-          {inquiryData.time}분 전
-        </span>
-        <span className='mx-1 text-[0.65rem] text-[#b3b3b3]'>
-          <img src={dot} alt='점' className='h-full w-full' />
-        </span>
-        <span className='text-[0.9rem] font-medium text-[#b3b3b3]'>
-          {inquiryData.category}
-        </span>
       </div>
-      <div className='overflow-wrap break-word mb-[1rem] mt-[1rem] flex flex-wrap whitespace-pre-wrap text-left text-[1rem] font-medium text-[#666666]'>
-        {inquiryData.content}
       <div className='overflow-wrap break-word mb-[1rem] mt-[1rem] flex flex-wrap whitespace-pre-wrap text-left text-[1rem] font-medium text-[#666666]'>
         {inquiryData.content}
       </div>
