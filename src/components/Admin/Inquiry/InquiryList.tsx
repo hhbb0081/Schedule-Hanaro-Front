@@ -127,10 +127,10 @@ function InquiryList({
                     )}
                   </div>
                   <p className='mb-2 text-left text-[0.85rem] font-medium text-gray-400'>
-                    {name} · {time} · {category} {/* name으로 수정 */}
+                    {name} · {time} · {category}
                   </p>
                   <p className='text-left text-[1rem] font-medium leading-normal text-gray-700'>
-                    {content} {/* 문의 내용 표시 */}
+                    {content}
                   </p>
                 </div>
               </AccordionContent>
