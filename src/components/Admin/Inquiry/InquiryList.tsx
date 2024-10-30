@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { ActiveTab } from '@/types/inquiry';
 import rightArrow from '../../../assets/icons/right_arrow.svg';
 import { InquiryDetail } from '@/types/inquiryDetail';
+import { ActiveTab } from '@/types/inquiry';
+import rightArrow from '../../../assets/icons/right_arrow.svg';
 
 function InquiryList({
   activeTab,
