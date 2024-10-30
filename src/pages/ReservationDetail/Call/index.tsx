@@ -81,6 +81,7 @@ export function ReservationDetailCallPage() {
           modalDescription1=''
           modalDescription2='취소시에는 다시 상담 신청을 하셔야합니다.'
           modalButtonTitle='확인'
+          navigateTo='/reservation/call'
         ></Modalbutton>
       </body>
       <Nav />
