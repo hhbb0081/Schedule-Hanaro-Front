@@ -9,19 +9,20 @@ import { Badge } from '../../ui/badge';
 import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ActiveTab } from '@/types/inquiry';
 import { InquiryDetail } from '@/types/inquiryDetail';
+import { ActiveTab } from '@/types/inquiry';
+import rightArrow from '../../../assets/icons/right_arrow.svg';
 
 function InquiryList({
   activeTab,
   activeCategory,
   setActiveCategory,
-  inquiries,
+  inquiries, // inquiries props 추가
 }: {
-  activeTab: ActiveTab; // '답변대기' | '답변완료'만 사용
+  activeTab: ActiveTab;
   activeCategory: string;
   setActiveCategory: (category: string) => void;
-  inquiries: InquiryDetail[];
+  inquiries: InquiryDetail[]; // inquiries 타입 정의 추가
 }) {
   const formattedInquiries = inquiries.map((inquiry) => ({
     id: String(inquiry.id),
@@ -29,14 +30,14 @@ function InquiryList({
     status: inquiry.status as ActiveTab,
     category: inquiry.category,
     time: `${inquiry.time}분 전`,
-    content: inquiry.content,
-    name: inquiry.name,
+    content: inquiry.content, // 문의 내용 추가
+    name: inquiry.name, // 작성자 정보를 name으로 변경
   }));
 
   const filteredInquiries = formattedInquiries.filter(
     ({ status, category }) =>
-      status === activeTab && // activeTab이 '답변대기' 또는 '답변완료'인 경우
-      (activeCategory === '전체' || category === activeCategory) // 카테고리 필터링
+      status === activeTab &&
+      (activeCategory === '전체' || category === activeCategory)
   );
 
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
@@ -85,7 +86,12 @@ function InquiryList({
                     className='mr-6 flex cursor-pointer items-center pb-[1.05rem] pt-[1rem] text-sm font-normal text-black'
                     onClick={() => navigate(`/admin/inquiry/${id}`)}
                   >
-                    상세보기 &gt;
+                    상세보기
+                    <img
+                      src={rightArrow}
+                      alt='Go'
+                      className='ml-0 inline-block'
+                    />
                   </span>
                 ) : (
                   <AccordionTrigger
