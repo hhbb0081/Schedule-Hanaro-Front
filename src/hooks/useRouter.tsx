@@ -4,11 +4,15 @@ import { RegisterLayout } from '@/components/Layout/Register';
 import {
   BranchDetailPage,
   DirectionPage,
+  InquiryDetailPage,
+  MainPage,
   MapDetailPage,
   MapPage,
   RegisterCallFormPage,
   RegisterInquiryFormPage,
   ReservationCallPage,
+  ReservationDetailCallPage,
+  ReservationDetailInquiryPage,
   ReservationDetailVisitPage,
   ReservationInquiryPage,
   ReservationPage,
@@ -64,7 +68,9 @@ export const useRouter = () =>
                 { index: true, element: <ReservationCallPage /> },
                 {
                   path: '/reservation/call/:id',
-                  children: [{ index: true, element: <ReservationCallPage /> }],
+                  children: [
+                    { index: true, element: <ReservationDetailCallPage /> },
+                  ],
                 },
               ],
             },
@@ -75,8 +81,12 @@ export const useRouter = () =>
                 {
                   path: '/reservation/inquiry/:id',
                   children: [
-                    { index: true, element: <ReservationInquiryPage /> },
+                    { index: true, element: <ReservationDetailInquiryPage /> },
                   ],
+                },
+                {
+                  path: '/reservation/inquiry/:id/detail',
+                  children: [{ index: true, element: <InquiryDetailPage /> }],
                 },
               ],
             },

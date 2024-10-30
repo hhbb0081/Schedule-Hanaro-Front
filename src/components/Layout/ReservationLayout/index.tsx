@@ -11,6 +11,12 @@ export function ReservationLayout() {
     '/reservation/inquiry/,',
   ];
 
+  const noLayoutPaths = [
+    '/reservation/visit/',
+    '/reservation/call/',
+    '/reservation/inquiry/',
+  ];
+
   const hasNoLayout = noLayoutPaths.some((path) =>
     location.pathname.startsWith(path)
   );
