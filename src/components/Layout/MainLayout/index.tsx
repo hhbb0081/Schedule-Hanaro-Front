@@ -1,10 +1,10 @@
 import Nav from '@/components/Nav/Nav';
-import { Outlet } from 'react-router-dom';
+import { MainPage } from '@/pages';
 
 export function MainLayout() {
   return (
     <>
-      <Outlet />
+      <MainPage />
       <Nav />
     </>
   );

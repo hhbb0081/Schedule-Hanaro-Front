@@ -4,6 +4,7 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
+      xs: '1px',
       sm: '435px',
       md: '800px',
       lg: '1024px',

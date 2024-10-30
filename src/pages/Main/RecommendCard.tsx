@@ -7,14 +7,16 @@ type Props = {
 
 export default function RecommendCard({ title, content }: Props) {
   return (
-    <div className='flex h-[5rem] w-full items-center justify-between rounded-[0.625rem] px-[0.9375rem] py-[1rem] shadow-[4px_4px_20px_0px_rgba(0,0,0,0.20)]'>
+    <div className='flex h-[3rem] w-full items-center justify-between px-[0.9375rem] py-[1rem] md:h-[3rem]'>
       <div className='flex w-full items-center gap-4'>
-        <div className='text-[1.5rem] font-[600]'>{title}</div>
-        <div className='text-[1.25rem] font-[400] text-lightGrey'>
+        <div className='text-[1rem] font-[600] md:text-[1rem]'>{title}</div>
+        <div className='pt-[0.1rem] text-[0.9rem] font-[400] text-lightGrey md:text-[0.9rem]'>
           {content}
         </div>
       </div>
-      <Button className='h-7 w-[6rem] rounded-[50rem]'>추천</Button>
+      <Button className='h-[1.5rem] w-[5rem] rounded-[50rem] text-[0.8rem] md:h-5 md:w-[4rem] md:text-[0.75rem]'>
+        추천
+      </Button>
     </div>
   );
 }
