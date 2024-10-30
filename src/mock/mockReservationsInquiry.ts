@@ -1,18 +1,7 @@
-export type ReservationInquiryDetail = {
-  id: string;
-  title: string;
-  content: string;
-  consultationType: string;
-  date: string;
-  time: string;
-  waitingNumber: number;
-};
-export type ReservationInquiryAnswerDetail = {
-  id: string;
-  content2: string;
-  date2: string;
-  time2: string;
-};
+import {
+  ReservationInquiryAnswerDetail,
+  ReservationInquiryDetail,
+} from '@/types/reservation';
 
 export const mockReservationInquiryDetails: ReservationInquiryDetail[] = [
   {
