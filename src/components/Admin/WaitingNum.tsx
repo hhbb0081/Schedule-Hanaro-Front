@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import './YourStyles.css'; // CSS 파일 임포트
+import { useEffect, useState } from 'react';
+import './YourStyles.css';
 
-const WaitingNumber: React.FC = () => {
-  const [angle, setAngle] = useState(0);
+type WaitingNumberProps = {
+  numbers: number[];
+  angle: number;
+};
+
+function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
   const [isRow] = useState(false);
-  const [numbers, setNumbers] = useState([
-    952, 953, 954, 955, 956, 957, 958, 951,
-  ]);
-
-  const rotateAngle = 360 / 8; // 카드 개수에 따라 회전 각도 설정
+  const rotateAngle = 360 / 8;
   const radian = (rotateAngle / 2) * (Math.PI / 180);
   const colTz = Math.round(210 / 2 / Math.tan(radian));
   const rowTz = Math.round(140 / 2 / Math.tan(radian));
@@ -20,23 +20,7 @@ const WaitingNumber: React.FC = () => {
         ? `rotateX(${rotateAngle * idx}deg) translateZ(${rowTz}px)`
         : `rotateY(${rotateAngle * idx}deg) translateZ(${colTz}px)`;
     });
-  }, [isRow, rotateAngle]);
-
-  const handleNext = () => {
-    setNumbers((prevNumbers) => {
-      if (prevNumbers.length === 0) return prevNumbers;
-      const lastNumber = prevNumbers[prevNumbers.length - 1];
-      return [lastNumber, ...prevNumbers.slice(0, prevNumbers.length - 1)];
-    });
-    setNumbers((prevNumbers) => {
-      return prevNumbers.map((num) => num + 1);
-    });
-    setAngle((prev) => prev + rotateAngle);
-  };
-
-  useEffect(() => {
-    console.log(...numbers);
-  }, [numbers]);
+  }, [rotateAngle]);
 
   return (
     <div className='mt-10 flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
@@ -52,15 +36,12 @@ const WaitingNumber: React.FC = () => {
           className='scene relative mx-auto h-[140px] w-[210px]'
           style={{
             perspective: '1200px',
-            perspectiveOrigin: isRow ? 'center' : 'center -60%',
           }}
         >
           <div
             className='carousel transform-style-preserve-3d absolute h-full w-full transition-transform duration-500'
             style={{
-              transform: isRow
-                ? `rotateX(${-angle}deg)`
-                : `rotateY(${-angle}deg)`,
+              transform: `rotateY(${-angle}deg)`,
             }}
           >
             {numbers.map((number, idx) => (
@@ -77,17 +58,8 @@ const WaitingNumber: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div className='mb-4 mt-6 space-x-4'>
-        <button
-          className='bg-aliceblue rounded-lg px-4 py-2 text-lg font-bold'
-          onClick={handleNext}
-        >
-          다음
-        </button>
-      </div>
     </div>
   );
-};
+}
 
 export default WaitingNumber;

@@ -55,6 +55,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { inquiryDetail } from '@/types/inquiryDetail'; // 경로에 따라 수정
 import { mockInquiryData } from '@/mock/adminInquiry';
 import dot from '../../../../../assets/icons/dot.svg';
+import arrow_left from '../../../../../assets/icons/arrow_left.svg';
 
 export function AnswerDetail() {
   const { id } = useParams<{ id: string }>();
@@ -70,7 +71,7 @@ export function AnswerDetail() {
   }, [id]);
 
   if (!inquiryData) {
-    return <div>Loading...</div>; // 데이터가 없으면 로딩 표시
+    return <div>Loading...</div>;
   }
   return (
     <div className='mx-auto h-full w-[83%]'>
@@ -78,10 +79,10 @@ export function AnswerDetail() {
         className='mb-[1rem] flex items-center text-gray-600 hover:text-gray-800'
         onClick={() => navigate(-1)}
       >
-        <span className='mr-1 text-[0.825rem]'>&lt;</span>{' '}
-        <span className='text-[0.825rem] font-bold text-[#464646]'>
-          뒤로가기
+        <span className='mr-[0.1rem] flex justify-center text-[0.825rem]'>
+          <img src={arrow_left} alt='점' className='h-[0.825rem] w-full' />
         </span>
+        <span className='text-[1rem] font-bold text-[#464646]'>뒤로가기</span>
       </button>
       <div className='mx-auto h-[85%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
         <div className='overflow-wrap break-word text-left text-[1.5rem] font-bold text-[#464646]'>
@@ -109,7 +110,7 @@ export function AnswerDetail() {
           {inquiryData.content}
         </div>
         <hr />
-        <div className='mb-[0.5rem] mt-[0.75rem] text-left text-[0.9rem] font-bold text-[#464646]'>
+        <div className='mb-[0.5rem] mt-[0.75rem] text-left text-[1.5rem] font-bold text-[#464646]'>
           답변
         </div>
         <div className='overflow-wrap break-word whitespace-pre-wraptext-left mb-[1rem] mt-[1rem] flex flex-wrap text-left text-[1rem] font-medium text-[#666666]'>
