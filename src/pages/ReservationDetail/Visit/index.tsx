@@ -5,7 +5,9 @@ import Nav from '@/components/Nav/Nav';
 import { DirectionButton } from '@/components/ui/direction';
 import { useToast } from '@/hooks/use-toast';
 import '@/index.css';
-import { useParams } from 'react-router-dom';
+import { BRANCH_MOCK } from '@/mock/branch_mock';
+import { showToast } from '@/pages/Register/Call';
+import { useNavigate, useParams } from 'react-router-dom';
 export function ReservationDetailVisitPage() {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ export function ReservationDetailVisitPage() {
             </div>
             <div className='mt-2 flex w-full justify-center gap-6'>
               <div className='text-2xl font-semibold'>하나은행 성수역점</div>
-              <DirectionButton />
+              <DirectionButton onClick={handleDirection} />
             </div>
             <div className='mt-6 w-[23.75rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
               <h3 className='flex text-xl font-bold text-black'>대기정보</h3>
