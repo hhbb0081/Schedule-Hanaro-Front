@@ -9,72 +9,26 @@ import { Badge } from '../../ui/badge';
 import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ActiveTab } from '@/types/inquiry';
-import rightArrow from '../../../../public/svg/right_arrow.svg';
-
-// Inquiry 타입 정의
-type Inquiry = {
-  id: string;
-  title: string;
-  status: ActiveTab; // ActiveTab 사용
-  category: string;
-  time: string;
-};
+import { InquiryDetail } from '@/types/inquiryDetail';
 
 function InquiryList({
   activeTab,
   activeCategory,
   setActiveCategory,
+  inquiries, // inquiries props 추가
 }: {
-  activeTab: ActiveTab; // ActiveTab 사용
+  activeTab: '답변대기' | '답변완료' | '전체';
   activeCategory: string;
   setActiveCategory: (category: string) => void;
+  inquiries: InquiryDetail[]; // inquiries 타입 정의
 }) {
-  const inquiries: Inquiry[] = [
-    {
-      id: '1',
-      title: '안녕하세요 문의드리려고 했다가 안했다가 합니다',
-      status: '답변대기',
-      category: '예적금',
-      time: '10분 전',
-    },
-    {
-      id: '2',
-      title: '안녕하세요 좀 궁금한게 있는...',
-      status: '답변대기',
-      category: '대출',
-      time: '20분 전',
-    },
-    {
-      id: '3',
-      title: '안녕하세요, 예금 관련 문의드립니다.',
-      status: '답변완료',
-      category: '예적금',
-      time: '1시간 전',
-    },
-    {
-      id: '4',
-      title: '펀드 관련 문의드립니다.',
-      status: '답변완료',
-      category: '펀드',
-      time: '3시간 전',
-    },
-    {
-      id: '5',
-      title: '외환 관련해서 문의드려요.',
-      status: '답변대기',
-      category: '외환',
-      time: '5시간 전',
-    },
-  ];
-
   const filteredInquiries = inquiries.filter(
     ({ status, category }) =>
-      status === activeTab &&
+      (activeTab === '전체' || status === activeTab) &&
       (activeCategory === '전체' || category === activeCategory)
   );
 
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [expandedItem, setExpandedItem] = useState<number | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -84,37 +38,28 @@ function InquiryList({
         boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.10)',
       }}
     >
-      <div className='font-inter mb-0 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
-        <h2 className='text-[1.125rem] font-bold text-gray-800'>
-          총{' '}
-          <span className='text-[1.4rem] font-extrabold text-teal-600'>
-            {filteredInquiries.length}
-          </span>
-          건
+      <div className='mb-4 flex items-center justify-between border-b pb-4'>
+        <h2 className='text-lg font-semibold text-gray-800'>
+          총 <span className='text-teal-600'>{filteredInquiries.length}</span>건
         </h2>
         <FilterAndSearch setActiveCategory={setActiveCategory} />
       </div>
 
       <Accordion type='single' collapsible>
         {filteredInquiries.map(
-          ({ id, title, status, category, time }, index) => (
-            <AccordionItem key={id} value={id}>
-              <div className='font-inter flex items-center justify-between py-4 font-normal leading-normal'>
+          ({ id, title, status, category, time, content }, index) => (
+            <AccordionItem key={id} value={String(id)}>
+              <div className='flex items-center justify-between py-4'>
                 <div className='flex items-center space-x-2'>
-                  <span className='pl-5 text-[1.25rem] font-bold text-gray-700'>
-                    {index + 1}
-                  </span>
-                  <span
-                    className='pl-5 pr-2 text-[1.25rem] font-bold text-gray-800'
-                    style={{ cursor: 'default' }}
-                  >
+                  <span className='font-medium text-gray-700'>{index + 1}</span>
+                  <span className='font-semibold text-gray-800'>
                     {title.length <= 15
                       ? title
                       : `${title.substring(0, 15)}...`}
                   </span>
                   <Badge
                     variant='lightSolid'
-                    className={`rounded-full px-2 py-0.5 text-[0.875rem] font-normal ${
+                    className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
                       status === '답변대기'
                         ? 'bg-teal-50 text-teal-600'
                         : 'bg-gray-200 text-gray-600'
@@ -125,48 +70,43 @@ function InquiryList({
                 </div>
                 {status === '답변완료' ? (
                   <span
-                    className='mr-6 flex cursor-pointer items-center pb-[1.05rem] pt-[1rem] text-sm font-normal text-black'
-                    onClick={() => navigate('/admin/inquiry/answerDetail')}
+                    className='cursor-pointer text-sm font-semibold text-gray-500'
+                    onClick={() => navigate('/admin/inquiry/' + id)}
                   >
-                    상세보기
-                    <img
-                      src={rightArrow}
-                      alt='Go'
-                      className='ml-0 inline-block'
-                    />
+                    상세보기 &gt;
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
+                    className='flex items-center text-sm text-gray-500'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    } // 아코디언 열고 닫기
+                    }
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
                 )}
               </div>
-              <AccordionContent className='-mb-4 mt-0'>
-                <div className='font-inter rounded-md border-t bg-gray-50 p-4 leading-normal'>
-                  <div className='mb-2 flex items-center justify-between'>
-                    <p className='text-[1.25rem] font-bold text-gray-800'>
-                      {title}
-                    </p>
+              <AccordionContent>
+                <div className='mt-2 rounded-md p-4 shadow-inner'>
+                  <div className='mb-1 flex items-center justify-between'>
+                    <p className='font-semibold text-gray-800'>{title}</p>
                     {status === '답변대기' && (
                       <Button
                         variant='default'
-                        className='h-[2.4375rem] w-[7.5rem] rounded-full bg-main px-4 py-1 text-[1rem] font-bold text-white'
-                        onClick={() => navigate('/admin/inquiry/answerInput')}
+                        className='h-[2.4375rem] w-[7.5rem] rounded-full bg-main px-4 py-1 text-sm text-white'
+                        onClick={() =>
+                          navigate('/admin/inquiry/register/' + id)
+                        }
                       >
                         답변하기
                       </Button>
                     )}
                   </div>
-                  <p className='mb-2 text-left text-[0.85rem] font-medium text-gray-400'>
-                    작성자 · {time} · {category}
+                  <p className='mb-2 text-left text-[0.75rem] text-gray-400'>
+                    작성자 · {new Date(time).toLocaleString()} · {category}
                   </p>
-                  <p className='text-left text-[1rem] font-medium leading-normal text-gray-700'>
-                    문의 내용에 대한 상세 설명이 여기에 표시됩니다.
+                  <p className='text-left text-sm leading-relaxed text-gray-700'>
+                    {content}
                   </p>
                 </div>
               </AccordionContent>

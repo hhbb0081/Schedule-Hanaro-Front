@@ -3,7 +3,7 @@ import { Textarea } from '@/components/ui/textarea';
 // import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { inquiryDetail } from '@/types/inquiryDetail';
+import { InquiryDetail } from '@/types/inquiryDetail';
 import { mockInquiryData } from '@/mock/adminInquiry';
 import dot from '../../../../../assets/icons/dot.svg';
 
@@ -12,7 +12,7 @@ export function AnswerInput() {
   const [answer, setAnswer] = useState('');
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const [inquiryData, setInquiryData] = useState<inquiryDetail | null>(null);
+  const [inquiryData, setInquiryData] = useState<InquiryDetail | null>(null);
   useEffect(() => {
     const fetchInquiryDetail = () => {
       const inquiry = mockInquiryData.find((item) => item.id === Number(id)); // ID로 데이터 찾기
@@ -49,7 +49,7 @@ export function AnswerInput() {
       className='mx-auto h-[90%] w-[83%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'
     >
       <div className='overflow-wrap break-word text-left text-[1.5rem] font-bold text-[#464646]'>
-        {inquiryData.Title}
+        {inquiryData.title}
       </div>
       <div className='mt-[1rem] flex items-center'>
         <span className='text-[0.9rem] font-medium text-[#b3b3b3]'>

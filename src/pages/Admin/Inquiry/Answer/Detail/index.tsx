@@ -52,7 +52,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { inquiryDetail } from '@/types/inquiryDetail'; // 경로에 따라 수정
+import { InquiryDetail } from '@/types/inquiryDetail'; // 경로에 따라 수정
 import { mockInquiryData } from '@/mock/adminInquiry';
 import dot from '../../../../../assets/icons/dot.svg';
 import arrow_left from '../../../../../assets/icons/arrow_left.svg';
@@ -60,7 +60,7 @@ import arrow_left from '../../../../../assets/icons/arrow_left.svg';
 export function AnswerDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [inquiryData, setInquiryData] = useState<inquiryDetail | null>(null);
+  const [inquiryData, setInquiryData] = useState<InquiryDetail | null>(null);
   useEffect(() => {
     const fetchInquiryDetail = () => {
       const inquiry = mockInquiryData.find((item) => item.id === Number(id)); // ID로 데이터 찾기
@@ -86,7 +86,7 @@ export function AnswerDetail() {
       </button>
       <div className='mx-auto h-[85%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
         <div className='overflow-wrap break-word text-left text-[1.5rem] font-bold text-[#464646]'>
-          {inquiryData.Title}
+          {inquiryData.title}
         </div>
         <div className='mt-[1rem] flex items-center'>
           <span className='text-[0.9rem] font-medium text-[#b3b3b3]'>
