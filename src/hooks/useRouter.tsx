@@ -4,7 +4,6 @@ import { RegisterLayout } from '@/components/Layout/Register';
 import {
   BranchDetailPage,
   DirectionPage,
-  MainPage,
   MapDetailPage,
   MapPage,
   RegisterCallFormPage,
@@ -27,6 +26,7 @@ import VisitPage from '@/pages/Admin/Visit';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
+import { MainLayout } from '@/components/Layout/MainLayout';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -34,7 +34,7 @@ export const useRouter = () =>
       path: '/',
       element: <ClientLayout />,
       children: [
-        { index: true, element: <MainPage /> },
+        { index: true, element: <MainLayout /> },
         {
           path: '/map',
           element: <MapLayout />,
