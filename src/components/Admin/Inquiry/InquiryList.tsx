@@ -17,14 +17,14 @@ function InquiryList({
   setActiveCategory,
   inquiries, // inquiries props 추가
 }: {
-  activeTab: '답변대기' | '답변완료' | '전체';
+  activeTab: ActiveTab; // ActiveTab 사용
   activeCategory: string;
   setActiveCategory: (category: string) => void;
   inquiries: InquiryDetail[]; // inquiries 타입 정의
 }) {
   const filteredInquiries = inquiries.filter(
     ({ status, category }) =>
-      (activeTab === '전체' || status === activeTab) &&
+      status === activeTab &&
       (activeCategory === '전체' || category === activeCategory)
   );
 
@@ -73,14 +73,19 @@ function InquiryList({
                     className='cursor-pointer text-sm font-semibold text-gray-500'
                     onClick={() => navigate('/admin/inquiry/' + id)}
                   >
-                    상세보기 &gt;
+                    상세보기
+                    <img
+                      src={rightArrow}
+                      alt='Go'
+                      className='ml-0 inline-block'
+                    />
                   </span>
                 ) : (
                   <AccordionTrigger
                     className='flex items-center text-sm text-gray-500'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    }
+                    } // 아코디언 열고 닫기
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
