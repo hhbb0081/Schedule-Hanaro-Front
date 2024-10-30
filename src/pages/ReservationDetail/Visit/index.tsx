@@ -60,11 +60,11 @@ export function ReservationDetailVisitPage() {
               </div>
             </div>
           </div>
-          <div className='pb-[6rem]'>
+          <div className='pb-[7rem] pt-[2rem]'>
             <Modalbutton
               buttonTitle='예약 취소'
               buttonVariant='outline'
-              buttonSize='h-[3.75rem] w-[23.75rem]'
+              buttonSize='h-[3.75rem] w-[23.75rem] md:w-[25rem]'
               modalTitle='영업점 예약 취소'
               modalDescription1='취소 시 30분 후부터 재예약이 가능합니다.'
               modalDescription2=''
@@ -73,7 +73,9 @@ export function ReservationDetailVisitPage() {
           </div>
         </div>
       </div>
-      <Nav />
+      <div>
+        <Nav />
+      </div>
     </div>
   );
 }

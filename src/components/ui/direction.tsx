@@ -49,7 +49,7 @@ export const DirectionButton = ({
         {variant === 'square' ? (
           <Direction className='h-full w-full' fill='#ffffff' />
         ) : (
-          <Direction className='h-full w-full' />
+          <Direction className='h-full w-full' fill='#000000' />
         )}
       </div>
       <span

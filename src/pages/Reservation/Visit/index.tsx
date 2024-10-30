@@ -18,7 +18,7 @@ export function ReservationVisitPage() {
         {visitNum.map(({ id, my_num, name, waiting_number, waiting_time }) => (
           <div key={id}>
             <button
-              onClick={() => moveToDetail(id)}
+              onClick={() => moveToDetail(my_num)}
               className='mt-[1.4375rem] w-full px-2'
             >
               <div className='mx-2 flex justify-between'>
