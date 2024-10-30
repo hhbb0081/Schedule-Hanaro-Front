@@ -10,65 +10,32 @@ import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActiveTab } from '@/types/inquiry';
-import rightArrow from '../../../../public/svg/right_arrow.svg';
-
-// Inquiry 타입 정의
-type Inquiry = {
-  id: string;
-  title: string;
-  status: ActiveTab; // ActiveTab 사용
-  category: string;
-  time: string;
-};
+import rightArrow from '../../../assets/icons/right_arrow.svg';
+import { mockInquiryData } from '@/mock/adminInquiry';
+import { inquiryDetail } from '@/types/inquiryDetail';
 
 function InquiryList({
   activeTab,
   activeCategory,
   setActiveCategory,
 }: {
-  activeTab: ActiveTab; // ActiveTab 사용
+  activeTab: ActiveTab;
   activeCategory: string;
   setActiveCategory: (category: string) => void;
 }) {
-  const inquiries: Inquiry[] = [
-    {
-      id: '1',
-      title: '안녕하세요 문의드리려고 했다가 안했다가 합니다',
-      status: '답변대기',
-      category: '예적금',
-      time: '10분 전',
-    },
-    {
-      id: '2',
-      title: '안녕하세요 좀 궁금한게 있는...',
-      status: '답변대기',
-      category: '대출',
-      time: '20분 전',
-    },
-    {
-      id: '3',
-      title: '안녕하세요, 예금 관련 문의드립니다.',
-      status: '답변완료',
-      category: '예적금',
-      time: '1시간 전',
-    },
-    {
-      id: '4',
-      title: '펀드 관련 문의드립니다.',
-      status: '답변완료',
-      category: '펀드',
-      time: '3시간 전',
-    },
-    {
-      id: '5',
-      title: '외환 관련해서 문의드려요.',
-      status: '답변대기',
-      category: '외환',
-      time: '5시간 전',
-    },
-  ];
+  const inquiries: inquiryDetail[] = mockInquiryData;
 
-  const filteredInquiries = inquiries.filter(
+  const formattedInquiries = inquiries.map((inquiry) => ({
+    id: String(inquiry.id),
+    title: inquiry.Title,
+    status: inquiry.status as ActiveTab,
+    category: inquiry.category,
+    time: `${inquiry.time}분 전`,
+    content: inquiry.content, // 문의 내용 추가
+    name: inquiry.name, // 작성자 정보를 name으로 변경
+  }));
+
+  const filteredInquiries = formattedInquiries.filter(
     ({ status, category }) =>
       status === activeTab &&
       (activeCategory === '전체' || category === activeCategory)
@@ -78,12 +45,7 @@ function InquiryList({
   const navigate = useNavigate();
 
   return (
-    <div
-      className='font-inter mx-auto max-w-3xl rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal shadow-lg'
-      style={{
-        boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.10)',
-      }}
-    >
+    <div className='font-inter mx-auto max-w-3xl rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal shadow-lg'>
       <div className='font-inter mb-0 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
         <h2 className='text-[1.125rem] font-bold text-gray-800'>
           총{' '}
@@ -97,7 +59,7 @@ function InquiryList({
 
       <Accordion type='single' collapsible>
         {filteredInquiries.map(
-          ({ id, title, status, category, time }, index) => (
+          ({ id, title, status, category, time, content, name }, index) => (
             <AccordionItem key={id} value={id}>
               <div className='font-inter flex items-center justify-between py-4 font-normal leading-normal'>
                 <div className='flex items-center space-x-2'>
@@ -126,7 +88,7 @@ function InquiryList({
                 {status === '답변완료' ? (
                   <span
                     className='mr-6 flex cursor-pointer items-center pb-[1.05rem] pt-[1rem] text-sm font-normal text-black'
-                    onClick={() => navigate('/admin/inquiry/answerDetail')}
+                    onClick={() => navigate(`/admin/inquiry/${id}`)}
                   >
                     상세보기
                     <img
@@ -140,7 +102,7 @@ function InquiryList({
                     className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
-                    } // 아코디언 열고 닫기
+                    }
                   >
                     {expandedItem === id ? '접기' : '펼쳐보기'}
                   </AccordionTrigger>
@@ -163,10 +125,10 @@ function InquiryList({
                     )}
                   </div>
                   <p className='mb-2 text-left text-[0.85rem] font-medium text-gray-400'>
-                    작성자 · {time} · {category}
+                    {name} · {time} · {category} {/* name으로 수정 */}
                   </p>
                   <p className='text-left text-[1rem] font-medium leading-normal text-gray-700'>
-                    문의 내용에 대한 상세 설명이 여기에 표시됩니다.
+                    {content} {/* 문의 내용 표시 */}
                   </p>
                 </div>
               </AccordionContent>
