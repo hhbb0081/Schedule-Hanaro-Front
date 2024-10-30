@@ -10,6 +10,7 @@ import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActiveTab } from '@/types/inquiry';
+import rightArrow from '../../../../public/svg/right_arrow.svg';
 
 // Inquiry 타입 정의
 type Inquiry = {
@@ -124,14 +125,19 @@ function InquiryList({
                 </div>
                 {status === '답변완료' ? (
                   <span
-                    className='mr-5 cursor-pointer py-4 text-sm font-normal text-gray-500'
+                    className='mr-6 flex cursor-pointer items-center pb-[1.05rem] pt-[1rem] text-sm font-normal text-black'
                     onClick={() => navigate('/admin/inquiry/answerDetail')}
                   >
-                    상세보기 &gt;
+                    상세보기
+                    <img
+                      src={rightArrow}
+                      alt='Go'
+                      className='ml-0 inline-block'
+                    />
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='mr-5 flex items-center text-[0.875rem] font-normal text-gray-500'
+                    className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
                     } // 아코디언 열고 닫기
@@ -141,9 +147,7 @@ function InquiryList({
                 )}
               </div>
               <AccordionContent className='-mb-4 mt-0'>
-                {' '}
-                {/* mb-4로 하단 여백 조정 */}
-                <div className='font-inter rounded-md bg-gray-50 p-4 leading-normal'>
+                <div className='font-inter rounded-md border-t bg-gray-50 p-4 leading-normal'>
                   <div className='mb-2 flex items-center justify-between'>
                     <p className='text-[1.25rem] font-bold text-gray-800'>
                       {title}
