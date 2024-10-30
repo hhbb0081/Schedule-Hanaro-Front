@@ -5,22 +5,26 @@ import WaitingNumber from '@/components/Admin/WaitingNum';
 import { useState } from 'react';
 
 function CallPage() {
-  const [previousNumber, setPreviousNumber] = useState(951);
-  const [currentNumber, setCurrentNumber] = useState(952);
-  const [nextNumber, setNextNumber] = useState(953);
+  const [numbers, setNumbers] = useState([
+    952, 953, 954, 955, 956, 957, 958, 951,
+  ]);
+  const [angle, setAngle] = useState(0);
+  const rotateAngle = 360 / 8;
 
-  const handleNextNumber = () => {
-    setPreviousNumber(currentNumber);
-    setCurrentNumber(nextNumber);
-    setNextNumber(nextNumber + 1);
+  const handleNext = () => {
+    setNumbers((prevNumbers) => {
+      if (prevNumbers.length === 0) return prevNumbers;
+      const lastNumber = prevNumbers[prevNumbers.length - 1];
+      return [lastNumber, ...prevNumbers.slice(0, prevNumbers.length - 1)];
+    });
+    setNumbers((prevNumbers) => {
+      return prevNumbers.map((num) => num + 1);
+    });
+    setAngle((prev) => prev + rotateAngle);
   };
   return (
     <>
-      <WaitingNumber
-        previousNumber={previousNumber}
-        currentNumber={currentNumber}
-        nextNumber={nextNumber}
-      />
+      <WaitingNumber numbers={numbers} angle={angle} />
       <div className='flex items-start justify-center'>
         <CustomerInfo
           customerCount={952}
@@ -32,7 +36,7 @@ function CallPage() {
         <div className='ml-[2rem]'>
           <InfoCard waitingCount={2} estimatedTime={15} />
           <div className='mt-[2rem]'>
-            <Next onClick={handleNextNumber} />
+            <Next onClick={handleNext} />
           </div>
         </div>
       </div>
