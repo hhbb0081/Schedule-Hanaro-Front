@@ -68,7 +68,7 @@ function ChangeToggleOption({
     }
   };
   return (
-    <div>
+    <div className=''>
       <div
         onClick={handleSelect}
         className={`relative mx-[15px] my-[0.5rem] flex items-center justify-between rounded-[.625rem] px-[1.25rem] py-[0.7rem] text-[1.0625rem] font-semibold ${

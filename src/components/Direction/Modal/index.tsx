@@ -14,7 +14,7 @@ import { useState } from 'react';
 
 type Props = {
   buttonTitle: string;
-  buttonVariant: 'default' | 'ghost';
+  buttonVariant: 'default' | 'ghost' | 'outline';
   buttonSize: string;
   modalTitle: string;
   modalDescription1: string;

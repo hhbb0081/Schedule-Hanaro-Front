@@ -2,17 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
-  leftValue: string;
+  leftValue: 'visit' | 'call';
   leftName: string;
-  rightValue: string;
+  rightValue: 'visit' | 'call';
   rightName: string;
+  onChange: (value: 'visit' | 'call') => void;
 };
 
-function Tabs({ leftValue, leftName, rightValue, rightName }: Props) {
+function Tabs({ leftValue, leftName, rightValue, rightName, onChange }: Props) {
   const [activeTab, setActiveTab] = useState(leftValue);
   const navigate = useNavigate();
 
-  const ChangeTab = (newTab: string) => {
+  const ChangeTab = (newTab: 'visit' | 'call') => {
     setActiveTab(newTab);
     navigate(`/reservation/${newTab}`);
   };
@@ -25,7 +26,10 @@ function Tabs({ leftValue, leftName, rightValue, rightName }: Props) {
               ? 'scale-105 font-bold text-[#2b2b2b]'
               : 'scale-100 text-[#a6a6a6]'
           } ml-[5rem] mr-auto md:ml-[6.8rem] lg:ml-[6.8rem]`}
-          onClick={() => ChangeTab(leftValue)}
+          onClick={() => {
+            ChangeTab(leftValue);
+            onChange(leftValue);
+          }}
         >
           {leftName}
         </button>
@@ -35,7 +39,10 @@ function Tabs({ leftValue, leftName, rightValue, rightName }: Props) {
               ? 'scale-105 font-bold text-[#2b2b2b]'
               : 'scale-100 text-[#a6a6a6]'
           } ml-auto mr-[4rem] md:mr-[5.5rem] lg:mr-[5.5rem]`}
-          onClick={() => ChangeTab(rightValue)}
+          onClick={() => {
+            ChangeTab(rightValue);
+            onChange(rightValue);
+          }}
         >
           {rightName}
         </button>

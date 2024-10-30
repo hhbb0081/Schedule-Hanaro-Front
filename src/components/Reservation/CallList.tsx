@@ -18,7 +18,7 @@ const CallList: React.FC<CallConsultationCardProps> = ({
   timerText,
 }) => {
   return (
-    <div className='rounded-[0.9375rem] bg-white pb-[2.1875rem] pl-[1.1875rem] pr-[1.4688rem] pt-[1.75rem] drop-shadow'>
+    <div className='z-10 rounded-[0.9375rem] bg-white pb-[2.1875rem] pl-[1.1875rem] pr-[1.4688rem] pt-[1.75rem] drop-shadow'>
       {timerText <= 5 && (
         <div className='mb-[1rem] flex items-center text-[#e90061]'>
           <WarningTimer className='mr-[0.25rem] h-[0.75rem] w-[0.75rem] sm:h-[0.875rem] sm:w-[0.875rem] md:h-[1rem] md:w-[1rem] lg:h-[1.25rem] lg:w-[1.25rem]' />
