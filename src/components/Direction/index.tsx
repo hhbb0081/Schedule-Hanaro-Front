@@ -34,7 +34,6 @@ export function Direction() {
 
   const {
     mapInstance,
-    coord,
     setCoord,
     currentStartAddress,
     setStartCoord,
@@ -45,11 +44,11 @@ export function Direction() {
 
   // 출발지 & 도착지 설정
   useEffect(() => {
-    if (!coord || !end) return;
+    if (!start || !end) return;
 
     setStartCoord({
-      latitude: coord.latitude,
-      longitude: coord.longitude,
+      latitude: start.latitude,
+      longitude: start.longitude,
     });
     setEndCoord({
       latitude: end.latitude,
