@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { ReactComponent as Direction } from '@/assets/icons/branch/direction.svg';
-import { ReactComponent as DirectionWhite } from '@/assets/icons/navigate.svg';
 import { cn } from '@/lib/utils';
 import { Button } from './button';
 
@@ -46,9 +45,9 @@ export const DirectionButton = ({
       className={cn(DirectionButtonVariants({ variant, className }))}
       {...props}
     >
-      <div className='h-auto w-4'>
+      <div className='h-auto w-auto'>
         {variant === 'square' ? (
-          <DirectionWhite className='h-full w-full' />
+          <Direction className='h-full w-full' fill='#ffffff' />
         ) : (
           <Direction className='h-full w-full' />
         )}

@@ -1,6 +1,7 @@
 // src/pages/Admin/Inquiry/index.tsx
 import InquiryList from '@/components/Admin/Inquiry/InquiryList';
 import ReplyState from '@/components/Admin/Inquiry/ReplyState';
+import { mockInquiryData } from '@/mock/adminInquiry';
 import { useState } from 'react';
 
 function InquiryPage() {
@@ -19,6 +20,7 @@ function InquiryPage() {
         activeTab={activeTab}
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
+        inquiries={mockInquiryData}
       />
     </>
   );

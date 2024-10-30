@@ -18,11 +18,13 @@ import {
 } from '@/pages';
 //수정 예정 ..
 import { ClientLayout } from '@/components/Layout/ClientLayout';
+import MypageLayout from '@/components/Layout/MypageLayout';
 import CallPage from '@/pages/Admin/Call';
 import InquiryPage from '@/pages/Admin/Inquiry';
 import { AnswerDetail } from '@/pages/Admin/Inquiry/Answer/Detail';
 import { AnswerInput } from '@/pages/Admin/Inquiry/Answer/Input';
 import VisitPage from '@/pages/Admin/Visit';
+import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -111,6 +113,11 @@ export const useRouter = () =>
               element: <RegisterVisitFormPage />,
             },
           ],
+        },
+        {
+          path: '/mypage',
+          element: <MypageLayout />,
+          children: [{ index: true, element: <Mypage /> }],
         },
       ],
     },

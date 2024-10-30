@@ -15,7 +15,8 @@ const Item = ({ icon: Icon, name, route }: NavItemProps) => {
     location.pathname === ''
       ? location.pathname
       : location.pathname.split('/').slice(1, 3).join('/');
-  const iconFill = selectedPath === route.split('?')[0] ? '#000' : '#999';
+  const iconFill = selectedPath === route.split('?')[0] ? '#777777' : '#D9D9D9';
+  console.log(route.split('?')[0]);
 
   const handleRoute = () => {
     navigate(`/${route}`);
@@ -31,10 +32,16 @@ const Item = ({ icon: Icon, name, route }: NavItemProps) => {
         className='flex flex-col items-center gap-1 whitespace-nowrap'
         onClick={handleRoute}
       >
-        <Icon />
+        {route.split('?')[0] === 'reservation/visit' ? (
+          <Icon stroke={iconFill} />
+        ) : route.split('?')[0] === '' ? (
+          <Icon />
+        ) : (
+          <Icon fill={iconFill} />
+        )}
         {name && (
           <span
-            className={`text-[0.75rem] font-medium ${iconFill ? 'text-[#D9D9D9]' : 'text-[#595959]'}`}
+            className={`text-[0.75rem] font-medium ${selectedPath === route.split('?')[0] ? 'text-[#777777]' : 'text-[#D9D9D9]'}`}
           >
             {name}
           </span>

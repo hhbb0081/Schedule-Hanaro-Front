@@ -1,11 +1,11 @@
 // mockInquiryData.ts
 
-import { inquiryDetail } from '@/types/inquiryDetail';
+import { InquiryDetail } from '@/types/inquiryDetail';
 
-export const mockInquiryData: inquiryDetail[] = [
+export const mockInquiryData: InquiryDetail[] = [
   {
     id: 1,
-    Title: '안녕하세요 문의드리려고 합니다',
+    title: '안녕하세요 문의드리려고 합니다',
     name: '이규호',
     time: 12,
     category: '예적금',
@@ -16,7 +16,7 @@ export const mockInquiryData: inquiryDetail[] = [
   },
   {
     id: 2,
-    Title: '예금 관련 문의',
+    title: '예금 관련 문의',
     name: '김지현',
     time: 1,
     category: '예적금',
@@ -26,7 +26,7 @@ export const mockInquiryData: inquiryDetail[] = [
   },
   {
     id: 3,
-    Title: '대출 상담 요청',
+    title: '대출 상담 요청',
     name: '박민수',
     time: 15,
     category: '대출',
@@ -36,7 +36,7 @@ export const mockInquiryData: inquiryDetail[] = [
   },
   {
     id: 4,
-    Title: '인터넷 뱅킹 문제',
+    title: '인터넷 뱅킹 문제',
     name: '이현수',
     time: 142,
     category: '인터넷뱅킹',
