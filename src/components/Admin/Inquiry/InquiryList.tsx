@@ -12,8 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { InquiryDetail } from '@/types/inquiryDetail';
 import { ActiveTab } from '@/types/inquiry';
 import rightArrow from '../../../assets/icons/right_arrow.svg';
-import { mockInquiryData } from '@/mock/adminInquiry';
-import { inquiryDetail } from '@/types/inquiryDetail';
 
 function InquiryList({
   activeTab,
@@ -24,12 +22,11 @@ function InquiryList({
   activeTab: ActiveTab;
   activeCategory: string;
   setActiveCategory: (category: string) => void;
+  inquiries: InquiryDetail[]; // inquiries 타입 정의 추가
 }) {
-  const inquiries: inquiryDetail[] = mockInquiryData;
-
   const formattedInquiries = inquiries.map((inquiry) => ({
     id: String(inquiry.id),
-    title: inquiry.Title,
+    title: inquiry.title,
     status: inquiry.status as ActiveTab,
     category: inquiry.category,
     time: `${inquiry.time}분 전`,
@@ -43,7 +40,7 @@ function InquiryList({
       (activeCategory === '전체' || category === activeCategory)
   );
 
-  const [expandedItem, setExpandedItem] = useState<number | null>(null);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -65,7 +62,9 @@ function InquiryList({
             <AccordionItem key={id} value={id}>
               <div className='font-inter flex items-center justify-between py-4 font-normal leading-normal'>
                 <div className='flex items-center space-x-2'>
-                  <span className='font-medium text-gray-700'>{index + 1}</span>
+                  <span className='ml-5 mr-5 font-medium text-gray-700'>
+                    {index + 1}
+                  </span>
                   <span className='font-semibold text-gray-800'>
                     {title.length <= 15
                       ? title
@@ -96,7 +95,7 @@ function InquiryList({
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='flex items-center text-sm text-gray-500'
+                    className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
                     }
@@ -105,8 +104,8 @@ function InquiryList({
                   </AccordionTrigger>
                 )}
               </div>
-              <AccordionContent>
-                <div className='mt-2 rounded-md p-4 shadow-inner'>
+              <AccordionContent className='-mb-4 mt-0 bg-gray-50'>
+                <div className='mt-2 rounded-md border-t p-4'>
                   <div className='mb-1 flex items-center justify-between'>
                     <p className='font-semibold text-gray-800'>{title}</p>
                     {status === '답변대기' && (
@@ -122,10 +121,10 @@ function InquiryList({
                     )}
                   </div>
                   <p className='mb-2 text-left text-[0.85rem] font-medium text-gray-400'>
-                    {name} · {time} · {category} {/* name으로 수정 */}
+                    {name} · {time} · {category}
                   </p>
                   <p className='text-left text-[1rem] font-medium leading-normal text-gray-700'>
-                    {content} {/* 문의 내용 표시 */}
+                    {content}
                   </p>
                 </div>
               </AccordionContent>

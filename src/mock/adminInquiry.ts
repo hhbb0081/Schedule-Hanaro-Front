@@ -46,7 +46,7 @@ export const mockInquiryData: InquiryDetail[] = [
   },
   {
     id: 5,
-    Title: '안녕하세요 문의드리려고 했다가 말다가 고민입니다.',
+    title: '안녕하세요 문의드리려고 했다가 말다가 고민입니다.',
     name: '이주호',
     time: 12,
     category: '예적금',
@@ -58,7 +58,7 @@ export const mockInquiryData: InquiryDetail[] = [
   },
   {
     id: 6,
-    Title: '안녕하세요 펀드 상품 문의드리려고 합니다',
+    title: '안녕하세요 펀드 상품 문의드리려고 합니다',
     name: '김민호',
     status: '답변완료',
     time: 18,
@@ -69,7 +69,7 @@ export const mockInquiryData: InquiryDetail[] = [
   },
   {
     id: 7,
-    Title: '안녕하세요 문의드리려고 합니다',
+    title: '안녕하세요 문의드리려고 합니다',
     name: '호날두',
     status: '답변대기',
     time: 14,
@@ -80,7 +80,7 @@ export const mockInquiryData: InquiryDetail[] = [
   },
   {
     id: 8,
-    Title: '안녕하세요 문의드리려고 합니다',
+    title: '안녕하세요 문의드리려고 합니다',
     name: '일론머스크',
     status: '답변완료',
     time: 7,
@@ -91,7 +91,7 @@ export const mockInquiryData: InquiryDetail[] = [
   },
   {
     id: 9,
-    Title: '안녕하세요 문의드리려고 합니다',
+    title: '안녕하세요 문의드리려고 합니다',
     name: '강능요',
     status: '답변대기',
     time: 43,
