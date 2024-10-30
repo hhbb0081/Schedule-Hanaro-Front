@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
+  tabLocation: 'visit' | 'call';
   leftValue: 'visit' | 'call';
   leftName: string;
   rightValue: 'visit' | 'call';
@@ -9,8 +10,15 @@ type Props = {
   onChange: (value: 'visit' | 'call') => void;
 };
 
-function Tabs({ leftValue, leftName, rightValue, rightName, onChange }: Props) {
-  const [activeTab, setActiveTab] = useState(leftValue);
+function Tabs({
+  tabLocation,
+  leftValue,
+  leftName,
+  rightValue,
+  rightName,
+  onChange,
+}: Props) {
+  const [activeTab, setActiveTab] = useState(tabLocation);
   const navigate = useNavigate();
 
   const ChangeTab = (newTab: 'visit' | 'call') => {

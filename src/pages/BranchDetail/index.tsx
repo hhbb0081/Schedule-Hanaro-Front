@@ -6,6 +6,7 @@ import { ReactComponent as Hours } from '@/assets/icons/branch/business_hours.sv
 import { ReactComponent as Tel } from '@/assets/icons/branch/tel.svg';
 import { ReactComponent as WaitPeople } from '@/assets/icons/branch/waitpeople.svg';
 import { ReactComponent as Time } from '@/assets/icons/branch/walktime.svg';
+import { ReactComponent as BankImg } from '@/assets/icons/branch/branch_img.svg';
 
 // import branch from '@/assets/images/branch.png';
 
@@ -43,18 +44,20 @@ export function BranchDetailPage() {
       const { position_x: longitude, position_y: latitude } = branch;
       // TODO: startLat, startLon 현 위치로 수정
       navigate(
-        `/direction?startLat=37.5631989425409&startLon=126.98732327063084&endLat=${latitude}&endLon=${longitude}&branchId=${id}`
+        `/direction?startLat=37.54463002278825&startLon=127.05656718408437&endLat=${latitude}&endLon=${longitude}&branchId=${id}`
       );
       showToast(toast, '길 안내를 시작합니다.');
     }
   };
   return (
-    <div className='mx-auto max-w-md overflow-hidden rounded-lg bg-white md:max-w-lg'>
+    <div className='mx-auto overflow-hidden rounded-lg bg-white'>
       <header className='flex h-14 items-center justify-between border'>
         <ArrowLeft width={21} height={21} className='ml-4' />
         <div className='text-xl'>{name}</div>
+        <div></div>
       </header>
       <main>
+        <BankImg />
         {/* <img src={branch} alt='bank image' className='w-full' /> */}
         <div className='border-b p-8'>
           <div className='flex items-center justify-between'>

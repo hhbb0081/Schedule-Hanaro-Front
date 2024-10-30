@@ -3,10 +3,14 @@ import { ChangeToggle } from '../Reservation/ChangeToggle';
 import Tabs from '../Tabs/Tabs';
 import { ReactComponent as DropButton } from '@/assets/icons/reservation/minidown.svg';
 
-function ReservationHeader() {
+type Props = {
+  tabLocation: 'visit' | 'call';
+};
+
+function ReservationHeader({ tabLocation }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState('전화 상담 내역');
-  const [activeTab, setActiveTab] = useState<'visit' | 'call'>('visit');
+  const [activeTab, setActiveTab] = useState<'visit' | 'call'>(tabLocation);
 
   const toggleCallList = () => {
     setIsOpen(!isOpen);
@@ -44,6 +48,7 @@ function ReservationHeader() {
       </div>
       <div className='w-[90%] justify-self-center'>
         <Tabs
+          tabLocation={tabLocation}
           leftValue='visit'
           leftName='방문 상담'
           rightValue='call'
