@@ -10,10 +10,7 @@ import FilterAndSearch from './FilterAndSearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActiveTab } from '@/types/inquiry';
-import rightArrow from '../../../assets/icons/right_arrow.svg';
 import { InquiryDetail } from '@/types/inquiryDetail';
-import { ActiveTab } from '@/types/inquiry';
-import rightArrow from '../../../assets/icons/right_arrow.svg';
 
 function InquiryList({
   activeTab,
@@ -21,7 +18,7 @@ function InquiryList({
   setActiveCategory,
   inquiries,
 }: {
-  activeTab: ActiveTab;
+  activeTab: ActiveTab; // '답변대기' | '답변완료'만 사용
   activeCategory: string;
   setActiveCategory: (category: string) => void;
   inquiries: InquiryDetail[];
@@ -32,14 +29,14 @@ function InquiryList({
     status: inquiry.status as ActiveTab,
     category: inquiry.category,
     time: `${inquiry.time}분 전`,
-    content: inquiry.content, // 문의 내용 추가
-    name: inquiry.name, // 작성자 정보를 name으로 변경
+    content: inquiry.content,
+    name: inquiry.name,
   }));
 
   const filteredInquiries = formattedInquiries.filter(
     ({ status, category }) =>
-      (activeTab === '전체' || status === activeTab) &&
-      (activeCategory === '전체' || category === activeCategory)
+      status === activeTab && // activeTab이 '답변대기' 또는 '답변완료'인 경우
+      (activeCategory === '전체' || category === activeCategory) // 카테고리 필터링
   );
 
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
