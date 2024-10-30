@@ -1,27 +1,27 @@
-import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@/components/ui/select';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverTrigger,
 } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
-import { CalendarIcon, ClockIcon } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { MAX_CAPACITY } from '@/constants/reservation';
 import {
   mockReservations,
   ReservationSlots,
-} from '@/mock/mockReservationsNumber';
-import { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
+} from '@/mock/mockReservationsCall';
 import { format } from 'date-fns';
+import { CalendarIcon, ClockIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import { Button } from '../ui/button';
 import { FormErrorMessage } from './FormErrorMessage';
-import { MAX_CAPACITY } from '@/constants/maxCapacity';
 
 type DateAndTimePickerProps<T extends FieldValues> = {
   control: Control<T>;

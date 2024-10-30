@@ -4,16 +4,16 @@ import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow_left.svg';
 import { ReactComponent as Addrss } from '@/assets/icons/branch/address.svg';
 import { ReactComponent as Hours } from '@/assets/icons/branch/business_hours.svg';
 import { ReactComponent as Tel } from '@/assets/icons/branch/tel.svg';
-import { ReactComponent as Time } from '@/assets/icons/branch/walktime.svg';
 import { ReactComponent as WaitPeople } from '@/assets/icons/branch/waitpeople.svg';
+import { ReactComponent as Time } from '@/assets/icons/branch/walktime.svg';
 
 // import branch from '@/assets/images/branch.png';
 
-import { Button } from '@/components/ui/button';
-import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
-import { DirectionButton } from '@/components/ui/branch/direction';
-import { CloseButton } from '@/components/ui/close';
 import Nav from '@/components/Nav/Nav';
+import { Button } from '@/components/ui/button';
+import { CloseButton } from '@/components/ui/close';
+import { DirectionButton } from '@/components/ui/direction';
+import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 
 export function BranchDetailPage() {
   const navigate = useNavigate();

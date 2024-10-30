@@ -1,13 +1,21 @@
 import { Button } from '@/components/ui/button';
-import Modalbutton from '../Modal';
-import { branchIdAtom } from '@/stores';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
+import { branchIdAtom } from '@/stores';
 import { useAtomValue } from 'jotai';
+import { useNavigate } from 'react-router-dom';
+import Modalbutton from '../Modal';
 
 export default function ReservationButton() {
   const branchId = useAtomValue(branchIdAtom);
   const branchIdx = BRANCH_MOCK.findIndex(({ id }) => id === branchId);
   const reserved = 1;
+  const navigate = useNavigate();
+
+  const handlePage =
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (url: string) => {
+      e.stopPropagation();
+      navigate(url);
+    };
   return (
     <div className='flex gap-3'>
       {reserved ? (
@@ -21,7 +29,12 @@ export default function ReservationButton() {
             modalDescription2=''
             modalButtonTitle='확인'
           ></Modalbutton>
-          <Button className='w-3/4 font-bold'>예약 상세보기</Button>
+          <Button
+            className='w-3/4 font-bold'
+            onClick={(e) => handlePage(e)('/register/visit/1')}
+          >
+            예약 상세보기
+          </Button>
         </>
       ) : (
         <Modalbutton

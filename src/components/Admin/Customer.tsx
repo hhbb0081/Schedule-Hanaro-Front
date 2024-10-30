@@ -1,4 +1,4 @@
-import { label } from '@/constants/customer';
+import { LABEL } from '@/constants';
 
 type CustomerInfoProps = {
   customerCount: number;
@@ -16,10 +16,10 @@ export const CustomerInfo = ({
   inquiryCount,
 }: CustomerInfoProps) => {
   const customerDetails = [
-    { label: label[0].label, id: label[0].id, value: name },
-    { label: label[1].label, id: label[0].id, value: phoneNumber },
-    { label: label[2].label, id: label[0].id, value: birthDate },
-    { label: label[3].label, id: label[0].id, value: `${inquiryCount}회` },
+    { label: LABEL[0].label, id: LABEL[0].id, value: name },
+    { label: LABEL[1].label, id: LABEL[0].id, value: phoneNumber },
+    { label: LABEL[2].label, id: LABEL[0].id, value: birthDate },
+    { label: LABEL[3].label, id: LABEL[0].id, value: `${inquiryCount}회` },
   ];
 
   return (

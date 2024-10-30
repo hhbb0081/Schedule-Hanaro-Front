@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button';
 
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useToast } from '@/hooks/use-toast';
-import { Toaster } from '@/components/ui/toaster';
-import { ConsultationSelect } from '@/components/Register/ConsultationSelect';
 import { AgreementCheckbox } from '@/components/Register/AgreementCheckbox';
+import { ConsultationSelect } from '@/components/Register/ConsultationSelect';
 import { ReusableInput } from '@/components/Register/ReusableInput';
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export type RegisterVisitData = {
   name: string;
@@ -61,7 +61,10 @@ export function RegisterVisitFormPage() {
 
   return (
     <div className='mx-auto flex min-h-[80%] w-[90%] flex-col justify-between py-5'>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-1 flex-col'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='flex h-full flex-1 flex-col justify-between'
+      >
         <div className='flex-1 space-y-4'>
           <ReusableInput
             register={register}
@@ -95,7 +98,7 @@ export function RegisterVisitFormPage() {
           />
         </div>
 
-        <div>
+        <div className='flex-grow'>
           <AgreementCheckbox
             isChecked1={isChecked1}
             isChecked2={isChecked2}

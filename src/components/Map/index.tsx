@@ -12,9 +12,8 @@ import { BranchInfo } from '@/types/branch';
 import { setMyLocation } from '@/utils';
 import { useAtom } from 'jotai';
 import { BottomSheet } from '../BottomSheet/BottomSheet';
-import BottomFloatingSheet from '../Direction/BottomFloatingSheet';
+import BottomFloatingBox from '../Direction/BottomFloatingBox';
 import Nav from '../Nav/Nav';
-import { SearchInput } from '../ui/searchInput';
 import { Marker } from './Marker';
 import { MyLocation } from './MyLocation';
 
@@ -41,6 +40,13 @@ export function Map() {
 
   const onClickMyLocation = () => {
     setMyLocation(setCoord);
+  };
+
+  const focusSelectedBranch = (lat: number, lon: number) => {
+    if (!mapInstance) return;
+    const position = new Tmapv3.LatLng(lat, lon);
+    mapInstance.setCenter(position);
+    mapInstance.setZoom(MAX_ZOOM_LEVEL);
   };
 
   // 현위치 Marker 생성
@@ -76,9 +82,7 @@ export function Map() {
           });
           marker.on('Click', () => {
             onClickMarker(id);
-            // Marker 클릭 시 주소 받아옴
-            mapInstance.setCenter(position);
-            mapInstance.setZoom(MAX_ZOOM_LEVEL);
+            focusSelectedBranch(position._lat, position._lng);
           });
         }
       }
@@ -91,15 +95,19 @@ export function Map() {
       <div className='map' id='map' ref={mapRef} />
       {currentBranchId ? (
         <div className='mx-auto w-full'>
-          <SearchInput />
-          <div className='navbar fixed bottom-[16.5rem] z-10 mx-auto flex w-[26rem] justify-end'>
+          {/* TODO: 검색 화면 구현시 SearchInput 설정 */}
+          {/* <SearchInput /> */}
+          <div className='navbar fixed bottom-[10rem] z-10 mx-auto flex max-w-[30rem] justify-center'>
             <MyLocation onClick={onClickMyLocation} />
-            <BottomFloatingSheet />
+            <BottomFloatingBox type='map' />
           </div>
         </div>
       ) : (
         <>
-          <BottomSheet currentAddress={currentAddress} />
+          <BottomSheet
+            currentAddress={currentAddress}
+            focusSelectedBranch={focusSelectedBranch}
+          />
           <Nav />
         </>
       )}
