@@ -4,10 +4,17 @@ import Tabs from '@/components/Tabs/Tabs';
 import { Outlet, useLocation } from 'react-router-dom';
 
 export function ReservationLayout() {
-  const noLayoutPaths = ['/reservation'];
   const location = useLocation();
 
-  const hasNoLayout = noLayoutPaths.some((path) => location.pathname === path);
+  const noLayoutPaths = [
+    '/reservation/visit/',
+    '/reservation/call/',
+    '/reservation/inquiry/',
+  ];
+
+  const hasNoLayout = noLayoutPaths.some((path) =>
+    location.pathname.startsWith(path)
+  );
   if (hasNoLayout) {
     return <Outlet />;
   }
