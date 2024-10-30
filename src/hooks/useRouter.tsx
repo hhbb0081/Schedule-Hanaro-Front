@@ -5,7 +5,6 @@ import {
   BranchDetailPage,
   DirectionPage,
   InquiryDetailPage,
-  MainPage,
   MapDetailPage,
   MapPage,
   RegisterCallFormPage,
