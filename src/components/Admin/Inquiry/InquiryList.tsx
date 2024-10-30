@@ -42,7 +42,7 @@ function InquiryList({
       (activeCategory === '전체' || category === activeCategory)
   );
 
-  const [expandedItem, setExpandedItem] = useState<number | null>(null);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -64,7 +64,9 @@ function InquiryList({
             <AccordionItem key={id} value={id}>
               <div className='font-inter flex items-center justify-between py-4 font-normal leading-normal'>
                 <div className='flex items-center space-x-2'>
-                  <span className='font-medium text-gray-700'>{index + 1}</span>
+                  <span className='ml-5 mr-5 font-medium text-gray-700'>
+                    {index + 1}
+                  </span>
                   <span className='font-semibold text-gray-800'>
                     {title.length <= 15
                       ? title
@@ -90,7 +92,7 @@ function InquiryList({
                   </span>
                 ) : (
                   <AccordionTrigger
-                    className='flex items-center text-sm text-gray-500'
+                    className='mr-5 flex items-center text-[0.875rem] font-normal text-black'
                     onClick={() =>
                       setExpandedItem(expandedItem === id ? null : id)
                     }
@@ -99,8 +101,8 @@ function InquiryList({
                   </AccordionTrigger>
                 )}
               </div>
-              <AccordionContent>
-                <div className='mt-2 rounded-md p-4 shadow-inner'>
+              <AccordionContent className='-mb-4 mt-0 bg-gray-50'>
+                <div className='mt-2 rounded-md border-t p-4'>
                   <div className='mb-1 flex items-center justify-between'>
                     <p className='font-semibold text-gray-800'>{title}</p>
                     {status === '답변대기' && (
