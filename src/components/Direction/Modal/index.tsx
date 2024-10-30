@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   buttonTitle: string;
@@ -20,6 +21,7 @@ type Props = {
   modalDescription1: string;
   modalDescription2: string;
   modalButtonTitle: string;
+  navigateTo?: string;
 };
 
 export default function Modalbutton({
@@ -30,11 +32,16 @@ export default function Modalbutton({
   modalDescription1,
   modalDescription2,
   modalButtonTitle,
+  navigateTo,
 }: Props) {
+  const navigate = useNavigate();
   const [checkBox, setCheckBox] = useState(false);
 
   const toggleCheckBox = () => {
     setCheckBox((cur) => !cur);
+  };
+  const handleAgree = () => {
+    navigate(navigateTo ?? '/');
   };
 
   return (
@@ -83,7 +90,10 @@ export default function Modalbutton({
             </DialogClose>
 
             {checkBox ? (
-              <Button className='h-[3.1875rem] w-2/3 rounded-[1.875rem] bg-[#454545] font-bold hover:bg-[#545454]'>
+              <Button
+                onClick={handleAgree}
+                className='h-[3.1875rem] w-2/3 rounded-[1.875rem] bg-[#454545] font-bold hover:bg-[#545454]'
+              >
                 {modalButtonTitle}
               </Button>
             ) : (

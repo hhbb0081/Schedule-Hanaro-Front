@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { ConsultationSelect } from '@/components/Register/ConsultationSelect';
 import { AgreementCheckbox } from '@/components/Register/AgreementCheckbox';
 import { ReusableInput } from '@/components/Register/ReusableInput';
+import Header from '@/components/Header/Header';
 
 export type RegisterInquiryData = {
   name: string;
@@ -60,9 +61,13 @@ export function RegisterInquiryFormPage() {
   const [isChecked2, setIsChecked2] = useState(false);
 
   return (
-    <div className='mx-auto flex min-h-[80%] w-[90%] flex-col justify-between py-5'>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-1 flex-col'>
-        <div className='flex-1 space-y-4'>
+    <div className='mx-auto flex w-[90%] flex-col'>
+      <Header title='1:1 상담 예약' />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='flex w-full flex-col gap-[1rem] pt-[5rem]'
+      >
+        <div className='flex flex-col gap-[1rem]'>
           <ReusableInput
             register={register}
             fieldName='name'
@@ -95,7 +100,7 @@ export function RegisterInquiryFormPage() {
           />
         </div>
 
-        <div>
+        <div className='flex flex-col'>
           <AgreementCheckbox
             isChecked1={isChecked1}
             isChecked2={isChecked2}

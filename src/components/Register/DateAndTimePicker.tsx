@@ -131,10 +131,12 @@ export function DateAndTimePicker<T extends FieldValues>({
                       key={slot}
                       value={`${slot} ${getRemainingCapacity(slot)}명`}
                     >
-                      <span className='flex-1'>{slot}</span>
-                      <span className='ml-11'>
-                        {getRemainingCapacity(slot)}명
-                      </span>
+                      <div className='flex w-[12.5rem] justify-between'>
+                        <div>{slot}</div>
+                        <div className='font-bold text-main'>
+                          {getRemainingCapacity(slot)}명
+                        </div>
+                      </div>
                     </SelectItem>
                   ))}
                 </SelectContent>

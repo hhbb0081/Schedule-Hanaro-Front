@@ -3,15 +3,19 @@ import {
   mockReservationInquiryAnswerDetails,
   mockReservationInquiryDetails,
 } from '@/mock/mockReservationsInquiry';
-import ReservationInquiryDetailHeader from '@/components/Header/ReservationInquiryDetailHeader';
+import Header from '@/components/Header/Header';
+import Nav from '@/components/Nav/Nav';
 
 export function InquiryDetailPage() {
-  const { id } = useParams<{ id: string }>();
+  const { id: inquiryId } = useParams<{ id: string }>();
 
-  const inquiry = mockReservationInquiryDetails.find((res) => res.id === id);
-  const inquiry2 = mockReservationInquiryAnswerDetails.find(
-    (res) => res.id === id
+  const inquiry = mockReservationInquiryDetails.find(
+    ({ id }: { id: string }) => id === inquiryId
   );
+  const inquiry2 = mockReservationInquiryAnswerDetails.find(
+    ({ id }: { id: string }) => id === inquiryId
+  );
+
   if (!inquiry) {
     return <div>문의 정보를 찾을 수 없습니다.</div>;
   }
@@ -21,7 +25,7 @@ export function InquiryDetailPage() {
   if (!inquiry2) {
     return (
       <>
-        <ReservationInquiryDetailHeader />
+        <Header title='답변 상세' />
         <div className='mx-auto w-[90%] pt-[2rem]'>
           <div className='flex w-full flex-col items-center gap-[2rem]'>
             <div className='flex w-full flex-col gap-[0.5rem] text-left'>
@@ -45,8 +49,8 @@ export function InquiryDetailPage() {
 
   return (
     <>
-      <ReservationInquiryDetailHeader />
-      <div className='mx-auto w-[90%] pt-[2rem]'>
+      <Header title='답변 상세' />
+      <div className='mx-auto w-[90%] pt-[5rem]'>
         <div className='flex w-full flex-col items-center gap-[2rem]'>
           <div className='flex w-full flex-col gap-[0.5rem] text-left'>
             <div className='text-2xl font-bold'>{title}</div>
@@ -66,6 +70,7 @@ export function InquiryDetailPage() {
             <div className='text-lg text-[#464646]'>{content2}</div>
           </div>
         </div>
+        <Nav />
       </div>
     </>
   );
