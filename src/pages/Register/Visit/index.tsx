@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import Header from '@/components/Header/Header';
 
 export type RegisterVisitData = {
   name: string;
@@ -60,12 +61,13 @@ export function RegisterVisitFormPage() {
   const [isChecked2, setIsChecked2] = useState(false);
 
   return (
-    <div className='mx-auto flex min-h-[80%] w-[90%] flex-col justify-between py-5'>
+    <div className='mx-auto flex w-[90%] flex-col'>
+      <Header title='방문 상담 예약' />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex h-full flex-1 flex-col justify-between'
+        className='flex w-full flex-col gap-[1rem] pt-[5rem]'
       >
-        <div className='flex-1 space-y-4'>
+        <div className='flex flex-col gap-[1rem]'>
           <ReusableInput
             register={register}
             fieldName='name'
@@ -84,7 +86,7 @@ export function RegisterVisitFormPage() {
             register={register}
             fieldName='inquiryTitle'
             error={errors.inquiryTitle?.message}
-            label='상담 제목'
+            label='문의 제목'
             placeholder='제목을 입력하세요.'
             type='text'
           />
@@ -92,13 +94,13 @@ export function RegisterVisitFormPage() {
             register={register}
             fieldName='inquiryContent'
             error={errors.inquiryContent?.message}
-            label='상담 내용'
+            label='문의 내용'
             placeholder='내용을 입력하세요.'
             type='textarea'
           />
         </div>
 
-        <div className='flex-grow'>
+        <div className='flex flex-col'>
           <AgreementCheckbox
             isChecked1={isChecked1}
             isChecked2={isChecked2}
