@@ -1,14 +1,73 @@
-import { useEffect, useState } from 'react';
-import './YourStyles.css';
+// import { useState, useEffect } from 'react';
 
-type WaitingNumberProps = {
-  numbers: number[];
-  angle: number;
-};
+// type WaitingNum = {
+//   previousNumber: number;
+//   currentNumber: number;
+//   nextNumber: number;
+// };
 
-function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
+// function WaitingNumber({
+//   previousNumber,
+//   currentNumber,
+//   nextNumber,
+// }: WaitingNum) {
+//   const [visible, setVisible] = useState(true);
+
+//   useEffect(() => {
+//     setVisible(false);
+//     const timer = setTimeout(() => {
+//       setVisible(true);
+//     }, 100);
+
+//     return () => clearTimeout(timer);
+//   }, [currentNumber]);
+
+//   return (
+//     <div className='mx-auto flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
+//       {/* 레이블 */}
+//       <div className='mb-4 flex w-full max-w-[75%] justify-between px-[0.5rem] md:px-[2rem]'>
+//         <span className='text-sm text-gray-400 md:text-lg'>이전 대기번호</span>
+//         <span className='pt-10 text-sm text-gray-400 md:text-lg'>
+//           현재 대기번호
+//         </span>
+//         <span className='text-sm text-gray-400 md:text-lg'>다음 대기번호</span>
+//       </div>
+
+//       {/* 대기번호 */}
+//       <div className='flex w-full max-w-[75%] items-end justify-between px-2 md:px-8'>
+//         <span
+//           className={`text-4xl font-bold text-gray-600 transition-opacity duration-300 md:text-6xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+//         >
+//           {previousNumber}
+//         </span>
+//         <span
+//           className={`relative top-10 text-6xl font-extrabold text-black transition-opacity duration-300 md:text-8xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+//         >
+//           {currentNumber}
+//         </span>
+//         <span
+//           className={`text-4xl font-bold text-gray-600 transition-opacity duration-300 md:text-6xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+//         >
+//           {nextNumber}
+//         </span>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default WaitingNumber;
+
+import React, { useEffect, useState } from 'react';
+import './YourStyles.css'; // CSS 파일 임포트
+
+const WaitingNumber: React.FC = () => {
+  const [angle, setAngle] = useState(0);
   const [isRow] = useState(false);
-  const rotateAngle = 360 / 8;
+  const [numbers, setNumbers] = useState([
+    952, 953, 954, 955, 956, 957, 958, 951,
+  ]);
+
+  const rotateAngle = 360 / 8; // 카드 개수에 따라 회전 각도 설정
   const radian = (rotateAngle / 2) * (Math.PI / 180);
   const colTz = Math.round(210 / 2 / Math.tan(radian));
   const rowTz = Math.round(140 / 2 / Math.tan(radian));
@@ -20,12 +79,31 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
         ? `rotateX(${rotateAngle * idx}deg) translateZ(${rowTz}px)`
         : `rotateY(${rotateAngle * idx}deg) translateZ(${colTz}px)`;
     });
-  }, [rotateAngle]);
+  }, [isRow, rotateAngle]);
+
+  const handleNext = () => {
+    setNumbers((prevNumbers) => {
+      if (prevNumbers.length === 0) return prevNumbers;
+      const lastNumber = prevNumbers[prevNumbers.length - 1];
+      return [lastNumber, ...prevNumbers.slice(0, prevNumbers.length - 1)];
+    });
+    setNumbers((prevNumbers) => {
+      return prevNumbers.map((num) => num + 1);
+    });
+    setAngle((prev) => prev + rotateAngle);
+  };
+
+  useEffect(() => {
+    console.log(...numbers);
+  }, [numbers]);
 
   return (
     <div className='mt-10 flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
       <div className='mb-[-5rem] flex w-full max-w-xl justify-between px-2 md:px-8'>
+    <div className='mt-10 flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
+      <div className='mb-[-5rem] flex w-full max-w-xl justify-between px-2 md:px-8'>
         <span className='text-sm text-gray-400 md:text-lg'>이전 대기번호</span>
+        <span className='pt-2 text-sm text-gray-400 md:text-lg'>
         <span className='pt-2 text-sm text-gray-400 md:text-lg'>
           현재 대기번호
         </span>
@@ -36,12 +114,15 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
           className='scene relative mx-auto h-[140px] w-[210px]'
           style={{
             perspective: '1200px',
+            perspectiveOrigin: isRow ? 'center' : 'center -60%',
           }}
         >
           <div
             className='carousel transform-style-preserve-3d absolute h-full w-full transition-transform duration-500'
             style={{
-              transform: `rotateY(${-angle}deg)`,
+              transform: isRow
+                ? `rotateX(${-angle}deg)`
+                : `rotateY(${-angle}deg)`,
             }}
           >
             {numbers.map((number, idx) => (
@@ -58,8 +139,17 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
           </div>
         </div>
       </div>
+
+      <div className='mb-4 mt-6 space-x-4'>
+        <button
+          className='bg-aliceblue rounded-lg px-4 py-2 text-lg font-bold'
+          onClick={handleNext}
+        >
+          다음
+        </button>
+      </div>
     </div>
   );
-}
+};
 
 export default WaitingNumber;
