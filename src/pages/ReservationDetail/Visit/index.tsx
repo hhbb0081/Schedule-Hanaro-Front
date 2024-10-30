@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
 import { ReactComponent as Check } from '@/assets/icons/reservation/check.svg';
-import '@/index.css';
-import { DirectionButton } from '@/components/ui/branch/direction';
-import { Button } from '@/components/ui/button';
-import Nav from '@/components/Nav/Nav';
 import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
+import Nav from '@/components/Nav/Nav';
+import { Button } from '@/components/ui/button';
+import { DirectionButton } from '@/components/ui/direction';
+import '@/index.css';
+import { useParams } from 'react-router-dom';
 export function ReservationDetailVisitPage() {
   const { id } = useParams();
   if (!id) {
