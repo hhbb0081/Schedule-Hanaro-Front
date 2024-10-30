@@ -1,9 +1,9 @@
 import '@/index.css';
-import { Button } from '@/components/ui/button';
 import Nav from '@/components/Nav/Nav';
 import { useParams } from 'react-router-dom';
 import { mockReservationCallDetails } from '@/mock/mockReservationsCall';
 import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
+import Modalbutton from '@/components/Direction/Modal';
 export function ReservationDetailCallPage() {
   const { id } = useParams<{ id: string }>();
 
@@ -23,9 +23,9 @@ export function ReservationDetailCallPage() {
   } = reservation;
   return (
     <div className='w-[90%] justify-self-center'>
-      <body className='flex flex-col items-center justify-center gap-[2.5rem]'>
+      <body className='flex w-full flex-col items-center justify-center gap-[2.5rem]'>
         <ReservationDetailHeader />
-        <div className='flex flex-col items-center justify-center gap-[1rem]'>
+        <div className='flex w-full flex-col items-center justify-center gap-[1rem]'>
           <div className='text-center text-lg font-medium'>
             현재 대기 번호는{' '}
             <span className='text-3xl font-bold text-[#008485]/80'>
@@ -38,9 +38,9 @@ export function ReservationDetailCallPage() {
             <div className='text-2xl font-semibold'>{waitingTime}분 후</div>
           </div>
         </div>
-        <div className='flex flex-col gap-[0.5rem]'>
-          <label className='ml-2 flex text-xl font-bold'>예약 상세 정보</label>
-          <div className='flex w-[23.75rem] flex-col gap-[1rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
+        <div className='flex w-full flex-col gap-[0.5rem]'>
+          <label className='ml-2 flex text-2xl font-bold'>예약 상세 정보</label>
+          <div className='flex flex-col gap-[1rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
             <div className='flex justify-between'>
               <div className='text-lg font-medium text-[#666666]'>이름</div>
               <div className='text-lg font-bold text-[#464646]'>{name}</div>
@@ -73,12 +73,15 @@ export function ReservationDetailCallPage() {
             </div>
           </div>
         </div>
-        <Button
-          className='h-[3.75rem] w-[23.75rem] rounded-[1.25rem] py-[1.125rem] text-xl font-bold text-[#2b2b2b]'
-          variant={'outline'}
-        >
-          예약 취소
-        </Button>
+        <Modalbutton
+          buttonTitle='상담 취소'
+          buttonVariant='outline'
+          buttonSize='h-[3.75rem]  rounded-[1.25rem] py-[1.125rem] text-xl'
+          modalTitle='전화 상담 취소'
+          modalDescription1=''
+          modalDescription2='취소시에는 다시 상담 신청을 하셔야합니다.'
+          modalButtonTitle='확인'
+        ></Modalbutton>
       </body>
       <Nav />
     </div>

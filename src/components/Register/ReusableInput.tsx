@@ -32,7 +32,7 @@ export function ReusableInput<T extends FieldValues>({
           })}
           placeholder={placeholder}
           className='w-full resize-none border-2 p-2 text-base outline-none'
-          rows={5}
+          rows={4}
         />
       ) : (
         <Input
