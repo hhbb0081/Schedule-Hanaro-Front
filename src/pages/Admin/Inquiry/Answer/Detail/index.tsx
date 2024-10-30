@@ -69,4 +69,14 @@ export function AnswerDetail() {
       </div>
     </div>
   );
+  // return (
+  //   <div className='mx-auto h-full w-[83%]'>
+  //     <h1 className='text-xl font-bold'>{inquiryData.Title}</h1>
+  //     <div className='text-gray-600'>
+  //       {inquiryData.name} - {new Date(inquiryData.time).toLocaleString()}
+  //     </div>
+  //     <div className='mt-2'>{inquiryData.category}</div>
+  //     <div className='mt-4'>{inquiryData.content}</div>
+  //   </div>
+  // );
 }

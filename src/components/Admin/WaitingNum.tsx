@@ -20,7 +20,27 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
         ? `rotateX(${rotateAngle * idx}deg) translateZ(${rowTz}px)`
         : `rotateY(${rotateAngle * idx}deg) translateZ(${colTz}px)`;
     });
+<<<<<<< HEAD
   }, [rotateAngle]);
+=======
+  }, [isRow, rotateAngle]);
+
+  const handleNext = () => {
+    setNumbers((prevNumbers) => {
+      if (prevNumbers.length === 0) return prevNumbers;
+      const lastNumber = prevNumbers[prevNumbers.length - 1];
+      return [lastNumber, ...prevNumbers.slice(0, prevNumbers.length - 1)];
+    });
+    setNumbers((prevNumbers) => {
+      return prevNumbers.map((num) => num + 1);
+    });
+    setAngle((prev) => prev + rotateAngle);
+  };
+
+  useEffect(() => {
+    console.log(...numbers);
+  }, [numbers]);
+>>>>>>> 7dcc44d ( [Feat]🥚다음순서 3D)
 
   return (
     <div className='mt-10 flex w-full flex-col items-center rounded-lg bg-white pb-[4.25rem]'>
@@ -32,17 +52,30 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
         <span className='text-sm text-gray-400 md:text-lg'>다음 대기번호</span>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7dcc44d ( [Feat]🥚다음순서 3D)
       <div className='relative w-full max-w-xl'>
         <div
           className='scene relative mx-auto h-[140px] w-[210px]'
           style={{
             perspective: '1200px',
+<<<<<<< HEAD
+=======
+            perspectiveOrigin: isRow ? 'center' : 'center -60%',
+>>>>>>> 7dcc44d ( [Feat]🥚다음순서 3D)
           }}
         >
           <div
             className='carousel transform-style-preserve-3d absolute h-full w-full transition-transform duration-500'
             style={{
+<<<<<<< HEAD
               transform: `rotateY(${-angle}deg)`,
+=======
+              transform: isRow
+                ? `rotateX(${-angle}deg)`
+                : `rotateY(${-angle}deg)`,
+>>>>>>> 7dcc44d ( [Feat]🥚다음순서 3D)
             }}
           >
             {numbers.map((number, idx) => (
@@ -58,13 +91,18 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
             ))}
           </div>
         </div>
+<<<<<<< HEAD
 =======
+=======
+      </div>
+>>>>>>> 7dcc44d ( [Feat]🥚다음순서 3D)
 
-      {/* 대기번호 */}
-      <div className='flex w-full max-w-[75%] items-end justify-between px-2 md:px-8'>
-        <span
-          className={`text-4xl font-bold text-gray-600 transition-opacity duration-300 md:text-6xl ${visible ? 'opacity-100' : 'opacity-0'}`}
+      <div className='mb-4 mt-6 space-x-4'>
+        <button
+          className='bg-aliceblue rounded-lg px-4 py-2 text-lg font-bold'
+          onClick={handleNext}
         >
+<<<<<<< HEAD
           {previousNumber}
         </span>
         <span
@@ -78,9 +116,13 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
           {nextNumber}
         </span>
 >>>>>>> 5dfb285 ([Feat]🥚다음 번호 호출)
+=======
+          다음
+        </button>
+>>>>>>> 7dcc44d ( [Feat]🥚다음순서 3D)
       </div>
     </div>
   );
-}
+};
 
 export default WaitingNumber;
