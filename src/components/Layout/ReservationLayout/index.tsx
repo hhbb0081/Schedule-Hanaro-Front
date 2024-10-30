@@ -38,7 +38,7 @@ export function ReservationLayout() {
             <button
               className={`text-center transition-all duration-300 ease-in-out ${
                 ActiveTab === 'visit'
-                  ? 'scale-105 font-bold text-[#2b2b2b]'
+                  ? 'ml-[4.5rem] mr-auto scale-105 text-[1.2rem] font-extrabold text-[#2b2b2b] md:ml-[6.2rem] lg:ml-[6.2rem]'
                   : 'scale-100 text-[#a6a6a6]'
               } ml-[5rem] mr-auto md:ml-[6.8rem] lg:ml-[6.8rem]`}
               onClick={() => ChangeTab('visit')}
@@ -48,7 +48,7 @@ export function ReservationLayout() {
             <button
               className={`text-center transition-all duration-300 ease-in-out ${
                 ActiveTab === 'call'
-                  ? 'scale-105 font-bold text-[#2b2b2b]'
+                  ? 'ml-auto mr-[3.5rem] scale-105 text-[1.2rem] font-extrabold text-[#2b2b2b] md:mr-[5rem] lg:mr-[5rem]'
                   : 'scale-100 text-[#a6a6a6]'
               } ml-auto mr-[4rem] md:mr-[5.5rem] lg:mr-[5.5rem]`}
               onClick={() => ChangeTab('call')}

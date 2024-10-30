@@ -1,4 +1,4 @@
-import { ReactComponent as Refresh } from '@/assets/icons/reservaion/refresh.svg';
+import { ReactComponent as Refresh } from '@/assets/icons/reservation/refresh.svg';
 import { ButtonHTMLAttributes } from 'react';
 
 type Props = {

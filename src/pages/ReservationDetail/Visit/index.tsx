@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { ReactComponent as Check } from '@/assets/icons/reservaion/check.svg';
+import { ReactComponent as Check } from '@/assets/icons/reservation/check.svg';
 import '@/index.css';
 import { DirectionButton } from '@/components/ui/branch/direction';
 import { Button } from '@/components/ui/button';
