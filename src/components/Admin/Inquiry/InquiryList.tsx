@@ -11,23 +11,23 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActiveTab } from '@/types/inquiry';
 import rightArrow from '../../../assets/icons/right_arrow.svg';
-import { mockInquiryData } from '@/mock/adminInquiry';
-import { inquiryDetail } from '@/types/inquiryDetail';
+import { InquiryDetail } from '@/types/inquiryDetail';
 
 function InquiryList({
   activeTab,
   activeCategory,
   setActiveCategory,
+  inquiries,
 }: {
   activeTab: ActiveTab;
   activeCategory: string;
   setActiveCategory: (category: string) => void;
+  inquiries: InquiryDetail[];
 }) {
-  const inquiries: inquiryDetail[] = mockInquiryData;
 
   const formattedInquiries = inquiries.map((inquiry) => ({
     id: String(inquiry.id),
-    title: inquiry.Title,
+    title: inquiry.title,
     status: inquiry.status as ActiveTab,
     category: inquiry.category,
     time: `${inquiry.time}분 전`,

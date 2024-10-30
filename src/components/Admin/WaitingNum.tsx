@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './YourStyles.css';
+// import './YourStyles.css';
 
 type WaitingNumberProps = {
   numbers: number[];
