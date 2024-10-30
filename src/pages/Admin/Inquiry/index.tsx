@@ -4,8 +4,8 @@ import ReplyState from '@/components/Admin/Inquiry/ReplyState';
 import { useState } from 'react';
 
 function InquiryPage() {
-  const [activeTab, setActiveTab] = useState<'답변대기' | '답변완료' | '전체'>(
-    '전체'
+  const [activeTab, setActiveTab] = useState<'답변대기' | '답변완료'>(
+    '답변대기'
   );
   const [activeCategory, setActiveCategory] = useState<string>('전체'); // 카테고리 상태 추가
 
