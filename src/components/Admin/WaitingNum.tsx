@@ -60,6 +60,6 @@ function WaitingNumber({ numbers, angle }: WaitingNumberProps) {
       </div>
     </div>
   );
-}
+};
 
 export default WaitingNumber;
