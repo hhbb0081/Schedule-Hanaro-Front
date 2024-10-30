@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import Header from '@/components/Header/Header';
 
 export type RegisterCallData = {
   name: string;
@@ -93,57 +94,66 @@ export function RegisterCallFormPage() {
   }, []);
 
   return (
-    <div className='mx-auto flex min-h-[80%] w-[90%] flex-col justify-between py-5'>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-1 flex-col'>
-        <div className='flex-1 space-y-4'>
-          <ReusableInput
-            register={register}
-            fieldName='name'
-            error={errors.name?.message}
-            label='이름'
-            placeholder='ex) 김하나'
-            type='text'
-          />
-          <PhoneNumberInput register={register} error={errors.phone?.message} />
-          <ConsultationSelect
-            control={control}
-            error={errors.consultationType?.message}
-            fieldName={'consultationType'}
-          />
-          <DateAndTimePicker<RegisterCallData>
-            control={control}
-            timeSlots={timeSlots}
-            dateError={errors.reservationDate?.message}
-            timeError={errors.reservationTime?.message}
-            dateFieldName={'reservationDate'}
-            timeFieldName={'reservationTime'}
-          />
-        </div>
-
-        <div>
-          <AgreementCheckbox
-            isChecked1={isChecked1}
-            isChecked2={isChecked2}
-            setIsChecked1={setIsChecked1}
-            setIsChecked2={setIsChecked2}
-          />
-          <div className='flex justify-between'>
-            <Button
-              type='button'
-              onClick={() => navigate('/')}
-              variant='ghost'
-              className='w-1/4'
-            >
-              취소
-            </Button>
-            <Button type='submit' variant='default' className='ml-2 w-3/4'>
-              예약하기
-            </Button>
+    <>
+      <Header title='전화 상담 예약' />
+      <div className='mx-auto flex w-[90%] justify-between py-5 pt-[5rem]'>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='flex w-full flex-col gap-[5rem]'
+        >
+          <div className='flex w-full flex-col gap-[1rem]'>
+            <ReusableInput
+              register={register}
+              fieldName='name'
+              error={errors.name?.message}
+              label='이름'
+              placeholder='ex) 김하나'
+              type='text'
+            />
+            <PhoneNumberInput
+              register={register}
+              error={errors.phone?.message}
+            />
+            <ConsultationSelect
+              control={control}
+              error={errors.consultationType?.message}
+              fieldName={'consultationType'}
+            />
+            <DateAndTimePicker<RegisterCallData>
+              control={control}
+              timeSlots={timeSlots}
+              dateError={errors.reservationDate?.message}
+              timeError={errors.reservationTime?.message}
+              dateFieldName={'reservationDate'}
+              timeFieldName={'reservationTime'}
+            />
           </div>
-        </div>
-      </form>
 
-      <Toaster />
-    </div>
+          <div className='flex w-full flex-col'>
+            <AgreementCheckbox
+              isChecked1={isChecked1}
+              isChecked2={isChecked2}
+              setIsChecked1={setIsChecked1}
+              setIsChecked2={setIsChecked2}
+            />
+            <div className='flex justify-between'>
+              <Button
+                type='button'
+                onClick={() => navigate('/')}
+                variant='ghost'
+                className='w-1/4'
+              >
+                취소
+              </Button>
+              <Button type='submit' variant='default' className='ml-2 w-3/4'>
+                예약하기
+              </Button>
+            </div>
+          </div>
+        </form>
+
+        <Toaster />
+      </div>
+    </>
   );
 }
