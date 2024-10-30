@@ -8,7 +8,6 @@ import {
   MapPage,
   RegisterCallFormPage,
   RegisterInquiryFormPage,
-  RegisterPage,
   ReservationCallPage,
   ReservationDetailVisitPage,
   ReservationInquiryPage,
@@ -17,6 +16,7 @@ import {
 } from '@/pages';
 //수정 예정 ..
 import { ClientLayout } from '@/components/Layout/ClientLayout';
+import { MainLayout } from '@/components/Layout/MainLayout';
 import MypageLayout from '@/components/Layout/MypageLayout';
 import CallPage from '@/pages/Admin/Call';
 import InquiryPage from '@/pages/Admin/Inquiry';
@@ -26,7 +26,6 @@ import VisitPage from '@/pages/Admin/Visit';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
-import { MainLayout } from '@/components/Layout/MainLayout';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -58,7 +57,7 @@ export const useRouter = () =>
           path: '/reservation',
           element: <ReservationLayout />,
           children: [
-            { index: true, element: <ReservationPage /> },
+            // { index: true, element: <ReservationPage /> },
             {
               path: '/reservation/call',
               children: [
@@ -99,7 +98,7 @@ export const useRouter = () =>
           path: '/register',
           element: <RegisterLayout />,
           children: [
-            { index: true, element: <RegisterPage /> },
+            { index: true, element: <ReservationPage /> },
             {
               path: '/register/call',
               element: <RegisterCallFormPage />,

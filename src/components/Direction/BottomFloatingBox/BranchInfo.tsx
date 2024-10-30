@@ -1,12 +1,17 @@
+import { ReactComponent as Hyperlink } from '@/assets/icons/hyperlink.svg';
 import { DirectionButton } from '@/components/ui/direction';
 import { Separator } from '@/components/ui/separator';
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/hooks/use-toast';
 import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
+import { showToast } from '@/pages';
 import { branchIdAtom } from '@/stores';
 import { useAtomValue } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { FloatingType } from '.';
 
 export default function BranchInfo({ type }: FloatingType) {
+  const { toast } = useToast();
   const navigate = useNavigate();
   const branchId = useAtomValue(branchIdAtom);
   const targetBranch = BRANCH_MOCK.find((branch) => branch.id === branchId);
@@ -24,16 +29,27 @@ export default function BranchInfo({ type }: FloatingType) {
       navigate(
         `/direction?startLat=37.5631989425409&startLon=126.98732327063084&endLat=${latitude}&endLon=${longitude}&branchId=${branchId}`
       );
+      showToast(toast, '길 안내를 시작합니다.');
     }
+  };
+
+  const handlePage = (url: string) => () => {
+    navigate(url);
   };
 
   return (
     <>
       <div className='flex items-center justify-between'>
         <div className='flex flex-col items-start justify-center gap-1'>
-          <span className='flex text-2xl font-extrabold'>
-            {targetBranch?.name ?? ''}
-          </span>
+          <div
+            className='flex items-center justify-center gap-2'
+            onClick={handlePage(`/branch/${branchId}`)}
+          >
+            <span className='flex text-2xl font-extrabold'>
+              {targetBranch?.name ?? ''}
+            </span>
+            <Hyperlink />
+          </div>
           <div className='flex flex-wrap items-center justify-center gap-2'>
             <span className='text-[1rem] text-lightGrey'>
               {targetBranch?.address ?? ''}
@@ -61,6 +77,7 @@ export default function BranchInfo({ type }: FloatingType) {
           <span className='text-md font-bold'>{`${targetBranchState?.waiting_time ?? 0}분`}</span>
         </div>
       </div>
+      <Toaster />
     </>
   );
 }

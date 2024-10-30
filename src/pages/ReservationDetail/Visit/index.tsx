@@ -1,16 +1,36 @@
 import { ReactComponent as Check } from '@/assets/icons/reservation/check.svg';
-import '@/index.css';
+import Modalbutton from '@/components/Direction/Modal';
 import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
 import Nav from '@/components/Nav/Nav';
 import { DirectionButton } from '@/components/ui/direction';
+import { useToast } from '@/hooks/use-toast';
 import '@/index.css';
-import { useParams } from 'react-router-dom';
-import Modalbutton from '@/components/Direction/Modal';
+import { BRANCH_MOCK } from '@/mock/branch_mock';
+import { showToast } from '@/pages/Register/Call';
+import { useNavigate, useParams } from 'react-router-dom';
 export function ReservationDetailVisitPage() {
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const { id } = useParams();
   if (!id) {
     return;
   }
+
+  const branch = BRANCH_MOCK.find((br) => br.id === id);
+
+  const handleDirection = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    if (branch) {
+      const { position_x: longitude, position_y: latitude } = branch;
+      // TODO: startLat, startLon 현 위치로 수정
+      navigate(
+        `/direction?startLat=37.5631989425409&startLon=126.98732327063084&endLat=${latitude}&endLon=${longitude}&branchId=${id}`
+      );
+      showToast(toast, '길 안내를 시작합니다.');
+    }
+  };
   return (
     <div className='h-screen w-[90%] justify-self-center'>
       <div className='flex h-full flex-col'>
@@ -41,7 +61,7 @@ export function ReservationDetailVisitPage() {
             </div>
             <div className='mt-2 flex w-full justify-center gap-6'>
               <div className='text-2xl font-semibold'>하나은행 성수역점</div>
-              <DirectionButton />
+              <DirectionButton onClick={handleDirection} />
             </div>
             <div className='mt-6 w-[23.75rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
               <h3 className='flex text-xl font-bold text-black'>대기정보</h3>
