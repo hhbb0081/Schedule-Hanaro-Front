@@ -134,7 +134,7 @@ export const useRouter = () =>
           path: '/admin/inquiry/:id',
           element: <AnswerDetail />,
         },
-        { path: '/admin/inquiry/answerInput', element: <AnswerInput /> },
+        { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/call', element: <CallPage /> },
       ],
