@@ -13,25 +13,27 @@ import { InquiryDetail } from '@/types/inquiryDetail';
 import { ActiveTab } from '@/types/inquiry';
 import rightArrow from '../../../assets/icons/right_arrow.svg';
 
+type InquiryListProps = {
+  activeTab: ActiveTab;
+  activeCategory: string;
+  setActiveCategory: (category: string) => void;
+  inquiries: InquiryDetail[];
+}
+
 function InquiryList({
   activeTab,
   activeCategory,
   setActiveCategory,
-  inquiries, // inquiries props 추가
-}: {
-  activeTab: ActiveTab;
-  activeCategory: string;
-  setActiveCategory: (category: string) => void;
-  inquiries: InquiryDetail[]; // inquiries 타입 정의 추가
-}) {
-  const formattedInquiries = inquiries.map((inquiry) => ({
-    id: String(inquiry.id),
-    title: inquiry.title,
-    status: inquiry.status as ActiveTab,
-    category: inquiry.category,
-    time: `${inquiry.time}분 전`,
-    content: inquiry.content, // 문의 내용 추가
-    name: inquiry.name, // 작성자 정보를 name으로 변경
+  inquiries, 
+}: InquiryListProps) {
+  const formattedInquiries = inquiries.map(({ id, title, status, category, time, content, name }) => ({
+    id: String(id),
+    title: title,
+    status: status as ActiveTab,
+    category: category,
+    time: `${time}분 전`,
+    content: content,
+    name: name,
   }));
 
   const filteredInquiries = formattedInquiries.filter(
