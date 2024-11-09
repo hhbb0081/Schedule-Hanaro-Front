@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
-
 import { Marker } from '@/components/Map/Marker';
 import { PolyLine } from '@/components/Map/Polyline';
 import {
@@ -11,10 +9,10 @@ import {
   MAX_ZOOM_LEVEL,
   MIN_ZOOM_LEVEL,
 } from '@/constants';
-import { queryKeys } from '@/queries';
-import { Coord, mapClickAtom } from '@/stores';
+import { mapClickAtom } from '@/stores';
 import { TMap, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
 import { useAtom } from 'jotai';
+import { useReverseGeoLocation, useRoutesPedestrain } from './useTmapQuery';
 
 const { Tmapv3 } = window;
 
@@ -62,47 +60,16 @@ export const useMap = (
   };
   // ======================================
 
-  const isEnabled = (coords: Coord[]) =>
-    coords.some(({ latitude, longitude }) => !!latitude || !!longitude);
-
   // 현위치 좌표 -> 주소 변환 Query
-  const { data: addressData } = useQuery({
-    ...queryKeys.tmap.getAddressFromCoord({
-      latitude: coord.latitude,
-      longitude: coord.longitude,
-    }),
-
-    placeholderData: keepPreviousData,
-    enabled: isEnabled([coord]),
-  });
+  const { data: addressData } = useReverseGeoLocation(coord);
   const currentAddress = addressData?.addressInfo.fullAddress || '';
 
   // 출발지 좌표 -> 주소 변환 Query
-  const { data: startAddressData } = useQuery({
-    ...queryKeys.tmap.getAddressFromCoord({
-      latitude: startCoord.latitude,
-      longitude: startCoord.longitude,
-    }),
-
-    placeholderData: keepPreviousData,
-    enabled: isEnabled([startCoord]),
-  });
+  const { data: startAddressData } = useReverseGeoLocation(startCoord);
   const currentStartAddress = startAddressData?.addressInfo.fullAddress || '';
 
   // 보행자 경로 Query
-  const { data: pathData } = useQuery({
-    ...queryKeys.tmap.getRoutesPedestrain({
-      startLatitude: startCoord.latitude,
-      startLongitude: startCoord.longitude,
-      endLatitude: endCoord.latitude,
-      endLongitude: endCoord.longitude,
-      startName: '출발지',
-      endName: '목적지',
-    }),
-
-    placeholderData: keepPreviousData,
-    enabled: isEnabled([startCoord, endCoord]),
-  });
+  const { data: pathData } = useRoutesPedestrain(startCoord, endCoord);
 
   //======================================================
 

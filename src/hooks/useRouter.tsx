@@ -1,4 +1,8 @@
-import { MapLayout, ReservationLayout } from '@/components/Layout';
+import {
+  MapLayout,
+  MapTestLayout,
+  ReservationLayout,
+} from '@/components/Layout';
 import AdminLayout from '@/components/Layout/AdminLayout';
 import { RegisterLayout } from '@/components/Layout/Register';
 import {
@@ -29,6 +33,8 @@ import VisitPage from '@/pages/Admin/Visit';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
+import MapTestPage from '@/pages/MapTest';
+import DupTest from '@/pages/MapTest/DupTest';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -145,6 +151,14 @@ export const useRouter = () =>
         { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/call', element: <CallPage /> },
+      ],
+    },
+    {
+      path: '/maptest',
+      element: <MapTestLayout />,
+      children: [
+        { index: true, element: <MapTestPage /> },
+        { path: '/maptest/dup', element: <DupTest /> },
       ],
     },
   ]);
