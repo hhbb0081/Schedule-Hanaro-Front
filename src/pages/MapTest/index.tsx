@@ -1,21 +1,29 @@
-import { useMap } from '@/hooks/map-context';
+import { Direction } from '@/components/Direction';
+import Nav from '@/components/Nav/Nav';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
-import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export default function MapTestPage() {
-  const { mapRef, setStartCoord, setEndCoord } = useMap();
+  const [searchParams] = useSearchParams();
 
-  const startLat = '37.5631989425409';
-  const startLon = '126.98732327063084';
+  const startLat = searchParams.get('startLat') || '37.5631989425409';
+  const startLon = searchParams.get('startLon') || '126.98732327063084';
 
-  const endLat = BRANCH_MOCK[1].position_y;
-  const endLon = BRANCH_MOCK[1].position_x;
+  const endLat = searchParams.get('endLat') || BRANCH_MOCK[1].position_y;
+  const endLon = searchParams.get('endLon') || BRANCH_MOCK[1].position_x;
 
-  useEffect(() => {
-    setStartCoord(+startLat, +startLon);
-    setEndCoord(+endLat, +endLon);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startLat, startLon, endLat, endLon]);
+  const branchId = searchParams.get('branchId') || BRANCH_MOCK[1].id;
 
-  return <div id='map' className='map' ref={mapRef}></div>;
+  return (
+    <>
+      <Direction
+        startLat={startLat}
+        startLon={startLon}
+        endLat={endLat}
+        endLon={endLon}
+        branchId={branchId}
+      />
+      <Nav />
+    </>
+  );
 }

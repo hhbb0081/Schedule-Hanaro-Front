@@ -1,26 +1,34 @@
-import { arrivalTimeAtom, departureTimeAtom, totalTimeAtom } from '@/stores';
-import { useAtom, useAtomValue } from 'jotai';
-import { useEffect } from 'react';
+import { useMap } from '@/hooks/map-context';
+import { useEffect, useState } from 'react';
 
 export default function DepartureArrivalTime() {
-  const [departureTime, setDepartureTime] = useAtom(departureTimeAtom);
-  const [arrivalTime, setArrivalTime] = useAtom(arrivalTimeAtom);
-  const totalTime = useAtomValue(totalTimeAtom);
+  const { routesPedstrainResponse } = useMap();
+  const departureTime = new Date();
+  const [arrivalTime, setArrivalTime] = useState<Date>(new Date());
 
   useEffect(() => {
-    setDepartureTime(new Date());
+    if (!routesPedstrainResponse) return;
 
-    if (!departureTime) return;
-
-    const tmpDate = new Date(departureTime);
-    tmpDate.setSeconds(
-      tmpDate.getSeconds() + +(totalTime / 60).toFixed(0) * 60
+    console.log(
+      '🚀 ~ useEffect ~ routesPedstrainResponse:',
+      routesPedstrainResponse.totalDistance
     );
-    console.log('🚀 ~ TopSheet ~ tmpDate:', tmpDate);
-    console.log('🚀 ~ TopSheet ~ totalTime:', totalTime);
-    setArrivalTime(tmpDate);
+    console.log(
+      '🚀 ~ useEffect ~ routesPedstrainResponse:',
+      routesPedstrainResponse.totalTime
+    );
+
+    const { totalTime } = routesPedstrainResponse;
+    const tmpTime = new Date(departureTime);
+    tmpTime.setSeconds(
+      departureTime.getSeconds() + +(totalTime / 60).toFixed(0) * 60
+    );
+    setArrivalTime(tmpTime);
+    console.log('🚀 ~ TopSheet ~ departureTime:', departureTime);
+    console.log('🚀 ~ TopSheet ~ arrivalTime:', arrivalTime);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalTime]);
+  }, [routesPedstrainResponse]);
 
   return (
     <div className='flex flex-col justify-between font-bold'>

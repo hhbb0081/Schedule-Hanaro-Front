@@ -1,9 +1,9 @@
-import { totalTimeAtom } from '@/stores';
-import { useAtomValue } from 'jotai';
+import { useMap } from '@/hooks/map-context';
 
 export default function TotalTime() {
-  const totalTime = useAtomValue(totalTimeAtom);
+  const { routesPedstrainResponse } = useMap();
 
+  const { totalTime } = routesPedstrainResponse || { totalTime: 0 };
   return (
     <div className='flex items-end gap-3'>
       <div>소요시간</div>

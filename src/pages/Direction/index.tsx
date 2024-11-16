@@ -1,16 +1,11 @@
 import { Direction } from '@/components/Direction';
 import Nav from '@/components/Nav/Nav';
+import { MapProvider } from '@/hooks/map-context';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
-import { branchIdAtom, endAtom, startAtom } from '@/stores';
-import { useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export function DirectionPage() {
-  const [start, setStart] = useAtom(startAtom);
-  const [end, setEnd] = useAtom(endAtom);
-  const [, setBranchId] = useAtom(branchIdAtom);
-
   const [searchParams] = useSearchParams();
 
   const startLat = searchParams.get('startLat') || '37.5631989425409';
@@ -19,29 +14,20 @@ export function DirectionPage() {
   const endLat = searchParams.get('endLat') || BRANCH_MOCK[1].position_y;
   const endLon = searchParams.get('endLon') || BRANCH_MOCK[1].position_x;
 
-  useEffect(() => {
-    if (start) return;
-    setStart({ latitude: +startLat, longitude: +startLon });
-    setEnd({ latitude: +endLat, longitude: +endLon });
+  const branchId = searchParams.get('branchId') || BRANCH_MOCK[1].id;
 
-    setBranchId(searchParams.get('branchId') || '8124674');
-  }, [
-    start,
-    end,
-    endLat,
-    endLon,
-    searchParams,
-    setBranchId,
-    setEnd,
-    setStart,
-    startLat,
-    startLon,
-  ]);
+  const mapRef = useRef<HTMLDivElement>(null);
 
   return (
-    <>
-      <Direction />
+    <MapProvider mapRef={mapRef}>
+      <Direction
+        startLat={startLat}
+        startLon={startLon}
+        endLat={endLat}
+        endLon={endLon}
+        branchId={branchId}
+      />
       <Nav />
-    </>
+    </MapProvider>
   );
 }

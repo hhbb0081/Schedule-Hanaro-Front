@@ -5,19 +5,17 @@ import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/hooks/use-toast';
 import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { showToast } from '@/pages';
-import { branchIdAtom } from '@/stores';
-import { useAtomValue } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { FloatingType } from '.';
 
-export default function BranchInfo({ type }: FloatingType) {
+export default function BranchInfo({
+  type,
+  branchId,
+}: FloatingType & { branchId: string }) {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const branchId = useAtomValue(branchIdAtom);
-  const targetBranch = BRANCH_MOCK.find((branch) => branch.id === branchId);
-  const targetBranchState = BRANCH_STATE_MOCK.find(
-    (branch) => branch.id === branchId
-  );
+  const targetBranch = BRANCH_MOCK.find(({ id }) => id === branchId);
+  const targetBranchState = BRANCH_STATE_MOCK.find(({ id }) => id === branchId);
 
   const handleDirection = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

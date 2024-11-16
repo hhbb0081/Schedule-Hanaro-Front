@@ -10,7 +10,7 @@ export type BranchCardProps = {
   openTime?: string;
   waitingNumber: string;
   waitingTime: string;
-  type?: 'bank' | 'atm' | 'reservedBank';
+  type?: 'branch' | 'atm' | 'reservedBranch';
 };
 
 function BranchCard({
@@ -21,7 +21,7 @@ function BranchCard({
   openTime,
   waitingNumber,
   waitingTime,
-  type = 'bank',
+  type = 'branch',
 }: BranchCardProps) {
   return (
     <div className='flex w-full cursor-pointer items-center justify-between rounded-[0.9375rem] bg-white p-6 shadow-[0_0_10px_5px_rgba(0,0,0,0.05)] transition-colors duration-300 hover:bg-gray-50'>
@@ -45,7 +45,7 @@ function BranchCard({
             <span className='text-[0.875rem]'>{openTime}</span>
           </div>
         </div>
-        {type === 'bank' && (
+        {type === 'branch' && (
           <div className='flex items-center gap-4'>
             <Badge className='gap-2 rounded-[5px] bg-[rgba(0,0,0,0.07)] px-4 py-2 text-[0.875rem] text-lightGrey'>
               <span>대기인원</span>

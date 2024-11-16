@@ -22,10 +22,10 @@ type MarkerProps = {
     | 'start'
     | 'end'
     | 'current'
-    | 'bank'
-    | 'selectedBank'
-    | 'reservedBank'
-    | 'selectedReservedBank'
+    | 'branch'
+    | 'selectedBranch'
+    | 'reservedBranch'
+    | 'selectedReservedBranch'
     | 'atm'
     | 'selectedAtm';
   icon?: string;
@@ -45,13 +45,13 @@ export function Marker({
         ? markerStart
         : theme === 'end'
           ? markerEnd
-          : theme === 'bank'
+          : theme === 'branch'
             ? markerBank
-            : theme === 'selectedBank'
+            : theme === 'selectedBranch'
               ? markerBankSelected
-              : theme === 'reservedBank'
+              : theme === 'reservedBranch'
                 ? markerBankReserved
-                : theme === 'selectedReservedBank'
+                : theme === 'selectedReservedBranch'
                   ? markerBankReservedSelected
                   : theme === 'atm'
                     ? markerAtm

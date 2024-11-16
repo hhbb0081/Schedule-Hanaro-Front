@@ -31,6 +31,8 @@ import useMarker from './useMarker';
 import { defaultMarkers, Markers } from '@/types/markers';
 import { PolyLine } from '@/components/Map/Polyline';
 import { Coords, defaultCoords } from '@/types/coords';
+import { BranchInfo } from '@/types/branch';
+import { Marker } from '@/components/Map/Marker';
 
 type MapContextProps = {
   mapRef: RefObject<HTMLDivElement> | null;
@@ -38,7 +40,12 @@ type MapContextProps = {
   startAddress: string;
   setStartCoord: (latitude: number, longitude: number) => void;
   setEndCoord: (latitude: number, longitude: number) => void;
+  selectedBranchId: string | null;
+  setSelectedBranchId: (branchId: string | null) => void;
+  setBranchList: (branchList: BranchInfo[]) => void;
   routesPedstrainResponse: RoutesPedestrainResponse | null;
+  setFocus: (latitude: number, longitude: number) => void;
+  setDirectionAllNull: () => void;
 };
 
 const { Tmapv3 } = window;
@@ -49,7 +56,12 @@ const MapContext = createContext<MapContextProps>({
   startAddress: '',
   setStartCoord: () => {},
   setEndCoord: () => {},
+  selectedBranchId: '',
+  setSelectedBranchId: () => {},
+  setBranchList: () => {},
   routesPedstrainResponse: null,
+  setFocus: () => {},
+  setDirectionAllNull: () => {},
 });
 
 type MapProviderProps = {
@@ -84,6 +96,8 @@ export const MapProvider = ({
   const [mapInstance, setMapInstance] = useState<TMap | null>(null);
   const [coords, setCoords] = useState<Coords>(defaultCoords);
   const [markers, setMarkers] = useState<Markers>(defaultMarkers);
+  const [selectedBranchId, setSelectedBranchId] = useState<string | null>(null);
+  const [branchList, setBranchList] = useState<BranchInfo[]>([]);
   const [routesPedestrainData, dispatchRoutesPedestrainData] = useReducer(
     routesPedestrainReducer,
     defaultRoutesPedestrainRequest
@@ -213,6 +227,41 @@ export const MapProvider = ({
   useMarker(mapInstance, startCoord, startMarker, setStartMarker, 'start');
   useMarker(mapInstance, endCoord, endMarker, setEndMarker, 'end');
 
+  const setFocus = (lat: number, lon: number) => {
+    if (!mapInstance) return;
+    const position = new Tmapv3.LatLng(lat, lon);
+    mapInstance.setCenter(position);
+    mapInstance.setZoom(MAX_ZOOM_LEVEL);
+  };
+
+  // 은행 마커 생성
+  useEffect(() => {
+    const onClickMarker = (id: string) => {
+      console.log(id);
+      if (selectedBranchId !== id) setSelectedBranchId(id);
+    };
+
+    branchList.forEach(
+      ({ id, name, position_x: longitude, position_y: latitude, type }) => {
+        if (mapInstance && latitude && longitude) {
+          console.log(type);
+          const position = new Tmapv3.LatLng(+latitude, +longitude);
+          const marker = Marker({
+            mapContent: mapInstance,
+            position,
+            theme: type,
+            labelText: name,
+          });
+          marker.on('Click', () => {
+            onClickMarker(id);
+            setFocus(+latitude, +longitude);
+          });
+        }
+      }
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mapInstance, branchList]);
+
   // Polyline 생성 함수
   const makePolyLine = useCallback(
     (tempPath: TMapLatLng[], strokeColor: string, strokeWeight: number) => {
@@ -259,6 +308,35 @@ export const MapProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapInstance, routesPedestrainData]);
 
+  const setDirectionAllNull = () => {
+    dispatchRoutesPedestrainData({
+      type: 'setStartCoord',
+      payload: null,
+    });
+    dispatchRoutesPedestrainData({
+      type: 'setEndCoord',
+      payload: null,
+    });
+    dispatchRoutesPedestrainData({
+      type: 'setPath',
+      payload: [],
+    });
+
+    setCoords((cur) => ({
+      ...cur,
+      startCoord: null,
+      endCoord: null,
+    }));
+
+    setMarkers((cur) => ({
+      ...cur,
+      startMarker: null,
+      endMarker: null,
+    }));
+
+    setCurrentPolyline(null);
+  };
+
   return (
     <MapContext.Provider
       value={{
@@ -267,7 +345,12 @@ export const MapProvider = ({
         startAddress,
         setStartCoord,
         setEndCoord,
+        selectedBranchId,
+        setSelectedBranchId,
+        setBranchList,
         routesPedstrainResponse,
+        setFocus,
+        setDirectionAllNull,
       }}
     >
       {children}

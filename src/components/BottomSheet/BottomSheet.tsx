@@ -28,9 +28,7 @@ import {
 } from '@/components/ui/drawer';
 import { MAP_CHIPS } from '@/constants';
 import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
-import { branchIdAtom } from '@/stores';
 import { BranchInfo } from '@/types/branch';
-import { useSetAtom } from 'jotai';
 import { List, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import BranchCard from '../Map/BranchCard';
@@ -42,19 +40,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { useMap } from '@/hooks/map-context';
 
-type Props = {
-  currentAddress: string;
-  focusSelectedBranch: (lat: number, lon: number) => void;
-};
-
-export function BottomSheet({ currentAddress, focusSelectedBranch }: Props) {
+export function BottomSheet() {
+  const { currentAddress, setSelectedBranchId, setFocus } = useMap();
   const [selectedChipIdx, setSelectedChipIdx] = useState(0); // 영업점 | ATM chip
 
   const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen((prev) => !prev);
-
-  const setCurrentBranchId = useSetAtom(branchIdAtom);
 
   const handleDetailPage = (branchId: string) => {
     toggleOpen();
@@ -63,8 +56,8 @@ export function BottomSheet({ currentAddress, focusSelectedBranch }: Props) {
     ) as BranchInfo;
     const { position_x: lat, position_y: lon } = targetBranch;
     setTimeout(() => {
-      setCurrentBranchId(branchId);
-      if (lat && lon) focusSelectedBranch(+lon, +lat);
+      setSelectedBranchId(branchId);
+      if (lat && lon) setFocus(+lon, +lat);
     }, 200);
   };
 
@@ -155,37 +148,29 @@ export function BottomSheet({ currentAddress, focusSelectedBranch }: Props) {
               {/* </DrawerHeader> */}
               <ul className='h-full space-y-6 overflow-y-auto p-1 scrollbar-hide'>
                 {BRANCH_MOCK?.filter(({ type }) => {
-                  const stype = selectedChipIdx === 0 ? 'bank' : 'atm';
+                  const stype = selectedChipIdx === 0 ? 'branch' : 'atm';
                   return type === stype;
                 })
-                  ?.map(
-                    ({
-                      id,
-                      name,
-                      address,
-                      business_hours,
-                      type,
-                    }: BranchInfo) => {
-                      // TODO: waiting_number -> distance로 수정
-                      const { waiting_number, waiting_time } =
-                        findWaitingInfo(id);
-                      return (
-                        <li key={id} onClick={() => handleDetailPage(id)}>
-                          <BranchCard
-                            id={id}
-                            name={name}
-                            isOpen={true}
-                            address={address}
-                            distance={waiting_number}
-                            openTime={business_hours}
-                            waitingNumber={waiting_number}
-                            waitingTime={waiting_time}
-                            type={type}
-                          />
-                        </li>
-                      );
-                    }
-                  )
+                  ?.map(({ id, name, address, business_hours, type }) => {
+                    // TODO: waiting_number -> distance로 수정
+                    const { waiting_number, waiting_time } =
+                      findWaitingInfo(id);
+                    return (
+                      <li key={id} onClick={() => handleDetailPage(id)}>
+                        <BranchCard
+                          id={id}
+                          name={name}
+                          isOpen={true}
+                          address={address}
+                          distance={waiting_number}
+                          openTime={business_hours}
+                          waitingNumber={waiting_number}
+                          waitingTime={waiting_time}
+                          type={type}
+                        />
+                      </li>
+                    );
+                  })
                   ?.sort((a, b) => +a.props.distance - +b.props.distance)}
               </ul>
             </div>
