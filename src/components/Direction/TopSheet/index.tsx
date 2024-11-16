@@ -9,9 +9,10 @@ import TotalTime from './TotalTime';
 
 type TopSheetProps = {
   closeDirection: () => void;
+  branchId: string;
 };
 
-export default function TopSheet({ closeDirection }: TopSheetProps) {
+export default function TopSheet({ closeDirection, branchId }: TopSheetProps) {
   return (
     <div className='fixed top-10 z-10 h-[13rem] w-[70%] max-w-[30rem] rounded-xl bg-white px-6 py-4'>
       <div className='flex h-full flex-col justify-between'>
@@ -19,7 +20,7 @@ export default function TopSheet({ closeDirection }: TopSheetProps) {
           <div className='flex gap-3'>
             <DepartureArrivalTime />
             <DirectionBar />
-            <DepartureArrivalAddress />
+            <DepartureArrivalAddress branchId={branchId} />
           </div>
           <Button variant={'link'} className='w-auto' onClick={closeDirection}>
             <X />

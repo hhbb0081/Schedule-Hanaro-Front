@@ -15,12 +15,12 @@ const defaultRoutesPedestrainRequest: RoutesPedestrainRequest = {
 
 type SetStartCoordAction = {
   type: 'setStartCoord';
-  payload: TMapLatLng;
+  payload: TMapLatLng | null;
 };
 
 type SetEndCoordAction = {
   type: 'setEndCoord';
-  payload: TMapLatLng;
+  payload: TMapLatLng | null;
 };
 
 type SetPathAction = {
@@ -35,13 +35,13 @@ type RoutesPedestrainAction =
 
 // Response
 type RoutesPedestrainResponse = {
-  totalDistance: number | null;
-  totalTime: number | null;
+  totalDistance: number;
+  totalTime: number;
 };
 
 const defaultRoutesPedestrainResponse: RoutesPedestrainResponse = {
-  totalDistance: null,
-  totalTime: null,
+  totalDistance: 0,
+  totalTime: 0,
 };
 export {
   type RoutesPedestrainAction,
