@@ -28,7 +28,13 @@ export function Direction({
 }: DirectionProps) {
   const navigate = useNavigate();
 
-  const { mapRef, setStartCoord, setEndCoord, setDirectionAllNull } = useMap();
+  const {
+    mapRef,
+    mapFocusOnly,
+    setStartCoord,
+    setEndCoord,
+    setDirectionAllNull,
+  } = useMap();
 
   // 출발지 & 도착지 설정
   useEffect(() => {
@@ -50,11 +56,16 @@ export function Direction({
   return (
     <>
       <div className='flex w-full flex-col items-center'>
-        <TopSheet
-          closeDirection={closeDirection}
-          branchId={branchId}
-        ></TopSheet>
-        <BottomFloatingBox type='dir' branchId={branchId} />
+        {!mapFocusOnly && (
+          <>
+            <TopSheet
+              closeDirection={closeDirection}
+              branchId={branchId}
+            ></TopSheet>
+            <BottomFloatingBox type='dir' branchId={branchId} />
+          </>
+        )}
+
         {/* <div className='navbar fixed bottom-[20.5rem] z-10 mx-auto flex w-[30rem] justify-end'>
           <MyLocation onClick={onClickMyLocation} />
         </div> */}
