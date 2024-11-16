@@ -36,6 +36,7 @@ import { Marker } from '@/components/Map/Marker';
 
 type MapContextProps = {
   mapRef: RefObject<HTMLDivElement> | null;
+  mapFocusOnly: boolean;
   currentAddress: string;
   startAddress: string;
   setStartCoord: (latitude: number, longitude: number) => void;
@@ -52,6 +53,7 @@ const { Tmapv3 } = window;
 
 const MapContext = createContext<MapContextProps>({
   mapRef: null,
+  mapFocusOnly: false,
   currentAddress: '',
   startAddress: '',
   setStartCoord: () => {},
@@ -94,6 +96,7 @@ export const MapProvider = ({
   mapRef,
 }: PropsWithChildren<MapProviderProps>) => {
   const [mapInstance, setMapInstance] = useState<TMap | null>(null);
+  const [mapFocusOnly, setMapFocusOnly] = useState(false);
   const [coords, setCoords] = useState<Coords>(defaultCoords);
   const [markers, setMarkers] = useState<Markers>(defaultMarkers);
   const [selectedBranchId, setSelectedBranchId] = useState<string | null>(null);
@@ -123,6 +126,17 @@ export const MapProvider = ({
     setMapInstance(map);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapRef]);
+
+  // Map 클릭 시 상하 시트 토글
+  useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
+    mapInstance.on('Click', () => {
+      console.log('Map Clicked!!!!');
+      setMapFocusOnly((cur) => !cur);
+    });
+  }, [mapInstance, setMapFocusOnly]);
 
   // 현위치 주소 받아오기
   const { data: addressData } = useReverseGeoLocation({
@@ -341,6 +355,7 @@ export const MapProvider = ({
     <MapContext.Provider
       value={{
         mapRef,
+        mapFocusOnly,
         currentAddress,
         startAddress,
         setStartCoord,
