@@ -32,3 +32,17 @@ export function useRoutesPedestrain(startCoord: Coord, endCoord: Coord) {
     enabled: isEnabled([startCoord, endCoord]),
   });
 }
+
+export function useRoutesAutomobile(startCoord: Coord, endCoord: Coord) {
+  return useQuery({
+    ...queryKeys.tmap.getRoutesAutomobile({
+      startLatitude: startCoord.latitude,
+      startLongitude: startCoord.longitude,
+      endLatitude: endCoord.latitude,
+      endLongitude: endCoord.longitude,
+    }),
+
+    placeholderData: keepPreviousData,
+    enabled: isEnabled([startCoord, endCoord]),
+  });
+}

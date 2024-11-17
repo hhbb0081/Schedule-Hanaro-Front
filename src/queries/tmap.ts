@@ -22,4 +22,13 @@ export const tmapKeys = createQueryKeys('tmap', {
     queryKey: [{ filters }],
     queryFn: () => tmap.getRoutesPedestrain(filters),
   }),
+  getRoutesAutomobile: (filters: {
+    startLatitude: number;
+    startLongitude: number;
+    endLatitude: number;
+    endLongitude: number;
+  }) => ({
+    queryKey: [{ filters }],
+    queryFn: () => tmap.getRoutesAutomobile(filters),
+  }),
 });

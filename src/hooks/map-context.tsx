@@ -5,7 +5,7 @@ import {
   MAX_ZOOM_LEVEL,
   MIN_ZOOM_LEVEL,
 } from '@/constants';
-import { TMap, TMapLatLng, TMapMarker, TMapPolyline } from '@/types';
+import { TMap, TMapMarker, TMapPolyline } from '@/types';
 import {
   createContext,
   PropsWithChildren,
@@ -17,15 +17,12 @@ import {
   useReducer,
   useState,
 } from 'react';
-import { useReverseGeoLocation, useRoutesPedestrain } from './useTmapQuery';
 import {
-  defaultRoutesPedestrainRequest,
-  defaultRoutesPedestrainResponse,
-  RoutesPedestrainAction,
-  RoutesPedestrainRequest,
-  RoutesPedestrainResponse,
-} from '@/types/routesPedestrainData';
-import { parseRoutesPedestrainResponse } from './parseRoutesPedestrainResponse';
+  useReverseGeoLocation,
+  useRoutesAutomobile,
+  useRoutesPedestrain,
+} from './useTmapQuery';
+import { parseRoutesResponse } from './parseRoutesPedestrainResponse';
 import getMyLocation from './useMyLocation';
 import useMarker from './useMarker';
 import { defaultMarkers, Markers } from '@/types/markers';
@@ -33,6 +30,13 @@ import { PolyLine } from '@/components/Map/Polyline';
 import { Coords, defaultCoords } from '@/types/coords';
 import { BranchInfo } from '@/types/branch';
 import { Marker } from '@/components/Map/Marker';
+import {
+  defaultRoutesRequest,
+  defaultRoutesResponse,
+  RoutesAction,
+  RoutesRequest,
+  RoutesResponse,
+} from '@/types/routesPedestrainData';
 
 type MapContextProps = {
   mapRef: RefObject<HTMLDivElement> | null;
@@ -44,9 +48,12 @@ type MapContextProps = {
   selectedBranchId: string | null;
   setSelectedBranchId: (branchId: string | null) => void;
   setBranchList: (branchList: BranchInfo[]) => void;
-  routesPedstrainResponse: RoutesPedestrainResponse | null;
+  routesPedestrainResponse: RoutesResponse | null;
+  routesAutomobileResponse: RoutesResponse | null;
   setFocus: (latitude: number, longitude: number) => void;
-  setDirectionAllNull: () => void;
+  routesType: 'pedestrain' | 'automobile';
+  setRouteTypeToPedestrain: () => void;
+  setRouteTypeToAutomobile: () => void;
 };
 
 const { Tmapv3 } = window;
@@ -61,34 +68,40 @@ const MapContext = createContext<MapContextProps>({
   selectedBranchId: '',
   setSelectedBranchId: () => {},
   setBranchList: () => {},
-  routesPedstrainResponse: null,
+  routesPedestrainResponse: null,
+  routesAutomobileResponse: null,
   setFocus: () => {},
-  setDirectionAllNull: () => {},
+  routesType: 'pedestrain',
+  setRouteTypeToPedestrain: () => {},
+  setRouteTypeToAutomobile: () => {},
 });
 
 type MapProviderProps = {
   mapRef: RefObject<HTMLDivElement>;
 };
-
+// TODO: 선택 상태하나 만들고 그거 set되면 그 라인만 보이게
 // Routes Pedstrain
-const routesPedestrainReducer = (
-  data: RoutesPedestrainRequest,
-  { type, payload }: RoutesPedestrainAction
+const routesReducer = (
+  data: RoutesRequest,
+  { type, payload }: RoutesAction
 ) => {
-  let routesPedestrainRequest: RoutesPedestrainRequest;
+  let routesRequest: RoutesRequest;
   switch (type) {
     case 'setStartCoord':
-      routesPedestrainRequest = { ...data, startCoord: payload };
+      routesRequest = { ...data, startCoord: payload };
       break;
     case 'setEndCoord':
-      routesPedestrainRequest = { ...data, endCoord: payload };
+      routesRequest = { ...data, endCoord: payload };
       break;
-    case 'setPath':
-      routesPedestrainRequest = { ...data, path: payload };
+    case 'setPathPedestrain':
+      routesRequest = { ...data, pathPedestrain: payload };
+      break;
+    case 'setPathAutomobile':
+      routesRequest = { ...data, pathAutomobile: payload };
       break;
   }
 
-  return routesPedestrainRequest;
+  return routesRequest;
 };
 
 export const MapProvider = ({
@@ -101,15 +114,20 @@ export const MapProvider = ({
   const [markers, setMarkers] = useState<Markers>(defaultMarkers);
   const [selectedBranchId, setSelectedBranchId] = useState<string | null>(null);
   const [branchList, setBranchList] = useState<BranchInfo[]>([]);
-  const [routesPedestrainData, dispatchRoutesPedestrainData] = useReducer(
-    routesPedestrainReducer,
-    defaultRoutesPedestrainRequest
+  const [routesData, dispatchRoutesData] = useReducer(
+    routesReducer,
+    defaultRoutesRequest
   );
-  const [routesPedstrainResponse, setRoutesPedestrainResponse] =
-    useState<RoutesPedestrainResponse>(defaultRoutesPedestrainResponse);
-  const [currentPolyline, setCurrentPolyline] = useState<TMapPolyline | null>(
-    null
+  const [routesPedestrainResponse, setRoutesPedestrainResponse] =
+    useState<RoutesResponse>(defaultRoutesResponse);
+  const [routesAutomobileResponse, setRoutesAutomobileResponse] =
+    useState<RoutesResponse>(defaultRoutesResponse);
+  useState<TMapPolyline | null>(null);
+  useState<TMapPolyline | null>(null);
+  const [routesType, setRoutesType] = useState<'pedestrain' | 'automobile'>(
+    'pedestrain'
   );
+
   // Map 초기 설정
   useLayoutEffect(() => {
     if (mapRef.current?.firstChild || mapInstance) {
@@ -147,20 +165,32 @@ export const MapProvider = ({
 
   // 출발지 주소 받아오기
   const { data: startAddressData } = useReverseGeoLocation({
-    latitude: routesPedestrainData.startCoord?.lat() || 0,
-    longitude: routesPedestrainData.startCoord?.lng() || 0,
+    latitude: routesData.startCoord?.lat() || 0,
+    longitude: routesData.startCoord?.lng() || 0,
   });
   const startAddress = startAddressData?.addressInfo.fullAddress || '';
 
   // 보행자 경로 받아오기
-  const { data: routesPedestrainResponse } = useRoutesPedestrain(
+  const { data: pedestrainResponse } = useRoutesPedestrain(
     {
-      latitude: routesPedestrainData.startCoord?.lat() || 0,
-      longitude: routesPedestrainData.startCoord?.lng() || 0,
+      latitude: routesData.startCoord?.lat() || 0,
+      longitude: routesData.startCoord?.lng() || 0,
     },
     {
-      latitude: routesPedestrainData.endCoord?.lat() || 0,
-      longitude: routesPedestrainData.endCoord?.lng() || 0,
+      latitude: routesData.endCoord?.lat() || 0,
+      longitude: routesData.endCoord?.lng() || 0,
+    }
+  );
+
+  // 자동차 경로 받아오기
+  const { data: automobileResponse } = useRoutesAutomobile(
+    {
+      latitude: routesData.startCoord?.lat() || 0,
+      longitude: routesData.startCoord?.lng() || 0,
+    },
+    {
+      latitude: routesData.endCoord?.lat() || 0,
+      longitude: routesData.endCoord?.lng() || 0,
     }
   );
 
@@ -172,30 +202,47 @@ export const MapProvider = ({
 
   // 보행자 경로 및 시간, 거리 정보 설정하기
   useEffect(() => {
-    if (!routesPedestrainResponse) {
+    if (!pedestrainResponse) {
       return;
     }
 
-    const { path, totalDistance, totalTime } = parseRoutesPedestrainResponse(
-      routesPedestrainResponse
-    );
+    const { path, totalDistance, totalTime } =
+      parseRoutesResponse(pedestrainResponse);
 
-    setCoords({
-      ...coords,
-      startCoord: path[0],
-      endCoord: path[path.length - 1],
-    });
+    setCoords((cur) => ({
+      ...cur,
+      startPedestrainCoord: path[0],
+      endPedestrainCoord: path[path.length - 1],
+    }));
 
-    dispatchRoutesPedestrainData({ type: 'setPath', payload: path });
+    dispatchRoutesData({ type: 'setPathPedestrain', payload: path });
     setRoutesPedestrainResponse({ totalDistance, totalTime });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [routesPedestrainResponse]);
+  }, [pedestrainResponse]);
+
+  // 자동차 경로 및 시간, 거리 정보 설정하기
+  useEffect(() => {
+    if (!automobileResponse) {
+      return;
+    }
+
+    const { path, totalDistance, totalTime } =
+      parseRoutesResponse(automobileResponse);
+
+    setCoords((cur) => ({
+      ...cur,
+      startAutomobileCoord: path[0],
+      endAutomobileCoord: path[path.length - 1],
+    }));
+
+    dispatchRoutesData({ type: 'setPathAutomobile', payload: path });
+    setRoutesAutomobileResponse({ totalDistance, totalTime });
+  }, [automobileResponse]);
 
   const setCurrentCoord = useCallback(
     (latitude: number, longitude: number) => {
       const position = new Tmapv3.LatLng(latitude, longitude);
-      setCoords({ ...coords, currentCoord: position });
-      if (routesPedestrainData.path.length == 0) {
+      setCoords((cur) => ({ ...cur, currentCoord: position }));
+      if (routesData.pathPedestrain.length == 0) {
         mapInstance?.setCenter(position);
       }
     },
@@ -204,33 +251,26 @@ export const MapProvider = ({
   );
 
   const setStartCoord = (latitude: number, longitude: number) => {
-    dispatchRoutesPedestrainData({
+    dispatchRoutesData({
       type: 'setStartCoord',
       payload: new Tmapv3.LatLng(latitude, longitude),
     });
   };
 
   const setEndCoord = (latitude: number, longitude: number) => {
-    dispatchRoutesPedestrainData({
+    dispatchRoutesData({
       type: 'setEndCoord',
       payload: new Tmapv3.LatLng(latitude, longitude),
     });
   };
 
   const setCurrentMarker = (marker: TMapMarker) => {
-    setMarkers({ ...markers, currentMarker: marker });
+    setMarkers((cur) => ({ ...cur, currentMarker: marker }));
   };
 
-  const setStartMarker = (marker: TMapMarker) => {
-    setMarkers({ ...markers, startMarker: marker });
-  };
+  const { currentCoord } = coords;
+  const { currentMarker } = markers;
 
-  const setEndMarker = (marker: TMapMarker) => {
-    setMarkers({ ...markers, endMarker: marker });
-  };
-
-  const { currentCoord, startCoord, endCoord } = coords;
-  const { currentMarker, startMarker, endMarker } = markers;
   useMarker(
     mapInstance,
     currentCoord,
@@ -238,8 +278,74 @@ export const MapProvider = ({
     setCurrentMarker,
     'current'
   );
-  useMarker(mapInstance, startCoord, startMarker, setStartMarker, 'start');
-  useMarker(mapInstance, endCoord, endMarker, setEndMarker, 'end');
+
+  useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
+
+    const {
+      startPedestrainCoord,
+      endPedestrainCoord,
+      startAutomobileCoord,
+      endAutomobileCoord,
+    } = coords;
+
+    let tmpStart: TMapMarker | null;
+    let tmpEnd: TMapMarker | null;
+    if (routesType === 'pedestrain') {
+      if (!startPedestrainCoord || !endPedestrainCoord) {
+        return;
+      }
+
+      tmpStart = Marker({
+        mapContent: mapInstance,
+        position: startPedestrainCoord,
+        theme: 'start',
+      });
+
+      tmpEnd = Marker({
+        mapContent: mapInstance,
+        position: endPedestrainCoord,
+        theme: 'end',
+      });
+
+      setMarkers((cur) => ({
+        ...cur,
+        startPedestrainMarker: tmpStart,
+        endPedestrainMarker: tmpEnd,
+      }));
+    } else {
+      if (!startAutomobileCoord || !endAutomobileCoord) {
+        return;
+      }
+
+      console.log('Automobile Marker');
+
+      tmpStart = Marker({
+        mapContent: mapInstance,
+        position: startAutomobileCoord,
+        theme: 'start',
+      });
+
+      tmpEnd = Marker({
+        mapContent: mapInstance,
+        position: endAutomobileCoord,
+        theme: 'end',
+      });
+
+      setMarkers((cur) => ({
+        ...cur,
+        startAutomobileMarker: tmpStart,
+        endAutomobileMarker: tmpEnd,
+      }));
+    }
+
+    return () => {
+      tmpStart?.setMap(null);
+      tmpEnd?.setMap(null);
+    };
+  }, [mapInstance, coords, routesType]);
 
   const setFocus = (lat: number, lon: number) => {
     if (!mapInstance) return;
@@ -276,79 +382,79 @@ export const MapProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapInstance, branchList]);
 
-  // Polyline 생성 함수
-  const makePolyLine = useCallback(
-    (tempPath: TMapLatLng[], strokeColor: string, strokeWeight: number) => {
-      if (!tempPath.length || !mapInstance) {
+  // Pedestrain Polyline 적용 함수
+  useEffect(() => {
+    if (!mapRef.current?.firstChild || !mapInstance) return;
+
+    const { startCoord, endCoord, pathPedestrain, pathAutomobile } = routesData;
+
+    let tmpPolyline: TMapPolyline | null;
+    if (routesType === 'pedestrain') {
+      if (!startCoord || !endCoord || pathPedestrain.length === 0) {
         return;
       }
-      const startLatitude = tempPath[0]._lat;
-      const startLongitude = tempPath[0]._lng;
-
-      currentPolyline?.setMap(null);
-
-      const position = new Tmapv3.LatLng(startLatitude, startLongitude);
-
-      const polyline = PolyLine({
-        path: tempPath,
-        strokeColor,
-        strokeWeight,
+      mapInstance.on('ConfigLoad', () => {
+        console.log('Map Loaded!!!');
+        tmpPolyline = PolyLine({
+          path: pathPedestrain,
+          strokeColor: '#3D8BFF',
+          strokeWeight: 9,
+          mapContent: mapInstance,
+        });
+        // setPedestrainPolyline(tmpPolyline);
+      });
+      tmpPolyline = PolyLine({
+        path: pathPedestrain,
+        strokeColor: '#3D8BFF',
+        strokeWeight: 9,
         mapContent: mapInstance,
       });
-      setCurrentPolyline(polyline);
+      // setPedestrainPolyline(tmpPolyline);
+
+      const startLatitude = pathPedestrain[0]._lat;
+      const startLongitude = pathPedestrain[0]._lng;
+      const position = new Tmapv3.LatLng(startLatitude, startLongitude);
       mapInstance?.setCenter(position);
-    },
-    [mapInstance, currentPolyline]
-  );
+    } else {
+      if (!startCoord || !endCoord || pathAutomobile.length === 0) {
+        return;
+      }
+      mapInstance.on('ConfigLoad', () => {
+        console.log('Map Loaded!!!');
+        tmpPolyline = PolyLine({
+          path: pathAutomobile,
+          strokeColor: '#3D8BFF',
+          strokeWeight: 9,
+          mapContent: mapInstance,
+        });
+        // setAutomobilePolyline(tmpPolyline);
+      });
+      tmpPolyline = PolyLine({
+        path: pathAutomobile,
+        strokeColor: '#3D8BFF',
+        strokeWeight: 9,
+        mapContent: mapInstance,
+      });
+      // setAutomobilePolyline(tmpPolyline);
 
-  // Polyline 적용 함수
-  useEffect(() => {
-    console.log('Polyline1');
-
-    if (!mapRef.current?.firstChild || !mapInstance) return;
-    console.log('Polyline2');
-
-    const { startCoord, endCoord, path } = routesPedestrainData;
-    console.log('🚀 ~ useEffect ~ path:', path);
-    console.log('🚀 ~ useEffect ~ endCoord:', endCoord);
-    console.log('🚀 ~ useEffect ~ startCoord:', startCoord);
-    if (!startCoord || !endCoord || path.length === 0) {
-      return;
+      const startLatitude = pathAutomobile[0]._lat;
+      const startLongitude = pathAutomobile[0]._lng;
+      const position = new Tmapv3.LatLng(startLatitude, startLongitude);
+      mapInstance?.setCenter(position);
     }
-    console.log('Polyline3');
 
-    mapInstance.on('ConfigLoad', () => makePolyLine(path, '#3D8BFF', 9));
-
+    return () => {
+      tmpPolyline?.setMap(null);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mapInstance, routesPedestrainData]);
+  }, [mapInstance, routesData, routesType]);
 
-  const setDirectionAllNull = () => {
-    dispatchRoutesPedestrainData({
-      type: 'setStartCoord',
-      payload: null,
-    });
-    dispatchRoutesPedestrainData({
-      type: 'setEndCoord',
-      payload: null,
-    });
-    dispatchRoutesPedestrainData({
-      type: 'setPath',
-      payload: [],
-    });
+  const setRouteTypeToPedestrain = () => {
+    setRoutesType('pedestrain');
+  };
 
-    setCoords((cur) => ({
-      ...cur,
-      startCoord: null,
-      endCoord: null,
-    }));
-
-    setMarkers((cur) => ({
-      ...cur,
-      startMarker: null,
-      endMarker: null,
-    }));
-
-    setCurrentPolyline(null);
+  const setRouteTypeToAutomobile = () => {
+    setRoutesType('automobile');
   };
 
   return (
@@ -363,9 +469,12 @@ export const MapProvider = ({
         selectedBranchId,
         setSelectedBranchId,
         setBranchList,
-        routesPedstrainResponse,
+        routesPedestrainResponse,
+        routesAutomobileResponse,
         setFocus,
-        setDirectionAllNull,
+        routesType,
+        setRouteTypeToPedestrain,
+        setRouteTypeToAutomobile,
       }}
     >
       {children}

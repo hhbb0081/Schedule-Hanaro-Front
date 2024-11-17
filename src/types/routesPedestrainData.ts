@@ -1,16 +1,18 @@
 import { TMapLatLng } from './tmap';
 
 // Request
-type RoutesPedestrainRequest = {
+type RoutesRequest = {
   startCoord: TMapLatLng | null;
   endCoord: TMapLatLng | null;
-  path: TMapLatLng[];
+  pathPedestrain: TMapLatLng[];
+  pathAutomobile: TMapLatLng[];
 };
 
-const defaultRoutesPedestrainRequest: RoutesPedestrainRequest = {
+const defaultRoutesRequest: RoutesRequest = {
   startCoord: null,
   endCoord: null,
-  path: [],
+  pathPedestrain: [],
+  pathAutomobile: [],
 };
 
 type SetStartCoordAction = {
@@ -23,30 +25,36 @@ type SetEndCoordAction = {
   payload: TMapLatLng | null;
 };
 
-type SetPathAction = {
-  type: 'setPath';
+type SetPathPedestrainAction = {
+  type: 'setPathPedestrain';
   payload: TMapLatLng[];
 };
 
-type RoutesPedestrainAction =
-  | SetPathAction
+type SetPathAutomobileAction = {
+  type: 'setPathAutomobile';
+  payload: TMapLatLng[];
+};
+
+type RoutesAction =
+  | SetPathPedestrainAction
+  | SetPathAutomobileAction
   | SetStartCoordAction
   | SetEndCoordAction;
 
 // Response
-type RoutesPedestrainResponse = {
+type RoutesResponse = {
   totalDistance: number;
   totalTime: number;
 };
 
-const defaultRoutesPedestrainResponse: RoutesPedestrainResponse = {
+const defaultRoutesResponse: RoutesResponse = {
   totalDistance: 0,
   totalTime: 0,
 };
 export {
-  type RoutesPedestrainAction,
-  type RoutesPedestrainRequest,
-  type RoutesPedestrainResponse,
-  defaultRoutesPedestrainRequest,
-  defaultRoutesPedestrainResponse,
+  type RoutesAction,
+  type RoutesRequest,
+  type RoutesResponse,
+  defaultRoutesRequest,
+  defaultRoutesResponse,
 };

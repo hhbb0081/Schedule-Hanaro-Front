@@ -1,10 +1,8 @@
-import { TMapLatLng, TmapRoutePedestrainResponse } from '@/types';
+import { TMapLatLng, TmapRouteResponse } from '@/types';
 
 const { Tmapv3 } = window;
 
-export const parseRoutesPedestrainResponse = (
-  response: TmapRoutePedestrainResponse
-) => {
+export const parseRoutesResponse = (response: TmapRouteResponse) => {
   const path: TMapLatLng[] = [];
   const featureData = response?.features;
   featureData?.forEach(({ geometry }) => {

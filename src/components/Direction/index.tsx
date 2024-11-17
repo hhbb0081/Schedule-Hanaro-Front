@@ -28,13 +28,7 @@ export function Direction({
 }: DirectionProps) {
   const navigate = useNavigate();
 
-  const {
-    mapRef,
-    mapFocusOnly,
-    setStartCoord,
-    setEndCoord,
-    setDirectionAllNull,
-  } = useMap();
+  const { mapRef, mapFocusOnly, setStartCoord, setEndCoord } = useMap();
 
   // 출발지 & 도착지 설정
   useEffect(() => {
@@ -49,7 +43,6 @@ export function Direction({
 
   const closeDirection = () => {
     // showToast(toast, '길 안내를 종료합니다.');
-    setDirectionAllNull();
     navigate('/map');
   };
 
