@@ -3,9 +3,12 @@ import { useMap } from '@/hooks/map-context';
 const KILLOMETER = 1000;
 
 export default function TotalDistance() {
-  const { routesPedstrainResponse } = useMap();
+  const { routesType, routesPedestrainResponse, routesAutomobileResponse } =
+    useMap();
 
-  const { totalDistance } = routesPedstrainResponse || { totalDistance: 0 };
+  const { totalDistance } = (routesType === 'pedestrain'
+    ? routesPedestrainResponse
+    : routesAutomobileResponse) || { totalDistance: 0 };
 
   return (
     <div className='flex items-end gap-3'>

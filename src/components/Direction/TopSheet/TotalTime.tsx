@@ -1,9 +1,12 @@
 import { useMap } from '@/hooks/map-context';
 
 export default function TotalTime() {
-  const { routesPedstrainResponse } = useMap();
+  const { routesType, routesPedestrainResponse, routesAutomobileResponse } =
+    useMap();
 
-  const { totalTime } = routesPedstrainResponse || { totalTime: 0 };
+  const { totalTime } = (routesType === 'pedestrain'
+    ? routesPedestrainResponse
+    : routesAutomobileResponse) || { totalTime: 0 };
   return (
     <div className='flex items-end gap-3'>
       <div>소요시간</div>

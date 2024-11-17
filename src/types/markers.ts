@@ -2,12 +2,16 @@ import { TMapMarker } from './tmap';
 
 export type Markers = {
   currentMarker: TMapMarker | null;
-  startMarker: TMapMarker | null;
-  endMarker: TMapMarker | null;
+  startPedestrainMarker: TMapMarker | null;
+  endPedestrainMarker: TMapMarker | null;
+  startAutomobileMarker: TMapMarker | null;
+  endAutomobileMarker: TMapMarker | null;
 };
 
-export const defaultMarkers = {
+export const defaultMarkers: Markers = {
   currentMarker: null,
-  startMarker: null,
-  endMarker: null,
+  startPedestrainMarker: null,
+  endPedestrainMarker: null,
+  startAutomobileMarker: null,
+  endAutomobileMarker: null,
 };

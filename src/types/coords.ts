@@ -2,14 +2,18 @@ import { TMapLatLng } from './tmap';
 
 export type Coords = {
   currentCoord: TMapLatLng | null;
-  startCoord: TMapLatLng | null;
-  endCoord: TMapLatLng | null;
+  startPedestrainCoord: TMapLatLng | null;
+  endPedestrainCoord: TMapLatLng | null;
+  startAutomobileCoord: TMapLatLng | null;
+  endAutomobileCoord: TMapLatLng | null;
   branchCoordList: TMapLatLng[];
 };
 
-export const defaultCoords = {
+export const defaultCoords: Coords = {
   currentCoord: null,
-  startCoord: null,
-  endCoord: null,
+  startPedestrainCoord: null,
+  endPedestrainCoord: null,
+  startAutomobileCoord: null,
+  endAutomobileCoord: null,
   branchCoordList: [],
 };

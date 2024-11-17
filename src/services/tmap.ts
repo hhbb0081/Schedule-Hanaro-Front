@@ -4,7 +4,7 @@ import { TMAP_API_KEY } from '@/constants';
 import {
   TmapResponse,
   TmapReverseGeocodingResponse,
-  TmapRoutePedestrainResponse,
+  TmapRouteResponse,
 } from '@/types';
 
 export const tmap = {
@@ -13,6 +13,7 @@ export const tmap = {
     pois: '/pois',
     reverseGeocoding: '/geo/reversegeocoding',
     routesPedestrain: '/routes/pedestrian',
+    routesAutomobile: '/routes',
   },
 
   searchAddress: async ({ searchKeyword }: { searchKeyword: string }) => {
@@ -104,9 +105,45 @@ export const tmap = {
       endName,
     };
 
-    // TODO:
-    const { data } = await axios.post<TmapRoutePedestrainResponse>(
+    const { data } = await axios.post<TmapRouteResponse>(
       `${tmap.host}${tmap.endPoint.routesPedestrain}?${queryString}`,
+      body,
+      options
+    );
+    return data;
+  },
+
+  getRoutesAutomobile: async ({
+    startLatitude,
+    startLongitude,
+    endLatitude,
+    endLongitude,
+  }: {
+    startLatitude: number;
+    startLongitude: number;
+    endLatitude: number;
+    endLongitude: number;
+  }) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        appKey: TMAP_API_KEY,
+      },
+    };
+    const searchOptions = {
+      version: '1',
+    };
+    const queryString = new URLSearchParams(searchOptions).toString();
+    const body = {
+      startX: startLongitude,
+      startY: startLatitude,
+      endX: endLongitude,
+      endY: endLatitude,
+    };
+
+    const { data } = await axios.post<TmapRouteResponse>(
+      `${tmap.host}${tmap.endPoint.routesAutomobile}?${queryString}`,
       body,
       options
     );

@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import BranchInfo from './BranchInfo';
 import ReservationButton from './ReservationButton';
 import { useMap } from '@/hooks/map-context';
+import { Button } from '@/components/ui/button';
 
 export type FloatingType = {
   type: 'dir' | 'map';
@@ -12,7 +13,11 @@ export default function BottomFloatingBox({
   type,
   branchId,
 }: FloatingType & { branchId: string }) {
-  const { setSelectedBranchId } = useMap();
+  const {
+    setSelectedBranchId,
+    setRouteTypeToAutomobile,
+    setRouteTypeToPedestrain,
+  } = useMap();
 
   const initBranchId = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
     e.stopPropagation();
@@ -39,6 +44,20 @@ export default function BottomFloatingBox({
         )}
         <BranchInfo type={type} branchId={branchId} />
         <ReservationButton />
+        <Button
+          variant={'link'}
+          className='w-auto'
+          onClick={setRouteTypeToAutomobile}
+        >
+          자동차
+        </Button>
+        <Button
+          variant={'link'}
+          className='w-auto'
+          onClick={setRouteTypeToPedestrain}
+        >
+          보행자
+        </Button>
       </div>
     </div>
   );
