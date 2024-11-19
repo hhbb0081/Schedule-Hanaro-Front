@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
 import { ConsultationSelect } from '@/components/Register/ConsultationSelect';
@@ -30,12 +30,16 @@ const showToast = (toast: any, description: string) => {
 export function RegisterInquiryFormPage() {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<RegisterInquiryData>();
+
+  const consultationType = watch('consultationType');
 
   const onSubmit: SubmitHandler<RegisterInquiryData> = (data) => {
     if (!isChecked1 || !isChecked2) {
@@ -53,12 +57,14 @@ export function RegisterInquiryFormPage() {
 
     showToast(toast, '예약 완료되었습니다!');
     setTimeout(() => {
-      navigate('/');
+      navigate(`/reservation/inquiry/${id}`);
     }, 1000);
   };
 
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
+
+  const isFormComplete = consultationType;
 
   return (
     <>
@@ -85,14 +91,6 @@ export function RegisterInquiryFormPage() {
 
             <ReusableInput
               register={register}
-              fieldName='inquiryTitle'
-              error={errors.inquiryTitle?.message}
-              label='문의 제목'
-              placeholder='제목을 입력하세요.'
-              type='text'
-            />
-            <ReusableInput
-              register={register}
               fieldName='inquiryContent'
               error={errors.inquiryContent?.message}
               label='문의 내용'
@@ -117,7 +115,12 @@ export function RegisterInquiryFormPage() {
               >
                 취소
               </Button>
-              <Button type='submit' variant='default' className='ml-2 w-3/4'>
+              <Button
+                type='submit'
+                variant='default'
+                className='ml-2 w-3/4'
+                disabled={!isFormComplete}
+              >
                 예약하기
               </Button>
             </div>
