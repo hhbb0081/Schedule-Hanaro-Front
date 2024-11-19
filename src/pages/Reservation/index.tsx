@@ -10,18 +10,24 @@ export function ReservationPage() {
   const navigate = useNavigate();
   const [selectedRes, setSelectedRes] = useState(0);
   const handlePage = () => {
-    const type =
-      selectedRes === 0 ? 'call' : selectedRes === 1 ? 'inquiry' : 'visit';
+    const type = selectedRes === 0 ? 'call' : 'inquiry';
     navigate(`/register/${type}`);
   };
   return (
     <>
       <div className='mx-auto flex h-screen w-[90%] flex-col justify-between pb-[7rem] pt-[2rem]'>
-        <div className='space-y-4'>
-          <div className='flex flex-col items-start justify-center text-3xl font-bold'>
-            <span>상담 유형을</span>
-            <span>선택해주세요</span>
+        <div className='space-y-10'>
+          <div className='space-y-2'>
+            <div className='flex flex-col items-start justify-center text-4xl font-bold'>
+              <span>상담 유형을</span>
+              <span>선택해주세요</span>
+            </div>
+            <div className='flex flex-col items-start justify-center'>
+              <span>예나님이 작성하신 문의 내용을</span>
+              <span>원하시는 유형의 상담으로 문의할 수 있어요</span>
+            </div>
           </div>
+
           <ul className='space-y-5'>
             {RESERVATION_TYPE.map(({ id, title, subTitle }) => (
               <li key={id} onClick={() => setSelectedRes(id)}>
