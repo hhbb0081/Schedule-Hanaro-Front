@@ -9,6 +9,7 @@ type ModalFormPageProps = {
   setIsChecked2: React.Dispatch<React.SetStateAction<boolean>>;
   handleClose: () => void;
 };
+
 export default function ModalFormPage({
   isChecked1,
   isChecked2,
@@ -16,13 +17,6 @@ export default function ModalFormPage({
   setIsChecked2,
   handleClose,
 }: ModalFormPageProps) {
-  const navigate = useNavigate();
-
-  const handleAgree = () => {
-    console.log('Agree clicked', isChecked1, isChecked2);
-    navigate('/');
-  };
-
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
       <div className='w-[400px] space-y-4 rounded-lg bg-white p-6'>
@@ -68,7 +62,7 @@ export default function ModalFormPage({
         </div>
         {isChecked1 && isChecked2 ? (
           <Button
-            onClick={handleAgree}
+            onClick={handleClose}
             className='h-[3.1875rem] w-full rounded-[1.875rem] bg-[#454545] font-bold hover:bg-[#545454]'
           >
             동의합니다
