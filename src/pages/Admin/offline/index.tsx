@@ -1,8 +1,8 @@
 // VisitPage.tsx
 import InfoCard from '@/components/Admin/Infocard';
-import Next from '../../../components/Admin/Next';
 import WaitingNumber from '@/components/Admin/WaitingNum';
 import { useState } from 'react';
+import Next from '../../../components/Admin/Next';
 
 function VisitPage() {
   const [numbers, setNumbers] = useState([
@@ -30,18 +30,18 @@ function VisitPage() {
   };
 
   return (
-    <div className='relative mt-[6.25rem] w-[50%] max-w-screen-lg'>
-      <div className='left-[15%] right-[15%]'>
-        <Next onClick={handleNext} />
-      </div>
-      <div className='mb-[3rem] mt-[3rem]'>
+    <div className='relative mx-auto w-full max-w-screen-lg'>
+      <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
+      <div className='my-[2.5rem]'>
         <WaitingNumber
           numbers={numbers}
           angle={angle}
           displayNum={displayNum}
         />
       </div>
-      <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
+      <div className='absolute bottom-[-6.25rem] left-[15%] right-[15%]'>
+        <Next onClick={handleNext} />
+      </div>
     </div>
   );
 }
