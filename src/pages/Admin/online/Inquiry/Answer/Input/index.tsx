@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 // import { useToast } from '@/hooks/use-toast';
+import dot from '@/assets/icons/dot.svg';
+import { mockInquiryData } from '@/mock/adminInquiry';
+import { InquiryDetail } from '@/types/inquiryDetail';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { InquiryDetail } from '@/types/inquiryDetail';
-import { mockInquiryData } from '@/mock/adminInquiry';
-import dot from '../../../../../assets/icons/dot.svg';
 
 export function AnswerInput() {
   // const { toast } = useToast();
