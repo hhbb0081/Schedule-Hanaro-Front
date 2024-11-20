@@ -127,6 +127,10 @@ export const MapProvider = ({
   const [routesType, setRoutesType] = useState<'pedestrain' | 'automobile'>(
     'pedestrain'
   );
+  const [pedestrainPolyline, setPedestrainPolyline] =
+    useState<TMapPolyline | null>(null);
+  const [automobilePolyline, setAutomobilePolyline] =
+    useState<TMapPolyline | null>(null);
 
   // Map 초기 설정
   useLayoutEffect(() => {
@@ -388,66 +392,61 @@ export const MapProvider = ({
 
     const { startCoord, endCoord, pathPedestrain, pathAutomobile } = routesData;
 
-    let tmpPolyline: TMapPolyline | null;
-    if (routesType === 'pedestrain') {
-      if (!startCoord || !endCoord || pathPedestrain.length === 0) {
-        return;
-      }
-      mapInstance.on('ConfigLoad', () => {
-        console.log('Map Loaded!!!');
-        tmpPolyline = PolyLine({
+    if (
+      !startCoord ||
+      !endCoord ||
+      pathPedestrain.length === 0 ||
+      pathAutomobile.length === 0
+    ) {
+      return;
+    }
+
+    mapInstance.on('ConfigLoad', () => {
+      console.log('Map Loaded!!!');
+      setPedestrainPolyline(
+        PolyLine({
           path: pathPedestrain,
           strokeColor: '#3D8BFF',
           strokeWeight: 9,
           mapContent: mapInstance,
-        });
-        // setPedestrainPolyline(tmpPolyline);
-      });
-      tmpPolyline = PolyLine({
-        path: pathPedestrain,
-        strokeColor: '#3D8BFF',
-        strokeWeight: 9,
-        mapContent: mapInstance,
-      });
-      // setPedestrainPolyline(tmpPolyline);
-
-      const startLatitude = pathPedestrain[0]._lat;
-      const startLongitude = pathPedestrain[0]._lng;
-      const position = new Tmapv3.LatLng(startLatitude, startLongitude);
-      mapInstance?.setCenter(position);
-    } else {
-      if (!startCoord || !endCoord || pathAutomobile.length === 0) {
-        return;
-      }
-      mapInstance.on('ConfigLoad', () => {
-        console.log('Map Loaded!!!');
-        tmpPolyline = PolyLine({
+        })
+      );
+      setAutomobilePolyline(
+        PolyLine({
           path: pathAutomobile,
           strokeColor: '#3D8BFF',
           strokeWeight: 9,
           mapContent: mapInstance,
-        });
-        // setAutomobilePolyline(tmpPolyline);
-      });
-      tmpPolyline = PolyLine({
-        path: pathAutomobile,
-        strokeColor: '#3D8BFF',
-        strokeWeight: 9,
-        mapContent: mapInstance,
-      });
-      // setAutomobilePolyline(tmpPolyline);
+        })
+      );
+    });
+    // setPedestrainPolyline(tmpPolyline);
 
-      const startLatitude = pathAutomobile[0]._lat;
-      const startLongitude = pathAutomobile[0]._lng;
-      const position = new Tmapv3.LatLng(startLatitude, startLongitude);
-      mapInstance?.setCenter(position);
-    }
-
-    return () => {
-      tmpPolyline?.setMap(null);
-    };
+    const startLatitude = (
+      routesType === 'pedestrain' ? pathPedestrain[0] : pathAutomobile[0]
+    )._lat;
+    const startLongitude = (
+      routesType === 'pedestrain' ? pathPedestrain[0] : pathAutomobile[0]
+    )._lng;
+    const position = new Tmapv3.LatLng(startLatitude, startLongitude);
+    mapInstance?.setCenter(position);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapInstance, routesData, routesType]);
+
+  // TODO:
+  useEffect(() => {
+    if (!mapInstance || !pedestrainPolyline || !automobilePolyline) {
+      return;
+    }
+
+    if (routesType === 'pedestrain') {
+      automobilePolyline.setMap(null);
+      pedestrainPolyline.setMap(mapInstance);
+    } else {
+      pedestrainPolyline.setMap(null);
+      automobilePolyline.setMap(mapInstance);
+    }
+  }, [mapInstance, pedestrainPolyline, automobilePolyline, routesType]);
 
   const setRouteTypeToPedestrain = () => {
     setRoutesType('pedestrain');
