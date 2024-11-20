@@ -28,7 +28,7 @@ function ReplyState({
         }`}
       ></div>
 
-      {tabs.map((tab) => (
+      {tabs2.map((tab) => (
         <button
           key={tab}
           onClick={() => setActiveTab(tab)}
