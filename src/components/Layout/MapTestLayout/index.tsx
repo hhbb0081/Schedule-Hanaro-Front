@@ -1,15 +1,12 @@
-import { Map } from '@/components';
 import { MapProvider } from '@/hooks/map-context';
 import { useRef } from 'react';
+import { Outlet } from 'react-router-dom';
 
-export function MapPage() {
+export function MapTestLayout() {
   const mapRef = useRef<HTMLDivElement>(null);
-
   return (
     <MapProvider mapRef={mapRef}>
-      <div className='map'>
-        <Map />
-      </div>
+      <Outlet />
     </MapProvider>
   );
 }

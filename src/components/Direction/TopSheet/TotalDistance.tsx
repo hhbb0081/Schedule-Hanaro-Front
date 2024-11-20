@@ -1,10 +1,14 @@
-import { totalDistanceAtom } from '@/stores';
-import { useAtomValue } from 'jotai';
+import { useMap } from '@/hooks/map-context';
 
 const KILLOMETER = 1000;
 
 export default function TotalDistance() {
-  const totalDistance = useAtomValue(totalDistanceAtom);
+  const { routesType, routesPedestrainResponse, routesAutomobileResponse } =
+    useMap();
+
+  const { totalDistance } = (routesType === 'pedestrain'
+    ? routesPedestrainResponse
+    : routesAutomobileResponse) || { totalDistance: 0 };
 
   return (
     <div className='flex items-end gap-3'>

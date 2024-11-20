@@ -98,6 +98,6 @@ export type TmapFeatureInfo = {
   geometry: TmapGeometryInfo;
   properties: TmapPropertyInfo;
 };
-export type TmapRoutePedestrainResponse = {
+export type TmapRouteResponse = {
   features: TmapFeatureInfo[];
 };

@@ -1,18 +1,21 @@
 import { Separator } from '@/components/ui/separator';
+import { useMap } from '@/hooks/map-context';
 import { BRANCH_MOCK } from '@/mock/branch_mock';
-import { branchIdAtom, currentStartAddressAtom } from '@/stores';
-import { useAtomValue } from 'jotai';
 
-export default function DepartureArrivalAddress() {
-  const currentStartAddress = useAtomValue(currentStartAddressAtom);
-  const branchId = useAtomValue(branchIdAtom);
+export default function DepartureArrivalAddress({
+  branchId,
+}: {
+  branchId: string;
+}) {
+  const { startAddress } = useMap();
+
   const branchIdx = BRANCH_MOCK.findIndex(({ id }) => id === branchId);
 
   return (
     <div className='flex flex-col justify-between gap-1 text-left'>
       <div className='flex flex-col'>
         <div className='text-xs text-gray-400'>출발지</div>
-        <div className='font-bold'>{currentStartAddress || ''}</div>
+        <div className='font-bold'>{startAddress || ''}</div>
       </div>
 
       <Separator />

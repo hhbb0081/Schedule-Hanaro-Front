@@ -1,20 +1,27 @@
 import { ReactComponent as Close } from '@/assets/icons/close.svg';
 import { cn } from '@/lib/utils';
-import { branchIdAtom } from '@/stores';
-import { useSetAtom } from 'jotai';
 import BranchInfo from './BranchInfo';
 import ReservationButton from './ReservationButton';
+import { useMap } from '@/hooks/map-context';
+import { Button } from '@/components/ui/button';
 
 export type FloatingType = {
   type: 'dir' | 'map';
 };
 
-export default function BottomFloatingBox({ type }: FloatingType) {
-  const setBranchId = useSetAtom(branchIdAtom);
+export default function BottomFloatingBox({
+  type,
+  branchId,
+}: FloatingType & { branchId: string }) {
+  const {
+    setSelectedBranchId,
+    setRouteTypeToAutomobile,
+    setRouteTypeToPedestrain,
+  } = useMap();
 
   const initBranchId = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
     e.stopPropagation();
-    setBranchId(null);
+    setSelectedBranchId(null);
   };
 
   return (
@@ -35,8 +42,22 @@ export default function BottomFloatingBox({ type }: FloatingType) {
             />
           </span>
         )}
-        <BranchInfo type={type} />
+        <BranchInfo type={type} branchId={branchId} />
         <ReservationButton />
+        <Button
+          variant={'link'}
+          className='w-auto'
+          onClick={setRouteTypeToAutomobile}
+        >
+          자동차
+        </Button>
+        <Button
+          variant={'link'}
+          className='w-auto'
+          onClick={setRouteTypeToPedestrain}
+        >
+          보행자
+        </Button>
       </div>
     </div>
   );
