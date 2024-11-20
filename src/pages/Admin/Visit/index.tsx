@@ -2,7 +2,7 @@
 import InfoCard from '@/components/Admin/Infocard';
 import Next from '../../../components/Admin/Next';
 import WaitingNumber from '@/components/Admin/WaitingNum';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function VisitPage() {
   const [numbers, setNumbers] = useState([

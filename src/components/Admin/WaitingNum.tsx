@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import CategoryButton from './CategoryButton';
 // import './YourStyles.css';
 
 type WaitingNumberProps = {
@@ -60,6 +61,9 @@ function WaitingNumber({ numbers, angle, displayNum }: WaitingNumberProps) {
                 >
                   {number}
                 </span>
+                <div className={`${displayNum.includes(idx) ? '' : 'hidden'}`}>
+                  <CategoryButton category={'예금'} />
+                </div>
               </div>
             ))}
           </div>
