@@ -1,9 +1,9 @@
+import arrow_left from '@/assets/icons/arrow_left.svg';
+import dot from '@/assets/icons/dot.svg';
+import { mockInquiryData } from '@/mock/adminInquiry';
+import { InquiryDetail } from '@/types/inquiryDetail'; // 경로에 따라 수정
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { InquiryDetail } from '@/types/inquiryDetail'; // 경로에 따라 수정
-import { mockInquiryData } from '@/mock/adminInquiry';
-import dot from '../../../../../assets/icons/dot.svg';
-import arrow_left from '../../../../../assets/icons/arrow_left.svg';
 
 export function AnswerDetail() {
   const { id } = useParams<{ id: string }>();

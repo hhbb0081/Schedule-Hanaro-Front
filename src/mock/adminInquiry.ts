@@ -1,5 +1,6 @@
 // mockInquiryData.ts
 
+import { CallDataType } from '@/types/inquiry';
 import { InquiryDetail } from '@/types/inquiryDetail';
 
 export const mockInquiryData: InquiryDetail[] = [
@@ -99,5 +100,64 @@ export const mockInquiryData: InquiryDetail[] = [
     content:
       '안녕하세요 좀 궁금한게 있는데 어떤게 궁금한지는 잘 모르겠어서 생각 좀 해보고 다시 문의드릴게요 감사합니다.',
     reply_content: '',
+  },
+];
+
+export const mockCallData: CallDataType[] = [
+  {
+    waitingNum: 123,
+    category: '예금',
+    content: '상담내용내용내용내용',
+    userName: '문해빈',
+    resTime: '12:00AM',
+    now: true,
+  },
+  {
+    waitingNum: 124,
+    category: '예금',
+    content: '상담내용내용내용내용',
+    userName: '문해빈',
+    resTime: '12:00AM',
+    now: false,
+  },
+  {
+    waitingNum: 125,
+    category: '예금',
+    content: '상담내용내용내용내용',
+    userName: '문해빈',
+    resTime: '12:00AM',
+    now: false,
+  },
+  {
+    waitingNum: 126,
+    category: '예금',
+    content: '상담내용내용내용내용',
+    userName: '문해빈',
+    resTime: '12:00AM',
+    now: false,
+  },
+  {
+    waitingNum: 127,
+    category: '예금',
+    content: '상담내용내용내용내용',
+    userName: '문해빈',
+    resTime: '12:00AM',
+    now: false,
+  },
+  {
+    waitingNum: 128,
+    category: '예금',
+    content: '상담내용내용내용내용',
+    userName: '문해빈',
+    resTime: '12:00AM',
+    now: false,
+  },
+  {
+    waitingNum: 129,
+    category: '예금',
+    content: '상담내용내용내용내용',
+    userName: '문해빈',
+    resTime: '12:00AM',
+    now: false,
   },
 ];

@@ -1,7 +1,8 @@
-import React from 'react';
 import { ActiveTab } from '@/types/inquiry';
+import React from 'react';
 
-const tabs: ActiveTab[] = ['답변대기', '답변완료'];
+// const tabs: ActiveTab[] = ['답변대기', '답변완료'];
+const tabs2: ActiveTab[] = ['문의정보', '고객정보'];
 
 function ReplyState({
   activeTab,
@@ -21,11 +22,13 @@ function ReplyState({
       {/* 이동하는 배경 */}
       <div
         className={`absolute -left-0.5 -top-2 h-[3.9375rem] w-[15.5rem] rounded-full bg-gray-600 transition-transform duration-300 ease-in-out ${
-          activeTab === '답변완료' ? 'translate-x-[92%]' : 'translate-x-0'
+          activeTab === '답변완료' || activeTab === '고객정보'
+            ? 'translate-x-[92%]'
+            : 'translate-x-0'
         }`}
       ></div>
 
-      {tabs.map((tab) => (
+      {tabs2.map((tab) => (
         <button
           key={tab}
           onClick={() => setActiveTab(tab)}
