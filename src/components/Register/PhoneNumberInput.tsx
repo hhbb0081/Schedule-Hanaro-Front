@@ -1,15 +1,19 @@
 import { Input } from '@/components/ui/input';
-import { RegisterCallData } from '@/pages';
 import { ChangeEvent, useState } from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import { FormErrorMessage } from './FormErrorMessage';
 
-type PhoneInputProps = {
-  register: UseFormRegister<RegisterCallData>;
+type PhoneInputProps<T extends FieldValues> = {
+  register: UseFormRegister<T>;
   error: string | undefined;
+  name: Path<T>;
 };
 
-export function PhoneNumberInput({ register, error }: PhoneInputProps) {
+export function PhoneNumberInput<T extends FieldValues>({
+  register,
+  error,
+  name,
+}: PhoneInputProps<T>) {
   const [formattedPhone, setFormattedPhone] = useState('');
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +36,16 @@ export function PhoneNumberInput({ register, error }: PhoneInputProps) {
         type='text'
         placeholder='ex) 010-1234-1234'
         value={formattedPhone}
-        {...register('phone', {
+        {...register(name, {
           required: '전화번호를 입력해주세요.',
           pattern: {
             value: /^\d{3}-\d{3,4}-\d{4}$/,
             message: '유효한 전화번호 형식이 아닙니다.',
           },
-          onChange: (e) => handlePhoneChange(e),
+          onChange: (e) => {
+            handlePhoneChange(e);
+            e.target.dispatchEvent(new Event('input', { bubbles: true }));
+          },
         })}
         className='w-full border-b-2 py-2 text-base outline-none'
       />
