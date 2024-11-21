@@ -13,13 +13,13 @@ import {
 } from '@/components/ui/select';
 import { MAX_CAPACITY } from '@/constants/reservation';
 import { mockReservations } from '@/mock/mockReservationsCall';
-import { ReservationSlots } from '@/types/reservation';
 import { format } from 'date-fns';
 import { CalendarIcon, ClockIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { Button } from '../ui/button';
 import { FormErrorMessage } from './FormErrorMessage';
+import { ReservationSlots } from '@/types/reservation';
 
 type DateAndTimePickerProps<T extends FieldValues> = {
   control: Control<T>;
@@ -27,7 +27,7 @@ type DateAndTimePickerProps<T extends FieldValues> = {
   dateError: string | undefined;
   timeError: string | undefined;
   dateFieldName: Path<T>;
-  timeFieldName: Path<T>;
+  timeFieldName?: Path<T>;
 };
 
 export function DateAndTimePicker<T extends FieldValues>({
@@ -103,46 +103,47 @@ export function DateAndTimePicker<T extends FieldValues>({
           />
           <FormErrorMessage error={dateError} />
         </div>
-
-        <div className='w-1/2 flex-1'>
-          <Controller
-            name={timeFieldName}
-            control={control}
-            rules={{ required: '시간대를 선택해주세요.' }}
-            render={({ field: { onChange, value } }) => (
-              <Select
-                onValueChange={(value) => onChange(value)}
-                value={value || ''}
-              >
-                <SelectTrigger className='time-select w-full'>
-                  <SelectValue
-                    placeholder='시간대를 선택하세요'
-                    className='text-base'
-                  >
-                    {value ? value.split(' ')[0] : '시간대를 선택하세요'}
-                  </SelectValue>
-                  <ClockIcon className='clock-icon ml-2 h-5 w-5 text-gray-400' />
-                </SelectTrigger>
-                <SelectContent>
-                  {timeSlots.map((slot) => (
-                    <SelectItem
-                      key={slot}
-                      value={`${slot} ${getRemainingCapacity(slot)}명`}
+        {timeFieldName && (
+          <div className='w-1/2 flex-1'>
+            <Controller
+              name={timeFieldName}
+              control={control}
+              rules={{ required: '시간대를 선택해주세요.' }}
+              render={({ field: { onChange, value } }) => (
+                <Select
+                  onValueChange={(value) => onChange(value)}
+                  value={value || ''}
+                >
+                  <SelectTrigger className='time-select w-full'>
+                    <SelectValue
+                      placeholder='시간대를 선택하세요'
+                      className='text-base'
                     >
-                      <div className='flex w-[12.5rem] justify-between'>
-                        <div>{slot}</div>
-                        <div className='font-bold text-main'>
-                          {getRemainingCapacity(slot)}명
+                      {value ? value.split(' ')[0] : '시간대를 선택하세요'}
+                    </SelectValue>
+                    <ClockIcon className='clock-icon ml-2 h-5 w-5 text-gray-400' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {timeSlots.map((slot) => (
+                      <SelectItem
+                        key={slot}
+                        value={`${slot} ${getRemainingCapacity(slot)}명`}
+                      >
+                        <div className='flex w-[12.5rem] justify-between'>
+                          <div>{slot}</div>
+                          <div className='font-bold text-main'>
+                            {getRemainingCapacity(slot)}명
+                          </div>
                         </div>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-          />
-          <FormErrorMessage error={timeError} />
-        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            <FormErrorMessage error={timeError} />
+          </div>
+        )}
       </div>
     </div>
   );
