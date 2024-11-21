@@ -30,18 +30,18 @@ function VisitPage() {
   };
 
   return (
-    <div className='relative mx-auto w-full max-w-screen-lg'>
-      <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
-      <div className='my-[2.5rem]'>
+    <div className='relative mt-[6.25rem] w-[50%] max-w-screen-lg'>
+      <div className='left-[15%] right-[15%]'>
+        <Next onClick={handleNext} />
+      </div>
+      <div className='mb-[3rem] mt-[5rem]'>
         <WaitingNumber
           numbers={numbers}
           angle={angle}
           displayNum={displayNum}
         />
       </div>
-      <div className='absolute bottom-[-6.25rem] left-[15%] right-[15%]'>
-        <Next onClick={handleNext} />
-      </div>
+      <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
     </div>
   );
 }

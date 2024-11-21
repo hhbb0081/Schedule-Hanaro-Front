@@ -44,7 +44,7 @@ export default function InfoCard({
   return (
     <div className='flex justify-center'>
       <div
-        className={`mx-auto ${isTwoItems ? 'h-[11.5rem] w-[80%]' : 'h-auto w-[90%]'} rounded-[1.25rem] border border-[#d9d9d9] p-[1rem]`}
+        className={`mx-auto ${isTwoItems ? 'h-[11.5rem] w-[80%]' : 'h-auto w-[60%]'} rounded-[1.25rem] border border-[#d9d9d9] p-[1rem]`}
       >
         <div
           className={`flex ${isTwoItems ? 'flex-col gap-[0.75rem]' : 'flex-row'} items-center justify-evenly`}
