@@ -38,9 +38,13 @@ export function InquiryDetailPage() {
             <div className='flex w-full justify-center'>
               <hr className='w-full' />
             </div>
-            <div className='text-center'>답변 정보가 없습니다.</div>
+            <img src='/waitingAnswer.png' className='h-[8rem]' />
+            <div className='text-center text-xl font-bold'>
+              상담사가 고객님의 문의를 처리 중입니다.
+            </div>
           </div>
         </div>
+        <Nav />
       </>
     );
   }
