@@ -34,11 +34,11 @@ export const mockReservationInquiryAnswerDetails: ReservationInquiryAnswerDetail
       date2: '2024-10-29',
       time2: '12:00',
     },
-    {
-      id: '2',
-      content2:
-        '반갑습니다 고객님 ^-^ 예금 정보가 궁금하셨군요~ 예금은 저축 목적에 적절하죠~ 답변이 되셨으면 좋아요 부탁드립니다~!',
-      date2: '2024-10-30',
-      time2: '12:00',
-    },
+    // {
+    //   id: '2',
+    //   content2:
+    //     '반갑습니다 고객님 ^-^ 예금 정보가 궁금하셨군요~ 예금은 저축 목적에 적절하죠~ 답변이 되셨으면 좋아요 부탁드립니다~!',
+    //   date2: '2024-10-30',
+    //   time2: '12:00',
+    // },
   ];
