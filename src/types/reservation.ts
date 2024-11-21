@@ -15,7 +15,8 @@ export type ReservationCallDetail = {
 
 export type ReservationInquiryDetail = {
   id: string;
-  title: string;
+  name: string;
+  phone: string;
   content: string;
   consultationType: string;
   date: string;
