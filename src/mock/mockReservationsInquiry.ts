@@ -6,8 +6,10 @@ import {
 export const mockReservationInquiryDetails: ReservationInquiryDetail[] = [
   {
     id: '1',
-    title: '대학생 예금 상담',
-    content: '안녕하세요. 대학생에게 큰 혜택을 주는 예금 상품이 궁금하여 문의.',
+    name: '해빈',
+    phone: '010-2345-2345',
+    content:
+      '안녕하세요. 대학생에게 큰 혜택을 주는 예금 상품이 궁금하여 문의드려요. 저는 대학교 4학년이고 현재 모아놓은 돈은 500만원 정도에요. 저한테 잘 어울리는 예금이 뭐가 있을까요? 모은 돈을 전부 넣고 싶어요.',
     consultationType: '예금',
     date: '2024-10-29',
     time: '09:00',
@@ -15,7 +17,8 @@ export const mockReservationInquiryDetails: ReservationInquiryDetail[] = [
   },
   {
     id: '2',
-    title: '대학생 대출 상담',
+    name: '예나',
+    phone: '010-1234-1234',
     content:
       '안녕하세요. 대학생에게 큰 혜택을 주는 예금 상품이 궁금하여 문의드려요. 돈을 완전 많이 벌고싶어서 큰 혜택이었음 좋겠네요. 그리고 소득분위랑도 상관 있을까요? 최대한 받고 싶은 혜택은 몽땅 받고 싶어요. 아니 아직도 6줄이 안넘었네. 이거 참 당황스럽다. 지금은 오전 11시 16분이에요',
     consultationType: '대출',
