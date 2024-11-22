@@ -18,7 +18,8 @@ import { useToast } from '@/hooks/use-toast';
 import { BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { showToast } from '../Register/Call';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import apiCall from '@/api/Api';
 
 type BranchProps = {
   branchNum: string | null;
@@ -52,18 +53,19 @@ export function BranchDetailPage() {
     const getBranchDetail = async () => {
       console.log(id);
       try {
-        const response = await axios({
-          method: 'get',
-          url: 'http://localhost:8080/api/v1/branch/one',
-          params: {
-            branchId: id,
-          },
-        });
+        const param = { branchId: id };
+        const response = await apiCall('/branch/one', 'get', param);
+        // const response = await axios({
+        //   method: 'get',
+        //   url: 'http://localhost:8080/api/v1/branch/one',
+        //   params: {
+        //     branchId: id,
+        //   },
+        // });
         console.log(response);
         setBranch(response.data);
       } catch (error) {
         console.log('Api call error:', error);
-        throw error;
       }
     };
     getBranchDetail();
