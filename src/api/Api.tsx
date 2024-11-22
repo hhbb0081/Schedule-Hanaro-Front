@@ -16,7 +16,7 @@ const API = axios.create({ baseURL: 'http://localhost:8080/api/v1' });
 const apiCall = async (
   url: string,
   method = 'get',
-  data: null | undefined | object,
+  data: null | undefined | object = null,
   token: null | string = null
 ) => {
   try {

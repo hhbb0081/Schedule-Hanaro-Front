@@ -53,8 +53,7 @@ export function BranchDetailPage() {
     const getBranchDetail = async () => {
       console.log(id);
       try {
-        const param = { branchId: id };
-        const response = await apiCall('/branch/one', 'get', param);
+        const response = await apiCall(`/branch/${id}`, 'get');
         // const response = await axios({
         //   method: 'get',
         //   url: 'http://localhost:8080/api/v1/branch/one',
