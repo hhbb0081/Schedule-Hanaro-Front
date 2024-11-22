@@ -1,40 +1,42 @@
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from '../../ui/accordion';
-import { Button } from '../../ui/button';
-import { Badge } from '../../ui/badge';
-import FilterAndSearch from './FilterAndSearch';
+import { ActiveTab } from '@/types/inquiry';
+import { InquiryDetail } from '@/types/inquiryDetail';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InquiryDetail } from '@/types/inquiryDetail';
-import { ActiveTab } from '@/types/inquiry';
 import rightArrow from '../../../assets/icons/right_arrow.svg';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '../../ui/accordion';
+import { Badge } from '../../ui/badge';
+import { Button } from '../../ui/button';
+import FilterAndSearch from './FilterAndSearch';
 
 type InquiryListProps = {
   activeTab: ActiveTab;
   activeCategory: string;
   setActiveCategory: (category: string) => void;
   inquiries: InquiryDetail[];
-}
+};
 
 function InquiryList({
   activeTab,
   activeCategory,
   setActiveCategory,
-  inquiries, 
+  inquiries,
 }: InquiryListProps) {
-  const formattedInquiries = inquiries.map(({ id, title, status, category, time, content, name }) => ({
-    id: String(id),
-    title: title,
-    status: status as ActiveTab,
-    category: category,
-    time: `${time}분 전`,
-    content: content,
-    name: name,
-  }));
+  const formattedInquiries = inquiries.map(
+    ({ id, title, status, category, time, content, name }) => ({
+      id: String(id),
+      title: title,
+      status: status as ActiveTab,
+      category: category,
+      time: `${time}분 전`,
+      content: content,
+      name: name,
+    })
+  );
 
   const filteredInquiries = formattedInquiries.filter(
     ({ status, category }) =>
@@ -46,7 +48,7 @@ function InquiryList({
   const navigate = useNavigate();
 
   return (
-    <div className='font-inter mx-auto max-w-3xl rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal shadow-lg'>
+    <div className='font-inter mx-auto w-full rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal shadow-lg'>
       <div className='font-inter mb-0 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
         <h2 className='text-[1.125rem] font-bold text-gray-800'>
           총{' '}

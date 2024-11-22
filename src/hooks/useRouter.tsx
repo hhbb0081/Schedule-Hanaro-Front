@@ -25,16 +25,19 @@ import {
 import { ClientLayout } from '@/components/Layout/ClientLayout';
 import { MainLayout } from '@/components/Layout/MainLayout';
 import MypageLayout from '@/components/Layout/MypageLayout';
-import CallPage from '@/pages/Admin/Call';
-import InquiryPage from '@/pages/Admin/Inquiry';
-import { AnswerDetail } from '@/pages/Admin/Inquiry/Answer/Detail';
-import { AnswerInput } from '@/pages/Admin/Inquiry/Answer/Input';
-import VisitPage from '@/pages/Admin/Visit';
+import VisitPage from '@/pages/Admin/offline';
+import CallPage from '@/pages/Admin/online/Call';
+import AdminCustomerPage from '@/pages/Admin/online/customer';
+import AdminCustomerDetailPage from '@/pages/Admin/online/customer/detail';
+import InquiryPage from '@/pages/Admin/online/Inquiry';
+import { AnswerDetail } from '@/pages/Admin/online/Inquiry/Answer/Detail';
+import { AnswerInput } from '@/pages/Admin/online/Inquiry/Answer/Input';
+import { AdminMainPage } from '@/pages/Admin/online/Main';
+import MapTestPage from '@/pages/MapTest';
+import DupTest from '@/pages/MapTest/DupTest';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
-import MapTestPage from '@/pages/MapTest';
-import DupTest from '@/pages/MapTest/DupTest';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -140,6 +143,18 @@ export const useRouter = () =>
       element: <AdminLayout />,
       children: [
         { index: true, element: <VisitPage /> },
+        {
+          path: '/admin/online',
+          element: <AdminMainPage />,
+        },
+        {
+          path: '/admin/online/customer',
+          element: <AdminCustomerPage />,
+        },
+        {
+          path: '/admin/online/customer/:customerId',
+          element: <AdminCustomerDetailPage />,
+        },
         {
           path: '/admin/inquiry',
           element: <InquiryPage />,
