@@ -34,7 +34,7 @@ function VisitPage() {
       <div className='left-[15%] right-[15%]'>
         <Next onClick={handleNext} />
       </div>
-      <div className='mb-[3rem] mt-[5rem]'>
+      <div className='mb-[3rem] mt-[3rem]'>
         <WaitingNumber
           numbers={numbers}
           angle={angle}
