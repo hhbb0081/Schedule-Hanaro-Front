@@ -42,6 +42,7 @@ import { SignUpPage } from '@/pages/SignUp';
 import { SignUpLayout } from '@/components/Layout/SignUp';
 import ChatPage from '@/pages/Chat';
 
+import { AdminMyPage } from '@/pages/Admin/AdminMyPage';
 export const useRouter = () =>
   createBrowserRouter([
     {
