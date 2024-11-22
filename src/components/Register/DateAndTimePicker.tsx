@@ -12,10 +12,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { MAX_CAPACITY } from '@/constants/reservation';
-import {
-  mockReservations,
-  ReservationSlots,
-} from '@/mock/mockReservationsCall';
+import { mockReservations } from '@/mock/mockReservationsCall';
+import { ReservationSlots } from '@/types/reservation';
 import { format } from 'date-fns';
 import { CalendarIcon, ClockIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -50,7 +48,7 @@ export function DateAndTimePicker<T extends FieldValues>({
   }, []);
 
   const getRemainingCapacity = (slot: keyof ReservationSlots): number => {
-    const reserved = mockReservations[slot] || 0;
+    const reserved = mockReservations[slot as number] || 0;
     return MAX_CAPACITY - reserved;
   };
 
