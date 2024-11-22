@@ -27,6 +27,8 @@ import { MainLayout } from '@/components/Layout/MainLayout';
 import MypageLayout from '@/components/Layout/MypageLayout';
 import VisitPage from '@/pages/Admin/offline';
 import CallPage from '@/pages/Admin/online/Call';
+import AdminCustomerPage from '@/pages/Admin/online/customer';
+import AdminCustomerDetailPage from '@/pages/Admin/online/customer/detail';
 import InquiryPage from '@/pages/Admin/online/Inquiry';
 import { AnswerDetail } from '@/pages/Admin/online/Inquiry/Answer/Detail';
 import { AnswerInput } from '@/pages/Admin/online/Inquiry/Answer/Input';
@@ -144,6 +146,14 @@ export const useRouter = () =>
         {
           path: '/admin/online',
           element: <AdminMainPage />,
+        },
+        {
+          path: '/admin/online/customer',
+          element: <AdminCustomerPage />,
+        },
+        {
+          path: '/admin/online/customer/:customerId',
+          element: <AdminCustomerDetailPage />,
         },
         {
           path: '/admin/inquiry',
