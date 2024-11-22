@@ -35,7 +35,7 @@ import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 import MapTestPage from '@/pages/MapTest';
 import DupTest from '@/pages/MapTest/DupTest';
-
+import { AdminMyPage } from '@/pages/Admin/AdminMyPage';
 export const useRouter = () =>
   createBrowserRouter([
     {
@@ -151,6 +151,7 @@ export const useRouter = () =>
         { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/call', element: <CallPage /> },
+        { path: '/admin/adminmypage', element: <AdminMyPage /> },
       ],
     },
     {
