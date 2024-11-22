@@ -1,17 +1,20 @@
 import { Button } from '@/components/ui/button';
 import { mockCallData } from '@/mock/adminInquiry';
-import { useState } from 'react';
 import WaitingBox from './WaitingBox';
 
-function WaitingList() {
-  const [selectedIdx, setSelectedIdx] = useState(123);
-
+export type CallProps = {
+  selectedIdx: number;
+  setSelectedIdx: React.Dispatch<React.SetStateAction<number>>;
+};
+function WaitingList({ selectedIdx, setSelectedIdx }: CallProps) {
   const nowData = mockCallData.filter(({ now }) => now)[0];
   return (
-    <div className='w-[35%] rounded-[15px] bg-white pt-3'>
+    <div className='w-[35%] rounded-[30px] bg-white pt-5'>
       <div className='mx-auto flex w-[90%] items-center justify-between'>
         <span className='text-[1.125rem] font-medium'>대기목록</span>
-        <span className='text-[1.125rem] font-bold'>25명 대기중</span>
+        <span className='text-[0.8725rem] font-medium'>
+          <span className='text-[1.125rem] font-bold'>25</span>명 대기중
+        </span>
       </div>
       <div className='pt-5 text-center'>
         <span className='text-[0.875rem]'>현재 진행 중</span>
@@ -29,8 +32,8 @@ function WaitingList() {
           />
         </div>
       </div>
-      <div className='text-center text-[0.875rem]'>
-        <span className='text-[0.875rem]'>대기중</span>
+      <div className='pt-8 text-center text-[0.875rem]'>
+        <span className='pt-3 text-[0.875rem]'>대기중</span>
         <ul className='flex flex-col border-t-[1px] border-[#D9D9D9]'>
           {mockCallData
             .filter(({ now }) => !now)
@@ -48,8 +51,8 @@ function WaitingList() {
             ))}
         </ul>
       </div>
-      <div className='m-5 text-center'>
-        <Button variant='secondary' className='w-fit py-1'>
+      <div className='mb-5 mt-2 text-center'>
+        <Button variant='secondary' className='w-fit'>
           더보기
         </Button>
       </div>

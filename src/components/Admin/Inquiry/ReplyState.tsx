@@ -13,7 +13,7 @@ function ReplyState({
 }) {
   return (
     <div
-      className='relative flex h-[3rem] w-full max-w-[29.3125rem] rounded-full bg-white p-1'
+      className='relative flex h-[3rem] w-full rounded-full bg-white p-1'
       style={{
         boxShadow:
           '0px -2px 15px rgba(0, 0, 0, 0.15), 0px 6px 10px rgba(0, 0, 0, 0.15)',
@@ -21,7 +21,7 @@ function ReplyState({
     >
       {/* 이동하는 배경 */}
       <div
-        className={`absolute -left-0.5 -top-2 h-[3.9375rem] w-[15.5rem] rounded-full bg-gray-600 transition-transform duration-300 ease-in-out ${
+        className={`absolute -left-0.5 -top-2 h-[3.9375rem] w-[53%] rounded-full bg-gray-600 transition-transform duration-300 ease-in-out ${
           activeTab === '답변완료' || activeTab === '고객정보'
             ? 'translate-x-[92%]'
             : 'translate-x-0'
