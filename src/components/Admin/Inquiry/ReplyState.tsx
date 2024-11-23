@@ -1,8 +1,8 @@
 import { ActiveTab } from '@/types/inquiry';
 import React from 'react';
 
-const tabs: ActiveTab[] = ['답변대기', '답변완료'];
-// const tabs2: ActiveTab[] = ['문의정보', '고객정보'];
+// const tabs: ActiveTab[] = ['답변대기', '답변완료'];
+const tabs2: ActiveTab[] = ['문의정보', '고객정보'];
 
 function ReplyState({
   activeTab,
