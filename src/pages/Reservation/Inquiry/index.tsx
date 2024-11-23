@@ -13,7 +13,6 @@ export function ReservationInquiryPage() {
                 key={index}
                 inquiryNumber={call.inquiryNumber}
                 inquiryconsultationType={call.inquiryconsultationType}
-                consultationTitle={call.consultationTitle}
                 consultationContents={call.consultationContents}
                 responseStatus={call.responseStatus}
               />

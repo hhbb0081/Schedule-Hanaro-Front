@@ -35,6 +35,7 @@ import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
 import MapTestPage from '@/pages/MapTest';
 import DupTest from '@/pages/MapTest/DupTest';
+import SigninPage from '@/pages/Signin';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -132,6 +133,10 @@ export const useRouter = () =>
           path: '/mypage',
           element: <MypageLayout />,
           children: [{ index: true, element: <Mypage /> }],
+        },
+        {
+          path: '/signin',
+          element: <SigninPage />,
         },
       ],
     },
