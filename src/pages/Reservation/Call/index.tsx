@@ -21,6 +21,7 @@ export function ReservationCallPage() {
                 consultationTime={call.consultationTime}
                 callNumber={call.callNumber}
                 timerText={call.timerText}
+                idx={call.id}
               />
             ))}
           </div>
