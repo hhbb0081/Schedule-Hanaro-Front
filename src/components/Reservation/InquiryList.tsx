@@ -1,14 +1,14 @@
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { ReactComponent as DetailButton } from '@/assets/icons/reservation/reservationdetailbutton.svg';
-
+import { useNavigate } from 'react-router-dom';
 type InquiryConsultationCardProps = {
   inquiryNumber: number; // 대기 번호
   inquiryconsultationType: string; // 상담 종류
   consultationContents: string; // 상담 내용
   responseStatus: boolean; // 답변여부
   idx: string;
-}
+};
 
 const InquiryList: React.FC<InquiryConsultationCardProps> = ({
   inquiryNumber,
