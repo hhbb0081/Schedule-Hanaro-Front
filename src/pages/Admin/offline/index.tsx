@@ -1,10 +1,13 @@
 // VisitPage.tsx
 import InfoCard from '@/components/Admin/Infocard';
+import Next from '../../../components/Admin/Next';
 import WaitingNumber from '@/components/Admin/WaitingNum';
 import { useState } from 'react';
-import Next from '../../../components/Admin/Next';
+import CallInfoBox from '@/components/Admin/main/CallInfoBox';
 
 function VisitPage() {
+  const [selectedIdx, setSelectedIdx] = useState(123);
+
   const [numbers, setNumbers] = useState([
     952, 953, 954, 955, 956, 957, 958, 951,
   ]);
@@ -30,18 +33,26 @@ function VisitPage() {
   };
 
   return (
-    <div className='relative mt-[6.25rem] w-[50%] max-w-screen-lg'>
-      <div className='left-[15%] right-[15%]'>
-        <Next onClick={handleNext} />
+    <div className='relative mx-auto mt-[6.25rem] flex w-[98%] max-w-[1300px] justify-between'>
+      <div className='w-[100%]'>
+        <div className='left-[15%] right-[15%]'>
+          <Next onClick={handleNext} />
+        </div>
+        <div className='mb-[3rem] mt-[3rem]'>
+          <WaitingNumber
+            numbers={numbers}
+            angle={angle}
+            displayNum={displayNum}
+          />
+        </div>
+        <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
       </div>
-      <div className='mb-[3rem] mt-[3rem]'>
-        <WaitingNumber
-          numbers={numbers}
-          angle={angle}
-          displayNum={displayNum}
+      <div className='w-[100%] rounded-[.9375rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
+        <CallInfoBox
+          selectedIdx={selectedIdx}
+          setSelectedIdx={setSelectedIdx}
         />
       </div>
-      <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
     </div>
   );
 }

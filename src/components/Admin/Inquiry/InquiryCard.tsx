@@ -1,5 +1,5 @@
 interface Stats {
-  inquiry: String;
+  inquiry: string;
   today: number;
   transferred: number;
   reserved: number;

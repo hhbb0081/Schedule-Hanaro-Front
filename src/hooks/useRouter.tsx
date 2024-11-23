@@ -42,7 +42,7 @@ import { SignUpPage } from '@/pages/SignUp';
 import { SignUpLayout } from '@/components/Layout/SignUp';
 import ChatPage from '@/pages/Chat';
 
-import { AdminMyPage } from '@/pages/Admin/AdminMyPage';
+import { AdminMyPage } from '@/pages/Admin/online/mypage';
 export const useRouter = () =>
   createBrowserRouter([
     {
@@ -157,6 +157,10 @@ export const useRouter = () =>
       children: [
         { index: true, element: <VisitPage /> },
         {
+          path: '/admin/offline',
+          element: <VisitPage />,
+        },
+        {
           path: '/admin/online',
           element: <AdminMainPage />,
         },
@@ -178,8 +182,8 @@ export const useRouter = () =>
         },
         { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
-        { path: '/admin/call', element: <CallPage /> },
-        { path: '/admin/adminmypage', element: <AdminMyPage /> },
+        { path: '/admin/online/call', element: <CallPage /> },
+        { path: '/admin/online/mypage', element: <AdminMyPage /> },
       ],
     },
     {

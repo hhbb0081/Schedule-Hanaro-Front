@@ -1,4 +1,4 @@
-import { Header } from '@/components/Admin/Header';
+import Header from '@/components/Admin/Header';
 import { Outlet } from 'react-router-dom';
 
 function AdminLayout() {
