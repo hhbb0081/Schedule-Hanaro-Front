@@ -53,6 +53,7 @@
     "@svgr/rollup": "^8.1.0",
     "@tanstack/eslint-plugin-query": "latest",
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.9.3",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
