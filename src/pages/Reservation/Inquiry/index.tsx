@@ -16,6 +16,7 @@ export function ReservationInquiryPage() {
                 consultationTitle={call.consultationTitle}
                 consultationContents={call.consultationContents}
                 responseStatus={call.responseStatus}
+                idx={call.id}
               />
             ))}
           </div>

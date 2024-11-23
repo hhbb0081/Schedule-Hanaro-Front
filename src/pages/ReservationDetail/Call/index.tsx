@@ -4,8 +4,24 @@ import { useParams } from 'react-router-dom';
 import { mockReservationCallDetails } from '@/mock/mockReservationsCall';
 import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
 import Modalbutton from '@/components/Direction/Modal';
+import ReservationDetailCallTags, {
+  HashTag,
+} from '../ReservationDetailCallTags';
+import { useEffect, useState } from 'react';
 export function ReservationDetailCallPage() {
   const { id } = useParams<{ id: string }>();
+  const [tags, setTags] = useState<HashTag[]>([]);
+
+  useEffect(() => {
+    async function fetchReservationDetails() {
+      const fetchedTags = [
+        { id: 1, label: '예금' },
+        { id: 2, label: '금융상품' },
+      ];
+      setTags(fetchedTags);
+    }
+    fetchReservationDetails();
+  }, [id]);
 
   const reservation = mockReservationCallDetails.find((res) => res.id === id);
   if (!reservation) {
@@ -39,7 +55,7 @@ export function ReservationDetailCallPage() {
           </div>
         </div>
         <div className='flex w-full flex-col gap-[0.5rem]'>
-          <label className='ml-2 flex text-2xl font-bold'>예약 상세 정보</label>
+          <ReservationDetailCallTags title='예약 상세 정보' tags={tags} />
           <div className='flex flex-col gap-[1rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
             <div className='flex justify-between'>
               <div className='text-lg font-medium text-[#666666]'>이름</div>

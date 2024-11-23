@@ -38,6 +38,9 @@ import DupTest from '@/pages/MapTest/DupTest';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
+import { SignUpPage } from '@/pages/SignUp';
+import { SignUpLayout } from '@/components/Layout/SignUp';
+import ChatPage from '@/pages/Chat';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -64,6 +67,15 @@ export const useRouter = () =>
         {
           path: '/branch/:id',
           element: <BranchDetailPage />,
+        },
+        {
+          path: '/chat',
+          element: <ChatPage />,
+        },
+        {
+          path: '/signup',
+          element: <SignUpLayout />,
+          children: [{ index: true, element: <SignUpPage /> }],
         },
         {
           path: '/reservation',

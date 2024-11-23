@@ -1,5 +1,6 @@
 export const callListData = [
   {
+    id: '1',
     callconsultationType: '펀드',
     consultationDate: '2024년 10월 8일',
     consultationTime: '13:00',
@@ -7,6 +8,7 @@ export const callListData = [
     timerText: 15,
   },
   {
+    id: '2',
     callconsultationType: '예금',
     consultationDate: '2024년 10월 10일',
     consultationTime: '16:00',
