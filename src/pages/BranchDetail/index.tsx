@@ -43,19 +43,28 @@ const defaultBranchDetail = {
   tel: '',
   businessTime: '',
 };
+import { useMap } from '@/hooks/map-context';
 
 export function BranchDetailPage() {
   const navigate = useNavigate();
+  const { getCurrentLatitude, getCurrentLongitude } = useMap();
   const { toast } = useToast();
-  const { id } = useParams();
+  const { branchId } = useParams();
   const [branch, setBranch] = useState<BranchProps>(defaultBranchDetail);
   const reserved = 1;
 
   useEffect(() => {
     const getBranchDetail = async () => {
-      console.log(id);
+      console.log(branchId);
       try {
-        const response = await apiCall(`/branch/${id}`, 'get');
+        const response = await apiCall(`/branch/${branchId}`, 'get');
+        // const response = await axios({
+        //   method: 'get',
+        //   url: 'http://localhost:8080/api/v1/branch/one',
+        //   params: {
+        //     branchId: id,
+        //   },
+        // });
         console.log(response);
         setBranch(response.data);
       } catch (error) {
@@ -63,11 +72,12 @@ export function BranchDetailPage() {
       }
     };
     getBranchDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { branchName, address, tel, businessTime }: BranchProps = branch;
-  const state = BRANCH_STATE_MOCK.find((br) => br.id === id);
+  const state = BRANCH_STATE_MOCK.find((br) => br.id === branchId);
   const moveToReservation = () => {
-    navigate(`/reservation/visit/${id}`);
+    navigate(`/reservation/visit/${branchId}`);
   };
 
   const handleDirection = (
@@ -77,8 +87,17 @@ export function BranchDetailPage() {
     if (branch) {
       const { xPosition: longitude, yPosition: latitude } = branch;
       // TODO: startLat, startLon 현 위치로 수정
+      console.log(
+        '🚀 ~ BranchDetailPage ~ getCurrentLatitude:',
+        getCurrentLatitude()
+      );
+      console.log(
+        '🚀 ~ BranchDetailPage ~ getCurrentLongitude:',
+        getCurrentLongitude()
+      );
+
       navigate(
-        `/direction?startLat=37.54463002278825&startLon=127.05656718408437&endLat=${latitude}&endLon=${longitude}&branchId=${id}`
+        `/direction?startLat=${getCurrentLatitude()}&startLon=${getCurrentLongitude()}&endLat=${latitude}&endLon=${longitude}&branchId=${branchId}`
       );
       showToast(toast, '길 안내를 시작합니다.');
     }
