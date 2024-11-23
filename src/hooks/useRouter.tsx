@@ -34,7 +34,6 @@ import { AnswerDetail } from '@/pages/Admin/online/Inquiry/Answer/Detail';
 import { AnswerInput } from '@/pages/Admin/online/Inquiry/Answer/Input';
 import { AdminMainPage } from '@/pages/Admin/online/Main';
 import MapTestPage from '@/pages/MapTest';
-import DupTest from '@/pages/MapTest/DupTest';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
@@ -199,9 +198,6 @@ export const useRouter = () =>
     {
       path: '/maptest',
       element: <MapTestLayout />,
-      children: [
-        { index: true, element: <MapTestPage /> },
-        { path: '/maptest/dup', element: <DupTest /> },
-      ],
+      children: [{ index: true, element: <MapTestPage /> }],
     },
   ]);
