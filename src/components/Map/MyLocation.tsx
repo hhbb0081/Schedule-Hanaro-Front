@@ -6,7 +6,11 @@ export function MyLocation({
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <button type='button' className='myLocation' onClick={onClick}>
+    <button
+      type='button'
+      className='myLocation fixed bottom-1/2 z-10 mr-16 self-end'
+      onClick={onClick}
+    >
       <Location width={30} height={30} />
     </button>
   );
