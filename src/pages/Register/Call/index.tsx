@@ -120,6 +120,7 @@ export function RegisterCallFormPage() {
             />
             <PhoneNumberInput
               register={register}
+              name='phone'
               error={errors.phone?.message}
             />
             <ConsultationSelect
