@@ -1,8 +1,8 @@
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { ReactComponent as DetailButton } from '@/assets/icons/reservation/reservationdetailbutton.svg';
-import { useNavigate } from 'react-router-dom';
-interface InquiryConsultationCardProps {
+
+type InquiryConsultationCardProps = {
   inquiryNumber: number; // 대기 번호
   inquiryconsultationType: string; // 상담 종류
   consultationContents: string; // 상담 내용
