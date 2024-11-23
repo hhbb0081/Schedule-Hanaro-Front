@@ -12,9 +12,9 @@ export default function DepartureArrivalTime() {
     if (!routesPedestrainResponse || !routesAutomobileResponse) return;
 
     const { totalTime } =
-      routesType === 'pedestrain'
-        ? routesPedestrainResponse
-        : routesAutomobileResponse;
+      routesType === 'automobile'
+        ? routesAutomobileResponse
+        : routesPedestrainResponse;
     const tmpTime = new Date(departureTime);
     tmpTime.setSeconds(
       departureTime.getSeconds() + +(totalTime / 60).toFixed(0) * 60
