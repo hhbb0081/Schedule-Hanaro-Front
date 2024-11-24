@@ -27,7 +27,7 @@ function Header() {
             </Link>
           </div>
 
-          <ul className='flex space-x-[3.125rem] text-[1.25rem]'>
+          <ul className='ml-[10rem] flex space-x-[3.125rem] text-[1.25rem]'>
             <li
               className={cn('text-[#969696] hover:text-white', {
                 'text-[#FFFFFF]': isActive('/admin/online/call'),
@@ -58,7 +58,7 @@ function Header() {
             </li>
           </ul>
 
-          <div className='mr-[4.6875rem] text-right'>
+          <div className='mr-[4.6875rem]'>
             <span className='text-[1.5625rem] font-extrabold text-[#FFFFFF]'>
               강능요 사원 [11]
             </span>
