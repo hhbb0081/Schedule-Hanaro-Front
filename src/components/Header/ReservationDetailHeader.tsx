@@ -1,10 +1,10 @@
 import { CloseButton } from '../ui/close';
-import { RefreshButton } from '../ui/refresh';
+import { ReactComponent as Refresh } from '@/assets/icons/reservation/refresh2.svg';
 
 function ReservationDetailHeader() {
   return (
     <div className='flex w-full items-center justify-between pt-6'>
-      <RefreshButton className='h-[2.375rem] lg:h-[3.5rem]' />
+      <Refresh className='h-[1.75rem] lg:h-[2.1875rem]' />
       <CloseButton location='reservation/visit' />
     </div>
   );
