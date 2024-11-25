@@ -57,7 +57,7 @@ export function MainPage() {
             <div className='text-lg font-bold md:text-sm'>
               예나님을 위한 맞춤형 QnA
             </div>
-            <div
+            <div 
               className='xs:h-[6rem] w-full cursor-pointer overflow-y-auto sm:h-[3rem]'
               onClick={() => navigate('/map')}
             >

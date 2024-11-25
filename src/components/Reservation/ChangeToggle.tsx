@@ -2,12 +2,13 @@ import { ReactComponent as ChangeButton } from '@/assets/icons/reservation/chang
 import { ReactComponent as UpButton } from '@/assets/icons/reservation/up.svg';
 import { ReactComponent as DownButton } from '@/assets/icons/reservation/down.svg';
 import { useNavigate } from 'react-router-dom';
-interface ChangeToggleProps {
+
+type ChangeToggleProps = {
   isOpen: boolean;
   onToggle: () => void;
   selectedTab: string;
   onSelect: (tabName: string) => void;
-}
+};
 
 export function ChangeToggle({
   isOpen,
@@ -17,13 +18,13 @@ export function ChangeToggle({
 }: ChangeToggleProps) {
   return (
     <div className='flex flex-col items-start'>
-      <div
+      <button
         className='mb-[1.6875rem] flex items-center text-left text-[1.5rem] font-bold text-[#2b2b2b]'
         onClick={onToggle}
       >
         <span className='mr-[0.5rem]'>{selectedTab}</span>
         {isOpen ? <UpButton /> : <DownButton />}
-      </div>
+      </button>
       {isOpen && (
         <div className='absolute z-50 mt-[2rem] w-[15.5rem] rounded-[.9375rem] bg-white drop-shadow'>
           <div className='py-[1rem]'>
@@ -44,11 +45,11 @@ export function ChangeToggle({
   );
 }
 
-interface ChangeToggleOptionProps {
+type ChangeToggleOptionProps = {
   label: string;
   selectedTab: string;
   onSelect: (label: string) => void;
-}
+};
 
 function ChangeToggleOption({
   label,
@@ -73,7 +74,7 @@ function ChangeToggleOption({
         onClick={handleSelect}
         className={`relative mx-[15px] my-[0.5rem] flex items-center justify-between rounded-[.625rem] px-[1.25rem] py-[0.7rem] text-[1.0625rem] font-semibold ${
           isDisabled
-            ? 'cursor-not-allowed text-[#a8a8a8]'
+            ? 'cursor-default text-[#a8a8a8]'
             : 'cursor-pointer hover:bg-[#f1f1f1]'
         }`}
       >

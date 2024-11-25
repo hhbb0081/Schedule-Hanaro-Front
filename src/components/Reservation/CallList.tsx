@@ -3,14 +3,14 @@ import { ReactComponent as TimerButton } from '@/assets/icons/reservation/timer.
 import { ReactComponent as WarningTimer } from '@/assets/icons/reservation/warningalarm.svg';
 import { useNavigate } from 'react-router-dom';
 
-interface CallConsultationCardProps {
+type CallConsultationCardProps = {
   callconsultationType: string; // 상담 종류
   consultationDate: string; // 상담 일시
   consultationTime: string; // 상담 시간
   callNumber: number; // 대기 번호
   timerText: number; // 남은 시간
   idx: string;
-}
+};
 
 const CallList: React.FC<CallConsultationCardProps> = ({
   callconsultationType,
