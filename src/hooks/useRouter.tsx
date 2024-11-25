@@ -41,6 +41,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { SignUpPage } from '@/pages/SignUp';
 import { SignUpLayout } from '@/components/Layout/SignUp';
 import ChatPage from '@/pages/Chat';
+import SigninPage from '@/pages/Signin';
 
 import { AdminMyPage } from '@/pages/Admin/online/mypage';
 export const useRouter = () =>
@@ -148,6 +149,10 @@ export const useRouter = () =>
           path: '/mypage',
           element: <MypageLayout />,
           children: [{ index: true, element: <Mypage /> }],
+        },
+        {
+          path: '/signin',
+          element: <SigninPage />,
         },
       ],
     },

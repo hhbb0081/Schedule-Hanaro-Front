@@ -11,7 +11,7 @@ function CallInfoBox({ selectedIdx, setSelectedIdx }: CallProps) {
   const [activeCategory, setActiveCategory] = useState('전화문의');
 
   return (
-    <div className='flex h-full flex-col rounded-[20px] bg-white px-4 pb-8 pt-6'>
+    <div className='flex h-full w-[65%] flex-col rounded-[20px] bg-white px-4 pb-8 pt-6'>
       <div className='pb-5 pt-3'>
         <ReplyState activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>

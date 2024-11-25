@@ -15,12 +15,10 @@ function CallContainer() {
             selectedIdx={selectedIdx}
             setSelectedIdx={setSelectedIdx}
           />
-          <div className='w-[65%]'>
-            <CallInfoBox
-              selectedIdx={selectedIdx}
-              setSelectedIdx={setSelectedIdx}
-            />
-          </div>
+          <CallInfoBox
+            selectedIdx={selectedIdx}
+            setSelectedIdx={setSelectedIdx}
+          />
         </div>
         <CurrentBox />
       </div>
