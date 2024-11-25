@@ -17,12 +17,12 @@ const ReservationDetailCallTags: React.FC<ReservationDetailHeaderProps> = ({
     <div className='flex w-full items-center'>
       <label className='ml-2 text-2xl font-bold'>{title}</label>
       <div className='ml-4 flex space-x-2'>
-        {tags.map((tag) => (
+        {tags.map(({ id, label }) => (
           <span
-            key={tag.id}
+            key={id}
             className='rounded-full bg-[#008485]/20 px-3 py-1 text-sm text-[#008485]'
           >
-            #{tag.label}
+            #{label}
           </span>
         ))}
       </div>

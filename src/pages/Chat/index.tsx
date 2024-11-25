@@ -10,29 +10,33 @@ const Header = () => (
 );
 
 const ChatPage = () => {
-  const inputRef = useRef<string>('');
   const [answers, setAnswers] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSend = () => {
-    console.log(inputRef.current);
-    setIsLoading(true);
-    setAnswers([]);
-    setTimeout(() => {
-      setAnswers([
-        '대학생을 위한 통장이 있나요?',
-        '직장인을 위한 통장이 있나요?',
-      ]);
-      setIsLoading(false);
-    }, 2000);
+    if (textareaRef.current) {
+      const inputValue = textareaRef.current.value.trim();
+      if (!inputValue) {
+        alert('질문 내용을 입력해주세요.');
+        return;
+      }
+      setIsLoading(true);
+      setAnswers([]);
+      setTimeout(() => {
+        setAnswers([
+          '대학생을 위한 통장이 있나요?',
+          '직장인을 위한 통장이 있나요?',
+        ]);
+        setIsLoading(false);
+      }, 2000);
+    }
   };
 
   const handleInput = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-      inputRef.current = textareaRef.current.value;
     }
   };
 

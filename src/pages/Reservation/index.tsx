@@ -8,10 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 export function ReservationPage() {
   const navigate = useNavigate();
-  const [selectedRes, setSelectedRes] = useState(0);
+  const [selectedRes, setSelectedRes] = useState('call');
   const handlePage = () => {
-    const type = selectedRes === 0 ? 'call' : 'inquiry';
-    navigate(`/register/${type}`);
+    navigate(`/register/${selectedRes}`);
   };
   return (
     <>
