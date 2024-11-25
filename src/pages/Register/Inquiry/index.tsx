@@ -69,10 +69,10 @@ export function RegisterInquiryFormPage() {
   return (
     <>
       <Header title='1:1 상담 예약' />
-      <div className='mx-auto flex w-[90%] flex-col'>
+      <div className='mx-auto flex min-h-screen w-[90%] flex-col'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='flex w-full flex-col gap-[1rem] pt-[5rem]'
+          className='flex min-h-screen w-full flex-col justify-between gap-[1rem] pt-[5rem]'
         >
           <div className='flex flex-col gap-[1rem]'>
             <ReusableInput
@@ -106,7 +106,7 @@ export function RegisterInquiryFormPage() {
               setIsChecked1={setIsChecked1}
               setIsChecked2={setIsChecked2}
             />
-            <div className='flex justify-between'>
+            <div className='flex justify-between pb-[6.5rem]'>
               <Button
                 type='button'
                 onClick={() => navigate('/')}
