@@ -47,7 +47,7 @@ function VisitPage() {
         </div>
         <InfoCard waitingCount={2} estimatedTime={15} todayVisitors={72} />
       </div>
-      <div className='w-[100%] rounded-[.9375rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
+      <div className='w-full rounded-[.9375rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
         <CallInfoBox
           selectedIdx={selectedIdx}
           setSelectedIdx={setSelectedIdx}
