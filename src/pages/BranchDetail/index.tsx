@@ -20,6 +20,7 @@ import { showToast } from '../Register/Call';
 import { useEffect, useState } from 'react';
 // import axios from 'axios';
 import apiCall from '@/api/Api';
+import { BackButton } from '@/components/ui/back';
 
 type BranchProps = {
   branchNum: string | null;
@@ -91,7 +92,7 @@ export function BranchDetailPage() {
   return (
     <div className='mx-auto overflow-hidden rounded-lg bg-white'>
       <header className='flex h-14 items-center justify-between border'>
-        <ArrowLeft width={21} height={21} className='ml-4' />
+        <BackButton />
         <div className='text-xl'>{branchName}</div>
         <div></div>
       </header>
