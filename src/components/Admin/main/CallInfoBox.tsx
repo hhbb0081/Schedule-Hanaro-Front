@@ -5,13 +5,16 @@ import { ActiveTab } from '@/types/inquiry';
 import { useState } from 'react';
 import ReplyState from '../Inquiry/ReplyState';
 import { CallProps } from './WaitingList';
+import { useLocation } from 'react-router-dom';
 
 function CallInfoBox({ selectedIdx, setSelectedIdx }: CallProps) {
+  const location = useLocation();
+
   const [activeTab, setActiveTab] = useState<ActiveTab>('문의정보');
   const [activeCategory, setActiveCategory] = useState('전화문의');
 
   return (
-    <div className='flex h-full w-[65%] flex-col rounded-[20px] bg-white px-4 pb-8 pt-6'>
+    <div className='flex h-full flex-col rounded-[20px] bg-white px-4 pb-8 pt-6'>
       <div className='pb-5 pt-3'>
         <ReplyState activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
@@ -42,17 +45,19 @@ function CallInfoBox({ selectedIdx, setSelectedIdx }: CallProps) {
               </div>
             </div>
           </div>
-          <div className='mt-4 flex justify-end gap-3'>
-            <Button
-              className='w-fit rounded-3xl bg-[#777777] px-4 py-2'
-              onClick={() => setSelectedIdx(123)}
-            >
-              현재 고객으로 이동
-            </Button>
-            <Button className='w-fit rounded-3xl bg-[#777777] px-4 py-2 text-white'>
-              상담 내용 입력하기
-            </Button>
-          </div>
+          {location.pathname === '/admin/online' && (
+            <div className='mt-4 flex justify-end gap-3'>
+              <Button
+                className='w-fit rounded-3xl bg-[#777777] px-4 py-2'
+                onClick={() => setSelectedIdx(123)}
+              >
+                현재 고객으로 이동
+              </Button>
+              <Button className='w-fit rounded-3xl bg-[#777777] px-4 py-2 text-white'>
+                상담 내용 입력하기
+              </Button>
+            </div>
+          )}
         </div>
       )}
 

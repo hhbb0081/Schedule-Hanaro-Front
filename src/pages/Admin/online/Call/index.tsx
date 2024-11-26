@@ -12,6 +12,7 @@ function CallPage() {
   const [displayNum, setDisplayNum] = useState([7, 0, 1]);
   const rotateAngle = 360 / 8;
 
+  
   const handleNext = () => {
     setNumbers((prevNumbers) => {
       if (prevNumbers.length === 0) return prevNumbers;
@@ -44,6 +45,7 @@ function CallPage() {
           </div>
         </div>
       </div>
+      
     </>
   );
 }
