@@ -13,7 +13,7 @@ export default function TotalTime() {
     <div className='flex items-end gap-3'>
       <div>소요시간</div>
       <div className='flex items-end'>
-        {totalTime > 360 ? (
+        {totalTime > 3600 ? (
           <div className='flex items-end gap-[0.3rem]'>
             <div className='flex items-end gap-[0.1rem]'>
               <div className='text-3xl font-bold'>

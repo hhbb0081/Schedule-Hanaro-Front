@@ -11,6 +11,7 @@ import {
   InquiryDetailPage,
   MapDetailPage,
   MapPage,
+  MapTestPage,
   RegisterCallFormPage,
   RegisterInquiryFormPage,
   ReservationCallPage,
@@ -33,7 +34,6 @@ import InquiryPage from '@/pages/Admin/online/Inquiry';
 import { AnswerDetail } from '@/pages/Admin/online/Inquiry/Answer/Detail';
 import { AnswerInput } from '@/pages/Admin/online/Inquiry/Answer/Input';
 import { AdminMainPage } from '@/pages/Admin/online/Main';
-import MapTestPage from '@/pages/MapTest';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
