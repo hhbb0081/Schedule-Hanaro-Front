@@ -25,16 +25,14 @@ export function ReservationCallPage() {
               />
             ))}
           </div>
-          <div className='mb-[1rem] mt-[6rem] flex justify-end'>
-            <button
-              onClick={refreshButtonClick}
-              className='flex h-[4rem] w-[4rem] items-center justify-center sm:h-[3rem] sm:w-[3rem] lg:h-[5rem] lg:w-[5rem]'
-            >
-              <RefreshIcon className='h-full w-full' />
-            </button>
-          </div>
         </div>
       </div>
+      <button
+        onClick={refreshButtonClick}
+        className='fixed bottom-[6.5rem] right-[1.2rem] z-10 flex h-[4rem] w-[4rem] items-center justify-center sm:h-[3rem] sm:w-[3rem] lg:h-[5rem] lg:w-[5rem]'
+      >
+        <RefreshIcon className='h-full w-full text-white' />
+      </button>
     </>
   );
 }
