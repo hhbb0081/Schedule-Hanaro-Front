@@ -26,7 +26,7 @@ export function AdminMyPage() {
         </div>
         <div className='flex-grow border-t border-gray-300'></div>
       </div>
-      <div className='flex flex-row items-center justify-between rounded-[1.25rem] py-[2rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
+      <div className='flex flex-row items-center justify-around rounded-[1.25rem] py-[2rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
         <div className='ml-[6rem] flex flex-col items-center'>
           <div className='h-[12rem] w-[12rem] overflow-hidden rounded-full border-2 border-gray-300'>
             <img
@@ -35,7 +35,9 @@ export function AdminMyPage() {
               className='h-full w-full object-cover'
             />
           </div>
-          <div className='mt-[2rem] text-[1.5625rem]'> 강능요 사원</div>
+          <div className='mt-[2rem] text-[1.5625rem] font-bold text-[#464646]'>
+            강능요 사원
+          </div>
         </div>
 
         <div className='mr-[4.75rem] w-[55%] space-y-[1.6875rem]'>
