@@ -20,7 +20,7 @@ const ReservationDetailCallTags: React.FC<ReservationDetailHeaderProps> = ({
         {tags.map(({ id, label }) => (
           <span
             key={id}
-            className='rounded-full bg-[#008485]/20 px-3 py-1 text-sm text-[#008485]'
+            className='rounded-full bg-[#008485]/15 px-3 py-1 text-sm text-[#008485]'
           >
             #{label}
           </span>
