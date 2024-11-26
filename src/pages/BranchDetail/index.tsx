@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow_left.svg';
 import { ReactComponent as Addrss } from '@/assets/icons/branch/address.svg';
 import { ReactComponent as Hours } from '@/assets/icons/branch/business_hours.svg';
 import { ReactComponent as Tel } from '@/assets/icons/branch/tel.svg';
