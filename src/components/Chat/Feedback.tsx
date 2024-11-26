@@ -13,11 +13,11 @@ const Feedback = () => {
   };
 
   return (
-    <div className='flex flex-col items-center gap-4'>
+    <div className='flex flex-col items-center gap-[1rem]'>
       <p className='text-lg font-bold'>
         AI가 생성해드린 맞춤 답변이 도움이 되셨나요?
       </p>
-      <div className='flex gap-4'>
+      <div className='flex w-[80%] gap-4'>
         <Button type='button' variant='ghost' onClick={handleNegativeFeedback}>
           아니요, 부족해요
         </Button>

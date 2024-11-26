@@ -9,6 +9,7 @@ import { PhoneNumberInput } from '@/components/Register/PhoneNumberInput';
 import { BirthdayPicker } from '@/components/SignUp/BirthdayPicker';
 import { PasswordInput } from '@/components/SignUp/PasswordInput';
 import { ConfirmPasswordInput } from '@/components/SignUp/ConfirmPasswordInput';
+import { GenderSelect } from '@/components/SignUp/GenderSelect';
 
 export type SignUpData = {
   name: string;
@@ -20,6 +21,7 @@ export type SignUpData = {
   reservationDate: Date | undefined;
   nocontent: null;
   birthday: Date;
+  gender: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,10 +55,10 @@ export function SignUpPage() {
   return (
     <>
       <Header title='회원가입' />
-      <div className='mx-auto flex w-[90%] flex-col'>
+      <div className='mx-auto flex min-h-screen w-[90%] flex-col'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='flex w-full flex-col gap-[1rem] pt-[5rem]'
+          className='flex h-screen w-full flex-col justify-between gap-[1rem] pt-[5rem]'
         >
           <div className='flex flex-col gap-[1rem]'>
             <ReusableInput
@@ -72,14 +74,6 @@ export function SignUpPage() {
               fieldName='id'
               error={errors.id?.message}
               label='아이디'
-              placeholder='ex) HanaBank'
-              type='text'
-            />
-            <ReusableInput
-              register={register}
-              fieldName='email'
-              error={errors.email?.message}
-              label='이메일'
               placeholder='ex) HanaBank@gmail.com'
               type='text'
             />
@@ -106,14 +100,19 @@ export function SignUpPage() {
               name='birthday'
               error={errors.birthday?.message}
             />
+            <GenderSelect
+              register={register}
+              trigger={trigger}
+              name='gender'
+              error={errors.gender?.message}
+              setValue={setValue}
+            />
           </div>
 
-          <div className='flex flex-col'>
-            <div className='flex justify-between'>
-              <Button type='submit' variant='default' className='w-full'>
-                회원가입
-              </Button>
-            </div>
+          <div className='flex flex-col pb-[6.5rem]'>
+            <Button type='submit' variant='default' className='w-full'>
+              회원가입
+            </Button>
           </div>
         </form>
 

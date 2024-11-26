@@ -2,7 +2,7 @@ export const MAX_CAPACITY = 100;
 
 export const RESERVATION_TYPE = [
   {
-    id: 0,
+    id: 'call',
     title: '전화 상담',
     subTitle: [
       '전화 상담으로 간편하게 상담하세요.',
@@ -10,7 +10,7 @@ export const RESERVATION_TYPE = [
     ],
   },
   {
-    id: 1,
+    id: 'inquiry',
     title: '1:1 상담',
     subTitle: [
       '전화가 부담스러우실 때',

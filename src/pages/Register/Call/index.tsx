@@ -104,12 +104,12 @@ export function RegisterCallFormPage() {
   return (
     <>
       <Header title='전화 상담 예약' />
-      <div className='mx-auto flex w-[90%] justify-between py-5 pt-[5rem]'>
+      <div className='mx-auto flex min-h-screen w-[90%] py-5 pt-[5rem]'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='flex w-full flex-col gap-[5rem]'
+          className='flex h-screen w-full flex-col justify-between gap-[5rem]'
         >
-          <div className='flex w-full flex-col gap-[1rem]'>
+          <div className='flex w-full flex-col gap-[2rem]'>
             <ReusableInput
               register={register}
               fieldName='name'
@@ -145,7 +145,7 @@ export function RegisterCallFormPage() {
               setIsChecked1={setIsChecked1}
               setIsChecked2={setIsChecked2}
             />
-            <div className='flex justify-between'>
+            <div className='flex justify-between pb-[12rem]'>
               <Button
                 type='button'
                 onClick={() => navigate('/')}
