@@ -1,14 +1,32 @@
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import mainLogo from '@/assets/images/mainLogo.svg';
 import { AnswerCard } from '@/components/AI/AnswerCard';
 
 function SigninPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigate = useNavigate();
 
-  const isButtonDisabled = !(email && password);
+  useEffect(() => {
+    const checkButtonState = () => {
+      const email = emailRef.current?.value || '';
+      const password = passwordRef.current?.value || '';
+      setIsButtonDisabled(!(email && password));
+    };
+
+    const emailInput = emailRef.current;
+    const passwordInput = passwordRef.current;
+
+    emailInput?.addEventListener('input', checkButtonState);
+    passwordInput?.addEventListener('input', checkButtonState);
+
+    return () => {
+      emailInput?.removeEventListener('input', checkButtonState);
+      passwordInput?.removeEventListener('input', checkButtonState);
+    };
+  }, []);
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center bg-white'>
@@ -22,8 +40,7 @@ function SigninPage() {
             아이디
           </label>
           <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            ref={emailRef}
             placeholder='hanaro@hanaro.com'
             className='w-full border-b border-gray-300 px-[0.75rem] py-[0.5rem] leading-tight text-[#464646] focus:border-[#666666] focus:outline-none'
           />
@@ -37,8 +54,7 @@ function SigninPage() {
             비밀번호
           </label>
           <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            ref={passwordRef}
             className='w-full border-b border-gray-300 px-[0.75rem] py-[0.5rem] leading-tight text-[#464646] focus:border-[#666666] focus:outline-none'
           />
         </div>
