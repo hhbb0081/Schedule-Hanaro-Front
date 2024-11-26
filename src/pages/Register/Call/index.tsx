@@ -109,7 +109,7 @@ export function RegisterCallFormPage() {
           onSubmit={handleSubmit(onSubmit)}
           className='flex h-screen w-full flex-col justify-between gap-[5rem]'
         >
-          <div className='flex w-full flex-col gap-[1rem]'>
+          <div className='flex w-full flex-col gap-[2rem]'>
             <ReusableInput
               register={register}
               fieldName='name'

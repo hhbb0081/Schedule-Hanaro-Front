@@ -74,7 +74,7 @@ export function RegisterInquiryFormPage() {
           onSubmit={handleSubmit(onSubmit)}
           className='flex min-h-screen w-full flex-col justify-between gap-[1rem] pt-[5rem]'
         >
-          <div className='flex flex-col gap-[1rem]'>
+          <div className='flex flex-col gap-[2rem]'>
             <ReusableInput
               register={register}
               fieldName='name'

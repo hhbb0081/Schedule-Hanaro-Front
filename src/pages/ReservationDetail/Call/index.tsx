@@ -43,8 +43,8 @@ export function ReservationDetailCallPage() {
         <body className='w-full flex-col items-center justify-center gap-[2.5rem]'>
           <ReservationDetailHeader />
           <div className='flex h-screen flex-col justify-between'>
-            <div className='flex flex-col gap-[2.5rem]'>
-              <div className='flex flex-col gap-[1rem]'>
+            <div className='flex flex-col gap-[5rem]'>
+              <div className='flex flex-col gap-[2rem]'>
                 <div className='text-center text-lg font-medium'>
                   현재 대기 번호는{' '}
                   <span className='text-3xl font-bold text-[#008485]/80'>
@@ -59,7 +59,7 @@ export function ReservationDetailCallPage() {
                   </div>
                 </div>
               </div>
-              <div className='flex flex-col gap-[0.5rem]'>
+              <div className='flex flex-col gap-[1rem]'>
                 <ReservationDetailCallTags title='예약 상세 정보' tags={tags} />
                 <div className='flex flex-col gap-[1rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
                   <div className='flex justify-between'>

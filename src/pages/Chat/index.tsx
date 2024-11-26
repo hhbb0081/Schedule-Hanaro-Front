@@ -2,12 +2,7 @@ import Nav from '@/components/Nav/Nav';
 import Loading from '@/assets/images/loading.gif';
 import { useRef, useState } from 'react';
 import Feedback from '@/components/Chat/Feedback';
-
-const Header = () => (
-  <header className='w-full py-4 text-center'>
-    <h1 className='text-2xl font-bold text-[#274C5B]'>AI 답변</h1>
-  </header>
-);
+import Header from '@/components/Header/Header';
 
 const ChatPage = () => {
   const [answers, setAnswers] = useState<string[]>([]);
@@ -18,7 +13,6 @@ const ChatPage = () => {
     if (textareaRef.current) {
       const inputValue = textareaRef.current.value.trim();
       if (!inputValue) {
-        alert('질문 내용을 입력해주세요.');
         return;
       }
       setIsLoading(true);
@@ -41,10 +35,10 @@ const ChatPage = () => {
   };
 
   return (
-    <div className='flex flex-col items-center bg-[#F8FCFB]'>
-      <Header />
+    <div className='flex h-screen flex-col items-center justify-between bg-white text-lg'>
+      <Header title={'AI 답변'} />
       {!isLoading && answers.length === 0 && (
-        <div className='flex w-full flex-col items-center justify-between gap-6 px-4'>
+        <div className='flex h-screen w-full flex-col items-center justify-center gap-[2rem] pb-[15rem] text-lg'>
           <div className='h-80 w-80'>
             <img
               src='/svg/santa.svg' // 산타 이미지
@@ -60,7 +54,7 @@ const ChatPage = () => {
             <div className='relative w-[80%]'>
               <textarea
                 ref={textareaRef}
-                className='w-full resize-none overflow-hidden rounded-3xl border border-[#008485] p-4 pr-12 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#008485]'
+                className='w-full resize-none overflow-hidden rounded-3xl border-[3px] border-main bg-white p-4 pr-12 shadow-[0_0_17px_0_rgba(0,132,133,0.25)] focus:outline-none'
                 placeholder='질문 내용을 입력하세요'
                 onInput={handleInput}
                 onKeyDown={(e) => {
@@ -83,20 +77,20 @@ const ChatPage = () => {
       )}
 
       {isLoading && (
-        <div className='flex h-[calc(100vh-10rem)] flex-col items-center justify-center'>
+        <div className='flex h-screen w-full flex-col items-center justify-center pb-[15rem]'>
           <img
-            className='h-32 w-32 object-contain'
+            className='h-48 w-48 object-contain'
             src={Loading}
             alt='Loading'
           />
-          <div className='text-center text-lg font-bold'>
+          <div className='text-center text-2xl font-bold'>
             AI가 추천 답변을 생성하고 있어요!
           </div>
         </div>
       )}
       {!isLoading && answers.length > 0 && (
-        <div className='flex min-h-screen w-full flex-col justify-between pb-[12rem]'>
-          <div className='mt-6 flex w-full flex-col items-center gap-4 px-4'>
+        <div className='flex min-h-screen w-full flex-col justify-between pb-[7rem] pt-[7rem]'>
+          <div className='flex w-full flex-col items-center gap-4 px-4'>
             {answers.map((answer, index) => (
               <div
                 key={index}
