@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react';
 // import axios from 'axios';
 import apiCall from '@/api/Api';
 import { BackButton } from '@/components/ui/back';
+import Modalbutton from '@/components/Direction/Modal';
 
 type BranchProps = {
   branchNum: string | null;
@@ -48,19 +49,13 @@ export function BranchDetailPage() {
   const { toast } = useToast();
   const { id } = useParams();
   const [branch, setBranch] = useState<BranchProps>(defaultBranchDetail);
+  const reserved = 1;
 
   useEffect(() => {
     const getBranchDetail = async () => {
       console.log(id);
       try {
         const response = await apiCall(`/branch/${id}`, 'get');
-        // const response = await axios({
-        //   method: 'get',
-        //   url: 'http://localhost:8080/api/v1/branch/one',
-        //   params: {
-        //     branchId: id,
-        //   },
-        // });
         console.log(response);
         setBranch(response.data);
       } catch (error) {
@@ -88,6 +83,11 @@ export function BranchDetailPage() {
       showToast(toast, '길 안내를 시작합니다.');
     }
   };
+  const handlePage =
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (url: string) => {
+      e.stopPropagation();
+      navigate(url);
+    };
   return (
     <div className='mx-auto overflow-hidden rounded-lg bg-white'>
       <header className='flex h-14 items-center justify-between border'>
@@ -157,9 +157,29 @@ export function BranchDetailPage() {
             </span>
           </div>
         </div>
-        <div className='mt-16 flex items-center justify-center p-4'>
-          <Button onClick={moveToReservation}>예약하기</Button>
-        </div>
+        {reserved ? (
+          <div className='mt-16 flex h-[3.75rem] gap-x-[1.0625rem] px-[1.875rem]'>
+            <Modalbutton
+              buttonTitle='예약 취소'
+              buttonVariant='ghost'
+              buttonSize='w-1/4 h-full'
+              modalTitle='영업점 예약 취소'
+              modalDescription1='취소 시 30분 후부터 재예약이 가능합니다.'
+              modalDescription2=''
+              modalButtonTitle='확인'
+            ></Modalbutton>
+            <Button
+              className='h-full w-3/4 font-bold'
+              onClick={(e) => handlePage(e)('/register/visit/1')}
+            >
+              예약 상세보기
+            </Button>
+          </div>
+        ) : (
+          <div className='mt-16 flex items-center justify-center px-4'>
+            <Button onClick={moveToReservation}>예약하기</Button>
+          </div>
+        )}
       </main>
       <footer>
         <Nav />
