@@ -28,7 +28,7 @@ export function AnswerDetail() {
         onClick={() => navigate(-1)}
       >
         <span className='mr-[0.1rem] flex justify-center text-[0.825rem]'>
-          <img src={arrow_left} alt='점' className='h-[1.2rem] w-full' />
+          <img src={arrowLeft} alt='점' className='h-[1.2rem] w-full' />
         </span>
         <span className='text-[1.2rem] font-bold text-[#464646]'>뒤로가기</span>
       </button>

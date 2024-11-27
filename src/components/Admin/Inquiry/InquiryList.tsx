@@ -41,7 +41,7 @@ function InquiryList({
   );
 
   const filteredInquiries = formattedInquiries.filter(
-    ({ status, category, content, name, tags}) =>
+    ({ status, category, content, name, tags }) =>
       status === activeTab &&
       (activeCategory === '전체' || category === activeCategory) &&
       (searchQuery === '' ||
@@ -67,7 +67,7 @@ function InquiryList({
         <FilterAndSearch
           setActiveCategory={setActiveCategory}
           setSearchQuery={setSearchQuery} // 검색 상태 전달
-          />
+        />
       </div>
 
       <Accordion type='single' collapsible>

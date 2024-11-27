@@ -48,7 +48,7 @@ function CallPage() {
     <div className='mx-auto max-w-[1300px] px-4'>
       {/* 부모 컨테이너 */}
       <div className='mb-10 mt-6 flex w-full flex-col items-center'>
-      <SearchConditionSetting
+        <SearchConditionSetting
           searchConditions={searchConditions}
           setSearchConditions={setSearchConditions}
           onSearch={handleSearch}

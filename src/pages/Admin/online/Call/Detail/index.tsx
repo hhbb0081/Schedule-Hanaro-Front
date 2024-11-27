@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CallDetail } from '@/types/callDetail'; // 경로에 따라 수정
 import { mockCallInquiryData } from '@/mock/adminCallInquiry';
-import arrow_left from '../../../../assets/icons/arrow.svg';
+import arrowLeft from '@/assets/icons/arrow_left.svg';
 import CustomerInfo from '@/components/Admin/Inquiry/InputCustomerInfo';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -32,7 +32,7 @@ export function CallAnswerDetail() {
         onClick={() => navigate(-1)}
       >
         <span className='mr-[0.1rem] flex justify-center text-[1.2rem]'>
-          <img src={arrow_left} alt='점' className='h-[0.825rem] w-full' />
+          <img src={arrowLeft} alt='점' className='h-[0.825rem] w-full' />
         </span>
         <span className='text-[1.2rem] font-bold text-[#464646]'>뒤로가기</span>
       </button>

@@ -26,8 +26,6 @@ type SearchConditionSettingProps = {
   onReset: () => void;
 };
 
-  
-
 function SearchConditionSetting({
   searchConditions,
   setSearchConditions,
@@ -68,7 +66,7 @@ function SearchConditionSetting({
             기간
           </label>
           <div className='flex items-center space-x-2'>
-          <DatePicker
+            <DatePicker
               selected={startDate}
               onChange={(date) => handleInputChange('startDate', date)}
               maxDate={new Date()}
@@ -95,12 +93,12 @@ function SearchConditionSetting({
             style={{ width: '14rem', height: '2.5rem' }}
           >
             <Select
-            value={category}
-            onValueChange={(value) => handleInputChange('category', value)}
-          >
+              value={category}
+              onValueChange={(value) => handleInputChange('category', value)}
+            >
               <SelectTrigger className='relative h-[3rem] w-[14rem] rounded-full border-none bg-white pl-3 text-left text-base text-gray-500 shadow-md'>
                 <span className='ml-1'>
-                  <SelectValue placeholder='전체'/>
+                  <SelectValue placeholder='전체' />
                 </span>
                 <span className='absolute right-3 top-1/2 -translate-y-1/2'>
                   <img src={arrowDown} className='ml-0 mr-2 inline-block' />
@@ -108,7 +106,7 @@ function SearchConditionSetting({
               </SelectTrigger>
               <SelectContent>
                 {SELECT_ITEMS.map((item) => (
-                  <SelectItem key={item.value} value={item.value} >
+                  <SelectItem key={item.value} value={item.value}>
                     {item.label}
                   </SelectItem>
                 ))}
@@ -132,7 +130,7 @@ function SearchConditionSetting({
               value={keyword}
               onChange={(e) => handleInputChange('keyword', e.target.value)}
               // placeholder='검색'
-              className='h-full w-full rounded-full border-none placeholder:text-gray-500 placeholer:text-base text-base bg-white pl-10 pr-4 shadow-md focus:outline-none'
+              className='placeholer:text-base h-full w-full rounded-full border-none bg-white pl-10 pr-4 text-base shadow-md placeholder:text-gray-500 focus:outline-none'
             />
           </div>
           {/* 버튼 */}
@@ -140,14 +138,14 @@ function SearchConditionSetting({
             <Button
               variant='outline'
               onClick={onReset}
-              className='rounded-full border-2 h-[4rem] w-[14rem] border-gray-800 bg-white px-4 py-2 text-xl font-bold text-gray-600 hover:bg-gray-100'
+              className='h-[4rem] w-[14rem] rounded-full border-2 border-gray-800 bg-white px-4 py-2 text-xl font-bold text-gray-600 hover:bg-gray-100'
             >
               초기화
             </Button>
             <Button
               variant='default'
               onClick={() => onSearch(searchConditions)}
-              className='rounded-full h-[4rem] w-[14rem] bg-gray-800 px-4 py-2 text-xl font-bold text-white hover:bg-gray-900'
+              className='h-[4rem] w-[14rem] rounded-full bg-gray-800 px-4 py-2 text-xl font-bold text-white hover:bg-gray-900'
             >
               검색
             </Button>

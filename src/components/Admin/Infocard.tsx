@@ -31,7 +31,7 @@ export default function InfoCard({
   estimatedTime,
   todayVisitors,
 }: InfoCardProps) {
-  const infoItems = [ 
+  const infoItems = [
     { description: '현재 대기인수', suffix: '명', count: waitingCount },
     { description: '예상 소요시간', suffix: '분', count: estimatedTime },
     ...(todayVisitors !== undefined
