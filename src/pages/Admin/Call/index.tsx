@@ -1,50 +1,86 @@
-import { CustomerInfo } from '@/components/Admin/Customer';
-import InfoCard from '@/components/Admin/Infocard';
-import Next from '@/components/Admin/Next';
-import WaitingNumber from '@/components/Admin/WaitingNum';
+// 기존 CallPage
+
+import ListOfCallInquiry from '@/components/Admin/Call/ListOfCallInquiry';
+import SearchConditionSetting from '@/components/Admin/Call/SearchConditionSetting';
+import { mockCallInquiryData } from '@/mock/adminCallInquiry';
 import { useState } from 'react';
 
-function CallPage() {
-  const [numbers, setNumbers] = useState([
-    952, 953, 954, 955, 956, 957, 958, 951,
-  ]);
-  const [angle, setAngle] = useState(0);
-  const [displayNum, setDisplayNum] = useState([7, 0, 1]);
-  const rotateAngle = 360 / 8;
+type SearchConditions = {
+  startDate?: Date;
+  endDate?: Date;
+  category: string;
+  keyword: string;
+};
 
-  const handleNext = () => {
-    setNumbers((prevNumbers) => {
-      if (prevNumbers.length === 0) return prevNumbers;
-      const lastNumber = prevNumbers[prevNumbers.length - 1];
-      return [lastNumber, ...prevNumbers.slice(0, prevNumbers.length - 1)];
+function CallPage() {
+  const [filteredData, setFilteredData] = useState(mockCallInquiryData); // 필터링된 데이터 상태
+  const [searchConditions, setSearchConditions] = useState<SearchConditions>({
+    startDate: undefined,
+    endDate: undefined,
+    category: '전체',
+    keyword: '',
+  });
+
+  // 검색 실행
+  const handleSearch = (conditions: SearchConditions) => {
+    const { startDate, endDate, category, keyword } = conditions;
+
+    const filtered = mockCallInquiryData.filter((inquiry) => {
+      // 기간 조건
+      const matchesDate =
+        (!startDate || new Date(inquiry.call_date) >= startDate) &&
+        (!endDate || new Date(inquiry.call_date) <= endDate);
+
+      // 카테고리 조건
+      const matchesCategory =
+        category === '전체' || inquiry.category === category;
+
+      // 키워드 조건
+      const matchesKeyword =
+        !keyword ||
+        inquiry.inquiry_content.includes(keyword) ||
+        inquiry.tags.some((tag) => tag.includes(keyword)) ||
+        inquiry.category.includes(keyword) ||
+        inquiry.name.includes(keyword) ||
+        (inquiry.banker_reply_content &&
+          inquiry.banker_reply_content.includes(keyword)) ||
+        (inquiry.recommended_reply_content &&
+          inquiry.recommended_reply_content.includes(keyword));
+
+      return matchesDate && matchesCategory && matchesKeyword;
     });
-    setNumbers((prevNumbers) => {
-      return prevNumbers.map((num) => num + 1);
+
+    setFilteredData(filtered); // 필터링된 데이터 업데이트
+  };
+
+  // 초기화 실행
+  const handleReset = () => {
+    setSearchConditions({
+      startDate: undefined,
+      endDate: undefined,
+      category: '전체',
+      keyword: '',
     });
-    setAngle((prev) => prev + rotateAngle);
-    setDisplayNum((prevNumbers) =>
-      prevNumbers.map((num) => (num + 1 > 7 ? 0 : num + 1))
-    );
+    setFilteredData(mockCallInquiryData); // 기본 데이터로 복원
   };
   return (
-    <>
-      <WaitingNumber numbers={numbers} angle={angle} displayNum={displayNum} />
-      <div className='flex items-start justify-center'>
-        <CustomerInfo
-          customerCount={952}
-          name='김삼순'
-          phoneNumber='010-7330-9731'
-          birthDate='1977년 8월 24일'
-          inquiryCount={3}
+    <div className='mx-auto max-w-[1300px] px-4'>
+      {/* 부모 컨테이너 */}
+      <div className='mb-10 mt-6 flex w-full flex-col items-center'>
+      <SearchConditionSetting
+          searchConditions={searchConditions}
+          setSearchConditions={setSearchConditions}
+          onSearch={handleSearch}
+          onReset={handleReset}
         />
-        <div className='ml-[2rem]'>
-          <InfoCard waitingCount={2} estimatedTime={15} />
-          <div className='mt-[2rem]'>
-            <Next onClick={handleNext} />
-          </div>
-        </div>
       </div>
-    </>
+      <div className='w-full'>
+        <h1 className='mb-4 w-full text-left text-xl font-extrabold text-black'>
+          검색 목록
+        </h1>
+        <ListOfCallInquiry inquiries={filteredData} />
+      </div>
+    </div>
   );
 }
 

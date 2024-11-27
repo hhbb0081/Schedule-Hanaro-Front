@@ -27,7 +27,7 @@ function Sidebar() {
           className={`w-full ${isActive('/admin/inquiry') ? 'bg-gray-700' : ''}`}
         >
           <Link
-            to='/admin/inquiry'
+            to='/admin/online/inquiry'
             className={`block p-3 text-center no-underline ${
               isActive('/admin/inquiry') ? 'text-white' : 'text-gray-400'
             }`}
@@ -39,7 +39,7 @@ function Sidebar() {
           className={`w-full ${isActive('/admin/call') ? 'bg-gray-700' : ''}`}
         >
           <Link
-            to='/admin/call'
+            to='/admin/online/call'
             className={cn('block p-3 text-center no-underline', {
               'text-white': isActive('/admin/call'),
               'text-gray-400': !isActive('/admin/call'),

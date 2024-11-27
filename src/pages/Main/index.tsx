@@ -58,7 +58,7 @@ export function MainPage() {
               예나님을 위한 맞춤형 QnA
             </div>
             <div
-              className='xs:h-[6rem] w-full cursor-pointer overflow-y-auto sm:h-[3rem]'
+              className='w-full cursor-pointer overflow-y-auto xs:h-[6rem] sm:h-[3rem]'
               onClick={() => navigate('/map')}
             >
               <RecommendCard title='Q' content='대학생을 위한 통장이 있나요?' />

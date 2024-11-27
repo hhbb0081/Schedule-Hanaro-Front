@@ -29,6 +29,7 @@ import VisitPage from '@/pages/Admin/Visit';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
+import { CallAnswerDetail } from '@/pages/Admin/Call/Detail';
 
 export const useRouter = () =>
   createBrowserRouter([
@@ -135,16 +136,23 @@ export const useRouter = () =>
       children: [
         { index: true, element: <VisitPage /> },
         {
-          path: '/admin/inquiry',
+          path: '/admin/online/inquiry',
           element: <InquiryPage />,
         },
         {
-          path: '/admin/inquiry/:id',
+          path: '/admin/online/call/:id',
+          element: <CallAnswerDetail />,
+        },
+        {
+          path: '/admin/online/inquiry/:id',
           element: <AnswerDetail />,
         },
-        { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
+        {
+          path: '/admin/online/inquiry/register/:id',
+          element: <AnswerInput />,
+        },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
-        { path: '/admin/call', element: <CallPage /> },
+        { path: '/admin/online/call', element: <CallPage /> },
       ],
     },
   ]);
