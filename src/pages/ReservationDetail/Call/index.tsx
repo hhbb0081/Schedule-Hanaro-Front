@@ -37,6 +37,22 @@ export function ReservationDetailCallPage() {
     waitingNumber,
     waitingTime,
   } = reservation;
+
+  function ReservationInfoItem({
+    label,
+    value,
+  }: {
+    label: string;
+    value: string | number;
+  }) {
+    return (
+      <div className='flex justify-between'>
+        <div className='text-lg font-medium text-[#666666]'>{label}</div>
+        <div className='text-lg font-bold text-[#464646]'>{value}</div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className='w-[90%] justify-self-center'>
@@ -62,48 +78,14 @@ export function ReservationDetailCallPage() {
               <div className='flex flex-col gap-[1rem]'>
                 <ReservationDetailCallTags title='예약 상세 정보' tags={tags} />
                 <div className='flex flex-col gap-[1rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
-                  <div className='flex justify-between'>
-                    <div className='text-lg font-medium text-[#666666]'>
-                      이름
-                    </div>
-                    <div className='text-lg font-bold text-[#464646]'>
-                      {name}
-                    </div>
-                  </div>
-
-                  <div className='flex justify-between'>
-                    <div className='text-lg font-medium text-[#666666]'>
-                      전화번호
-                    </div>
-                    <div className='text-lg font-bold text-[#464646]'>
-                      {phone}
-                    </div>
-                  </div>
-                  <div className='flex justify-between'>
-                    <div className='text-lg font-medium text-[#666666]'>
-                      상담 종류
-                    </div>
-                    <div className='text-lg font-bold text-[#464646]'>
-                      {consultationType}
-                    </div>
-                  </div>
-                  <div className='flex justify-between'>
-                    <div className='text-lg font-medium text-[#666666]'>
-                      예약 일자
-                    </div>
-                    <div className='text-lg font-bold text-[#464646]'>
-                      {date}
-                    </div>
-                  </div>
-
-                  <div className='flex justify-between'>
-                    <div className='text-lg font-medium text-[#666666]'>
-                      예약 일시
-                    </div>
-                    <div className='text-lg font-bold text-[#464646]'>
-                      {time}
-                    </div>
-                  </div>
+                  <ReservationInfoItem label='이름' value={name} />
+                  <ReservationInfoItem label='전화번호' value={phone} />
+                  <ReservationInfoItem
+                    label='상담 종류'
+                    value={consultationType}
+                  />
+                  <ReservationInfoItem label='예약 일자' value={date} />
+                  <ReservationInfoItem label='예약 일시' value={time} />
                 </div>
               </div>
             </div>

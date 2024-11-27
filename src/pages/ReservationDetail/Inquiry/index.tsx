@@ -19,7 +19,7 @@ export function ReservationDetailInquiryPage() {
       const fetchedTags = [
         { id: 1, label: '예금' },
         { id: 2, label: '금융상품' },
-        { id: 2, label: '대학생' },
+        { id: 3, label: '대학생' },
       ];
       setTags(fetchedTags);
     }

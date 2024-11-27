@@ -14,7 +14,7 @@ export function ReservationPage() {
   };
   return (
     <>
-      <div className='mx-auto flex h-screen w-[90%] flex-col justify-between pb-[7rem] pt-[2rem]'>
+      <div className='mx-auto flex h-screen w-[90%] flex-col justify-between pb-[7rem] pt-[4rem]'>
         <div className='space-y-10'>
           <div className='space-y-5'>
             <div className='flex flex-col items-start justify-center text-4xl font-bold'>
