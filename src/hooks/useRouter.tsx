@@ -182,10 +182,17 @@ export const useRouter = () =>
           element: <InquiryPage />,
         },
         {
-          path: '/admin/inquiry/:id',
+          path: '/admin/online/call/:id',
+          element: <CallAnswerDetail />,
+        },
+        {
+          path: '/admin/online/inquiry/:id',
           element: <AnswerDetail />,
         },
-        { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
+        {
+          path: '/admin/online/inquiry/register/:id',
+          element: <AnswerInput />,
+        },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/online/call', element: <CallPage /> },
         { path: '/admin/online/mypage', element: <AdminMyPage /> },
