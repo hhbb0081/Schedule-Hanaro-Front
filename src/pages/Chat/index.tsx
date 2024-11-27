@@ -54,20 +54,6 @@ const ChatPage = () => {
             question: '사랑해요',
             content: '사랑해요라는 말은 언제 들어도 기분이 좋습니다!',
           },
-          '대학생을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
-          '직장인을 위한 통장이 있나요?',
         ]);
         setIsLoading(false);
       }, 2000);
@@ -119,7 +105,6 @@ const ChatPage = () => {
             <span>예나님이 작성하신 문의 내용을 바탕으로</span>
             <span>상담 전, AI의 맞춤답변을 제공해드려요</span>
           </div>
-
           <div className='flex w-full flex-col items-center'>
             <div className='w-[80%] pb-[0.75rem]'>
               <div
@@ -134,6 +119,7 @@ const ChatPage = () => {
                     onClick={() => {
                       if (textareaRef.current) {
                         textareaRef.current.value = question;
+                        handleInput();
                         handleSend();
                       }
                     }}
@@ -181,12 +167,9 @@ const ChatPage = () => {
         </div>
       )}
       {!isLoading && answers.length > 0 && (
-        <div className='flex min-h-screen w-full flex-col justify-between pb-[7rem] pt-[7rem]'>
-          <div className='flex w-full flex-col items-center gap-4 px-4'>
-            {inputContent.trim() || isExpanded ? (
         <div className='flex min-h-screen w-full flex-col justify-between gap-[2rem] pb-[7rem] pt-[7rem]'>
-          <div className='flex w-full flex-col items-center gap-[1rem] px-[1rem]'>
-            {answers.map((answer, index) => (
+          <div className='flex flex-col items-center gap-[1rem] px-[1rem]'>
+            {inputContent.trim() || isExpanded ? (
               <div
                 className={`relative w-full rounded-[1.25rem] border-[.1875rem] border-main bg-white p-[1rem] text-[1rem] font-normal shadow-[0_0_17px_0_rgba(0,132,133,0.25)] transition-all duration-300 ${
                   isExpanded ? 'h-auto' : 'cursor-pointer overflow-hidden'
