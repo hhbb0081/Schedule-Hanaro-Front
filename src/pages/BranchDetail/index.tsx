@@ -177,7 +177,7 @@ export function BranchDetailPage() {
           </div>
         </div>
         {reserved ? (
-          <div className='mt-16 flex h-[3.75rem] gap-x-[1.0625rem] px-[1.875rem]'>
+          <div className='mt-8 flex h-[3.75rem] gap-x-[1.0625rem] px-[1.875rem]'>
             <Modalbutton
               buttonTitle='예약 취소'
               buttonVariant='ghost'
@@ -195,7 +195,7 @@ export function BranchDetailPage() {
             </Button>
           </div>
         ) : (
-          <div className='mt-16 flex items-center justify-center px-4'>
+          <div className='mt-8 flex items-center justify-center px-4'>
             <Button onClick={moveToReservation}>예약하기</Button>
           </div>
         )}
