@@ -15,7 +15,7 @@ const ChatPage = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [inputContent, setInputContent] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  const [, setIsEditing] = useState(false);
   const [backupContent, setBackupContent] = useState('');
   const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
   const [badges] = useState<string[]>(['예금', '추천', '대학생']);
@@ -73,7 +73,12 @@ const ChatPage = () => {
   // 글자 축약 처리
   const truncatedContent =
     inputContent.length > MAX_LENGTH
-      ? inputContent.slice(0, MAX_LENGTH) + '...'
+      ? inputContent.split(' ').reduce((acc, word) => {
+          if ((acc + word).length <= MAX_LENGTH) {
+            return acc + (acc ? ' ' : '') + word;
+          }
+          return acc;
+        }, '') + '...'
       : inputContent;
 
   return (
@@ -133,7 +138,7 @@ const ChatPage = () => {
       {!isLoading && answers.length > 0 && (
         <div className='flex min-h-screen w-full flex-col justify-between pb-[7rem] pt-[7rem]'>
           <div className='flex w-full flex-col items-center gap-4 px-4'>
-            {inputContent.trim() && (
+            {inputContent.trim() || isExpanded ? (
               <div
                 className={`relative w-full rounded-[1.25rem] border-[.1875rem] border-main bg-white p-[1rem] text-[1rem] font-normal shadow-[0_0_17px_0_rgba(0,132,133,0.25)] transition-all duration-300 ${
                   isExpanded ? 'h-auto' : 'cursor-pointer overflow-hidden'
@@ -151,32 +156,34 @@ const ChatPage = () => {
                       rows={5}
                       autoFocus
                     />
-                    {isEditing && (
-                      <div className='mt-2 flex justify-end gap-2'>
-                        <button
-                          className='rounded-[3.125rem] bg-[#d9d9d9] px-[1.25rem] py-[.25rem] text-[.875rem] text-[#464646] drop-shadow'
-                          onClick={() => {
-                            setInputContent(backupContent); // 이전 상태로 복구
+                    <div className='mt-2 flex justify-end gap-2'>
+                      <button
+                        className='rounded-[3.125rem] bg-[#d9d9d9] px-[1.25rem] py-[.25rem] text-[.875rem] text-[#464646] drop-shadow'
+                        onClick={() => {
+                          setInputContent(backupContent); // 이전 상태로 복구
+                          setIsExpanded(false); // 축약 상태로 복귀
+                        }}
+                      >
+                        취소
+                      </button>
+                      <button
+                        className='rounded-[3.125rem] bg-[#464646] px-[1.25rem] py-[.25rem] text-[.875rem] text-white drop-shadow'
+                        onClick={() => {
+                          setBackupContent(inputContent); // 변경된 내용 저장
+                          setIsLoading(true); // 로딩 상태 시작
+                          setTimeout(() => {
+                            setIsLoading(false); // 로딩 상태 종료
                             setIsExpanded(false); // 축약 상태로 복귀
-                          }}
-                        >
-                          취소
-                        </button>
-                        <button
-                          className='rounded-[3.125rem] bg-[#464646] px-[1.25rem] py-[.25rem] text-[.875rem] text-white drop-shadow'
-                          onClick={() => {
-                            setBackupContent(inputContent); // 변경된 내용 저장
-                            setIsExpanded(false); // 축약 상태로 복귀
-                          }}
-                        >
-                          완료
-                        </button>
-                      </div>
-                    )}
+                          }, 2000); // 2초 후 로딩 종료
+                        }}
+                      >
+                        완료
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
-            )}
+            ) : null}
             <div className='flex flex-col items-center gap-[1rem]'>
               <p className='text-[1.2rem] font-bold text-[#2b2b2b]'>
                 원하시는 문의와 유사한 답변들을 보여드릴게요
