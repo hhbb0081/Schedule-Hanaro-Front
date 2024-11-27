@@ -44,7 +44,7 @@ const CallList: React.FC<CallConsultationCardProps> = ({
         </div>
         <div className='ml-auto'>
           <div className='flex items-center text-[1rem] font-bold text-[#2b2b2b]'>
-            <TimerButton className='mr-[0.0625rem] h-10 w-10 sm:h-[0.9rem] sm:w-[0.9rem] md:h-[0.9rem] md:w-[0.9rem] lg:h-[1rem] lg:w-[1rem]' />
+            <TimerButton className='mr-[0.0625rem] h-[1.2rem] w-[1.2rem] sm:h-[0.91em] sm:w-[0.9rem] md:h-[0.9rem] md:w-[0.9rem] lg:h-[1rem] lg:w-[1rem]' />
             {timerText}분 후
           </div>
         </div>
