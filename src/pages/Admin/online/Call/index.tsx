@@ -38,25 +38,23 @@ function CallPage() {
         const matchesDate =
           (!startDate || new Date(call_date) >= startDate) &&
           (!endDate || new Date(call_date) <= endDate);
-    
+
         const matchesCategory =
           category === '전체' || inquiryCategory === category;
-    
+
         const matchesKeyword =
           !keyword ||
           inquiry_content.includes(keyword) ||
           tags.some((tag) => tag.includes(keyword)) ||
           inquiryCategory.includes(keyword) ||
           name.includes(keyword) ||
-          (banker_reply_content &&
-            banker_reply_content.includes(keyword)) ||
+          (banker_reply_content && banker_reply_content.includes(keyword)) ||
           (recommended_reply_content &&
             recommended_reply_content.includes(keyword));
-    
+
         return matchesDate && matchesCategory && matchesKeyword;
       }
     );
-    
 
     setFilteredData(filtered); // 필터링된 데이터 업데이트
   };

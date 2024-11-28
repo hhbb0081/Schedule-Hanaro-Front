@@ -1,7 +1,4 @@
-import {
-  MapLayout,
-  ReservationLayout,
-} from '@/components/Layout';
+import { MapLayout, ReservationLayout } from '@/components/Layout';
 import AdminLayout from '@/components/Layout/AdminLayout';
 import { RegisterLayout } from '@/components/Layout/Register';
 import {
@@ -60,7 +57,7 @@ export const useRouter = () =>
           path: '/branch/:id',
           element: <BranchDetailPage />,
         },
-  
+
         {
           path: '/reservation',
           element: <ReservationLayout />,

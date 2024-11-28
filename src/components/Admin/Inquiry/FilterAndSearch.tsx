@@ -72,11 +72,11 @@ function FilterAndSearch({
               <SelectValue placeholder='전체' />
             </SelectTrigger>
             <SelectContent>
-            {SELECT_ITEMS.map(({ value, label }) => (
-  <SelectItem key={value} value={value}>
-    {label}
-  </SelectItem>
-))}
+              {SELECT_ITEMS.map(({ value, label }) => (
+                <SelectItem key={value} value={value}>
+                  {label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

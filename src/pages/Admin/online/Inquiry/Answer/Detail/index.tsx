@@ -19,7 +19,6 @@ export function AnswerDetail() {
 
     fetchInquiryDetail();
   }, [id]);
-  
 
   if (!inquiryData) {
     return <div>Loading...</div>;

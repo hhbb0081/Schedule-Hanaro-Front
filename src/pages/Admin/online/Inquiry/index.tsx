@@ -5,9 +5,7 @@ import { ActiveTab } from '@/types/inquiry';
 import { useState } from 'react';
 
 function InquiryPage() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>(
-    '답변대기'
-  );
+  const [activeTab, setActiveTab] = useState<ActiveTab>('답변대기');
   const [activeCategory, setActiveCategory] = useState<string>('전체');
   const [searchQuery, setSearchQuery] = useState<string>(''); // 검색어 상태 추가
 
