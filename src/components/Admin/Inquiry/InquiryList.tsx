@@ -58,7 +58,7 @@ function InquiryList({
   );
 
   const filteredInquiries = formattedInquiries.filter(
-    ({ status, category, content, name, tags}) =>
+    ({ status, category, content, name, tags }) =>
       status === activeTab &&
       (activeCategory === '전체' || category === activeCategory) &&
       (searchQuery === '' ||
@@ -72,11 +72,13 @@ function InquiryList({
   const navigate = useNavigate();
 
   return (
-    <div className='font-inter mx-auto w-full rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal'
-    style={{
-      boxShadow:
-        '0px -8px 18px rgba(0, 0, 0, 0.04), 0px 8px 12px rgba(0, 0, 0, 0.08)',
-    }}>
+    <div
+      className='font-inter mx-auto w-full rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal'
+      style={{
+        boxShadow:
+          '0px -8px 18px rgba(0, 0, 0, 0.04), 0px 8px 12px rgba(0, 0, 0, 0.08)',
+      }}
+    >
       <div className='font-inter mb-0 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
         <h2 className='text-[1.125rem] font-bold text-gray-800'>
           총{' '}
@@ -88,7 +90,7 @@ function InquiryList({
         <FilterAndSearch
           setActiveCategory={setActiveCategory}
           setSearchQuery={setSearchQuery} // 검색 상태 전달
-          />
+        />
       </div>
 
       <Accordion type='single' collapsible>

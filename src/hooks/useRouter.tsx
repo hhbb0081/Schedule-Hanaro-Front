@@ -21,15 +21,15 @@ import {
 import { ClientLayout } from '@/components/Layout/ClientLayout';
 import { MainLayout } from '@/components/Layout/MainLayout';
 import MypageLayout from '@/components/Layout/MypageLayout';
-import CallPage from '@/pages/Admin/Call';
-import InquiryPage from '@/pages/Admin/Inquiry';
-import { AnswerDetail } from '@/pages/Admin/Inquiry/Answer/Detail';
-import { AnswerInput } from '@/pages/Admin/Inquiry/Answer/Input';
-import VisitPage from '@/pages/Admin/Visit';
+import CallPage from '@/pages/Admin/online/Call';
+import InquiryPage from '@/pages/Admin/online/Inquiry';
+import { AnswerDetail } from '@/pages/Admin/online/Inquiry/Answer/Detail';
+import { AnswerInput } from '@/pages/Admin/online/Inquiry/Answer/Input';
+import VisitPage from '@/pages/Admin/offline/Visit';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
-import { CallAnswerDetail } from '@/pages/Admin/Call/Detail';
+import { CallAnswerDetail } from '@/pages/Admin/online/Call/Detail';
 
 export const useRouter = () =>
   createBrowserRouter([

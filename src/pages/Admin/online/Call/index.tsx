@@ -25,30 +25,38 @@ function CallPage() {
   const handleSearch = (conditions: SearchConditions) => {
     const { startDate, endDate, category, keyword } = conditions;
 
-    const filtered = mockCallInquiryData.filter((inquiry) => {
-      // 기간 조건
-      const matchesDate =
-        (!startDate || new Date(inquiry.call_date) >= startDate) &&
-        (!endDate || new Date(inquiry.call_date) <= endDate);
-
-      // 카테고리 조건
-      const matchesCategory =
-        category === '전체' || inquiry.category === category;
-
-      // 키워드 조건
-      const matchesKeyword =
-        !keyword ||
-        inquiry.inquiry_content.includes(keyword) ||
-        inquiry.tags.some((tag) => tag.includes(keyword)) ||
-        inquiry.category.includes(keyword) ||
-        inquiry.name.includes(keyword) ||
-        (inquiry.banker_reply_content &&
-          inquiry.banker_reply_content.includes(keyword)) ||
-        (inquiry.recommended_reply_content &&
-          inquiry.recommended_reply_content.includes(keyword));
-
-      return matchesDate && matchesCategory && matchesKeyword;
-    });
+    const filtered = mockCallInquiryData.filter(
+      ({
+        call_date,
+        category: inquiryCategory,
+        inquiry_content,
+        tags,
+        name,
+        banker_reply_content,
+        recommended_reply_content,
+      }) => {
+        const matchesDate =
+          (!startDate || new Date(call_date) >= startDate) &&
+          (!endDate || new Date(call_date) <= endDate);
+    
+        const matchesCategory =
+          category === '전체' || inquiryCategory === category;
+    
+        const matchesKeyword =
+          !keyword ||
+          inquiry_content.includes(keyword) ||
+          tags.some((tag) => tag.includes(keyword)) ||
+          inquiryCategory.includes(keyword) ||
+          name.includes(keyword) ||
+          (banker_reply_content &&
+            banker_reply_content.includes(keyword)) ||
+          (recommended_reply_content &&
+            recommended_reply_content.includes(keyword));
+    
+        return matchesDate && matchesCategory && matchesKeyword;
+      }
+    );
+    
 
     setFilteredData(filtered); // 필터링된 데이터 업데이트
   };
@@ -67,7 +75,7 @@ function CallPage() {
     <div className='mx-auto max-w-[1300px] px-4'>
       {/* 부모 컨테이너 */}
       <div className='mb-10 mt-6 flex w-full flex-col items-center'>
-      <SearchConditionSetting
+        <SearchConditionSetting
           searchConditions={searchConditions}
           setSearchConditions={setSearchConditions}
           onSearch={handleSearch}
