@@ -13,7 +13,7 @@ function InquiryPage() {
     <div className='mx-auto max-w-[1300px] px-4'>
       {' '}
       {/* 부모 컨테이너 */}
-      <div className='mb-10 mt-6 flex w-full flex-col items-center'>
+      <div className='mx-auto mb-10 mt-6 flex w-[40rem] flex-col items-center'>
         <ReplyState activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
       <div className='w-full'>

@@ -28,7 +28,7 @@ export function CallAnswerDetail() {
   return (
     <div className='mx-auto h-[90%] max-w-[1300px]'>
       <button
-        className='mb-[1rem] flex items-center text-gray-600 hover:text-gray-800'
+        className='mb-[1rem] mt-4 flex items-center text-gray-600 hover:text-gray-800'
         onClick={() => navigate(-1)}
       >
         <span className='mr-[0.1rem] flex justify-center text-[1.2rem]'>

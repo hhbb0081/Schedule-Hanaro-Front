@@ -1,4 +1,8 @@
-import { MapLayout, ReservationLayout } from '@/components/Layout';
+import {
+  MapLayout,
+  MapTestLayout,
+  ReservationLayout,
+} from '@/components/Layout';
 import AdminLayout from '@/components/Layout/AdminLayout';
 import { RegisterLayout } from '@/components/Layout/Register';
 import {
@@ -21,16 +25,26 @@ import {
 import { ClientLayout } from '@/components/Layout/ClientLayout';
 import { MainLayout } from '@/components/Layout/MainLayout';
 import MypageLayout from '@/components/Layout/MypageLayout';
+import VisitPage from '@/pages/Admin/offline';
 import CallPage from '@/pages/Admin/online/Call';
+import AdminCustomerPage from '@/pages/Admin/online/customer';
+import AdminCustomerDetailPage from '@/pages/Admin/online/customer/detail';
 import InquiryPage from '@/pages/Admin/online/Inquiry';
 import { AnswerDetail } from '@/pages/Admin/online/Inquiry/Answer/Detail';
 import { AnswerInput } from '@/pages/Admin/online/Inquiry/Answer/Input';
-import VisitPage from '@/pages/Admin/offline/Visit';
+import { AdminMainPage } from '@/pages/Admin/online/Main';
+import MapTestPage from '@/pages/MapTest';
+import DupTest from '@/pages/MapTest/DupTest';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
-import { CallAnswerDetail } from '@/pages/Admin/online/Call/Detail';
+import { SignUpPage } from '@/pages/SignUp';
+import { SignUpLayout } from '@/components/Layout/SignUp';
+import ChatPage from '@/pages/Chat';
+import SigninPage from '@/pages/Signin';
 
+import { AdminMyPage } from '@/pages/Admin/online/mypage';
+import { CallAnswerDetail } from '@/pages/Admin/online/Call/Detail';
 export const useRouter = () =>
   createBrowserRouter([
     {
@@ -57,7 +71,15 @@ export const useRouter = () =>
           path: '/branch/:id',
           element: <BranchDetailPage />,
         },
-
+        {
+          path: '/chat',
+          element: <ChatPage />,
+        },
+        {
+          path: '/signup',
+          element: <SignUpLayout />,
+          children: [{ index: true, element: <SignUpPage /> }],
+        },
         {
           path: '/reservation',
           element: <ReservationLayout />,
@@ -129,6 +151,10 @@ export const useRouter = () =>
           element: <MypageLayout />,
           children: [{ index: true, element: <Mypage /> }],
         },
+        {
+          path: '/signin',
+          element: <SigninPage />,
+        },
       ],
     },
     {
@@ -137,12 +163,24 @@ export const useRouter = () =>
       children: [
         { index: true, element: <VisitPage /> },
         {
-          path: '/admin/online/inquiry',
-          element: <InquiryPage />,
+          path: '/admin/offline',
+          element: <VisitPage />,
         },
         {
-          path: '/admin/online/call/:id',
-          element: <CallAnswerDetail />,
+          path: '/admin/online',
+          element: <AdminMainPage />,
+        },
+        {
+          path: '/admin/online/customer',
+          element: <AdminCustomerPage />,
+        },
+        {
+          path: '/admin/online/customer/:customerId',
+          element: <AdminCustomerDetailPage />,
+        },
+        {
+          path: '/admin/online/inquiry',
+          element: <InquiryPage />,
         },
         {
           path: '/admin/online/inquiry/:id',
@@ -154,6 +192,16 @@ export const useRouter = () =>
         },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/online/call', element: <CallPage /> },
+        { path: '/admin/online/call/:id', element: <CallAnswerDetail /> },
+        { path: '/admin/online/mypage', element: <AdminMyPage /> },
+      ],
+    },
+    {
+      path: '/maptest',
+      element: <MapTestLayout />,
+      children: [
+        { index: true, element: <MapTestPage /> },
+        { path: '/maptest/dup', element: <DupTest /> },
       ],
     },
   ]);
