@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import { Check } from 'lucide-react';
 import ModalFormPage from '@/pages/Register/Modal';
+import { Check } from 'lucide-react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 interface AgreementCheckboxProps {
   isChecked1: boolean;
@@ -19,12 +19,6 @@ export function AgreementCheckbox({
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-
-  const handleAgree = () => {
-    setIsChecked1(true);
-    setIsChecked2(true);
-    handleCloseModal();
-  };
 
   return (
     <div className='flex items-center space-x-2 pb-2'>
@@ -46,7 +40,6 @@ export function AgreementCheckbox({
           isChecked2={isChecked2}
           setIsChecked1={setIsChecked1}
           setIsChecked2={setIsChecked2}
-          handleAgree={handleAgree}
           handleClose={handleCloseModal}
         />
       )}

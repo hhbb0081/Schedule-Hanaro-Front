@@ -1,17 +1,17 @@
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from '../../ui/accordion';
-import { Button } from '../../ui/button';
-import { Badge } from '../../ui/badge';
-import FilterAndSearch from './FilterAndSearch';
+import { ActiveTab } from '@/types/inquiry';
+import { InquiryDetail } from '@/types/inquiryDetail';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InquiryDetail } from '@/types/inquiryDetail';
-import { ActiveTab } from '@/types/inquiry';
 import rightArrow from '../../../assets/icons/right_arrow.svg';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '../../ui/accordion';
+import { Badge } from '../../ui/badge';
+import { Button } from '../../ui/button';
+import FilterAndSearch from './FilterAndSearch';
 
 type InquiryListProps = {
   activeTab: ActiveTab;

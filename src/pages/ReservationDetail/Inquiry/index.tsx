@@ -5,9 +5,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { mockReservationInquiryDetails } from '@/mock/mockReservationsInquiry';
 import ReservationDetailHeader from '@/components/Header/ReservationDetailHeader';
 import Modalbutton from '@/components/Direction/Modal';
+import ReservationDetailInquiryTags, {
+  HashTag,
+} from '../ReservationDetailInquiryTags';
+import { useEffect, useState } from 'react';
 
 export function ReservationDetailInquiryPage() {
   const { id } = useParams<{ id: string }>();
+  const [tags, setTags] = useState<HashTag[]>([]);
+
+  useEffect(() => {
+    async function fetchReservationDetails() {
+      const fetchedTags = [
+        { id: 1, label: '예금' },
+        { id: 2, label: '금융상품' },
+        { id: 3, label: '대학생' },
+      ];
+      setTags(fetchedTags);
+    }
+    fetchReservationDetails();
+  }, [id]);
+
   const navigate = useNavigate();
   const reservation = mockReservationInquiryDetails.find(
     (res) => res.id === id
@@ -16,66 +34,93 @@ export function ReservationDetailInquiryPage() {
     return <div>예약 정보를 찾을 수 없습니다.</div>;
   }
 
-  const { title, content, consultationType, date, time, waitingNumber } =
+  const { name, phone, content, consultationType, date, time, waitingNumber } =
     reservation;
 
   return (
-    <div className='w-[90%] justify-self-center'>
-      <body className='flex flex-col items-center justify-center gap-[3.5rem]'>
+    <>
+      <div className='w-[90%] justify-self-center'>
         <ReservationDetailHeader />
-        <div className='flex flex-col items-center justify-center gap-[1rem]'>
-          <div className='text-center text-lg font-medium'>
-            현재 대기 번호는{' '}
-            <span className='text-3xl font-bold text-[#008485]/80'>
-              {waitingNumber}
-            </span>
-            번 입니다.
-          </div>
-          <div className='text-8xl font-bold'>{waitingNumber}</div>
-        </div>
-        <div className='flex w-full flex-col gap-[1rem]'>
-          <label className='ml-2 flex text-2xl font-bold'>문의 내용</label>
-          <div className='flex w-full flex-col gap-[0.5rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
-            <div className='text-left text-lg font-bold text-[#464646]'>
-              {title}
-            </div>
-            <div className='text-left text-sm text-[#B3B3B3]'>
-              {date} {time} • {consultationType}
-            </div>
-            <div
-              className='overflow-hidden text-ellipsis text-left text-lg text-[#464646]'
-              style={{
-                display: '-webkit-box',
-                WebkitLineClamp: 6,
-                WebkitBoxOrient: 'vertical',
-              }}
-            >
-              {content}
-            </div>
-          </div>
-        </div>
-        <div className='flex w-full gap-[0.5rem]'>
-          <Modalbutton
-            buttonTitle='문의 취소'
-            buttonVariant='ghost'
-            buttonSize='h-[3.75rem] w-1/3 text-xl'
-            modalTitle='1:1 문의 취소'
-            modalDescription1=''
-            modalDescription2='취소시에는 다시 상담 신청을 하셔야합니다.'
-            modalButtonTitle='확인'
-            navigateTo='/reservation/inquiry'
-          ></Modalbutton>
+        <body className='pt-[5rem]'>
+          <div className='flex h-screen flex-col justify-between'>
+            <div className='flex flex-col items-center gap-[4rem]'>
+              <div className='flex flex-col gap-[2rem]'>
+                <div className='text-lg font-medium'>
+                  현재 대기 번호는{' '}
+                  <span className='text-3xl font-bold text-[#008485]/80'>
+                    {waitingNumber}
+                  </span>
+                  번 입니다.
+                </div>
+                <div className='text-8xl font-bold'>{waitingNumber}</div>
+              </div>
+              <div className='flex w-full flex-col gap-[1rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
+                <div className='flex justify-between'>
+                  <div className='text-lg font-medium text-[#666666]'>이름</div>
+                  <div className='text-lg font-bold text-[#464646]'>{name}</div>
+                </div>
 
-          <Button
-            className='h-[3.75rem] w-2/3 py-[1.125rem] text-xl font-bold'
-            variant={'default'}
-            onClick={() => navigate(`/reservation/inquiry/${id}/detail`)}
-          >
-            문의 상세보기
-          </Button>
-        </div>
-      </body>
+                <div className='flex justify-between'>
+                  <div className='text-lg font-medium text-[#666666]'>
+                    전화번호
+                  </div>
+                  <div className='text-lg font-bold text-[#464646]'>
+                    {phone}
+                  </div>
+                </div>
+                <div className='flex justify-between'>
+                  <div className='text-lg font-medium text-[#666666]'>
+                    상담 종류
+                  </div>
+                  <div className='text-lg font-bold text-[#464646]'>
+                    {consultationType}
+                  </div>
+                </div>
+              </div>
+              <div className='flex w-[90%] flex-col gap-[1rem]'>
+                <label className='flex text-2xl font-bold'>문의 내용</label>
+                <hr className='border-2' />
+                <ReservationDetailInquiryTags tags={tags} />
+                <div className='text-left text-sm text-[#B3B3B3]'>
+                  {date} {time}
+                </div>
+                <div
+                  className='overflow-hidden text-ellipsis text-left text-lg text-[#464646]'
+                  style={{
+                    display: '-webkit-box',
+                    WebkitLineClamp: 6,
+                    WebkitBoxOrient: 'vertical',
+                  }}
+                >
+                  {content}
+                </div>
+              </div>
+            </div>
+
+            <div className='flex w-full gap-[1rem] pb-[16rem]'>
+              <Modalbutton
+                buttonTitle='문의 취소'
+                buttonVariant='ghost'
+                buttonSize='h-[3.75rem] w-1/3 text-xl'
+                modalTitle='1:1 문의 취소'
+                modalDescription1=''
+                modalDescription2='취소시에는 다시 상담 신청을 하셔야합니다.'
+                modalButtonTitle='확인'
+                navigateTo='/reservation/inquiry'
+              ></Modalbutton>
+
+              <Button
+                className='h-[3.75rem] w-2/3 py-[1.125rem] text-xl font-bold'
+                variant={'default'}
+                onClick={() => navigate(`/reservation/inquiry/${id}/detail`)}
+              >
+                문의 상세보기
+              </Button>
+            </div>
+          </div>
+        </body>
+      </div>
       <Nav />
-    </div>
+    </>
   );
 }

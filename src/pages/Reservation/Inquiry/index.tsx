@@ -9,14 +9,7 @@ export function ReservationInquiryPage() {
         <div className='flex w-full flex-col'>
           <div className='space-y-[1.5rem]'>
             {inquiryListData.map((call, index) => (
-              <InquiryList
-                key={index}
-                inquiryNumber={call.inquiryNumber}
-                inquiryconsultationType={call.inquiryconsultationType}
-                consultationTitle={call.consultationTitle}
-                consultationContents={call.consultationContents}
-                responseStatus={call.responseStatus}
-              />
+              <InquiryList key={index} {...call} idx={call.id} />
             ))}
           </div>
         </div>

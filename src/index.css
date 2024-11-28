@@ -115,7 +115,7 @@
 
   @media only screen and (max-width: 435px) {
     html {
-      font-size: 12px;
+      font-size: 14px;
     }
     .App {
       min-width: 320px;
@@ -138,7 +138,7 @@
   }
   @media only screen and (min-width: 435px) and (max-width: 800px) {
     html {
-      font-size: 14px;
+      font-size: 15px;
     }
     .App {
       max-width: 430px;
@@ -178,7 +178,7 @@
 
 @layer components {
   .map {
-    @apply z-0 h-screen w-full;
+    @apply z-0 mx-auto h-screen w-full max-w-full sm:w-[430px] md:w-[600px];
   }
   .container {
     @apply h-full;

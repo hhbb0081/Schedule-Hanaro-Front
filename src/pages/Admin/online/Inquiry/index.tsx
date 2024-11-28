@@ -1,10 +1,11 @@
 import InquiryList from '@/components/Admin/Inquiry/InquiryList';
 import ReplyState from '@/components/Admin/Inquiry/ReplyState';
 import { mockInquiryData } from '@/mock/adminInquiry';
+import { ActiveTab } from '@/types/inquiry';
 import { useState } from 'react';
 
 function InquiryPage() {
-  const [activeTab, setActiveTab] = useState<'답변대기' | '답변완료'>(
+  const [activeTab, setActiveTab] = useState<ActiveTab>(
     '답변대기'
   );
   const [activeCategory, setActiveCategory] = useState<string>('전체');

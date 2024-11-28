@@ -1,9 +1,15 @@
 import { Map } from '@/components';
+import { MapProvider } from '@/hooks/map-context';
+import { useRef } from 'react';
 
 export function MapPage() {
+  const mapRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className='map'>
-      <Map />
-    </div>
+    <MapProvider mapRef={mapRef}>
+      <div className='map'>
+        <Map />
+      </div>
+    </MapProvider>
   );
 }

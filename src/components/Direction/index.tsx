@@ -1,115 +1,71 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
 import BottomFloatingBox from '@/components/Direction/BottomFloatingBox';
 import TopSheet from '@/components/Direction/TopSheet';
-import { useMap } from '@/hooks';
-import {
-  branchIdAtom,
-  currentStartAddressAtom,
-  endAtom,
-  mapClickAtom,
-  startAtom,
-  totalDistanceAtom,
-  totalTimeAtom,
-} from '@/stores';
-import { setMyLocation } from '@/utils';
-import { useAtomValue, useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-import { MyLocation } from '../Map/MyLocation';
 import { Toaster } from '../ui/toaster';
+import { useMap } from '@/hooks/map-context';
 
 dayjs.locale('ko');
 
-export function Direction() {
-  const start = useAtomValue(startAtom);
-  const end = useAtomValue(endAtom);
-  const setCurrentStartAddress = useSetAtom(currentStartAddressAtom);
-  const setTotalTime = useSetAtom(totalTimeAtom);
-  const setTotalDistance = useSetAtom(totalDistanceAtom);
-  const mapClick = useAtomValue(mapClickAtom);
-  const mapRef = useRef<HTMLDivElement>(null);
+type DirectionProps = {
+  startLat: string;
+  startLon: string;
+  endLat: string;
+  endLon: string;
+  branchId: string;
+};
 
+export function Direction({
+  startLat,
+  startLon,
+  endLat,
+  endLon,
+  branchId,
+}: DirectionProps) {
   const navigate = useNavigate();
 
-  const {
-    mapInstance,
-    setCoord,
-    currentStartAddress,
-    setStartCoord,
-    setEndCoord,
-    currentTotalTime: time,
-    currentTotalDistance: distance,
-  } = useMap(mapRef);
+  const { mapRef, mapFocusOnly, setStartCoord, setEndCoord } = useMap();
 
   // 출발지 & 도착지 설정
   useEffect(() => {
-    if (!start || !end) return;
+    if (!startLat || !endLat) {
+      return;
+    }
 
-    setStartCoord({
-      latitude: start.latitude,
-      longitude: start.longitude,
-    });
-    setEndCoord({
-      latitude: end.latitude,
-      longitude: end.longitude,
-    });
+    setStartCoord(+startLat, +startLon);
+    setEndCoord(+endLat, +endLon);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [end, start]);
-
-  const onClickMyLocation = () => {
-    setMyLocation(setCoord);
-  };
-
-  // 현위치 Marker 생성
-  useEffect(() => {
-    onClickMyLocation();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mapInstance]);
-
-  // 소요시간 & 거리 설정
-  useEffect(() => {
-    if (!time || !distance) return;
-
-    setTotalTime(time);
-    setTotalDistance(distance);
-    setCurrentStartAddress(currentStartAddress);
-  }, [
-    distance,
-    time,
-    currentStartAddress,
-    setTotalTime,
-    setTotalDistance,
-    setCurrentStartAddress,
-  ]);
-
-  // const { toast } = useToast();
-  const setBranchId = useSetAtom(branchIdAtom);
+  }, [startLat, endLat]);
 
   const closeDirection = () => {
     // showToast(toast, '길 안내를 종료합니다.');
     navigate('/map');
-    setBranchId(null);
   };
 
   return (
-    <div className='container'>
+    <>
       <div className='flex w-full flex-col items-center'>
-        {!mapClick && (
+        {!mapFocusOnly && (
           <>
-            <TopSheet closeDirection={closeDirection}></TopSheet>
-            <BottomFloatingBox type='dir' />
+            <TopSheet
+              closeDirection={closeDirection}
+              branchId={branchId}
+            ></TopSheet>
+            <BottomFloatingBox type='dir' branchId={branchId} />
           </>
         )}
-        <div className='navbar fixed bottom-[20.5rem] z-10 mx-auto flex w-[30rem] justify-end'>
+
+        {/* <div className='navbar fixed bottom-[20.5rem] z-10 mx-auto flex w-[30rem] justify-end'>
           <MyLocation onClick={onClickMyLocation} />
-        </div>
+        </div> */}
       </div>
 
       <div className='map' id='map' ref={mapRef} />
       <Toaster />
-    </div>
+    </>
   );
 }

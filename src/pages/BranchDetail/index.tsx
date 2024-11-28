@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow_left.svg';
 import { ReactComponent as Addrss } from '@/assets/icons/branch/address.svg';
 import { ReactComponent as Hours } from '@/assets/icons/branch/business_hours.svg';
 import { ReactComponent as Tel } from '@/assets/icons/branch/tel.svg';
@@ -15,22 +14,57 @@ import { Button } from '@/components/ui/button';
 import { DirectionButton } from '@/components/ui/direction';
 import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/hooks/use-toast';
-import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
+import { BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { showToast } from '../Register/Call';
+import { useEffect, useState } from 'react';
+// import axios from 'axios';
+import apiCall from '@/api/Api';
+import { BackButton } from '@/components/ui/back';
+import Modalbutton from '@/components/Direction/Modal';
+
+type BranchProps = {
+  branchNum: string | null;
+  branchName: string | null;
+  branchType: string | null;
+  xPosition: string | null;
+  yPosition: string | null;
+  address: string | null;
+  tel: string | null;
+  businessTime: string | null;
+};
+
+const defaultBranchDetail = {
+  branchNum: '',
+  branchName: '',
+  branchType: '',
+  xPosition: '',
+  yPosition: '',
+  address: '',
+  tel: '',
+  businessTime: '',
+};
 
 export function BranchDetailPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { id } = useParams();
-  if (!id) {
-    return;
-  }
-  const branch = BRANCH_MOCK.find((br) => br.id === id);
-  // undefined에러 추후 처리
-  if (!branch) {
-    return;
-  }
-  const { name, address, business_hours, tel } = branch;
+  const [branch, setBranch] = useState<BranchProps>(defaultBranchDetail);
+  const reserved = 1;
+
+  useEffect(() => {
+    const getBranchDetail = async () => {
+      console.log(id);
+      try {
+        const response = await apiCall(`/branch/${id}`, 'get');
+        console.log(response);
+        setBranch(response.data);
+      } catch (error) {
+        console.log('Api call error:', error);
+      }
+    };
+    getBranchDetail();
+  }, []);
+  const { branchName, address, tel, businessTime }: BranchProps = branch;
   const state = BRANCH_STATE_MOCK.find((br) => br.id === id);
   const moveToReservation = () => {
     navigate(`/reservation/visit/${id}`);
@@ -41,7 +75,7 @@ export function BranchDetailPage() {
   ) => {
     e.stopPropagation();
     if (branch) {
-      const { position_x: longitude, position_y: latitude } = branch;
+      const { xPosition: longitude, yPosition: latitude } = branch;
       // TODO: startLat, startLon 현 위치로 수정
       navigate(
         `/direction?startLat=37.54463002278825&startLon=127.05656718408437&endLat=${latitude}&endLon=${longitude}&branchId=${id}`
@@ -49,11 +83,16 @@ export function BranchDetailPage() {
       showToast(toast, '길 안내를 시작합니다.');
     }
   };
+  const handlePage =
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (url: string) => {
+      e.stopPropagation();
+      navigate(url);
+    };
   return (
     <div className='mx-auto overflow-hidden rounded-lg bg-white'>
       <header className='flex h-14 items-center justify-between border'>
-        <ArrowLeft width={21} height={21} className='ml-4' />
-        <div className='text-xl'>{name}</div>
+        <BackButton />
+        <div className='text-xl'>{branchName}</div>
         <div></div>
       </header>
       <main>
@@ -74,7 +113,7 @@ export function BranchDetailPage() {
             <li className='mt-4 flex items-center justify-start gap-2'>
               <Hours width={20} height={20} />
               <span className="font-['Inter'] text-base font-semibold text-[#464646]">
-                {business_hours}
+                {businessTime}
               </span>
             </li>
             <li className='mt-4 flex items-center justify-start gap-2'>
@@ -118,9 +157,29 @@ export function BranchDetailPage() {
             </span>
           </div>
         </div>
-        <div className='mt-16 flex items-center justify-center p-4'>
-          <Button onClick={moveToReservation}>예약하기</Button>
-        </div>
+        {reserved ? (
+          <div className='mt-16 flex h-[3.75rem] gap-x-[1.0625rem] px-[1.875rem]'>
+            <Modalbutton
+              buttonTitle='예약 취소'
+              buttonVariant='ghost'
+              buttonSize='w-1/4 h-full'
+              modalTitle='영업점 예약 취소'
+              modalDescription1='취소 시 30분 후부터 재예약이 가능합니다.'
+              modalDescription2=''
+              modalButtonTitle='확인'
+            ></Modalbutton>
+            <Button
+              className='h-full w-3/4 font-bold'
+              onClick={(e) => handlePage(e)('/register/visit/1')}
+            >
+              예약 상세보기
+            </Button>
+          </div>
+        ) : (
+          <div className='mt-16 flex items-center justify-center px-4'>
+            <Button onClick={moveToReservation}>예약하기</Button>
+          </div>
+        )}
       </main>
       <footer>
         <Nav />

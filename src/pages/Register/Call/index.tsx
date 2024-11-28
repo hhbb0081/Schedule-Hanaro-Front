@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '@/components/Header/Header';
 
 export type RegisterCallData = {
@@ -55,12 +55,18 @@ function generateTimeSlots(startTime: string, endTime: string) {
 export function RegisterCallFormPage() {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<RegisterCallData>();
+
+  const reservationDate = watch('reservationDate');
+  const reservationTime = watch('reservationTime');
+  const consultationType = watch('consultationType');
 
   const onSubmit: SubmitHandler<RegisterCallData> = (data) => {
     if (!isChecked1 || !isChecked2) {
@@ -76,7 +82,7 @@ export function RegisterCallFormPage() {
 
     showToast(toast, '예약 완료되었습니다!');
     setTimeout(() => {
-      navigate('/');
+      navigate(`/reservation/call/${id}`);
     }, 1000);
   };
 
@@ -93,15 +99,17 @@ export function RegisterCallFormPage() {
     setTimeSlots(slots);
   }, []);
 
+  const isFormComplete = reservationDate && reservationTime && consultationType;
+
   return (
     <>
       <Header title='전화 상담 예약' />
-      <div className='mx-auto flex w-[90%] justify-between py-5 pt-[5rem]'>
+      <div className='mx-auto flex min-h-screen w-[90%] py-5 pt-[5rem]'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='flex w-full flex-col gap-[5rem]'
+          className='flex h-screen w-full flex-col justify-between gap-[5rem]'
         >
-          <div className='flex w-full flex-col gap-[1rem]'>
+          <div className='flex w-full flex-col gap-[2rem]'>
             <ReusableInput
               register={register}
               fieldName='name'
@@ -112,6 +120,7 @@ export function RegisterCallFormPage() {
             />
             <PhoneNumberInput
               register={register}
+              name='phone'
               error={errors.phone?.message}
             />
             <ConsultationSelect
@@ -136,7 +145,7 @@ export function RegisterCallFormPage() {
               setIsChecked1={setIsChecked1}
               setIsChecked2={setIsChecked2}
             />
-            <div className='flex justify-between'>
+            <div className='flex justify-between pb-[12rem]'>
               <Button
                 type='button'
                 onClick={() => navigate('/')}
@@ -145,7 +154,12 @@ export function RegisterCallFormPage() {
               >
                 취소
               </Button>
-              <Button type='submit' variant='default' className='ml-2 w-3/4'>
+              <Button
+                type='submit'
+                variant='default'
+                className='ml-2 w-3/4'
+                disabled={!isFormComplete}
+              >
                 예약하기
               </Button>
             </div>

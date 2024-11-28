@@ -1,5 +1,6 @@
 export const inquiryListData = [
   {
+    id: '1',
     inquiryNumber: 3,
     inquiryconsultationType: '예금',
     consultationTitle: '대학생 예금 추천 상담',
@@ -7,6 +8,7 @@ export const inquiryListData = [
     responseStatus: false,
   },
   {
+    id: '2',
     inquiryNumber: 12,
     inquiryconsultationType: '대출',
     consultationTitle: '학자금 대출을 해야해요',
