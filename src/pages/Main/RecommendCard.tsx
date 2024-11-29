@@ -11,11 +11,11 @@ export default function RecommendCard({ title, content }: Props) {
       <div className='flex w-full justify-between px-3'>
         <div className='flex items-center gap-4'>
           <div className='text-[1.25rem] font-[600]'>{title}</div>
-          <div className='text-[1.175rem] font-[400] md:text-[0.9rem]'>
-            {content}
-          </div>
+          <div className='text-[1.175rem] font-[400]'>{content}</div>
         </div>
-        <Badge className='h-[2.5rem] text-[1rem]'>유사도 97.2%</Badge>
+        <Badge className='h-[2.75rem] w-[8rem] justify-center text-[1rem] font-[500]'>
+          유사도 97.2%
+        </Badge>
       </div>
     </div>
   );
