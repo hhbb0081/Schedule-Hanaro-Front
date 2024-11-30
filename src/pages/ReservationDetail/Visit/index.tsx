@@ -34,10 +34,10 @@ export function ReservationDetailVisitPage() {
   return (
     <>
       <div className='h-screen w-[90%] justify-self-center'>
+        <ReservationDetailHeader />
         <div className='flex h-full w-full flex-col'>
-          <ReservationDetailHeader />
           <div className='flex h-full w-full flex-col justify-between'>
-            <div className='mt-4 flex w-full flex-col items-center'>
+            <div className='flex w-full flex-col items-center'>
               <div className='mt-4 flex justify-center'>
                 <Check className='h-auto w-[4.5rem]' />
               </div>
@@ -60,11 +60,13 @@ export function ReservationDetailVisitPage() {
                 {id}
                 <span className='text-[2rem] font-bold'>번</span>
               </div>
-              <div className='mt-2 flex w-full justify-center gap-6'>
-                <div className='text-2xl font-semibold'>하나은행 성수역점</div>
+              <div className='mt-2 flex w-full justify-center gap-6 align-middle'>
+                <div className='flex items-center text-2xl font-semibold'>
+                  하나은행 성수역점
+                </div>
                 <DirectionButton onClick={handleDirection} />
               </div>
-              <div className='mt-6 w-[21.25rem] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
+              <div className='mt-6 w-[94%] rounded-[1.25rem] border border-[#d9d9d9] bg-[#f9f9f9] p-6'>
                 <h3 className='flex text-xl font-bold text-black'>대기정보</h3>
                 <hr className='my-3' />
                 <div className='flex justify-between'>
@@ -81,11 +83,11 @@ export function ReservationDetailVisitPage() {
                 </div>
               </div>
             </div>
-            <div className='w-full pb-[7rem]'>
+            <div className='w-full pb-[12rem]'>
               <Modalbutton
                 buttonTitle='예약 취소'
                 buttonVariant='outline'
-                buttonSize='h-[3.75rem] w-[23.75rem] md:w-[25rem] rounded-[1.25rem]'
+                buttonSize='h-[3.75rem] w-[94%] md:w-[25rem] rounded-[1.25rem]'
                 modalTitle='영업점 예약 취소'
                 modalDescription1='취소 시 30분 후부터 재예약이 가능합니다.'
                 modalDescription2=''
