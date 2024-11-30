@@ -98,12 +98,12 @@ export function BranchDetailPage() {
       <main>
         <BankImg />
         {/* <img src={branch} alt='bank image' className='w-full' /> */}
-        <div className='border-b p-8'>
+        <div className='w-[90%] justify-self-center border-b py-8'>
           <div className='flex items-center justify-between'>
             <h2 className='text-xl font-bold'>기본정보</h2>
             <DirectionButton onClick={handleDirection} />
           </div>
-          <ul className='list-none'>
+          <div className='list-none'>
             <li className='mt-4 flex items-center justify-start gap-2'>
               <Addrss width={20} height={23} className='relative' />
               <span className="font-['Inter'] text-base font-semibold text-[#464646]">
@@ -122,10 +122,10 @@ export function BranchDetailPage() {
                 {tel}
               </span>
             </li>
-          </ul>
+          </div>
         </div>
         <div className='h-2 w-full bg-[#eeeeee]'></div>
-        <div className='p-8'>
+        <div className='w-[90%] justify-self-center py-8'>
           <h3 className='text-left text-xl font-bold'>대기 정보</h3>
           <div className='mt-8 grid grid-cols-2 gap-2 text-sm'>
             <div className='flex items-center gap-2'>
@@ -158,25 +158,25 @@ export function BranchDetailPage() {
           </div>
         </div>
         {reserved ? (
-          <div className='mt-8 flex h-[3.75rem] gap-x-[1.0625rem] px-[1.875rem]'>
+          <div className='mt-8 flex h-[3.75rem] w-[90%] gap-x-[1.0625rem] justify-self-center'>
             <Modalbutton
               buttonTitle='예약 취소'
               buttonVariant='ghost'
-              buttonSize='w-1/4 h-full'
+              buttonSize='w-1/4 '
               modalTitle='영업점 예약 취소'
               modalDescription1='취소 시 30분 후부터 재예약이 가능합니다.'
               modalDescription2=''
               modalButtonTitle='확인'
             ></Modalbutton>
             <Button
-              className='h-full w-3/4 font-bold'
+              className='w-3/4 font-bold'
               onClick={(e) => handlePage(e)('/register/visit/1')}
             >
               예약 상세보기
             </Button>
           </div>
         ) : (
-          <div className='mt-8 flex items-center justify-center px-4'>
+          <div className='mt-8 flex w-[90%] items-center justify-self-center'>
             <Button onClick={moveToReservation}>예약하기</Button>
           </div>
         )}
