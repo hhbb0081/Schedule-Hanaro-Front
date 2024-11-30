@@ -12,7 +12,7 @@ export function ReservationVisitPage() {
     navigate(`/reservation/visit/${id}`);
   };
   return (
-    <div className='h-full w-full overflow-auto'>
+    <div className='h-full w-full overflow-auto pb-[5.5rem]'>
       <hr />
       <div className=''>
         {visitNum.map(({ id, my_num, name, waiting_number, waiting_time }) => (
@@ -23,7 +23,7 @@ export function ReservationVisitPage() {
             >
               <div className='mx-2 flex justify-between'>
                 <div className='text-2xl font-bold text-[#464646]'>{name}</div>
-                <div className='text-3xl font-bold text-[#008485]/80'>
+                <div className='text-3xl font-[1000] text-[#008485]/80'>
                   {my_num}
                 </div>
               </div>
