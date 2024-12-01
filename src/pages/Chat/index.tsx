@@ -64,7 +64,19 @@ const ChatPage = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      // const lineHeight = parseInt(
+      //   getComputedStyle(textareaRef.current).lineHeight,
+      //   10
+      // );
+      // const lineCount = Math.floor(
+      //   textareaRef.current.scrollHeight / lineHeight
+      // );
 
+      // if (lineCount > 1 && !isExpanded) {
+      //   setIsExpanded(true);
+      // } else if (lineCount <= 1 && isExpanded) {
+      //   setIsExpanded(false);
+      // }
       setInputContent(textareaRef.current.value);
     }
   };
@@ -132,7 +144,7 @@ const ChatPage = () => {
             <div className='relative w-[80%]'>
               <textarea
                 ref={textareaRef}
-                className='w-full resize-none overflow-hidden rounded-3xl border-[3px] border-main bg-white p-4 pr-12 shadow-[0_0_17px_0_rgba(0,132,133,0.25)] focus:outline-none'
+                className='w-full resize-none overflow-hidden rounded-3xl border-[3px] border-main bg-white p-[1rem] pr-12 shadow-[0_0_17px_0_rgba(0,132,133,0.25)] focus:outline-none'
                 placeholder='질문 내용을 입력하세요'
                 onInput={handleInput}
                 onKeyDown={(e) => {
@@ -146,7 +158,9 @@ const ChatPage = () => {
               <img
                 src='src/assets/images/arrowAI.png'
                 alt='Send'
-                className='absolute bottom-5 right-4 h-7 w-7 cursor-pointer object-contain'
+                className={`absolute right-4 h-7 w-7 cursor-pointer object-contain transition-all ${
+                  isExpanded ? 'bottom-5' : 'bottom-3 -translate-y-1/2'
+                }`}
                 onClick={handleSend}
               />
             </div>
