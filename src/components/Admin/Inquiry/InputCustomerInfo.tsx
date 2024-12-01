@@ -1,5 +1,3 @@
-import React from 'react';
-
 type InputCustomerInfoProps = {
   name: string;
   phoneNumber: string;
@@ -15,11 +13,7 @@ function InputCustomerInfo({
 }: InputCustomerInfoProps) {
   return (
     <div
-      className={`mx-auto mb-8 flex h-[8rem] w-full items-center rounded-[1rem] bg-white shadow ${className}`}
-      style={{
-        boxShadow:
-          '0px -8px 18px rgba(0, 0, 0, 0.04), 0px 8px 12px rgba(0, 0, 0, 0.08)',
-      }}
+      className={`mx-auto mb-8 flex h-[8rem] w-full items-center rounded-[1rem] bg-white shadow ${className} shadow-custom`}
     >
       <div className='mx-auto flex items-center justify-between font-medium text-gray-600'>
         {/* 고객명 */}

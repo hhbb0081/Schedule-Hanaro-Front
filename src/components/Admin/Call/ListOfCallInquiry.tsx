@@ -1,4 +1,3 @@
-import React from 'react';
 import { Badge } from '@/components/ui/badge'; // Badge 컴포넌트 import
 import { useNavigate } from 'react-router-dom'; // 상세보기 이동을 위해 useNavigate 사용
 import rightArrow from '../../../assets/icons/right_arrow.svg';
@@ -12,13 +11,7 @@ function ListOfCallInquiry({ inquiries }: ListOfCallInquiryProps) {
   const navigate = useNavigate();
 
   return (
-    <div
-      className='mx-auto w-full max-w-[1300px] rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal'
-      style={{
-        boxShadow:
-          '0px -8px 18px rgba(0, 0, 0, 0.04), 0px 8px 12px rgba(0, 0, 0, 0.08)',
-      }}
-    >
+    <div className='mx-auto w-full max-w-[1300px] rounded-lg border-gray-200 bg-white p-6 text-[1.25rem] font-bold leading-normal shadow-custom'>
       {/* 상단 영역 */}
       <div className='font-inter mb-1 flex items-center justify-between border-b pb-4 font-normal leading-normal'>
         <h2 className='text-[1.125rem] font-bold text-gray-800'>

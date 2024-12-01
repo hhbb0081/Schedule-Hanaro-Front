@@ -13,7 +13,7 @@ export function AnswerDetail() {
   const [inquiryData, setInquiryData] = useState<InquiryDetail | null>(null);
   useEffect(() => {
     const fetchInquiryDetail = () => {
-      const inquiry = mockInquiryData.find((item) => item.id === Number(id)); // ID로 데이터 찾기
+      const inquiry = mockInquiryData.find(({ id }) => id === Number(id)); // ID로 데이터 찾기
       setInquiryData(inquiry || null);
     };
 
@@ -23,6 +23,19 @@ export function AnswerDetail() {
   if (!inquiryData) {
     return <div>Loading...</div>;
   }
+
+  const {
+    name,
+    phone_number,
+    start_time,
+    end_time,
+    category,
+    tags,
+    content,
+    reply_content,
+    recommended_entry_time,
+  } = inquiryData;
+
   return (
     <div className='mx-auto h-[90%] max-w-[1300px]'>
       <button
@@ -36,13 +49,10 @@ export function AnswerDetail() {
       </button>
       <CustomerInfo
         className='mb-[2rem] w-full rounded-[1.875rem] bg-[#f9f9f9] p-[1.5rem] shadow-[0_4px_10px_0_rgba(0,0,0,0.1)]'
-        name={inquiryData.name}
-        phoneNumber={inquiryData.phone_number}
-        start_time={format(
-          new Date(inquiryData.start_time),
-          'MM월 dd일 HH시 mm분'
-        )}
-        end_time={format(new Date(inquiryData.end_time), 'MM월 dd일 HH시 mm분')}
+        name={name}
+        phoneNumber={phone_number}
+        start_time={format(new Date(start_time), 'MM월 dd일 HH시 mm분')}
+        end_time={format(new Date(end_time), 'MM월 dd일 HH시 mm분')}
       />
       <div className='mx-auto h-[80%] rounded-[1.875rem] bg-white p-[1.5rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.1)]'>
         <div className='overflow-wrap break-word mb-3 text-left text-[1.5rem] font-extrabold text-[#464646]'>
@@ -51,14 +61,14 @@ export function AnswerDetail() {
             variant='lightSolid'
             className='ml-4 rounded-full bg-teal-50 px-3 py-1 align-middle text-[1rem] font-light text-teal-600'
           >
-            {inquiryData.category}
+            {category}
           </Badge>
         </div>
 
         <hr />
         <div className='mt-3 flex items-center'>
           <p className='font-semibold text-gray-800'>
-            {Array.isArray(inquiryData.tags) &&
+            {Array.isArray(tags) &&
               inquiryData.tags.map((tag, idx) => (
                 <Badge
                   key={idx}
@@ -72,19 +82,19 @@ export function AnswerDetail() {
         </div>
 
         <div className='overflow-wrap break-word mb-[1rem] mt-[1rem] flex flex-wrap whitespace-pre-wrap text-left text-[1.2rem] font-medium text-[#666666]'>
-          {inquiryData.content}
+          {content}
         </div>
         <div className='mb-[0.5rem] mt-[3.6rem] text-left text-[1.5rem] font-bold text-[#464646]'>
           답변 내용
           <span className='ml-3 text-[1rem] font-normal text-gray-400'>
-            {inquiryData.recommended_entry_time
-              ? format(new Date(inquiryData.end_time), 'MM월 dd일 HH시 mm분')
+            {recommended_entry_time
+              ? format(new Date(end_time), 'MM월 dd일 HH시 mm분')
               : ''}
           </span>
         </div>
         <hr />
         <div className='overflow-wrap break-word whitespace-pre-wraptext-left mb-[1rem] mt-[1rem] flex flex-wrap text-left text-[1.2rem] font-medium text-[#666666]'>
-          {inquiryData.reply_content}
+          {reply_content}
         </div>
       </div>
     </div>

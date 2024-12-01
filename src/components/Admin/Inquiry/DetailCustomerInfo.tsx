@@ -1,5 +1,3 @@
-import React from 'react';
-
 type DetailCustomerInfoProps = {
   name: string;
   phoneNumber: string;
@@ -17,11 +15,7 @@ function DetailCustomerInfo({
 }: DetailCustomerInfoProps) {
   return (
     <div
-      className={`mx-auto mb-6 flex h-[8rem] w-full items-center rounded-[1rem] bg-white p-4 ${className}`}
-      style={{
-        boxShadow:
-          '0px -8px 18px rgba(0, 0, 0, 0.04), 0px 8px 12px rgba(0, 0, 0, 0.08)',
-      }}
+      className={`mx-auto mb-6 flex h-[8rem] w-full items-center rounded-[1rem] bg-white p-4 ${className} shadow-custom`}
     >
       <div className='mx-auto flex items-center justify-between font-medium text-gray-400'>
         {/* 고객명 */}

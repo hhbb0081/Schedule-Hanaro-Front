@@ -21,38 +21,24 @@ type SearchConditions = {
 
 type SearchConditionSettingProps = {
   searchConditions: SearchConditions;
-  setSearchConditions: React.Dispatch<React.SetStateAction<SearchConditions>>; // 타입 정의
+  onInputChange: <K extends keyof SearchConditions>(
+    field: K,
+    value: SearchConditions[K]
+  ) => void;
   onSearch: (conditions: SearchConditions) => void;
   onReset: () => void;
 };
 
 function SearchConditionSetting({
   searchConditions,
-  setSearchConditions,
+  onInputChange,
   onSearch,
   onReset,
 }: SearchConditionSettingProps) {
   const { startDate, endDate, category, keyword } = searchConditions;
 
-  // 카테고리 변경 처리
-  const handleInputChange = <K extends keyof SearchConditions>(
-    field: K,
-    value: SearchConditions[K]
-  ) => {
-    setSearchConditions((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
   return (
-    <div
-      className='mx-auto w-full max-w-[1300px] rounded-lg bg-white p-6'
-      style={{
-        boxShadow:
-          '0px -8px 18px rgba(0, 0, 0, 0.04), 0px 8px 12px rgba(0, 0, 0, 0.08)',
-      }}
-    >
+    <div className='mx-auto w-full max-w-[1300px] rounded-lg bg-white p-6 shadow-custom'>
       {/* 상단 제목 영역 */}
       <div className='mb-6 flex justify-start'>
         <h2 className='text-xl font-extrabold text-black'>검색 조건 설정</h2>
@@ -68,21 +54,21 @@ function SearchConditionSetting({
           <div className='flex items-center space-x-2'>
             <DatePicker
               selected={startDate}
-              onChange={(date) => handleInputChange('startDate', date)}
+              onChange={(date) => onInputChange('startDate', date)}
               maxDate={new Date()}
               placeholderText='시작일'
             />
             <span className='text-gray-500'>~</span>
             <DatePicker
               selected={endDate}
-              onChange={(date) => handleInputChange('endDate', date)}
+              onChange={(date) => onInputChange('endDate', date)}
               minDate={startDate || new Date()}
               maxDate={new Date()}
               placeholderText='종료일'
             />
           </div>
         </div>
-        {/* className='text-lightGray shadow-md h-10 w-full w-[9rem] h-[3rem] align-middle rounded-full justify-start border-input pl-3 text-left' */}
+
         {/* 카테고리 선택 */}
         <div className='flex flex-col pl-7'>
           <label className='mb-1 self-start text-base font-semibold text-black'>
@@ -94,7 +80,7 @@ function SearchConditionSetting({
           >
             <Select
               value={category}
-              onValueChange={(value) => handleInputChange('category', value)}
+              onValueChange={(value) => onInputChange('category', value)}
             >
               <SelectTrigger className='relative h-[3rem] w-[14rem] rounded-full border-none bg-white pl-3 text-left text-base text-gray-500 shadow-md'>
                 <span className='ml-1'>
@@ -115,7 +101,7 @@ function SearchConditionSetting({
           </div>
         </div>
 
-        {/* 검색어 입력 및 버튼 */}
+        {/* 검색어 입력 */}
         <div className='flex flex-col items-start'>
           <label className='mb-1 self-start text-base font-semibold text-black'>
             검색어
@@ -128,11 +114,11 @@ function SearchConditionSetting({
             <Input
               type='text'
               value={keyword}
-              onChange={(e) => handleInputChange('keyword', e.target.value)}
-              // placeholder='검색'
+              onChange={(e) => onInputChange('keyword', e.target.value)}
               className='placeholer:text-base h-full w-full rounded-full border-none bg-white pl-10 pr-4 text-base shadow-md placeholder:text-gray-500 focus:outline-none'
             />
           </div>
+
           {/* 버튼 */}
           <div className='flex w-full justify-end space-x-4'>
             <Button

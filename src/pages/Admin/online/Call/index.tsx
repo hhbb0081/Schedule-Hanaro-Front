@@ -59,6 +59,16 @@ function CallPage() {
     setFilteredData(filtered); // 필터링된 데이터 업데이트
   };
 
+  const handleInputChange = <K extends keyof SearchConditions>(
+    field: K,
+    value: SearchConditions[K]
+  ) => {
+    setSearchConditions((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   // 초기화 실행
   const handleReset = () => {
     setSearchConditions({
@@ -75,7 +85,7 @@ function CallPage() {
       <div className='mb-10 mt-6 flex w-full flex-col items-center'>
         <SearchConditionSetting
           searchConditions={searchConditions}
-          setSearchConditions={setSearchConditions}
+          onInputChange={handleInputChange}
           onSearch={handleSearch}
           onReset={handleReset}
         />
