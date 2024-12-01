@@ -65,7 +65,8 @@ const ChatPage = () => {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
 
-      setInputContent(textareaRef.current.value);
+      const currentValue = textareaRef.current.value;
+      setInputContent(currentValue);
     }
   };
 
@@ -81,12 +82,7 @@ const ChatPage = () => {
   // 글자 축약 처리
   const truncatedContent =
     inputContent.length > MAX_LENGTH
-      ? inputContent.split(' ').reduce((acc, word) => {
-          if ((acc + word).length <= MAX_LENGTH) {
-            return acc + (acc ? ' ' : '') + word;
-          }
-          return acc;
-        }, '') + '...'
+      ? inputContent.slice(0, MAX_LENGTH) + '...' // 문자열 길이를 기준으로 잘라내기
       : inputContent;
 
   return (
@@ -132,7 +128,7 @@ const ChatPage = () => {
             <div className='relative w-[80%]'>
               <textarea
                 ref={textareaRef}
-                className='w-full resize-none overflow-hidden rounded-3xl border-[3px] border-main bg-white p-4 pr-12 shadow-[0_0_17px_0_rgba(0,132,133,0.25)] focus:outline-none'
+                className='w-full resize-none overflow-hidden rounded-3xl border-[.1875rem] border-main bg-white p-4 pr-12 shadow-[0_0_17px_0_rgba(0,132,133,0.25)] focus:outline-none'
                 placeholder='질문 내용을 입력하세요'
                 onInput={handleInput}
                 onKeyDown={(e) => {
@@ -171,7 +167,8 @@ const ChatPage = () => {
           <div className='flex flex-col items-center gap-[1rem] px-[1rem]'>
             {inputContent.trim() || isExpanded ? (
               <div
-                className={`relative w-full rounded-[1.25rem] border-[.1875rem] border-main bg-white p-[1rem] text-[1rem] font-normal shadow-[0_0_17px_0_rgba(0,132,133,0.25)] transition-all duration-300 ${
+                className={`relative w-full rounded-[1.25rem] border-[.1875rem] border-main bg-white p-[1rem] text-left text-[1rem] font-normal shadow-[0_0_17px_0_rgba(0,132,133,0.25)] transition-all duration-300 ${
+                  // 수정한부분 2024.12.01
                   isExpanded ? 'h-auto' : 'cursor-pointer overflow-hidden'
                 }`}
                 onClick={!isExpanded ? handleToggleExpand : undefined} // 클릭 시 확장
@@ -252,7 +249,7 @@ const ChatPage = () => {
                 </div>
                 {dropdownIndex === index && (
                   <div className='relative z-10 -mt-4 w-full rounded-[.9375rem] border-[.125rem] border-[#d9d9d9] bg-white px-4 pb-3 pt-6'>
-                    <p className='text-[.9375rem] text-[#464646]'>
+                    <p className='text-[1rem] font-bold text-[#464646]'>
                       {answer.content}
                     </p>
                   </div>
