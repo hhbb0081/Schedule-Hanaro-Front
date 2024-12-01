@@ -131,7 +131,8 @@ export const useRouter = () =>
           path: '/register',
           element: <RegisterLayout />,
           children: [
-            { index: true, element: <ReservationPage /> },
+            { index: true, element: <ChatPage /> },
+            { path: '/register/type', element: <ReservationPage /> },
             {
               path: '/register/call',
               element: <RegisterCallFormPage />,
