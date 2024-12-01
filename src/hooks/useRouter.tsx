@@ -44,6 +44,7 @@ import ChatPage from '@/pages/Chat';
 import SigninPage from '@/pages/Signin';
 
 import { AdminMyPage } from '@/pages/Admin/online/mypage';
+import { CallAnswerDetail } from '@/pages/Admin/online/Call/Detail';
 export const useRouter = () =>
   createBrowserRouter([
     {
@@ -178,16 +179,20 @@ export const useRouter = () =>
           element: <AdminCustomerDetailPage />,
         },
         {
-          path: '/admin/inquiry',
+          path: '/admin/online/inquiry',
           element: <InquiryPage />,
         },
         {
-          path: '/admin/inquiry/:id',
+          path: '/admin/online/inquiry/:id',
           element: <AnswerDetail />,
         },
-        { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
+        {
+          path: '/admin/online/inquiry/register/:id',
+          element: <AnswerInput />,
+        },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/online/call', element: <CallPage /> },
+        { path: '/admin/online/call/:id', element: <CallAnswerDetail /> },
         { path: '/admin/online/mypage', element: <AdminMyPage /> },
       ],
     },

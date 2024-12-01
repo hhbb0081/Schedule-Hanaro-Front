@@ -5,6 +5,7 @@ import InquiryList from '../Inquiry/InquiryList';
 function InquiryContainer() {
   const [activeTab] = useState<'답변대기' | '답변완료'>('답변대기');
   const [activeCategory, setActiveCategory] = useState<string>('전체');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   return (
     <div className='mx-auto w-full space-y-5 text-left'>
@@ -15,6 +16,8 @@ function InquiryContainer() {
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
           inquiries={mockInquiryData}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
         />
       </div>
     </div>

@@ -98,6 +98,10 @@ export default {
       dropShadow: {
         DEFAULT: '0 4px 10px rgba(0, 0, 0, 0.1)',
       },
+      boxShadow: {
+        custom:
+          '0px -8px 18px rgba(0, 0, 0, 0.04), 0px 8px 12px rgba(0, 0, 0, 0.08)',
+      },
     },
   },
   plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar-hide')],
