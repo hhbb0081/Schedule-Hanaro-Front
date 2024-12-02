@@ -29,7 +29,7 @@ export function Map() {
           {!mapFocusOnly && (
             <>
               <div className='mx-auto flex w-full flex-col items-center'>
-                <MyLocation onClick={() => setFocus()} />
+                <MyLocation onClick={() => setFocus()} type='direction' />
                 <BottomFloatingBox type='map' branchId={selectedBranchId} />
               </div>
             </>
@@ -39,7 +39,7 @@ export function Map() {
         <>
           {!mapFocusOnly && (
             <div className='mx-auto flex w-full flex-col items-center'>
-              <MyLocation onClick={() => setFocus()} />
+              <MyLocation onClick={() => setFocus()} type='map' />
               <BottomSheet />
             </div>
           )}
