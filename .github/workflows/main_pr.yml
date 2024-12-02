@@ -76,14 +76,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       # 3. Docker 이미지 빌드
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/my-frontend-app:latest .
-
-      # 4. Docker 이미지 푸시
-      - name: Push Docker image
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-frontend-app:latest
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
 
       # 5. SSH로 EC2에 접속하여 배포
       - name: Deploy to EC2
@@ -92,9 +91,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
+          port: 80
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/my-frontend-app:latest
-            docker stop my-frontend-app || true
-            docker rm my-frontend-app || true
-            docker run -d -p 80:80 --name my-frontend-app ${{ secrets.DOCKER_USERNAME }}/my-frontend-app:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
+            docker stop schedule-hanaro-client || true
+            docker rm schedule-hanaro-client || true
+            docker run -d -p 80:80 --name schedule-hanaro-client ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
