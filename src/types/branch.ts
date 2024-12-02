@@ -16,3 +16,11 @@ export type BranchStateInfo = {
   waiting_time: string;
   name: string;
 };
+
+export type RecBranch = {
+  branchId: number;
+  branchName: string;
+  location: string;
+  distance: number;
+  congestion: number;
+};

@@ -1,6 +1,6 @@
 // position 다시 string으로
 
-import { BranchInfo, BranchStateInfo } from '@/types/branch';
+import { BranchInfo, BranchStateInfo, RecBranch } from '@/types/branch';
 
 export const BRANCH_STATE_MOCK: BranchStateInfo[] = [
   {
@@ -735,5 +735,29 @@ export const BRANCH_MOCK: BranchInfo[] = [
     position_y: '37.58656439122322',
     business_hours: '09:00~16:00',
     type: 'atm',
+  },
+];
+
+export const REC_BRANCH_MOCK: RecBranch[] = [
+  {
+    branchId: 0,
+    branchName: 'SKT 신사옥 지하 1층',
+    location: '성수로1가 17',
+    distance: 503,
+    congestion: 11,
+  },
+  {
+    branchId: 1,
+    branchName: '성수역점',
+    location: '성수로1가 17',
+    distance: 1023,
+    congestion: 11,
+  },
+  {
+    branchId: 2,
+    branchName: 'SKT 신사옥 지하 1층',
+    location: '성수로1가 17',
+    distance: 503,
+    congestion: 8,
   },
 ];

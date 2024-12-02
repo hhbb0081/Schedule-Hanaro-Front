@@ -27,6 +27,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { MAP_CHIPS } from '@/constants';
+import { useMap } from '@/hooks/map-context';
 import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { BranchInfo } from '@/types/branch';
 import { List, MapPin } from 'lucide-react';
@@ -40,7 +41,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { useMap } from '@/hooks/map-context';
 
 export function BottomSheet() {
   const { currentAddress, setSelectedBranchId, setFocus } = useMap();
@@ -110,6 +110,10 @@ export function BottomSheet() {
                       onClick={toggleOpen}
                     />
                   </div>
+                  {/* 추천 지점 */}
+
+                  {/* <RecBranch /> */}
+
                   <div className='flex items-center justify-between py-5'>
                     <span className='space-x-2'>
                       {MAP_CHIPS.map(
