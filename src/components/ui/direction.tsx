@@ -54,7 +54,8 @@ export const DirectionButton = ({
       </div>
       <span
         className={cn(
-          'text-[0.8715rem] font-normal',
+          'font-normal',
+          variant === 'square' ? 'text-[0.8715rem]' : 'text-[1rem]',
           variant === 'square' ? 'text-white' : 'text-[#5b5b5b]'
         )}
       >
