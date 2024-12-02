@@ -35,10 +35,10 @@ export function ReservationDetailVisitPage() {
   };
   return (
     <>
-      <div className='h-screen w-[90%] justify-self-center'>
+      <div className='h-full w-[90%] justify-self-center'>
         <ReservationDetailHeader />
         <div className='flex h-full w-full flex-col'>
-          <div className='flex h-full w-full flex-col justify-between'>
+          <div className='flex h-full w-full flex-col justify-between gap-12'>
             <div className='flex w-full flex-col items-center'>
               <div className='mt-4 flex justify-center'>
                 <Check className='h-auto w-[4.5rem]' />
@@ -101,6 +101,6 @@ export function ReservationDetailVisitPage() {
       </div>
 
       <Nav />
-    </div>
+    </>
   );
 }
