@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '@/components/Header/Header';
 
 export type RegisterVisitData = {
@@ -30,12 +30,16 @@ const showToast = (toast: any, description: string) => {
 export function RegisterVisitFormPage() {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<RegisterVisitData>();
+
+  const consultationType = watch('consultationType');
 
   const onSubmit: SubmitHandler<RegisterVisitData> = (data) => {
     if (!isChecked1 || !isChecked2) {
@@ -53,77 +57,78 @@ export function RegisterVisitFormPage() {
 
     showToast(toast, '예약 완료되었습니다!');
     setTimeout(() => {
-      navigate('/');
+      navigate(`/reservation/visit/${id}`);
     }, 1000);
   };
 
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
 
+  const isFormComplete = consultationType && isChecked1 && isChecked2;
+
   return (
-    <div className='mx-auto flex w-[90%] flex-col'>
+    <>
       <Header title='방문 상담 예약' />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex w-full flex-col gap-[1rem] pt-[5rem]'
-      >
-        <div className='flex flex-col gap-[1rem]'>
-          <ReusableInput
-            register={register}
-            fieldName='name'
-            error={errors.name?.message}
-            label='이름'
-            placeholder='ex) 김하나'
-            type='text'
-          />
-          <ConsultationSelect
-            control={control}
-            error={errors.consultationType?.message}
-            fieldName={'consultationType'}
-          />
+      <div className='mx-auto flex min-h-screen w-[90%] flex-col'>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='flex min-h-screen w-full flex-col justify-between gap-[1rem] pt-[5rem]'
+        >
+          <div className='flex flex-col gap-[2rem]'>
+            <ReusableInput
+              register={register}
+              fieldName='name'
+              error={errors.name?.message}
+              label='이름'
+              placeholder='ex) 김하나'
+              type='text'
+            />
+            <ConsultationSelect
+              control={control}
+              error={errors.consultationType?.message}
+              fieldName={'consultationType'}
+            />
 
-          <ReusableInput
-            register={register}
-            fieldName='inquiryTitle'
-            error={errors.inquiryTitle?.message}
-            label='문의 제목'
-            placeholder='제목을 입력하세요.'
-            type='text'
-          />
-          <ReusableInput
-            register={register}
-            fieldName='inquiryContent'
-            error={errors.inquiryContent?.message}
-            label='문의 내용'
-            placeholder='내용을 입력하세요.'
-            type='textarea'
-          />
-        </div>
-
-        <div className='flex flex-col'>
-          <AgreementCheckbox
-            isChecked1={isChecked1}
-            isChecked2={isChecked2}
-            setIsChecked1={setIsChecked1}
-            setIsChecked2={setIsChecked2}
-          />
-          <div className='flex justify-between'>
-            <Button
-              type='button'
-              onClick={() => navigate('/')}
-              variant='ghost'
-              className='w-1/4'
-            >
-              취소
-            </Button>
-            <Button type='submit' variant='default' className='ml-2 w-3/4'>
-              예약하기
-            </Button>
+            <ReusableInput
+              register={register}
+              fieldName='inquiryContent'
+              error={errors.inquiryContent?.message}
+              label='문의 내용'
+              placeholder='내용을 입력하세요.'
+              type='textarea'
+            />
           </div>
-        </div>
-      </form>
 
-      <Toaster />
-    </div>
+          <div className='flex flex-col'>
+            <AgreementCheckbox
+              isChecked1={isChecked1}
+              isChecked2={isChecked2}
+              setIsChecked1={setIsChecked1}
+              setIsChecked2={setIsChecked2}
+            />
+            <div className='flex justify-between pb-[6.5rem]'>
+              <Button
+                type='button'
+                onClick={() => navigate('/')}
+                variant='ghost'
+                className='w-1/4'
+              >
+                취소
+              </Button>
+              <Button
+                type='submit'
+                variant='default'
+                className='ml-2 w-3/4'
+                disabled={!isFormComplete}
+              >
+                예약하기
+              </Button>
+            </div>
+          </div>
+        </form>
+
+        <Toaster />
+      </div>
+    </>
   );
 }

@@ -9,7 +9,7 @@ const Feedback = () => {
   };
 
   const handleNegativeFeedback = () => {
-    navigate('/register');
+    navigate('/register/type');
   };
 
   return (

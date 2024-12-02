@@ -53,12 +53,12 @@ export function SignUpPage() {
   };
 
   return (
-    <>
+    <div className='min-h-screen'>
       <Header title='회원가입' />
-      <div className='mx-auto flex min-h-screen w-[90%] flex-col'>
+      <div className='mx-auto flex w-[90%] flex-col'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='flex h-screen w-full flex-col justify-between gap-[1rem] pt-[5rem]'
+          className='flex min-h-screen w-full flex-col justify-between gap-[1rem] pt-[5rem]'
         >
           <div className='flex flex-col gap-[1rem]'>
             <ReusableInput
@@ -118,6 +118,6 @@ export function SignUpPage() {
 
         <Toaster />
       </div>
-    </>
+    </div>
   );
 }
