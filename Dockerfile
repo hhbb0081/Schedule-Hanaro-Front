@@ -1,11 +1,5 @@
-FROM node:16 AS build
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN pnpm install
-COPY . .
-RUN pnpm build
-
 FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+WORKDIR /app
+COPY dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
