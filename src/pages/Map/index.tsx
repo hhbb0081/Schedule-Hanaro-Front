@@ -1,9 +1,15 @@
-import '@/index.css';
+import { Map } from '@/components';
+import { MapProvider } from '@/hooks/map-context';
+import { useRef } from 'react';
 
-export function MapLayout() {
+export function MapPage() {
+  const mapRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className='text-6xl'>
-      <div className='text-center'>MAP!</div>
-    </div>
+    <MapProvider mapRef={mapRef}>
+      <div className='map'>
+        <Map />
+      </div>
+    </MapProvider>
   );
 }
