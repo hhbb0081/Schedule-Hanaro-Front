@@ -22,9 +22,6 @@ jobs:
       - name: Check Node v # Node v 확인
         run: node -v
 
-      - name: Install dependencies # 의존 파일 설치
-        run: pnpm install
-
       # - name: Set .env from secrets
       #   run: |
       #     echo "PORT=${{ secrets.MAIN_PORT }}" > .env
@@ -35,9 +32,14 @@ jobs:
 
       # - name: cat env file
       #   run: cat .env
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
 
-      - name: Generate build # React Build
-        run: pnpm run build
+      - name: Install dependencies # 의존 파일 설치
+        run: pnpm install
+
+      - name: Generate wbuild # React Build
+        run: pnpm build
 
   after:
     runs-on: ubuntu-latest
