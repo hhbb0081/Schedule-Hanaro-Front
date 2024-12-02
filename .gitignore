@@ -31,3 +31,4 @@ tsconfig.node.tsbuildinfo
 
 #buildInfo
 *.tsbuildinfo
+*storybook.log
