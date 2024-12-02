@@ -44,9 +44,10 @@ function ReservationHeader({ tabLocation }: Props) {
 
   return (
     <>
-      <Header title='예약내역' />
-
-      <div className='w-[90%] justify-self-center pt-[3.5rem]'>
+      <div className='absolute z-10'>
+        <Header title='예약내역' />
+      </div>
+      <div className='relative w-[90%] justify-self-center pt-[3.5rem]'>
         <Tabs
           tabLocation={tabLocation}
           leftValue='visit'
