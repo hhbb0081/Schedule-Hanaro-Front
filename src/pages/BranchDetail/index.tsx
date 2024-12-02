@@ -122,7 +122,7 @@ export function BranchDetailPage() {
             <h2 className='text-xl font-bold'>기본정보</h2>
             <DirectionButton onClick={handleDirection} />
           </div>
-          <div className='list-none'>
+          <ul className='list-none'>
             <li className='mt-4 flex items-center justify-start gap-2'>
               <Addrss width={20} height={23} className='relative' />
               <span className="font-['Inter'] text-base font-semibold text-[#464646]">
@@ -141,7 +141,7 @@ export function BranchDetailPage() {
                 {tel}
               </span>
             </li>
-          </div>
+          </ul>
         </div>
         <div className='h-2 w-full bg-[#eeeeee]'></div>
         <div className='w-[90%] justify-self-center py-8'>
