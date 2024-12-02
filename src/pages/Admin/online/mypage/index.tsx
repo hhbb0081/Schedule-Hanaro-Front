@@ -1,6 +1,6 @@
+import { ReactComponent as PersonIcon } from '@/assets/icons/Person.svg';
+import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg';
 import InquiryCard from '@/components/Admin/Inquiry/InquiryCard';
-import { ReactComponent as PhoneIcon } from '../../../../assets/icons/phone.svg';
-import { ReactComponent as PersonIcon } from '../../../../assets/icons/person.svg';
 
 export function AdminMyPage() {
   const phoneStats = {
