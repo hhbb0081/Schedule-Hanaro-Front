@@ -57,7 +57,7 @@ export function Direction({
               closeDirection={closeDirection}
               branchId={branchId}
             ></TopSheet>
-            <MyLocation onClick={() => setFocus()} />
+            <MyLocation onClick={() => setFocus()} type='direction' />
             <BottomFloatingBox type='dir' branchId={branchId} />
           </>
         )}

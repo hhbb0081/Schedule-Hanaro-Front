@@ -67,7 +67,7 @@ export const useRouter = () =>
           element: <DirectionPage />,
         },
         {
-          path: '/branch/:id',
+          path: '/branch/:branchId',
           element: <BranchDetailPage />,
         },
         {
@@ -117,7 +117,7 @@ export const useRouter = () =>
               children: [
                 { index: true, element: <ReservationVisitPage /> },
                 {
-                  path: '/reservation/visit/:id',
+                  path: '/reservation/visit/:branchId',
                   children: [
                     { index: true, element: <ReservationDetailVisitPage /> },
                   ],
