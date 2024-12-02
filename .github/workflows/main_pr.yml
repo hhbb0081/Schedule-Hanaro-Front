@@ -34,6 +34,8 @@ jobs:
       #   run: cat .env
       - name: Setup pnpm
         uses: pnpm/action-setup@v4.0.0
+        with:
+          version: 9
 
       - name: Install dependencies # 의존 파일 설치
         run: pnpm install
