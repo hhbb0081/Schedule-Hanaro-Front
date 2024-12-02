@@ -4,12 +4,14 @@ import BottomFloatingBox from '../Direction/BottomFloatingBox';
 import Nav from '../Nav/Nav';
 import { useMap } from '@/hooks/map-context';
 import { useEffect } from 'react';
+import { MyLocation } from './MyLocation';
 
 export function Map() {
   // Test용 위치 추가 및 기존 코드 삭제
   const branchList = [...BRANCH_MOCK];
 
-  const { mapRef, selectedBranchId, setBranchList } = useMap();
+  const { mapRef, mapFocusOnly, selectedBranchId, setBranchList, setFocus } =
+    useMap();
 
   useEffect(() => {
     setBranchList(branchList);
@@ -23,13 +25,24 @@ export function Map() {
         <div className='mx-auto w-full'>
           {/* TODO: 검색 화면 구현시 SearchInput 설정 */}
           {/* <SearchInput /> */}
-          <div className='navbar fixed bottom-[10rem] z-10 mx-auto flex max-w-[30rem] justify-center'>
-            <BottomFloatingBox type='map' branchId={selectedBranchId} />
-          </div>
+
+          {!mapFocusOnly && (
+            <>
+              <div className='mx-auto flex w-full flex-col items-center'>
+                <MyLocation onClick={() => setFocus()} type='direction' />
+                <BottomFloatingBox type='map' branchId={selectedBranchId} />
+              </div>
+            </>
+          )}
         </div>
       ) : (
         <>
-          <BottomSheet />
+          {!mapFocusOnly && (
+            <div className='mx-auto flex w-full flex-col items-center'>
+              <MyLocation onClick={() => setFocus()} type='map' />
+              <BottomSheet />
+            </div>
+          )}
           <Nav />
         </>
       )}

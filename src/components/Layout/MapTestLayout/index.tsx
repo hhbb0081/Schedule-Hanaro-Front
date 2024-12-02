@@ -1,12 +1,11 @@
-import { MapProvider } from '@/hooks/map-context';
-import { useRef } from 'react';
+import Nav from '@/components/Nav/Nav';
 import { Outlet } from 'react-router-dom';
 
 export function MapTestLayout() {
-  const mapRef = useRef<HTMLDivElement>(null);
   return (
-    <MapProvider mapRef={mapRef}>
+    <div className='App'>
       <Outlet />
-    </MapProvider>
+      <Nav />
+    </div>
   );
 }
