@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChangeToggle } from '../Reservation/ChangeToggle';
 import Tabs from '../Tabs/Tabs';
 import { ReactComponent as DropButton } from '@/assets/icons/reservation/minidown.svg';
+import Header from '@/components/Header/Header';
 
 type Props = {
   tabLocation: 'visit' | 'call';
@@ -42,11 +43,11 @@ function ReservationHeader({ tabLocation }: Props) {
   };
 
   return (
-    <header className='top_header fixed top-0 z-50 bg-white pt-[0.75rem]'>
-      <div className='top_header_page text-[1.25rem] font-bold text-[#2b2b2b]'>
-        예약내역
+    <>
+      <div className='absolute z-10'>
+        <Header title='예약내역' />
       </div>
-      <div className='w-[90%] justify-self-center'>
+      <div className='relative w-[90%] justify-self-center pt-[3.5rem]'>
         <Tabs
           tabLocation={tabLocation}
           leftValue='visit'
@@ -76,7 +77,7 @@ function ReservationHeader({ tabLocation }: Props) {
             />
             <div className='relative pb-[1.25rem]'>
               <button
-                className={`justify-between] flex items-center ${
+                className={`flex items-center justify-between ${
                   selectedStatus === '대기 중인 상담'
                     ? 'text-[#666666]'
                     : 'text-[#666666]'
@@ -111,7 +112,7 @@ function ReservationHeader({ tabLocation }: Props) {
           </div>
         )}
       </div>
-    </header>
+    </>
   );
 }
 

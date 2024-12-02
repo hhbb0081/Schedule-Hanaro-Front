@@ -23,7 +23,7 @@ export function ReservationLayout() {
   return (
     <>
       <ReservationHeader tabLocation={tabLocation} key={tabLocation} />
-      <div className='h-screen w-[90%] justify-self-center pt-[12.5rem]'>
+      <div className='h-screen w-[90%] justify-self-center'>
         <Outlet />
       </div>
       <Nav />
