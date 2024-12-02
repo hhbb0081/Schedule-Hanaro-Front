@@ -1,3 +1,3 @@
 export * from './admin';
 export * from './env';
-export * from './Map';
+export * from './map';
