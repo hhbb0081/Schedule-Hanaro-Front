@@ -89,7 +89,7 @@ export function ReservationDetailCallPage() {
                 </div>
               </div>
             </div>
-            <div className='flex flex-col pb-[11rem]'>
+            <div className='flex flex-col pb-[10rem]'>
               <Modalbutton
                 buttonTitle='상담 취소'
                 buttonVariant='outline'

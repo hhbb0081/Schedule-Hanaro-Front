@@ -41,7 +41,7 @@ export function GenderSelect<T extends FieldValues>({
   };
 
   return (
-    <>
+    <div>
       <label className='block pb-2 text-left text-lg font-semibold'>성별</label>
       <Select onValueChange={updateGender} value={selectedGender || ''}>
         <SelectTrigger className='w-full'>
@@ -72,6 +72,6 @@ export function GenderSelect<T extends FieldValues>({
       />
 
       <FormErrorMessage error={error} />
-    </>
+    </div>
   );
 }

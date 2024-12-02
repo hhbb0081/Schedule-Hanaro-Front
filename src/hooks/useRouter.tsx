@@ -11,6 +11,7 @@ import {
   InquiryDetailPage,
   MapDetailPage,
   MapPage,
+  MapTestPage,
   RegisterCallFormPage,
   RegisterInquiryFormPage,
   ReservationCallPage,
@@ -33,8 +34,6 @@ import InquiryPage from '@/pages/Admin/online/Inquiry';
 import { AnswerDetail } from '@/pages/Admin/online/Inquiry/Answer/Detail';
 import { AnswerInput } from '@/pages/Admin/online/Inquiry/Answer/Input';
 import { AdminMainPage } from '@/pages/Admin/online/Main';
-import MapTestPage from '@/pages/MapTest';
-import DupTest from '@/pages/MapTest/DupTest';
 import Mypage from '@/pages/Mypage';
 import { RegisterVisitFormPage } from '@/pages/Register/Visit';
 import { createBrowserRouter } from 'react-router-dom';
@@ -44,6 +43,7 @@ import ChatPage from '@/pages/Chat';
 import SigninPage from '@/pages/Signin';
 
 import { AdminMyPage } from '@/pages/Admin/online/mypage';
+import { CallAnswerDetail } from '@/pages/Admin/online/Call/Detail';
 export const useRouter = () =>
   createBrowserRouter([
     {
@@ -67,7 +67,7 @@ export const useRouter = () =>
           element: <DirectionPage />,
         },
         {
-          path: '/branch/:id',
+          path: '/branch/:branchId',
           element: <BranchDetailPage />,
         },
         {
@@ -117,7 +117,7 @@ export const useRouter = () =>
               children: [
                 { index: true, element: <ReservationVisitPage /> },
                 {
-                  path: '/reservation/visit/:id',
+                  path: '/reservation/visit/:branchId',
                   children: [
                     { index: true, element: <ReservationDetailVisitPage /> },
                   ],
@@ -130,7 +130,8 @@ export const useRouter = () =>
           path: '/register',
           element: <RegisterLayout />,
           children: [
-            { index: true, element: <ReservationPage /> },
+            { index: true, element: <ChatPage /> },
+            { path: '/register/type', element: <ReservationPage /> },
             {
               path: '/register/call',
               element: <RegisterCallFormPage />,
@@ -178,25 +179,26 @@ export const useRouter = () =>
           element: <AdminCustomerDetailPage />,
         },
         {
-          path: '/admin/inquiry',
+          path: '/admin/online/inquiry',
           element: <InquiryPage />,
         },
         {
-          path: '/admin/inquiry/:id',
+          path: '/admin/online/inquiry/:id',
           element: <AnswerDetail />,
         },
-        { path: '/admin/inquiry/register/:id', element: <AnswerInput /> },
+        {
+          path: '/admin/online/inquiry/register/:id',
+          element: <AnswerInput />,
+        },
         // { path: '/admin/inquiry/answerDetail', element: <AnswerDetail /> },
         { path: '/admin/online/call', element: <CallPage /> },
+        { path: '/admin/online/call/:id', element: <CallAnswerDetail /> },
         { path: '/admin/online/mypage', element: <AdminMyPage /> },
       ],
     },
     {
       path: '/maptest',
       element: <MapTestLayout />,
-      children: [
-        { index: true, element: <MapTestPage /> },
-        { path: '/maptest/dup', element: <DupTest /> },
-      ],
+      children: [{ index: true, element: <MapTestPage /> }],
     },
   ]);

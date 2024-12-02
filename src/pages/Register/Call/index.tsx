@@ -99,7 +99,12 @@ export function RegisterCallFormPage() {
     setTimeSlots(slots);
   }, []);
 
-  const isFormComplete = reservationDate && reservationTime && consultationType;
+  const isFormComplete =
+    reservationDate &&
+    reservationTime &&
+    consultationType &&
+    isChecked1 &&
+    isChecked2;
 
   return (
     <>

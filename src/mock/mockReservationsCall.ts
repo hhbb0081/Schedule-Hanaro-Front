@@ -29,3 +29,4 @@ export const mockReservationCallDetails: ReservationCallDetail[] = [
     waitingTime: 30,
   },
 ];
+export type { ReservationSlots };

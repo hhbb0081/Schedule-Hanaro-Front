@@ -42,7 +42,7 @@ export function ReservationDetailInquiryPage() {
       <div className='w-[90%] justify-self-center'>
         <ReservationDetailHeader />
         <body className='pt-[5rem]'>
-          <div className='flex h-screen flex-col justify-between'>
+          <div className='flex min-h-screen flex-col justify-between gap-[3rem]'>
             <div className='flex flex-col items-center gap-[4rem]'>
               <div className='flex flex-col gap-[2rem]'>
                 <div className='text-lg font-medium'>
@@ -97,7 +97,7 @@ export function ReservationDetailInquiryPage() {
               </div>
             </div>
 
-            <div className='flex w-full gap-[1rem] pb-[16rem]'>
+            <div className='flex w-full gap-[1rem] pb-[7rem]'>
               <Modalbutton
                 buttonTitle='문의 취소'
                 buttonVariant='ghost'

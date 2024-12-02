@@ -8,6 +8,7 @@ import TopSheet from '@/components/Direction/TopSheet';
 import { useNavigate } from 'react-router-dom';
 import { Toaster } from '../ui/toaster';
 import { useMap } from '@/hooks/map-context';
+import { MyLocation } from '../Map/MyLocation';
 
 dayjs.locale('ko');
 
@@ -28,7 +29,8 @@ export function Direction({
 }: DirectionProps) {
   const navigate = useNavigate();
 
-  const { mapRef, mapFocusOnly, setStartCoord, setEndCoord } = useMap();
+  const { mapRef, mapFocusOnly, setStartCoord, setEndCoord, setFocus } =
+    useMap();
 
   // 출발지 & 도착지 설정
   useEffect(() => {
@@ -48,13 +50,14 @@ export function Direction({
 
   return (
     <>
-      <div className='flex w-full flex-col items-center'>
+      <div className='mx-auto flex w-full flex-col items-center'>
         {!mapFocusOnly && (
           <>
             <TopSheet
               closeDirection={closeDirection}
               branchId={branchId}
             ></TopSheet>
+            <MyLocation onClick={() => setFocus()} type='direction' />
             <BottomFloatingBox type='dir' branchId={branchId} />
           </>
         )}

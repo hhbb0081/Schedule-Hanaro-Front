@@ -7,12 +7,20 @@ import { BRANCH_MOCK, BRANCH_STATE_MOCK } from '@/mock/branch_mock';
 import { showToast } from '@/pages';
 import { useNavigate } from 'react-router-dom';
 import { FloatingType } from '.';
+import { useMap } from '@/hooks/map-context';
+import { useState } from 'react';
+import { ChangeToggle } from './ChangeToggle';
 
 export default function BranchInfo({
   type,
   branchId,
 }: FloatingType & { branchId: string }) {
+  const { getCurrentLatitude, getCurrentLongitude } = useMap();
   const { toast } = useToast();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<'pedestrain' | 'automobile'>(
+    'pedestrain'
+  );
   const navigate = useNavigate();
   const targetBranch = BRANCH_MOCK.find(({ id }) => id === branchId);
   const targetBranchState = BRANCH_STATE_MOCK.find(({ id }) => id === branchId);
@@ -25,7 +33,7 @@ export default function BranchInfo({
       const { position_x: longitude, position_y: latitude } = targetBranch;
       // TODO: startLat, startLon 현 위치로 수정
       navigate(
-        `/direction?startLat=37.5631989425409&startLon=126.98732327063084&endLat=${latitude}&endLon=${longitude}&branchId=${branchId}`
+        `/direction?startLat=${getCurrentLatitude()}&startLon=${getCurrentLongitude()}&endLat=${latitude}&endLon=${longitude}&branchId=${branchId}`
       );
       showToast(toast, '길 안내를 시작합니다.');
     }
@@ -33,6 +41,11 @@ export default function BranchInfo({
 
   const handlePage = (url: string) => () => {
     navigate(url);
+  };
+
+  const selectTab = (tabName: 'pedestrain' | 'automobile') => {
+    setSelectedTab(tabName);
+    setIsOpen(false);
   };
 
   return (
@@ -58,8 +71,19 @@ export default function BranchInfo({
             <span className='text-[1.125rem] font-bold'>202m</span>
           </div>
         </div>
-        {type === 'map' && (
+        {type === 'map' ? (
           <DirectionButton variant='square' onClick={handleDirection} />
+        ) : (
+          <span className='mb-2 flex justify-end'>
+            <ChangeToggle
+              isOpen={isOpen}
+              onToggle={() => {
+                setIsOpen((cur) => !cur);
+              }}
+              selectedTab={selectedTab}
+              onSelect={selectTab}
+            />
+          </span>
         )}
       </div>
       <div className='my-3 flex gap-5'>

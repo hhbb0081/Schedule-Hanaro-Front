@@ -64,7 +64,7 @@ const ChatPage = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-
+      
       const currentValue = textareaRef.current.value;
       setInputContent(currentValue);
     }
@@ -142,7 +142,9 @@ const ChatPage = () => {
               <img
                 src='src/assets/images/arrowAI.png'
                 alt='Send'
-                className='absolute bottom-5 right-4 h-7 w-7 cursor-pointer object-contain'
+                className={`absolute right-4 h-7 w-7 cursor-pointer object-contain transition-all ${
+                  isExpanded ? 'bottom-5' : 'bottom-3 -translate-y-1/2'
+                }`}
                 onClick={handleSend}
               />
             </div>
