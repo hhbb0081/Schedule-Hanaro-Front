@@ -76,13 +76,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       # 3. Docker 이미지 빌드
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          # file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
+      - name: Build and Push Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
 
       # 5. SSH로 EC2에 접속하여 배포
       - name: Deploy to EC2
