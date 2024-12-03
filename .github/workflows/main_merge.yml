@@ -29,3 +29,58 @@ jobs:
 
       - name: Generate wbuild # React Build
         run: pnpm build
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+
+      # 2. Docker 로그인 (Docker Hub 계정 필요)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # - name: Build and push
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: . # 컨텍스트를 현재 디렉토리로 설정
+          push: true # Docker Hub에 푸시
+          tags: ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
+          file: |- # Dockerfile을 인라인으로 작성
+            FROM nginx:alpine
+            WORKDIR /app
+            COPY dist /usr/share/nginx/html
+            RUN apk update && apk add bash
+            EXPOSE 80
+            CMD ["nginx", "-g", "daemon off;"]
+
+      # 3. Docker 이미지 빌드
+      # - name: Build and Push Docker image
+      #   run: |
+      #     docker build -t ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest .
+      #     docker push ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
+
+      # 5. SSH로 EC2에 접속하여 배포
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            docker pull ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
+            docker stop schedule-hanaro-client || true
+            docker rm schedule-hanaro-client || true
+            docker run -d -p 80:80 --name schedule-hanaro-client ${{ secrets.DOCKER_USERNAME }}/schedule-hanaro-client:latest
